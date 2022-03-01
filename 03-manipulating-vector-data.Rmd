@@ -1,1 +1,1 @@
-# Manipulting vector data
+# Manipulating vector data
