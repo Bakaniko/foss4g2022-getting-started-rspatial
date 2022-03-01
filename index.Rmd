@@ -1,0 +1,27 @@
+--- 
+title: "Getting started with R and R-spatial"
+author: 
+  - "Nicolas Roelandt"
+  - "Jakub Nowosad"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  Teaching materials for R and R-spatial introduction workshop at FOSS4G2022.
+link-citations: yes
+github-repo: Bakaniko/foss4g2022-getting-started-rspatial
+---
+
+# About
+
+This is the teaching materials for a workshop introducting R and R-spatial at the [FOSS4G2022](https://2022.foss4g.org/index.php) conference.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
