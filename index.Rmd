@@ -17,7 +17,7 @@ github-repo: Bakaniko/foss4g2022-getting-started-rspatial
 
 # About {-}
 
-This is the teaching materials for a workshop introducting R and R-spatial at the [FOSS4G2022](https://2022.foss4g.org/index.php) conference.
+This is the teaching materials for a workshop introducing R and R-spatial at the [FOSS4G2022](https://2022.foss4g.org/index.php) conference.
 
 ![](https://2022.foss4g.org/img/logo/logo-dark.png)
 
