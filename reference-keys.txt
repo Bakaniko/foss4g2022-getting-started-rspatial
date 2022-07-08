@@ -1,3 +1,5 @@
 data-handling-with-r
+introduction-to-the-r-spatial-ecosystem
+making-maps-in-r
 manipulating-vector-data
 manipulating-raster-data
