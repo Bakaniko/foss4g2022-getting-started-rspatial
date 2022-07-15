@@ -19,6 +19,9 @@ jobs:
         run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
       - name: Install dependencies
         run: |
+          options(repos = c(rspatial = 'https://rspatial.r-universe.dev',
+                            rspatial2 = 'https://r-spatial.r-universe.dev',
+                            CRAN = 'https://cloud.r-project.org'))
           install.packages("remotes")
           remotes::install_deps(dependencies = TRUE)
           webshot::install_phantomjs()
