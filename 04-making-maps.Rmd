@@ -1,1 +1,237 @@
 # Making maps in R
+
+
+```{r, message=FALSE}
+library(tmap)
+library(sf)
+library(terra)
+```
+
+```{r}
+library(spData)
+data("nz")
+nz_ports = read_sf("data/nz_ports.gpkg")
+nz_elev = rast(system.file("raster/nz_elev.tif", package = "spDataLarge"))
+```
+
+## Mapping tools in R
+
+Static maps:
+
+- **graphics**
+- **rasterVis**
+- **ggplot2**
+- **ggspatial**
+- **mapsf**
+- ...
+
+Interactive maps:
+
+- **leaflet**
+- **mapview**
+- **mapdeck**
+- ...
+
+Both:
+
+- **tmap**
+
+Specific-purpose mapping:
+
+- **cartogram**
+- **geofacet**
+- **geogrid**
+- **rayshader**
+- ...
+
+## tmap
+
+```{r}
+tm_shape(nz) +
+  tm_graticules() +
+  tm_polygons(col = "Median_income") +
+  tm_shape(nz_ports) +
+  tm_symbols(size = 0.75) +
+  tm_scale_bar(breaks = c(0, 100, 200)) +
+  tm_compass(position = c("right", "top")) +
+  tm_layout(bg.color = "lightblue")
+```
+
+### Shapes and layers
+
+```{r, echo=FALSE}
+map_layers = data.frame(Function = c("`tm_polygons()`", "`tm_symbols()`", 
+                                     "`tm_lines()`", "`tm_raster()`",
+                                     "`tm_text()`"),
+                        Geometry = c("polygons", "points, lines, and polygons",
+                                     "lines", "raster", "points, lines, and polygons"))
+knitr::kable(map_layers, caption = "Basic map layers")
+```
+
+```{r}
+tm_shape(nz) +
+  tm_polygons()
+```
+
+```{r}
+tm_shape(nz) +
+  tm_polygons(col = "darkblue") #or #00008b
+```
+
+```{r}
+tm_shape(nz) +
+  tm_polygons(col = "MAP_COLORS")
+```
+
+```{r}
+head(nz)
+```
+
+```{r}
+tm_shape(nz) +
+  tm_polygons(col = "Median_income")
+```
+
+```{r}
+tm_shape(nz) +
+  tm_polygons(col = "Median_income", title = "Median income (USD)",
+              palette = "viridis")
+```
+
+`tmaptools::palette_explorer()`
+
+```{r}
+tm_shape(nz) +
+  tm_polygons(col = "Median_income", title = "Median income (USD)",
+              palette = "viridis")
+```
+
+```{r}
+tm_shape(nz) +
+  tm_polygons(col = "Median_income", title = "Median income (USD)",
+              palette = "viridis", style = "cont")
+```
+
+```{r}
+tm_shape(nz) +
+  tm_polygons(col = "Median_income", title = "Median income (USD)",
+              palette = "viridis", style = "cont") +
+  tm_shape(nz_ports) +
+  tm_symbols()
+```
+
+```{r}
+tm_shape(nz_elev) +
+  tm_raster(palette = "-Spectral", style = "cont",
+            title = "Elevation (m asl)") +
+  tm_shape(nz_ports) +
+  tm_symbols()
+```
+
+```{r}
+tm = tm_shape(nz_elev) +
+  tm_raster(palette = "-Spectral", style = "cont",
+            title = "Elevation (m asl)") +
+  tm_shape(nz_ports) +
+  tm_symbols()
+```
+
+### Attributes layers
+
+```{r, echo=FALSE}
+attr_layers = data.frame(Function = c("`tm_graticules()`", "`tm_scale_bar()`",
+                                      "`tm_compass()`", "`tm_logo()`", "`tm_credits()`"),
+                         Description = c("draws latitude and longitude graticules", 
+                                         "adds a scale bar", "adds a compass rose",
+                                         "adds a logo", "adds a text annotation"))
+knitr::kable(attr_layers, caption = "Basic attributes layers")
+```
+
+```{r}
+tm +
+  tm_graticules() +
+  tm_scale_bar(breaks = c(0, 100, 200)) +
+  tm_compass(position = c("right", "top")) +
+  tm_logo("https://foss4g.org/logos/2022-v2.png") +
+  tm_credits("N. Roelandt and J. Nowosad")
+```
+
+```{r}
+tm2 = tm +
+  tm_graticules() +
+  tm_scale_bar(breaks = c(0, 100, 200)) +
+  tm_compass(position = c("right", "top")) +
+  tm_logo("https://foss4g.org/logos/2022-v2.png") +
+  tm_credits("N. Roelandt and J. Nowosad")
+```
+
+### Other 
+
+```{r}
+tm2 +
+  tm_add_legend(type = "symbol", col = "grey", title = "Main ports") +
+  tm_layout(main.title = "New Zealand", bg.color = "lightblue")
+```
+
+```{r}
+tm3 = tm2 +
+  tm_add_legend(type = "symbol", col = "grey", title = "Main ports") +
+  tm_layout(main.title = "New Zealand", bg.color = "lightblue")
+```
+
+### Interactive mode
+
+```{r}
+tmap_mode("view")
+tm3
+```
+
+```{r}
+tm3 + 
+  tm_minimap() +
+  tm_mouse_coordinates()
+```
+
+<!-- , "`tm_basemap()`", "`tm_tiles()`" -->
+
+```{r}
+tmap_mode("plot")
+tm3
+```
+
+### Saving maps
+
+```{r}
+#| eval = FALSE
+tmap_save(tm3, "my_map.png")
+```
+
+```{r}
+#| eval = FALSE
+tmap_save(tm3, "my_map.svg")
+```
+
+```{r}
+#| eval = FALSE
+tmap_save(tm3, "my_map.html")
+```
+
+### What else?
+
+- Facet maps
+- Animations
+- Mapping applications
+- `tmap_tip()`
+
+## More resources
+
+- https://r-tmap.github.io/tmap-book/index.html
+- https://geocompr.github.io/post/2019/tmap-grid/
+- https://geocompr.github.io/post/2019/tmap-color-scales/
+
+## Exercises
+
+<!-- try saving to different formats -->
+<!-- try other palettes -->
+<!-- try other styles -->
+<!-- try tm_add_legend -->
