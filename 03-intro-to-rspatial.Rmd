@@ -1,1 +1,68 @@
 # Introduction to the R-spatial ecosystem
+
+- https://www.r-spatial.org/
+- https://www.rspatial.org/
+- https://geocompr.github.io/
+- #rspatial and #geocompr on Twitter
+
+What can you do with geographic data + R?
+
+- Exploratory data analysis (EDA)
+- Output data in different formats (e.g. creating a .GeoTIFF or .shp file to share with others)
+- Data processing (e.g. adding new variables, 'adding value')
+- Data transformation (e.g. changing CRS, reducing size via simplification/aggregation)
+- Data visualization
+- Web application development
+- Software development e.g. to share new methods
+
+- [**sf**](https://github.com/r-spatial/sf),
+[**sp**](https://github.com/edzer/sp),
+[**terra**](https://github.com/rspatial/terra),
+[**raster**](https://github.com/rspatial/raster), [**stars**](https://github.com/r-spatial/stars) - spatial classes
+- [**dplyr**](https://github.com/tidyverse/dplyr), [**rmapshaper**](https://github.com/ateucher/rmapshaper) - processing of attribute tables/geometries 
+- [**rnaturalearth**](https://github.com/ropensci/rnaturalearth), [**osmdata**](https://github.com/ropensci/osmdata), [**getSpatialData**](https://github.com/16EAGLE/getSpatialData) - spatial data download
+- [**rgrass7**](https://github.com/rsbivand/rgrass7), [**qgisprocess**](https://github.com/paleolimbot/qgisprocess), [**RSAGA**](https://github.com/r-spatial/RSAGA), [**link2GI**](https://github.com/r-spatial/link2GI) - connecting with GIS software
+- [**gstat**](https://github.com/r-spatial/gstat), [**mlr3**](https://github.com/mlr-org/mlr3), [**CAST**](https://github.com/HannaMeyer/CAST) - spatial data modeling
+- [**rasterVis**](https://github.com/oscarperpinan/rastervis), [**tmap**](https://github.com/mtennekes/tmap), [**ggplot2**](https://github.com/tidyverse/ggplot2) - static visualizations
+- [**leaflet**](https://github.com/rstudio/leaflet), [**mapview**](https://github.com/r-spatial/mapview), [**mapdeck**](https://github.com/SymbolixAU/mapdeck) - interactive visualizations
+- many more...
+
+## R packages - specialized packages
+
+- [**spatstat**](http://spatstat.org/)
+- [**spdep**](https://github.com/r-spatial/spdep)
+- [**spatialreg**](https://github.com/r-spatial/spatialreg)
+- [**dismo**](https://github.com/rspatial/dismo)
+- [**landscapemetrics**](https://github.com/r-spatialecology/landscapemetrics) - part of https://github.com/r-spatialecology
+- [**RStoolbox**](http://bleutner.github.io/RStoolbox/rstbx-docu/RStoolbox.html)
+- [**rayshader**](https://github.com/tylermorganwall/rayshader)
+- [**gdalcubes**](https://github.com/appelmar/gdalcubes_R)
+- [**sfnetworks**](https://github.com/luukvdmeer/sfnetworks)
+- many more...
+
+Learn more at https://cran.r-project.org/web/views/Spatial.html.
+
+## R's spatial ecosystem(s)
+
+- [rspatial](https://rspatial.org) vs [r-spatial](https://www.rspatial.org/)
+- Old vs New
+- [Legacy](https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial)
+- Other R ecosystems
+- ...
+
+```{r}
+#| echo = FALSE,
+#| fig.cap = "Source: https://geocompr.robinlovelace.net"
+knitr::include_graphics("https://geocompr.robinlovelace.net/figures/01-cranlogs.png")
+```
+
+```{r}
+#| echo = FALSE,
+#| fig.cap = "Source: https://www.r-spatial.org/r/2020/03/17/wkt.html"
+knitr::include_graphics("https://keen-swartz-3146c4.netlify.com/images/sf_deps.png")
+```
+
+```{r}
+#| echo = FALSE
+knitr::include_graphics("figs/terra-libs.png")
+```
