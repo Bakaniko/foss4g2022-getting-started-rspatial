@@ -1,1 +1,3 @@
 # Manipulating raster data
+
+<!-- (Jakub) Raster data processing (45 min) -->

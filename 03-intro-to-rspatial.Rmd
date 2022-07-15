@@ -1,5 +1,7 @@
 # Introduction to the R-spatial ecosystem
 
+<!-- (Jakub) Introduction to R-spatial ecosystem (20 min) -->
+
 - https://www.r-spatial.org/
 - https://www.rspatial.org/
 - https://geocompr.github.io/

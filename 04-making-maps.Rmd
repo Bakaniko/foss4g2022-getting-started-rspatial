@@ -1,5 +1,6 @@
 # Making maps in R
 
+<!-- (Jakub) Mapping in R with {tmap} (30 min) -->
 
 ```{r}
 #| message = FALSE

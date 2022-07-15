@@ -1,1 +1,4 @@
 # Manipulating vector data
+
+<!-- (Nicolas) Vector data processing (45 min) -->
+

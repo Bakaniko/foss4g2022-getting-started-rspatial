@@ -1,1 +1,5 @@
 # Introduction {-}
+
+<!-- (Nicolas) Introduction to the workshop (5 min) -->
+<!-- (Nicolas) Introduction to R (15 min) -->
+
