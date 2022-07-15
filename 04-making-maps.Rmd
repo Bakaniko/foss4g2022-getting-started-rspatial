@@ -1,7 +1,8 @@
 # Making maps in R
 
 
-```{r, message=FALSE}
+```{r}
+#| message = FALSE
 library(tmap)
 library(sf)
 library(terra)
@@ -59,7 +60,8 @@ tm_shape(nz) +
 
 ### Shapes and layers
 
-```{r, echo=FALSE}
+```{r}
+#| echo = FALSE
 map_layers = data.frame(Function = c("`tm_polygons()`", "`tm_symbols()`", 
                                      "`tm_lines()`", "`tm_raster()`",
                                      "`tm_text()`"),
@@ -138,7 +140,8 @@ tm = tm_shape(nz_elev) +
 
 ### Attributes layers
 
-```{r, echo=FALSE}
+```{r}
+#| echo = FALSE
 attr_layers = data.frame(Function = c("`tm_graticules()`", "`tm_scale_bar()`",
                                       "`tm_compass()`", "`tm_logo()`", "`tm_credits()`"),
                          Description = c("draws latitude and longitude graticules", 
