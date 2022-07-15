@@ -1,8 +1,6 @@
 --- 
 title: "Getting started with R and R-spatial"
-author: 
-  - "Nicolas Roelandt"
-  - "Jakub Nowosad"
+author: "Nicolas Roelandt and Jakub Nowosad"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book

@@ -5,6 +5,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Getting started with R and R-spatial</a></li>
       after: |
+        <li><a href="https://roelandtn.frama.io/" target="blank">Nicolas Roelandt</a></li>
+        <li><a href="https://jakubnowosad.com/" target="blank">Jakub Nowosad</a></li>
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/Bakaniko/foss4g2022-getting-started-rspatial/edit/main/%s
     download: ["epub"]
