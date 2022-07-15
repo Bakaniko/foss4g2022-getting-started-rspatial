@@ -11,4 +11,4 @@ Imports:
   sf,
   terra
 Remotes:
-  Nowosad/spDataLarge
+  Nowosad/spDataLarge@noraster
