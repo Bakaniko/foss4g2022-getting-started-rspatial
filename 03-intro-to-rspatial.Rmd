@@ -68,3 +68,7 @@ knitr::include_graphics("https://keen-swartz-3146c4.netlify.com/images/sf_deps.p
 #| echo = FALSE
 knitr::include_graphics("figs/terra-libs.png")
 ```
+
+### Conversions
+
+https://geocompr.github.io/post/2021/spatial-classes-conversion/
