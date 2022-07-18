@@ -10,6 +10,7 @@ Imports:
   spDataLarge,
   spData,
   sf,
-  terra
+  terra,
+  supercells
 Remotes:
   Nowosad/spDataLarge@noraster
