@@ -46,7 +46,7 @@ Specific-purpose mapping:
 - **rayshader**
 - ...
 
-## tmap
+## tmap intro
 
 ```{r}
 tm_shape(nz) +
@@ -59,7 +59,7 @@ tm_shape(nz) +
   tm_layout(bg.color = "lightblue")
 ```
 
-### Shapes and layers
+## Shapes and layers
 
 ```{r}
 #| echo = FALSE
@@ -139,7 +139,7 @@ tm = tm_shape(nz_elev) +
   tm_symbols()
 ```
 
-### Attributes layers
+## Attributes layers
 
 ```{r}
 #| echo = FALSE
@@ -169,7 +169,7 @@ tm2 = tm +
   tm_credits("N. Roelandt and J. Nowosad")
 ```
 
-### Other 
+## Other map elements
 
 ```{r}
 tm2 +
@@ -183,7 +183,7 @@ tm3 = tm2 +
   tm_layout(main.title = "New Zealand", bg.color = "lightblue")
 ```
 
-### Interactive mode
+## Interactive mode
 
 ```{r}
 tmap_mode("view")
@@ -203,7 +203,7 @@ tmap_mode("plot")
 tm3
 ```
 
-### Saving maps
+## Saving maps
 
 ```{r}
 #| eval = FALSE
@@ -220,7 +220,7 @@ tmap_save(tm3, "my_map.svg")
 tmap_save(tm3, "my_map.html")
 ```
 
-### What else?
+## What else?
 
 - Facet maps
 - Animations
