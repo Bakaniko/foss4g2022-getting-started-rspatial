@@ -280,7 +280,7 @@ tm_shape(srtm) +
   tm_layout(legend.show = FALSE)
 ```
 
-```{r 06-manipulating-raster-data-35, purl=FALSE,echo=FALSE, fig.height=7}
+```{r 06-manipulating-raster-data-35, purl=FALSE,echo=FALSE, fig.height=7, eval=FALSE}
 tm_shape(srtm_utm) + 
   tm_grid() + 
   tm_raster(style = "cont") + 
