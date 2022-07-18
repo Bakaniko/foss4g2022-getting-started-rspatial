@@ -1,3 +1,37 @@
 # Summary {-}
 
 <!-- (Jakub) Closing of the workshop (5 min) -->
+
+
+---
+class: inverse, left, bottom
+# Summary
+
+Many resources are available:
+
+- **terra** - https://rspatial.github.io/terra/reference/terra-package.html and https://rspatial.org/terra/index.html
+- **raster** - https://rspatial.org/raster/ and https://rpubs.com/etiennebr/visualraster
+- **stars** - https://r-spatial.github.io/stars/index.html and https://r-spatial.org/book/
+- https://geocompr.github.io/
+- https://spacetimewithr.org/Spatio-Temporal%20Statistics%20with%20R.pdf
+- https://jean-romain.github.io/lidRbook/index.html
+- More...
+
+**Sometimes conversion between classes is crucial!**
+
+
+Ask for help, if needed:
+
+- https://stackoverflow.com/questions/tagged/r
+- https://gis.stackexchange.com/questions/tagged/r
+- https://community.rstudio.com/
+- https://stat.ethz.ch/mailman/listinfo/r-sig-geo
+
+Contribute something:
+
+- https://github.com/
+- Provide suggestions 
+- Write bugs reports
+- Make improvements to the documentation, e.g., clarifying unclear sentences, fixing typos
+- Make changes to the code, e.g., to do things in a more efficient way
+- Share your work with #rspatial on Twitter
