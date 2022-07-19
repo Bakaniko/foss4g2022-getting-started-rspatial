@@ -53,3 +53,25 @@ install.packages("spDataLarge", repos = "https://geocompr.r-universe.dev")
 
 ## What is ~~love~~ R ?
 <!-- (Nicolas) Introduction to R (15 min) -->
+
+## Coding paradigms
+
+When R has been released as an Open Source language, there was no strong syntax 
+philosophy so there is some inconstancies in packages, functions and parameters naming
+for example.
+R base readibility and performances where not good enough for some users so they
+developped packages to improve thoses.
+
+When using R for data analysis, you will encounter 3 majors coding paradigms:
+
+- R base
+- [Tidyverse](https://www.tidyverse.org/)
+- [data.table](https://rdatatable.gitlab.io/data.table/)
+
+R base is vanilla R code. The Tidyverse aims to provide a more consistent grammar
+ and readibility.
+ Data.table provides a fast and powerful alternative to R base with a consistent
+ grammar.
+ 
+ You can mix the paradigms for your projects but for teaching purposes, the workshop 
+ materials will use the Tidyverse with some R base.
