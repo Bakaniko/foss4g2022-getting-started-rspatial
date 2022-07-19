@@ -12,6 +12,8 @@ Imports:
   spData,
   sf,
   terra,
+  fields,
+  gstat,
   supercells
 Remotes:
   Nowosad/spDataLarge@noraster
