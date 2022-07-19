@@ -1,5 +1,29 @@
 # Introduction {-}
 
 <!-- (Nicolas) Introduction to the workshop (5 min) -->
-<!-- (Nicolas) Introduction to R (15 min) -->
 
+This workshops aims to provide the very basics of R to newcomers and a first 
+introduction to spatial data handling in R using the [R-spatial ecosystem](https://r-spatial.org/). 
+We will present to the audience mapping with the {tmap} package, vector data
+handling with {sf} and raster data handling with {terra}.
+
+No previous knowledge of R is required.
+
+The workshop leaders are [Jakub Nowosad](https://jakubnowosad.com/) from Adam Mickiewicz University (Poznań, Poland) 
+and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel university (Lyon, France).
+
+## Schedule
+
+- Introduction to the workshop (5 min)
+- Introduction to R (15 min)
+- Non-spatial data handling (30 min)
+- Introduction to R-spatial ecosystem (20 min)
+- Mapping in R with {tmap} (30 min)
+- Pause (to be confirmed)
+- Vector data processing (45 min)
+- Raster data processing (45 min)
+- Closing of the workshop (5 min)
+
+## Pre-requisites
+## What is ~~love~~ R ?
+<!-- (Nicolas) Introduction to R (15 min) -->
