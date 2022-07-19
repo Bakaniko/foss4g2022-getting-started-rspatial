@@ -306,7 +306,7 @@ zion = read_sf(system.file("vector/zion.gpkg", package = "spDataLarge"))
 srtm_utm_c = crop(srtm_utm, vect(zion))
 ```
 
-```{r 06-manipulating-raster-data-38, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12}
+```{r 06-manipulating-raster-data-38, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
 tc1 = tm_shape(srtm_utm) +
   tm_grid() + 
   tm_raster(style = "cont") +
@@ -328,7 +328,7 @@ Raster masking is usually done together with cropping.
 srtm_utm_m = mask(srtm_utm_c, vect(zion))
 ```
 
-```{r 06-manipulating-raster-data-40, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12}
+```{r 06-manipulating-raster-data-40, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
 tc1 = tm_shape(srtm_utm) +
   tm_grid() + 
   tm_raster(style = "cont") +
