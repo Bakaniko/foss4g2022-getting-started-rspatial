@@ -12,7 +12,7 @@ No previous knowledge of R is required.
 The workshop leaders are [Jakub Nowosad](https://jakubnowosad.com/) from Adam Mickiewicz University (Poznań, Poland) 
 and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel university (Lyon, France).
 
-## Schedule
+## Schedule {-}
 
 - Introduction to the workshop (5 min)
 - Introduction to R (15 min)
@@ -24,7 +24,7 @@ and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel universi
 - Raster data processing (45 min)
 - Closing of the workshop (5 min)
 
-## Pre-requisites
+## Pre-requisites {-}
 
 
 - A working installation of R (following [CRAN recommandations](https://cran.r-project.org/) for your computer)
@@ -51,7 +51,7 @@ install.packages("spDataLarge", repos = "https://geocompr.r-universe.dev")
 ```
 
 
-## What is ~~love~~ R ?
+## What is ~~love~~ R ? {-}
 <!-- (Nicolas) Introduction to R (15 min) -->
 
 R is a programming language dedicated to data science.
@@ -69,13 +69,13 @@ geospatial capabilities to the langage.
   - read and write geospatial data
   - connect to geospatial data base
   - perform spatial analysis
-  - compute geostatistical modelling, prediction and simulation
+  - make geostatistical modelling, prediction and simulation
   - access to algorithms from other tools ([QGIS](https://github.com/r-spatial/RQGIS3), [GRASS](https://github.com/rsbivand/rgrass), [SAGA](https://github.com/r-spatial/RSAGA))
 - Use R in other FOSS4G tools:
   - [QGIS](https://docs.qgis.org/3.22/en/docs/training_manual/processing/r_intro.html?highlight=r%20processing)
   - [GRASS](https://grasswiki.osgeo.org/wiki/R_statistics)
 
-## Coding paradigms
+## Coding paradigms {-}
 
 When R has been released as an Open Source language, there was no strong syntax 
 philosophy so there is some inconstancies in packages, functions and parameters naming
@@ -94,5 +94,5 @@ R base is vanilla R code. The Tidyverse aims to provide a more consistent gramma
  Data.table provides a fast and powerful alternative to R base with a consistent
  grammar.
  
- You can mix the paradigms for your projects but for teaching purposes, the workshop 
- materials will use the Tidyverse with some R base.
+You can mix those paradigms for your projects but for teaching purposes, the workshop 
+materials will use the Tidyverse with some R base.
