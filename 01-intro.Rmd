@@ -54,6 +54,27 @@ install.packages("spDataLarge", repos = "https://geocompr.r-universe.dev")
 ## What is ~~love~~ R ?
 <!-- (Nicolas) Introduction to R (15 min) -->
 
+R is a programming language dedicated to data science.
+It can compute statistics and produce graphics and reports (and much more).
+
+It was created by Ross Ihaka and Robert Gentleman in 1993 and was released as a 
+Free and Open Source Software in 1995.
+
+## Why an R workshop in a FOSS4G conference ?
+
+While R is not dedicated to spatial analysis, there is several packages that provides
+geospatial capabilities to the langage.
+
+- use R a standalone GIS:
+  - read and write geospatial data
+  - connect to geospatial data base
+  - perform spatial analysis
+  - compute geostatistical modelling, prediction and simulation
+  - access to algorithms from other tools ([QGIS](https://github.com/r-spatial/RQGIS3), [GRASS](https://github.com/rsbivand/rgrass), [SAGA](https://github.com/r-spatial/RSAGA))
+- Use R in other FOSS4G tools:
+  - [QGIS](https://docs.qgis.org/3.22/en/docs/training_manual/processing/r_intro.html?highlight=r%20processing)
+  - [GRASS](https://grasswiki.osgeo.org/wiki/R_statistics)
+
 ## Coding paradigms
 
 When R has been released as an Open Source language, there was no strong syntax 
