@@ -1,3 +1,66 @@
 # Data handling with R
 
 <!-- (Nicolas) Non-spatial data handling (30 min) -->
+## Data types
+
+- numeric:
+ - `2`
+ - `12.125`
+- character strings: `'a'`, `"word"`
+- logical:
+  -`TRUE`
+  -`FALSE`
+  -`NULL` (sort of)
+
+Please note that logicals are in capital letters.
+
+- vectors:
+  - `c(12, 15, 35698)`
+  - `c('FOSS4G 2022', 'Firenze')`
+- list: `list(1, 45, 12.0, "toto")`
+- matrices: `matrix(0:9, 3,3)`
+- dataframe (df): `data.frame(x = 1:3, y = c('a', 'b', 'c'))`
+- constants:
+  - `letters[3:4]`
+  - `LETTERS[12:26]`
+  - `pi`
+
+## Affectation
+
+Use of variables to store data in memory.
+
+Use `<-` (or `=`)
+
+Examples:
+
+```{r, eval=FALSE}
+a <- c(0:9) # new integer vector
+b <- c('FOSS4G 2022', 'Firenze') # new character vector
+c <- list(1, 45, 12.0, "toto") # lists can store different data types
+d = matrix(0:9, 3,3)
+```
+
+## Not only a calculator
+
+R is shipped with lots of functions:
+
+```{r r-functions, eval=FALSE}
+data(<datasetname>)   # load an embedded dataset
+head(<objectname>)    # first lines of a dataframe
+is.vector(object)     # return TRUE if object is a vector
+is.data.frame(object) # return TRUE if object is a data.frame
+typeof(<objectname>)  # Type of an object
+unique(<datasetname>) # returns unique values
+help(<functionname>)  # get help on a function
+plot(<datasetname>)   # create a graphic from a dataset
+```
+
+Exercices : 
+
+- Load the `LakeHuron` dataset using `data()`
+- Get help on the `LakeHuron` dataset
+- Use `head()` to see its first lines
+- Plot `LakeHuron`
+
+
+
