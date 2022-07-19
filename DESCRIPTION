@@ -5,12 +5,15 @@ Version: 0.0.1
 Imports:
   bookdown,
   webshot,
+  dplyr,
   tmaptools,
   tmap,
   spDataLarge,
   spData,
   sf,
   terra,
+  fields,
+  gstat,
   supercells
 Remotes:
   Nowosad/spDataLarge@noraster
