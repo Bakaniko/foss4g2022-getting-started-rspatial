@@ -25,5 +25,31 @@ and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel universi
 - Closing of the workshop (5 min)
 
 ## Pre-requisites
+
+
+- A working installation of R (following [CRAN recommandations](https://cran.r-project.org/) for your computer)
+
+- R packages
+
+Please run those commands into the R console:
+
+
+```{r pre-requisites-packages, eval = FALSE}
+packages <- c(
+  tmaptools,
+  tmap,
+  spData,
+  sf,
+  terra,
+  supercells)
+
+# Install packages from CRAN Repo
+install.packages(packages)
+
+# Install spDataLarge that is not on CRAN repo
+install.packages("spDataLarge", repos = "https://geocompr.r-universe.dev")
+```
+
+
 ## What is ~~love~~ R ?
 <!-- (Nicolas) Introduction to R (15 min) -->
