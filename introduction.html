@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-07-19" />
+<meta name="date" content="2022-07-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,11 +155,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
-<li class="chapter" data-level="0.1" data-path="introduction.html"><a href="introduction.html#schedule"><i class="fa fa-check"></i><b>0.1</b> Schedule</a></li>
-<li class="chapter" data-level="0.2" data-path="introduction.html"><a href="introduction.html#pre-requisites"><i class="fa fa-check"></i><b>0.2</b> Pre-requisites</a></li>
-<li class="chapter" data-level="0.3" data-path="introduction.html"><a href="introduction.html#what-is-love-r"><i class="fa fa-check"></i><b>0.3</b> What is <del>love</del> R ?</a></li>
-<li class="chapter" data-level="0.4" data-path="introduction.html"><a href="introduction.html#why-an-r-workshop-in-a-foss4g-conference"><i class="fa fa-check"></i><b>0.4</b> Why an R workshop in a FOSS4G conference ?</a></li>
-<li class="chapter" data-level="0.5" data-path="introduction.html"><a href="introduction.html#coding-paradigms"><i class="fa fa-check"></i><b>0.5</b> Coding paradigms</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#pre-requisites"><i class="fa fa-check"></i>Pre-requisites</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-love-r"><i class="fa fa-check"></i>What is <del>love</del> R ?</a></li>
+<li class="chapter" data-level="0.1" data-path="introduction.html"><a href="introduction.html#why-an-r-workshop-in-a-foss4g-conference"><i class="fa fa-check"></i><b>0.1</b> Why an R workshop in a FOSS4G conference ?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#coding-paradigms"><i class="fa fa-check"></i>Coding paradigms</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html"><i class="fa fa-check"></i><b>1</b> Data handling with R</a><ul>
 <li class="chapter" data-level="1.1" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#data-types"><i class="fa fa-check"></i><b>1.1</b> Data types</a></li>
@@ -243,8 +243,8 @@ handling with {sf} and raster data handling with {terra}.</p>
 <p>No previous knowledge of R is required.</p>
 <p>The workshop leaders are <a href="https://jakubnowosad.com/">Jakub Nowosad</a> from Adam Mickiewicz University (Poznań, Poland)
 and <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiffel university (Lyon, France).</p>
-<div id="schedule" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.1</span> Schedule<a href="introduction.html#schedule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="schedule" class="section level2 unnumbered hasAnchor">
+<h2>Schedule<a href="introduction.html#schedule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Introduction to the workshop (5 min)</li>
 <li>Introduction to R (15 min)</li>
@@ -257,12 +257,18 @@ and <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiff
 <li>Closing of the workshop (5 min)</li>
 </ul>
 </div>
-<div id="pre-requisites" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.2</span> Pre-requisites<a href="introduction.html#pre-requisites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p>A working installation of R (following <a href="https://cran.r-project.org/">CRAN recommandations</a> for your computer)</p></li>
-<li><p>R packages</p></li>
-</ul>
+<div id="pre-requisites" class="section level2 unnumbered hasAnchor">
+<h2>Pre-requisites<a href="introduction.html#pre-requisites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>A working installation of R (following <a href="https://cran.r-project.org/">CRAN recommandations</a> for your computer)</li>
+</ol>
+<div class="infobox note">
+<p>R comes with the RGui interface. It is usable but for a better user experience we recommend using <a href="https://www.rstudio.com/products/rstudio/download/#download">Rstudio</a>.</p>
+<p><a href="https://jupyter.org/">Jupyter Notebook</a> with the <a href="https://irkernel.github.io/installation/">IRKernel</a> can be a good option.</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>R packages</li>
+</ol>
 <p>Please run those commands into the R console:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1"></a>packages &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
 <span id="cb1-2"><a href="introduction.html#cb1-2"></a>  tmaptools,</span>
@@ -270,16 +276,17 @@ and <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiff
 <span id="cb1-4"><a href="introduction.html#cb1-4"></a>  spData,</span>
 <span id="cb1-5"><a href="introduction.html#cb1-5"></a>  sf,</span>
 <span id="cb1-6"><a href="introduction.html#cb1-6"></a>  terra,</span>
-<span id="cb1-7"><a href="introduction.html#cb1-7"></a>  supercells)</span>
-<span id="cb1-8"><a href="introduction.html#cb1-8"></a></span>
-<span id="cb1-9"><a href="introduction.html#cb1-9"></a><span class="co"># Install packages from CRAN Repo</span></span>
-<span id="cb1-10"><a href="introduction.html#cb1-10"></a><span class="kw">install.packages</span>(packages)</span>
-<span id="cb1-11"><a href="introduction.html#cb1-11"></a></span>
-<span id="cb1-12"><a href="introduction.html#cb1-12"></a><span class="co"># Install spDataLarge that is not on CRAN repo</span></span>
-<span id="cb1-13"><a href="introduction.html#cb1-13"></a><span class="kw">install.packages</span>(<span class="st">&quot;spDataLarge&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;https://geocompr.r-universe.dev&quot;</span>)</span></code></pre></div>
+<span id="cb1-7"><a href="introduction.html#cb1-7"></a>  fields,</span>
+<span id="cb1-8"><a href="introduction.html#cb1-8"></a>  supercells)</span>
+<span id="cb1-9"><a href="introduction.html#cb1-9"></a></span>
+<span id="cb1-10"><a href="introduction.html#cb1-10"></a><span class="co"># Install packages from CRAN Repo</span></span>
+<span id="cb1-11"><a href="introduction.html#cb1-11"></a><span class="kw">install.packages</span>(packages)</span>
+<span id="cb1-12"><a href="introduction.html#cb1-12"></a></span>
+<span id="cb1-13"><a href="introduction.html#cb1-13"></a><span class="co"># Install spDataLarge that is not on CRAN repo</span></span>
+<span id="cb1-14"><a href="introduction.html#cb1-14"></a><span class="kw">install.packages</span>(<span class="st">&quot;spDataLarge&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;https://geocompr.r-universe.dev&quot;</span>)</span></code></pre></div>
 </div>
-<div id="what-is-love-r" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.3</span> What is <del>love</del> R ?<a href="introduction.html#what-is-love-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="what-is-love-r" class="section level2 unnumbered hasAnchor">
+<h2>What is <del>love</del> R ?<a href="introduction.html#what-is-love-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- (Nicolas) Introduction to R (15 min) -->
 <p>R is a programming language dedicated to data science.
 It can compute statistics and produce graphics and reports (and much more).</p>
@@ -287,7 +294,7 @@ It can compute statistics and produce graphics and reports (and much more).</p>
 Free and Open Source Software in 1995.</p>
 </div>
 <div id="why-an-r-workshop-in-a-foss4g-conference" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.4</span> Why an R workshop in a FOSS4G conference ?<a href="introduction.html#why-an-r-workshop-in-a-foss4g-conference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">0.1</span> Why an R workshop in a FOSS4G conference ?<a href="introduction.html#why-an-r-workshop-in-a-foss4g-conference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While R is not dedicated to spatial analysis, there is several packages that provides
 geospatial capabilities to the langage.</p>
 <ul>
@@ -296,7 +303,7 @@ geospatial capabilities to the langage.</p>
 <li>read and write geospatial data</li>
 <li>connect to geospatial data base</li>
 <li>perform spatial analysis</li>
-<li>compute geostatistical modelling, prediction and simulation</li>
+<li>make geostatistical modelling, prediction and simulation</li>
 <li>access to algorithms from other tools (<a href="https://github.com/r-spatial/RQGIS3">QGIS</a>, <a href="https://github.com/rsbivand/rgrass">GRASS</a>, <a href="https://github.com/r-spatial/RSAGA">SAGA</a>)</li>
 </ul></li>
 <li>Use R in other FOSS4G tools:
@@ -306,8 +313,8 @@ geospatial capabilities to the langage.</p>
 </ul></li>
 </ul>
 </div>
-<div id="coding-paradigms" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.5</span> Coding paradigms<a href="introduction.html#coding-paradigms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="coding-paradigms" class="section level2 unnumbered hasAnchor">
+<h2>Coding paradigms<a href="introduction.html#coding-paradigms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When R has been released as an Open Source language, there was no strong syntax
 philosophy so there is some inconstancies in packages, functions and parameters naming
 for example.
@@ -323,7 +330,7 @@ developped packages to improve thoses.</p>
 and readibility.
 Data.table provides a fast and powerful alternative to R base with a consistent
 grammar.</p>
-<p>You can mix the paradigms for your projects but for teaching purposes, the workshop
+<p>You can mix those paradigms for your projects but for teaching purposes, the workshop
 materials will use the Tidyverse with some R base.</p>
 
 </div>
