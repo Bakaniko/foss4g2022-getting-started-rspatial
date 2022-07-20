@@ -27,9 +27,17 @@ and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel universi
 ## Pre-requisites {-}
 
 
-- A working installation of R (following [CRAN recommandations](https://cran.r-project.org/) for your computer)
+1. A working installation of R (following [CRAN recommandations](https://cran.r-project.org/) for your computer)
 
-- R packages
+:::: {.infobox .note data-latex="note"}
+
+R comes with the RGui interface. It is usable but for a better user experience we recommend using [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
+
+[Jupyter Notebook](https://jupyter.org/) with the [IRKernel](https://irkernel.github.io/installation/) can be a good option.
+
+::::
+
+2. R packages
 
 Please run those commands into the R console:
 
@@ -41,6 +49,7 @@ packages <- c(
   spData,
   sf,
   terra,
+  fields,
   supercells)
 
 # Install packages from CRAN Repo
