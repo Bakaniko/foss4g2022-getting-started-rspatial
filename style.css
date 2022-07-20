@@ -12,3 +12,28 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+
+.infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid orange;
+  border-radius: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+}
+
+.caution {
+  background-image: url("images/caution.png");
+}
+
+.warning {
+  background-image: url("images/warning.png");
+}
+
+.note {
+  background-image: url("images/note.png");
+}
+
+.tip {
+  background-image: url("images/tip.png");
+}
