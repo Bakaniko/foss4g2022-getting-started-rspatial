@@ -106,6 +106,15 @@ data_url <- system.file("extdata/gapminder.tsv",package = "gapminder")
 data_url
 ```
 
+:::: {.infobox .tip data-latex="tip"}
+
+`system.file()` is a function that the path of files in R packages, independently
+of the operating system.
+
+::::
+
+
+
 ```{r load-gapminder-from-package}
 gapminder <- read.delim(data_url, sep = "\t")
 ```
@@ -147,9 +156,113 @@ We can see that it contains several columns (also called *variables*):
 names(gapminder)
 ```
 
+## In the beginning was the Verb
+
+`dplyr` provides a lot of functions to handle data: `filter()` to filter the data matching
+certains conditions (subset data), `select()` to select columns, `mutate()` to create new variables.
+All those functions are verbs and means an action onto the dataset.
 
 
 
+## Filter data
+
+If we only want the records from Italy, we can filter using 
+
+```{r data-handling-filter}
+
+filter(gapminder, country == "Italy" )
+
+```
+
+You can use comparison operators like `==`, `>`, `<`, `>=` , etc.
+There is also logical operators : `&` (*AND*), `|` (*OR*), `!` (*NOT*) and `xor()`.
+
+So, for example, if we want to subset records for Italy after 2000, we can use filter like this:
+
+```{r, data-handling-subset-italy}
+italy_2000 <- filter(gapminder, country == "Italy" & year > 2000 )
+italy_2000
+```
+
+### Exercice {-}
+
+- Try to subset non-European records
+
+```{r class.source = 'fold-hide'}
+filter(gapminder, continent != "Europe")
+```
+
+- Try to subset records that are in Oceania or before 2000
+
+```{r class.source = 'fold-hide'}
+filter(gapminder, continent == "Oceania" | year < 2000)
+```
+
+## Select columns
+
+`select`allows you to keep only the columns you need for your analysis.
+
+Maybe we only want the `country`, `year` and `lifeExp` variables:
+
+```{r data-handling-select}
+
+select(italy_2000, country, year, lifeExp)
+
+```
+
+Or, for example, in the `italy_2000` subset, the `continent` variable does not 
+provide useful information anymore, so we want to discard it. 
+Please not the use of the `-` symbol before the name of the variable.
+
+```{r data-handling-select2}
+
+select(italy_2000, -continent)
+
+```
+
+So you can select the column you want to keep or the ones you want to remove.
+
+## Create new variables
+
+Let say you want to compute the GDP, in millions, from the population and the GDP per capita.
+For that, you can use the `mutate()` function:
+
+```{r, data-handling-mutate}
+mutate(gapminder, GPD = (gdpPercap * pop)/ 1000000)
+```
+
+It's companion function, `transmute()` does the same thing but only keep the new variables.
+
+```{r, data-handling-transmute}
+transmute(gapminder, GPD = (gdpPercap * pop)/ 1000000)
+```
+
+If you want to keep variables from the dataset, you can call them in the function call:
+
+```{r, data-handling-transmute2}
+transmute(gapminder, country, year, GPD = (gdpPercap * pop)/ 1000000)
+```
+
+So in this example, we compute the GPD but we also keep the information about the year and the country.
+
+## Agregate data
+
+Sometimes, we have a too detailled dataset and we want a more broader view of the data
+so we want to agregate it.
+
+To do so, `dplyr` comes with a couple of functions:  `group_by()` and `summarise()`.
+Like their names says, `group_by` groups records who share the same value in a variable 
+and `summarise()` compute the summary of non-grouping variables.
+
+```{r, data-handling-group-by}
+
+summarise(group_by(gapminder, continent))
+
+```
 
 
+## Join data
 
+## Piping
+
+More information on pipe's operators on this [R-bloggers' blogpost](https://www.r-bloggers.com/2021/05/the-new-r-pipe/)
