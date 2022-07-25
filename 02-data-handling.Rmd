@@ -12,7 +12,7 @@
   -`FALSE`
   -`NULL` (sort of)
 
-Please note that logicals are in capital letters.
+> Please note that logicals are in capital letters.
 
 - vectors:
   - `c(12, 15, 35698)`
@@ -34,10 +34,13 @@ Use `<-` (or `=`)
 Examples:
 
 ```{r, eval=FALSE}
-a <- c(0:9) # new integer vector
-b <- c('FOSS4G 2022', 'Firenze') # new character vector
-c <- list(1, 45, 12.0, "toto") # lists can store different data types
-d = matrix(0:9, 3,3)
+a <- c(0, 1, 2) # new integer vector
+b <- c('FOSS4G', '2022', 'Firenze') # new character vector
+c <- data.frame(
+  number = a, 
+  strings = b)
+d <- list(1, 45, 12.0, "toto") # lists can store different data types
+e = matrix(0:9, 3,3)
 ```
 
 ## Not only a calculator
@@ -49,10 +52,10 @@ data(<datasetname>)   # load an embedded dataset
 head(<objectname>)    # first lines of a dataframe
 is.vector(object)     # return TRUE if object is a vector
 is.data.frame(object) # return TRUE if object is a data.frame
-typeof(<objectname>)  # Type of an object
-unique(<datasetname>) # returns unique values
+class(<objectname>)  # Returns the class of an object
+unique(<objectname>) # returns unique values
 help(<functionname>)  # get help on a function
-plot(<datasetname>)   # create a graphic from a dataset
+plot(<objectname>)   # create a graphic from a dataset
 ```
 
 Exercices : 
@@ -61,6 +64,92 @@ Exercices :
 - Get help on the `LakeHuron` dataset
 - Use `head()` to see its first lines
 - Plot `LakeHuron`
+
+
+## Packages
+
+While R base contains a lot of functions, it can be extended with packages.
+
+> In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. @wickham2022Packages
+
+You already saw how to install packages with the `install.packages()` function, 
+let's see how to load the [dplyr](https://dplyr.tidyverse.org/) 
+library we will use to handle the data.
+
+```{r data-handling-libraries}
+library(dplyr)
+```
+
+
+## Load data
+
+If the packages provides datasets to work with, you will want to work on your own data.
+There is several ways to load data.
+
+R base provides a set of functions for delimited text files.
+For example, if we want ot work with the Gapminder dataset from [Software Carpentry's R course](https://github.com/swcarpentry/r-novice-gapminder).
+
+```{r data-handling-download-gapminder}
+data_url <- "https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/main/data/gapminder_data.csv"
+
+# download the data and store it in a variable
+gapminder <- read.csv(data_url)
+```
+
+We call this dataset from an URL but it can be a path in your system file.
+
+For example, if you have installed the gapminder package as recommended, 
+you will find the data set as a TSV file in your R installation.
+
+```{r where-is-gapminder}
+data_url <- system.file("extdata/gapminder.tsv",package = "gapminder")
+data_url
+```
+
+```{r load-gapminder-from-package}
+gapminder <- read.delim(data_url, sep = "\t")
+```
+
+
+:::: {.infobox .tip data-latex="tip"}
+
+`read.csv()` and similars functions can read delimited text files only.
+For other formats, you can use functions from other packages like 
+[Haven](https://haven.tidyverse.org) or [readxl](https://readxl.tidyverse.org/).
+We will show in [Section](#manipulating-vector-data) how to load geospatial data.
+
+::::
+
+Let's take a look to our data :
+
+```{r data-handling-glimpse}
+glimpse(gapminder)
+```
+
+This dataset is about life expectancy, population and GDP per capita in world 
+countries between `r min(gapminder$year)` and `r max(gapminder$year)`.
+
+You can also use `head()` for the same purpose.
+
+```{r data-handling-head}
+head(gapminder)
+```
+
+:::: {.infobox .note data-latex="note"}
+
+Hans Rosling made an animated presentation of the data [TED talks](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen)
+
+::::
+
+We can see that it contains several columns (also called *variables*):
+
+```{r data-handling-names}
+names(gapminder)
+```
+
+
+
+
 
 
 
