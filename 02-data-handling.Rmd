@@ -243,26 +243,131 @@ If you want to keep variables from the dataset, you can call them in the functio
 transmute(gapminder, country, year, GPD = (gdpPercap * pop)/ 1000000)
 ```
 
-So in this example, we compute the GPD but we also keep the information about the year and the country.
+So in this example, we compute the GPD but we also keep the information about the country and the year.
 
 ## Agregate data
 
 Sometimes, we have a too detailled dataset and we want a more broader view of the data
 so we want to agregate it.
 
-To do so, `dplyr` comes with a couple of functions:  `group_by()` and `summarise()`.
+To do so, `dplyr` provides a couple of functions:  `group_by()` and `summarise()`.
 Like their names says, `group_by` groups records who share the same value in a variable 
 and `summarise()` compute the summary of non-grouping variables.
 
+For example, let's compute the yearly population of each continent.
+To do this, we first group the data by continent and year and pass the result to `summarise().
+Into this second function, we create a new variable called `population` that is the sum of
+the variable `pop` of each group.
+
 ```{r, data-handling-group-by}
 
-summarise(group_by(gapminder, continent))
+summarise(group_by(gapminder, continent, year), population = sum(pop))
 
 ```
 
 
+You can use any function to summarise your data, for example, if you want to know the number of entries
+by continent, you can use `n()`.
+
+```{r, data-handling-summarise}
+
+summarise(group_by(gapminder, continent), count = n())
+
+```
+
+Or if you only want the first country of each continent:
+
+```{r, data-handling-summarise2}
+
+summarise(group_by(gapminder, continent), country = first(.data[["country"]]))
+
+```
+
+:::: {.infobox .note data-latex="note"}
+
+`.data` is a pronoun that you can use when the column name is a character vector.
+
+::::
+
 ## Join data
+
+`dplyr` provides a large variety of functions to join datasets : 
+`inner_join()`,`left_join()`, `right_join()`, `full_join()`, `nest_join()` ,
+`semi_join()`,`anti_join()`. 
+
+Let's create two datasets that shares a common key.
+
+```{r, data-handling-left}
+gapminder_left <- transmute(gapminder, 
+                            key = paste0(country, "_" , year), 
+                            country, 
+                            continent, 
+                            year)
+
+head(gapminder_left)
+```
+
+
+```{r, data-handling-right}
+gapminder_right <- transmute(gapminder, 
+                             key = paste0(country, "_" , year), 
+                             lifeExp, 
+                             pop, 
+                             gdpPercap)
+
+head(gapminder_right)
+```
+
+
+Now we can join them.
+
+```{r}
+joined_gapminder <- left_join(
+  gapminder_left, 
+  gapminder_right, 
+  by = "key" # optional argument if the join variables have the same name
+  )
+```
+
+![Left Join animation (Copyright Garrick Aden_Buie)](https://raw.githubusercontent.com/gadenbuie/tidyexplain/main/images/left-join.gif)
+
+If you want more information on joins operations with `dplyr`, we recommend to read the [dedicated blogpost from Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)
 
 ## Piping
 
-More information on pipe's operators on this [R-bloggers' blogpost](https://www.r-bloggers.com/2021/05/the-new-r-pipe/)
+Piping allows to create a sequence of actions on a dataset without storing intermediate results.
+
+As it can be difficult to debug piped commands for the beginners, we won't use it in this workshop.
+However, its usagei very frequent so it is most likely that a beginner will encounter it soon.
+
+The most common form `%>%` is provided by the package [magrittr](https://magrittr.tidyverse.org/) 
+which is part of the Tidyverse and is a dependency of `dplyr`, so you don't have to load it.
+
+In the following example, we show how to compute the mean GDP by decade of the Europeans countries.
+
+```{r, piping-example-magrittr}
+gapminder %>% # pass the datset as the first argument
+  filter(continent == "Europe") %>% # subset on European records
+  select(-continent) %>% # remove the continent column
+  mutate(decade = year - year %% 10, # compute decade
+         GDP = (gdpPercap * pop)/ 1000000 # compute GDP
+         ) %>% 
+  group_by(country, decade) %>% # grouping variables
+  summarise(mean_GDP = mean(GDP)) # compute mean GDP of the decade
+```
+
+With R 4.1.0, a piping operator has been introduced:
+
+```{r, piping-example-Rbase}
+gapminder |> # pass the datset as the first argument
+  filter(continent == "Europe") |> # subset on European records
+  select(-continent) |> # remove the continent column
+  mutate(decade = year - year %% 10, # compute decade
+         GDP = (gdpPercap * pop)/ 1000000 # compute GDP
+         ) |> 
+  group_by(country, decade) |> # grouping variables
+  summarise(mean_GDP = mean(GDP)) # compute mean GDP of the decade
+```
+
+
+Those two pipes operators are not equivalent so we recommend to read this [R-bloggers' blogpost](https://www.r-bloggers.com/2021/05/the-new-r-pipe/) on pipe's operators.
