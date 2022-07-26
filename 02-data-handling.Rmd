@@ -33,7 +33,7 @@ Use `<-` (or `=`)
 
 Examples:
 
-```{r, eval=FALSE}
+```{r eval=FALSE}
 a <- c(0, 1, 2) # new integer vector
 b <- c('FOSS4G', '2022', 'Firenze') # new character vector
 c <- data.frame(
@@ -115,7 +115,7 @@ of the operating system.
 
 
 
-```{r load-gapminder-from-package}
+```{r load-gapminder-from-package, eval=FALSE}
 gapminder <- read.delim(data_url, sep = "\t")
 ```
 
@@ -179,7 +179,7 @@ There is also logical operators : `&` (*AND*), `|` (*OR*), `!` (*NOT*) and `xor(
 
 So, for example, if we want to subset records for Italy after 2000, we can use filter like this:
 
-```{r, data-handling-subset-italy}
+```{r data-handling-subset-italy}
 italy_2000 <- filter(gapminder, country == "Italy" & year > 2000 )
 italy_2000
 ```
@@ -227,19 +227,19 @@ So you can select the column you want to keep or the ones you want to remove.
 Let say you want to compute the GDP, in millions, from the population and the GDP per capita.
 For that, you can use the `mutate()` function:
 
-```{r, data-handling-mutate}
+```{r data-handling-mutate}
 mutate(gapminder, GPD = (gdpPercap * pop)/ 1000000)
 ```
 
 It's companion function, `transmute()` does the same thing but only keep the new variables.
 
-```{r, data-handling-transmute}
+```{r data-handling-transmute}
 transmute(gapminder, GPD = (gdpPercap * pop)/ 1000000)
 ```
 
 If you want to keep variables from the dataset, you can call them in the function call:
 
-```{r, data-handling-transmute2}
+```{r data-handling-transmute2}
 transmute(gapminder, country, year, GPD = (gdpPercap * pop)/ 1000000)
 ```
 
@@ -259,7 +259,7 @@ To do this, we first group the data by continent and year and pass the result to
 Into this second function, we create a new variable called `population` that is the sum of
 the variable `pop` of each group.
 
-```{r, data-handling-group-by}
+```{r data-handling-group-by}
 
 summarise(group_by(gapminder, continent, year), population = sum(pop))
 
@@ -269,7 +269,7 @@ summarise(group_by(gapminder, continent, year), population = sum(pop))
 You can use any function to summarise your data, for example, if you want to know the number of entries
 by continent, you can use `n()`.
 
-```{r, data-handling-summarise}
+```{r data-handling-summarise}
 
 summarise(group_by(gapminder, continent), count = n())
 
@@ -277,7 +277,7 @@ summarise(group_by(gapminder, continent), count = n())
 
 Or if you only want the first country of each continent:
 
-```{r, data-handling-summarise2}
+```{r data-handling-summarise2}
 
 summarise(group_by(gapminder, continent), country = first(.data[["country"]]))
 
@@ -297,7 +297,7 @@ summarise(group_by(gapminder, continent), country = first(.data[["country"]]))
 
 Let's create two datasets that shares a common key.
 
-```{r, data-handling-left}
+```{r data-handling-left}
 gapminder_left <- transmute(gapminder, 
                             key = paste0(country, "_" , year), 
                             country, 
@@ -308,7 +308,7 @@ head(gapminder_left)
 ```
 
 
-```{r, data-handling-right}
+```{r data-handling-right}
 gapminder_right <- transmute(gapminder, 
                              key = paste0(country, "_" , year), 
                              lifeExp, 
@@ -345,7 +345,7 @@ which is part of the Tidyverse and is a dependency of `dplyr`, so you don't have
 
 In the following example, we show how to compute the mean GDP by decade of the Europeans countries.
 
-```{r, piping-example-magrittr}
+```{r piping-example-magrittr}
 gapminder %>% # pass the datset as the first argument
   filter(continent == "Europe") %>% # subset on European records
   select(-continent) %>% # remove the continent column
@@ -358,7 +358,7 @@ gapminder %>% # pass the datset as the first argument
 
 With R 4.1.0, a piping operator has been introduced:
 
-```{r, piping-example-Rbase}
+```{r piping-example-Rbase}
 gapminder |> # pass the datset as the first argument
   filter(continent == "Europe") |> # subset on European records
   select(-continent) |> # remove the continent column
