@@ -1,4 +1,13 @@
-# Manipulating vector data
+# Manipulating vector data {#manipulating-vector-data}
 
 <!-- (Nicolas) Vector data processing (45 min) -->
+
+```{r vector-data-libraries}
+library(sf)
+```
+
+
+```{r}
+ sf::st_read(system.file("shapes/sids.shp", package = "spData"))
+```
 

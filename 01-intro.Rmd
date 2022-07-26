@@ -44,6 +44,7 @@ Please run those commands into the R console:
 
 ```{r pre-requisites-packages, eval = FALSE}
 packages <- c(
+  gapminder,
   tmaptools,
   tmap,
   spData,
