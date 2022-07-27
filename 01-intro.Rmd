@@ -75,7 +75,7 @@ Free and Open Source Software in 1995.
 While R is not dedicated to spatial analysis, there is several packages that provides
 geospatial capabilities to the language.
 
-- use R a standalone GIS:
+- Use R a standalone GIS:
   - read and write geospatial data
   - connect to geospatial data base
   - perform spatial analysis
