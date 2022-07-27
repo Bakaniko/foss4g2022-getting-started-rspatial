@@ -417,7 +417,7 @@ writeRaster(nlcd, filename = "nlcd3.tif", filetype = "COG")
 ```{r 06-manipulating-raster-data-43}
 landsat_path <- system.file("raster/landsat.tif", package = "spDataLarge")
 landsat <- rast(landsat_path)
-zion_points_utm <- zion_points_utm = st_transform(zion_points, crs = crs(landsat))
+zion_points_utm <- st_transform(zion_points, crs = crs(landsat))
 landsat_s <- stretch(landsat, maxq = 0.98)
 plotRGB(landsat_s, r = 3, g = 2, b = 1)
 plot(st_geometry(zion_points_utm), add = TRUE, col = "red", cex = 3)
