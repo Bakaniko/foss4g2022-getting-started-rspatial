@@ -52,21 +52,168 @@ Learn more at https://cran.r-project.org/web/views/Spatial.html.
 - Other R ecosystems
 - ...
 
-```{r}
+```{r 03-intro-to-rspatial-1}
 #| echo = FALSE,
 #| fig.cap = "Source: https://geocompr.robinlovelace.net"
 knitr::include_graphics("https://geocompr.robinlovelace.net/figures/01-cranlogs.png")
 ```
 
-```{r}
+## Vector data
+
+- [**sf**](https://github.com/r-spatial/sf)
+- [**sp**](https://github.com/edzer/sp)
+- [**terra**](https://github.com/rspatial/terra)
+
+```{r 03-intro-to-rspatial-2}
 #| echo = FALSE,
 #| fig.cap = "Source: https://www.r-spatial.org/r/2020/03/17/wkt.html"
 knitr::include_graphics("https://keen-swartz-3146c4.netlify.com/images/sf_deps.png")
 ```
 
-```{r}
+- The **sf** package is the successor of the **sp** package based on the OGC standard Simple Features
+- https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf
+- Combines the functionality of three previous packages: **sp**, **rgeos** and **rgdal**
+- https://www.mail-archive.com/r-sig-geo@r-project.org/msg18468.html
+- https://github.com/r-spatial/sf/wiki/Migrating
+- Most of the functions in this package start with a prefix `st_`
+
+```{r 03-intro-to-rspatial-3, echo=TRUE}
+# lsf.str("package:sf")
+ls("package:sf")
+```
+
+
+```{r 03-intro-to-rspatial-4, purl=FALSE,echo=FALSE, out.width="90%"}
+# knitr::include_graphics("figs/sf-classes.png", dpi = NA)
+```
+
+- This package handles additional vector data types (e.g. polygon and multipolygon are two separate classes), allows for easier data processing, and support for spatial databases such as PostGIS
+- https://r-spatial.github.io/sf/ and https://github.com/rstudio/cheatsheets/blob/master/sf.pdf
+
+```{r 03-intro-to-rspatial-5 }
+library(spData)
+library(sf)
+world
+```
+
+```{r 03-intro-to-rspatial-6 }
+plot(world)
+```
+
+```{r 03-intro-to-rspatial-7 }
+file_path = system.file("shapes/world.gpkg", package = "spData")
+file_path
+```
+
+```{r 03-intro-to-rspatial-8 }
+world = read_sf(file_path)
+```
+
+```{r 03-intro-to-rspatial-9}
+world
+```
+
+```{r 03-intro-to-rspatial-10}
+st_crs(world)
+```
+
+```{r 03-intro-to-rspatial-11}
+st_crs(world)$wkt
+```
+
+```{r 03-intro-to-rspatial-12}
+st_crs(world)$srid
+```
+
+```{r 03-intro-to-rspatial-13}
+st_crs(world)$proj4string
+```
+
+```{r 03-intro-to-rspatial-14 }
+cycle_hire_path = system.file("misc/cycle_hire_xy.csv", package = "spData")
+cycle_hire_txt = read.csv(cycle_hire_path)
+head(cycle_hire_txt)
+```
+
+```{r 03-intro-to-rspatial-15}
+cycle_hire_xy = st_as_sf(cycle_hire_txt, coords = c("X", "Y"), crs = "EPSG:4326")
+cycle_hire_xy
+```
+
+```{r 03-intro-to-rspatial-16}
+plot(cycle_hire_xy)
+```
+
+## Raster data
+
+- [**terra**](https://github.com/rspatial/terra)
+- [**raster**](https://github.com/rspatial/raster)
+- [**stars**](https://github.com/r-spatial/stars)
+
+```{r 03-intro-to-rspatial-17}
 #| echo = FALSE
 knitr::include_graphics("figs/terra-libs.png")
+```
+
+- The **terra** package contains classes and methods representing raster objects and operations
+- It allows raster data to be loaded and saved
+- It allows raster algebra and raster processing
+- It includes a number of additional functions, e.g., for analysis of terrain characteristics
+- It allows you to work on large sets of data
+- ?`terra-package`, https://rspatial.github.io/terra/reference/terra-package.html
+- It is a successor of the **raster** package - http://www.rpubs.com/etiennebr/visualraster
+- The **terra** package contains classes and methods representing raster objects and operations
+
+```{r 03-intro-to-rspatial-18 }
+library(spData)
+library(terra)
+elev = rast(system.file("raster/elev.tif", package = "spData"))
+elev
+```
+
+```{r 03-intro-to-rspatial-19 }
+plot(elev)
+```
+
+```{r 03-intro-to-rspatial-20}
+elev[]
+```
+
+```{r 03-intro-to-rspatial-21 }
+raster_filepath = system.file("raster/srtm.tif", package = "spDataLarge")
+new_raster = rast(raster_filepath)
+new_raster
+```
+
+```{r 03-intro-to-rspatial-22}
+crs(new_raster)
+```
+
+```{r 03-intro-to-rspatial-23}
+crs(new_raster, describe = TRUE, proj = TRUE)
+```
+
+```{r 03-intro-to-rspatial-24 }
+raster_filepath2 = system.file("raster/landsat.tif", package = "spDataLarge")
+new_raster2 = rast(raster_filepath2)
+plot(new_raster2)
+```
+
+```{r 03-intro-to-rspatial-25}
+plotRGB(new_raster2, r = 3, g = 2, b = 1, stretch = "lin")
+```
+
+```{r 03-intro-to-rspatial-26 }
+my_raster = rast(nrows = 10, ncols = 20, 
+                 xmin = 0, xmax = 20, ymin = -10, ymax = 0,
+                 crs = "EPSG:4326",
+                 vals = 1:200)
+my_raster
+
+```
+
+```{r 03-intro-to-rspatial-27}
+plot(my_raster)
 ```
 
 ### Conversions
