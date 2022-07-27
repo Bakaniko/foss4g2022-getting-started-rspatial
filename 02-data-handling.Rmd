@@ -6,11 +6,13 @@
 - numeric:
  - `2`
  - `12.125`
-- character strings: `'a'`, `"word"`
+- character strings: 
+ - `"a"`
+ - `'word'`
 - logical:
-  -`TRUE`
-  -`FALSE`
-  -`NULL` (sort of)
+ - `TRUE`
+ - `FALSE`
+ - `NULL` (sort of)
 
 > Please note that logicals are in capital letters.
 
@@ -45,7 +47,7 @@ e = matrix(0:9, 3,3)
 
 ## Not only a calculator
 
-R is shipped with lots of functions:
+R is shipped with lots of functions like :
 
 ```{r r-functions, eval=FALSE}
 data(<datasetname>)   # load an embedded dataset
@@ -113,12 +115,9 @@ of the operating system.
 
 ::::
 
-
-
 ```{r load-gapminder-from-package, eval=FALSE}
 gapminder <- read.delim(data_url, sep = "\t")
 ```
-
 
 :::: {.infobox .tip data-latex="tip"}
 
@@ -138,15 +137,29 @@ glimpse(gapminder)
 This dataset is about life expectancy, population and GDP per capita in world 
 countries between `r min(gapminder$year)` and `r max(gapminder$year)`.
 
-You can also use `head()` for the same purpose.
+You can also use `head()` for the same purpose but with a different output format.
 
 ```{r data-handling-head}
 head(gapminder)
 ```
 
+
+We can transform a dataframe into a tibble to access their better `print()` method
+that combines `head()` and `glimpse()`. 
+Tibbles are at the core of the Tidyverse packages. 
+
+```{r data-handling-head}
+gapminder <- as_tibble(gapminder)
+gapminder
+```
+
+
+
 :::: {.infobox .note data-latex="note"}
 
-Hans Rosling made an animated presentation of the data [TED talks](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen)
+If you want more information about the `gapminder` dataset, Hans Rosling made a 
+[TED talk](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) 
+presenting the gapminder data.
 
 ::::
 
@@ -188,13 +201,13 @@ italy_2000
 
 - Try to subset non-European records
 
-```{r class.source = 'fold-hide'}
+```{r class.source = 'fold-hide', eval=FALSE}
 filter(gapminder, continent != "Europe")
 ```
 
 - Try to subset records that are in Oceania or before 2000
 
-```{r class.source = 'fold-hide'}
+```{r class.source = 'fold-hide', eval=FALSE}
 filter(gapminder, continent == "Oceania" | year < 2000)
 ```
 
@@ -205,9 +218,7 @@ filter(gapminder, continent == "Oceania" | year < 2000)
 Maybe we only want the `country`, `year` and `lifeExp` variables:
 
 ```{r data-handling-select}
-
 select(italy_2000, country, year, lifeExp)
-
 ```
 
 Or, for example, in the `italy_2000` subset, the `continent` variable does not 
@@ -215,9 +226,7 @@ provide useful information anymore, so we want to discard it.
 Please not the use of the `-` symbol before the name of the variable.
 
 ```{r data-handling-select2}
-
 select(italy_2000, -continent)
-
 ```
 
 So you can select the column you want to keep or the ones you want to remove.
@@ -304,7 +313,7 @@ gapminder_left <- transmute(gapminder,
                             continent, 
                             year)
 
-head(gapminder_left)
+gapminder_left
 ```
 
 
@@ -315,7 +324,7 @@ gapminder_right <- transmute(gapminder,
                              pop, 
                              gdpPercap)
 
-head(gapminder_right)
+gapminder_right
 ```
 
 
@@ -337,13 +346,15 @@ If you want more information on joins operations with `dplyr`, we recommend to r
 
 Piping allows to create a sequence of actions on a dataset without storing intermediate results.
 
-As it can be difficult to debug piped commands for the beginners, we won't use it in this workshop.
-However, its usagei very frequent so it is most likely that a beginner will encounter it soon.
+As it can be difficult to debug piped commands for beginners, we won't use it in this workshop.
+However, its usage is very frequent so it is most likely that a beginner will encounter it 
+in documentation  or in code source publicly available.
 
 The most common form `%>%` is provided by the package [magrittr](https://magrittr.tidyverse.org/) 
 which is part of the Tidyverse and is a dependency of `dplyr`, so you don't have to load it.
 
-In the following example, we show how to compute the mean GDP by decade of the Europeans countries.
+In the following example, we show how to compute the mean GDP by decade of the 
+Europeans countries using pipes to chain functions.
 
 ```{r piping-example-magrittr}
 gapminder %>% # pass the datset as the first argument
@@ -356,7 +367,7 @@ gapminder %>% # pass the datset as the first argument
   summarise(mean_GDP = mean(GDP)) # compute mean GDP of the decade
 ```
 
-With R 4.1.0, a piping operator has been introduced:
+With R 4.1.0, the piping operator `|>` has been introduced:
 
 ```{r piping-example-Rbase}
 gapminder |> # pass the datset as the first argument
