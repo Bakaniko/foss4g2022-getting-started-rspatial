@@ -78,6 +78,7 @@ knitr::include_graphics("https://keen-swartz-3146c4.netlify.com/images/sf_deps.p
 - Most of the functions in this package start with a prefix `st_`
 
 ```{r 03-intro-to-rspatial-3, echo=TRUE}
+library(sf)
 # lsf.str("package:sf")
 ls("package:sf")
 ```
@@ -92,7 +93,7 @@ ls("package:sf")
 
 ```{r 03-intro-to-rspatial-5 }
 library(spData)
-library(sf)
+
 world
 ```
 
@@ -165,7 +166,6 @@ knitr::include_graphics("figs/terra-libs.png")
 - The **terra** package contains classes and methods representing raster objects and operations
 
 ```{r 03-intro-to-rspatial-18 }
-library(spData)
 library(terra)
 elev = rast(system.file("raster/elev.tif", package = "spData"))
 elev
