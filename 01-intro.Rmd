@@ -9,12 +9,11 @@ handling with {sf} and raster data handling with {terra}.
 
 No previous knowledge of R is required.
 
-The workshop leaders are [Jakub Nowosad](https://jakubnowosad.com/) from Adam Mickiewicz University (Poznań, Poland) 
-and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel university (Lyon, France).
+The workshop leaders are [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel university (Lyon, France) and [Jakub Nowosad](https://jakubnowosad.com/) from Adam Mickiewicz University (Poznań, Poland).
 
 ## Schedule {-}
 
-- Introduction to the workshop (5 min)
+- Opening the workshop (5 min)
 - Introduction to R (15 min)
 - Non-spatial data handling (30 min)
 - Introduction to R-spatial ecosystem (20 min)
@@ -22,7 +21,7 @@ and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel universi
 - Pause (to be confirmed)
 - Vector data processing (45 min)
 - Raster data processing (45 min)
-- Closing of the workshop (5 min)
+- Closing the workshop (5 min)
 
 ## Pre-requisites {-}
 
@@ -31,9 +30,10 @@ and [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel universi
 
 :::: {.infobox .note data-latex="note"}
 
-R comes with the RGui interface. It is usable but for a better user experience we recommend using [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
+R comes with the RGui interface.
+It is usable but for a better user experience we recommend using [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
 
-[Jupyter Notebook](https://jupyter.org/) with the [IRKernel](https://irkernel.github.io/installation/) can be a good option.
+[Jupyter Notebook](https://jupyter.org/) with the [IRKernel](https://irkernel.github.io/installation/) can also be a good option.
 
 ::::
 
@@ -73,7 +73,7 @@ Free and Open Source Software in 1995.
 ## Why an R workshop in a FOSS4G conference ?
 
 While R is not dedicated to spatial analysis, there is several packages that provides
-geospatial capabilities to the langage.
+geospatial capabilities to the language.
 
 - use R a standalone GIS:
   - read and write geospatial data
@@ -88,10 +88,10 @@ geospatial capabilities to the langage.
 ## Coding paradigms {-}
 
 When R has been released as an Open Source language, there was no strong syntax 
-philosophy so there is some inconstancies in packages, functions and parameters naming
+philosophy so there is some inconsistencies in packages, functions and parameters naming
 for example.
-R base readibility and performances where not good enough for some users so they
-developped packages to improve thoses.
+R base readability and performance where not good enough for some users so they
+developed packages to improve those.
 
 When using R for data analysis, you will encounter 3 majors coding paradigms:
 
@@ -100,7 +100,7 @@ When using R for data analysis, you will encounter 3 majors coding paradigms:
 - [data.table](https://rdatatable.gitlab.io/data.table/)
 
 R base is vanilla R code. The Tidyverse aims to provide a more consistent grammar
- and readibility.
+ and readability.
  Data.table provides a fast and powerful alternative to R base with a consistent
  grammar.
  
