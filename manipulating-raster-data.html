@@ -261,11 +261,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="raster-reading" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.1</span> Raster reading<a href="manipulating-raster-data.html#raster-reading" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="manipulating-raster-data.html#cb103-1"></a>srtm_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/srtm.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="manipulating-raster-data.html#cb103-1"></a>srtm_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/srtm.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
 <span id="cb103-2"><a href="manipulating-raster-data.html#cb103-2"></a>srtm_path</span></code></pre></div>
 <pre><code>## [1] &quot;/Users/runner/work/_temp/Library/spDataLarge/raster/srtm.tif&quot;</code></pre>
 <p><strong>terra</strong> - <a href="https://rspatial.github.io/terra/reference/terra-package.html" class="uri">https://rspatial.github.io/terra/reference/terra-package.html</a></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="manipulating-raster-data.html#cb105-1"></a>srtm =<span class="st"> </span><span class="kw">rast</span>(srtm_path)</span>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="manipulating-raster-data.html#cb105-1"></a>srtm &lt;-<span class="st"> </span><span class="kw">rast</span>(srtm_path)</span>
 <span id="cb105-2"><a href="manipulating-raster-data.html#cb105-2"></a>srtm</span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 457, 465, 1  (nrow, ncol, nlyr)
@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 0.0008333333 0.0008333333</code></pre>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="manipulating-raster-data.html#cb117-1"></a><span class="kw">ext</span>(srtm)</span></code></pre></div>
 <pre><code>## SpatExtent : -113.239583212784, -112.85208321281, 37.1320834298579, 37.5129167631658 (xmin, xmax, ymin, ymax)</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="manipulating-raster-data.html#cb119-1"></a>nlcd =<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/nlcd.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="manipulating-raster-data.html#cb119-1"></a>nlcd &lt;-<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/nlcd.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span></code></pre></div>
 </div>
 <div id="map-algebra" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.2</span> Map algebra<a href="manipulating-raster-data.html#map-algebra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -319,25 +319,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Reclassification</li>
 <li>Operations on many layers (e.g., calculating spectral indices, such as NDVI)</li>
 </ul>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="manipulating-raster-data.html#cb120-1"></a>srtm2 =<span class="st"> </span>srtm <span class="op">+</span><span class="st"> </span><span class="dv">1000</span></span></code></pre></div>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="manipulating-raster-data.html#cb121-1"></a>srtm3 =<span class="st"> </span>srtm <span class="op">-</span><span class="st"> </span><span class="dv">1024</span></span></code></pre></div>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="manipulating-raster-data.html#cb122-1"></a>srtm4 =<span class="st"> </span>srtm <span class="op">-</span><span class="st"> </span><span class="dv">1837</span></span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="manipulating-raster-data.html#cb120-1"></a>srtm2 &lt;-<span class="st"> </span>srtm <span class="op">+</span><span class="st"> </span><span class="dv">1000</span></span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="manipulating-raster-data.html#cb121-1"></a>srtm3 &lt;-<span class="st"> </span>srtm <span class="op">-</span><span class="st"> </span><span class="dv">1024</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="manipulating-raster-data.html#cb122-1"></a>srtm4 &lt;-<span class="st"> </span>srtm <span class="op">-</span><span class="st"> </span><span class="dv">1837</span></span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-11-1.png" width="100%" /></p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="manipulating-raster-data.html#cb123-1"></a>srtm_new =<span class="st"> </span>srtm</span>
-<span id="cb123-2"><a href="manipulating-raster-data.html#cb123-2"></a>srtm_new[srtm_new <span class="op">&lt;</span><span class="st"> </span><span class="dv">1500</span>] =<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="manipulating-raster-data.html#cb123-1"></a>srtm_new &lt;-<span class="st"> </span>srtm</span>
+<span id="cb123-2"><a href="manipulating-raster-data.html#cb123-2"></a>srtm_new[srtm_new <span class="op">&lt;</span><span class="st"> </span><span class="dv">1500</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-13-1.png" width="100%" /></p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="manipulating-raster-data.html#cb124-1"></a>rcl =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="dv">1</span>, <span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">2</span>, <span class="dv">2000</span>, <span class="dv">9999</span>, <span class="dv">3</span>),</span>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="manipulating-raster-data.html#cb124-1"></a>rcl &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="dv">1</span>, <span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">2</span>, <span class="dv">2000</span>, <span class="dv">9999</span>, <span class="dv">3</span>),</span>
 <span id="cb124-2"><a href="manipulating-raster-data.html#cb124-2"></a>             <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb124-3"><a href="manipulating-raster-data.html#cb124-3"></a>rcl</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    0 1500    1
 ## [2,] 1500 2000    2
 ## [3,] 2000 9999    3</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="manipulating-raster-data.html#cb126-1"></a>srtm_recl =<span class="st"> </span><span class="kw">classify</span>(srtm, <span class="dt">rcl =</span> rcl)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="manipulating-raster-data.html#cb126-1"></a>srtm_recl &lt;-<span class="st"> </span><span class="kw">classify</span>(srtm, <span class="dt">rcl =</span> rcl)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-16-1.png" width="672" /></p>
 <p><code>?lapp</code></p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="manipulating-raster-data.html#cb127-1"></a>landsat_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/landsat.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
-<span id="cb127-2"><a href="manipulating-raster-data.html#cb127-2"></a>landsat =<span class="st"> </span><span class="kw">rast</span>(landsat_path)</span>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="manipulating-raster-data.html#cb127-1"></a>landsat_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/landsat.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
+<span id="cb127-2"><a href="manipulating-raster-data.html#cb127-2"></a>landsat &lt;-<span class="st"> </span><span class="kw">rast</span>(landsat_path)</span>
 <span id="cb127-3"><a href="manipulating-raster-data.html#cb127-3"></a>landsat</span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 1428, 1128, 4  (nrow, ncol, nlyr)
@@ -354,17 +354,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 NDVI&amp;= \frac{\text{NIR} - \text{Red}}{\text{NIR} + \text{Red}}\\
 \end{split}
 \]</span></p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="manipulating-raster-data.html#cb129-1"></a>ndvi_fun =<span class="st"> </span><span class="cf">function</span>(nir, red){</span>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="manipulating-raster-data.html#cb129-1"></a>ndvi_fun &lt;-<span class="st"> </span><span class="cf">function</span>(nir, red){</span>
 <span id="cb129-2"><a href="manipulating-raster-data.html#cb129-2"></a>  (nir <span class="op">-</span><span class="st"> </span>red) <span class="op">/</span><span class="st"> </span>(nir <span class="op">+</span><span class="st"> </span>red)</span>
 <span id="cb129-3"><a href="manipulating-raster-data.html#cb129-3"></a>}</span>
-<span id="cb129-4"><a href="manipulating-raster-data.html#cb129-4"></a>ndvi =<span class="st"> </span><span class="kw">lapp</span>(landsat[[<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>)]],</span>
+<span id="cb129-4"><a href="manipulating-raster-data.html#cb129-4"></a>ndvi &lt;-<span class="st"> </span><span class="kw">lapp</span>(landsat[[<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>)]],</span>
 <span id="cb129-5"><a href="manipulating-raster-data.html#cb129-5"></a>            <span class="dt">fun =</span> ndvi_fun)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-19-1.png" width="100%" /></p>
 </div>
 <div id="focal-operations" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.2</span> Focal operations<a href="manipulating-raster-data.html#focal-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>?focal</code></p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="manipulating-raster-data.html#cb130-1"></a>srtm_focal_mean =<span class="st"> </span><span class="kw">focal</span>(srtm, </span>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="manipulating-raster-data.html#cb130-1"></a>srtm_focal_mean &lt;-<span class="st"> </span><span class="kw">focal</span>(srtm, </span>
 <span id="cb130-2"><a href="manipulating-raster-data.html#cb130-2"></a>                   <span class="dt">w =</span> <span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>), </span>
 <span id="cb130-3"><a href="manipulating-raster-data.html#cb130-3"></a>                   <span class="dt">fun =</span> mean)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-21-1.png" width="672" /></p>
@@ -373,9 +373,9 @@ NDVI&amp;= \frac{\text{NIR} - \text{Red}}{\text{NIR} + \text{Red}}\\
 <h3><span class="header-section-number">5.2.3</span> Zonal operations<a href="manipulating-raster-data.html#zonal-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>?zonal</code>
 Also known as zonal statistics. Result - a summary table</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="manipulating-raster-data.html#cb131-1"></a>srtm_utm =<span class="st"> </span><span class="kw">project</span>(srtm, nlcd, <span class="dt">method =</span> <span class="st">&quot;bilinear&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="manipulating-raster-data.html#cb131-1"></a>srtm_utm &lt;-<span class="st"> </span><span class="kw">project</span>(srtm, nlcd, <span class="dt">method =</span> <span class="st">&quot;bilinear&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-23-1.png" width="672" /></p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="manipulating-raster-data.html#cb132-1"></a>srtm_zonal =<span class="st"> </span><span class="kw">zonal</span>(srtm_utm, nlcd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">fun =</span> <span class="st">&quot;mean&quot;</span>)</span>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="manipulating-raster-data.html#cb132-1"></a>srtm_zonal &lt;-<span class="st"> </span><span class="kw">zonal</span>(srtm_utm, nlcd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">fun =</span> <span class="st">&quot;mean&quot;</span>)</span>
 <span id="cb132-2"><a href="manipulating-raster-data.html#cb132-2"></a>srtm_zonal</span></code></pre></div>
 <pre><code>##       levels     srtm
 ## 1      Water 2227.060
@@ -422,15 +422,15 @@ Also known as zonal statistics. Result - a summary table</p>
 ## name        : srtm 
 ## min value   : 1024 
 ## max value   : 2892</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="manipulating-raster-data.html#cb142-1"></a>new_srtm =<span class="st"> </span>srtm</span>
-<span id="cb142-2"><a href="manipulating-raster-data.html#cb142-2"></a><span class="kw">res</span>(new_srtm) =<span class="st"> </span><span class="fl">0.001</span></span>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="manipulating-raster-data.html#cb142-1"></a>new_srtm &lt;-<span class="st"> </span>srtm</span>
+<span id="cb142-2"><a href="manipulating-raster-data.html#cb142-2"></a><span class="kw">res</span>(new_srtm) &lt;-<span class="st"> </span><span class="fl">0.001</span></span>
 <span id="cb142-3"><a href="manipulating-raster-data.html#cb142-3"></a>new_srtm</span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 381, 387, 1  (nrow, ncol, nlyr)
 ## resolution  : 0.001, 0.001  (x, y)
 ## extent      : -113.2396, -112.8526, 37.13208, 37.51308  (xmin, xmax, ymin, ymax)
 ## coord. ref. : lon/lat WGS 84 (EPSG:4326)</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="manipulating-raster-data.html#cb144-1"></a>srtm2 =<span class="st"> </span><span class="kw">resample</span>(srtm, new_srtm, <span class="dt">method =</span> <span class="st">&quot;bilinear&quot;</span>) <span class="co"># method!</span></span>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="manipulating-raster-data.html#cb144-1"></a>srtm2 &lt;-<span class="st"> </span><span class="kw">resample</span>(srtm, new_srtm, <span class="dt">method =</span> <span class="st">&quot;bilinear&quot;</span>) <span class="co"># method!</span></span>
 <span id="cb144-2"><a href="manipulating-raster-data.html#cb144-2"></a>srtm2</span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 381, 387, 1  (nrow, ncol, nlyr)
@@ -451,7 +451,7 @@ Also known as zonal statistics. Result - a summary table</p>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-31-1.png" width="672" /></p>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-32-1.png" width="672" /></p>
 <p><a href="https://projectionwizard.org/" class="uri">https://projectionwizard.org/</a></p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="manipulating-raster-data.html#cb149-1"></a>srtm_utm =<span class="st"> </span><span class="kw">project</span>(srtm, <span class="st">&quot;EPSG:32612&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;bilinear&quot;</span>)</span>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="manipulating-raster-data.html#cb149-1"></a>srtm_utm &lt;-<span class="st"> </span><span class="kw">project</span>(srtm, <span class="st">&quot;EPSG:32612&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;bilinear&quot;</span>)</span>
 <span id="cb149-2"><a href="manipulating-raster-data.html#cb149-2"></a><span class="kw">crs</span>(srtm_utm, <span class="dt">describe =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>##                    name authority  code
 ## 1 WGS 84 / UTM zone 12N      EPSG 32612
@@ -473,17 +473,17 @@ Also known as zonal statistics. Result - a summary table</p>
 <div id="raster-cropping-and-masking" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.1</span> Raster cropping and masking<a href="manipulating-raster-data.html#raster-cropping-and-masking" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="manipulating-raster-data.html#cb151-1"></a><span class="kw">library</span>(sf)</span>
-<span id="cb151-2"><a href="manipulating-raster-data.html#cb151-2"></a>zion =<span class="st"> </span><span class="kw">read_sf</span>(<span class="kw">system.file</span>(<span class="st">&quot;vector/zion.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="manipulating-raster-data.html#cb152-1"></a>srtm_utm_c =<span class="st"> </span><span class="kw">crop</span>(srtm_utm, <span class="kw">vect</span>(zion))</span></code></pre></div>
+<span id="cb151-2"><a href="manipulating-raster-data.html#cb151-2"></a>zion &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="kw">system.file</span>(<span class="st">&quot;vector/zion.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="manipulating-raster-data.html#cb152-1"></a>srtm_utm_c &lt;-<span class="st"> </span><span class="kw">crop</span>(srtm_utm, <span class="kw">vect</span>(zion))</span></code></pre></div>
 <p>Raster masking is usually done together with cropping.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="manipulating-raster-data.html#cb153-1"></a>srtm_utm_m =<span class="st"> </span><span class="kw">mask</span>(srtm_utm_c, <span class="kw">vect</span>(zion))</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="manipulating-raster-data.html#cb153-1"></a>srtm_utm_m &lt;-<span class="st"> </span><span class="kw">mask</span>(srtm_utm_c, <span class="kw">vect</span>(zion))</span></code></pre></div>
 </div>
 <div id="raster-extraction" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.2</span> Raster extraction<a href="manipulating-raster-data.html#raster-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="manipulating-raster-data.html#cb154-1"></a>zion_points =<span class="st"> </span><span class="kw">read_sf</span>(<span class="kw">system.file</span>(<span class="st">&quot;vector/zion_points.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="manipulating-raster-data.html#cb154-1"></a>zion_points &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="kw">system.file</span>(<span class="st">&quot;vector/zion_points.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/53-raster-extraction-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="manipulating-raster-data.html#cb155-1"></a>zion_extract =<span class="st"> </span>terra<span class="op">::</span><span class="kw">extract</span>(srtm, <span class="kw">vect</span>(zion_points))</span>
-<span id="cb155-2"><a href="manipulating-raster-data.html#cb155-2"></a>zion_points =<span class="st"> </span><span class="kw">cbind</span>(zion_points, zion_extract)</span>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="manipulating-raster-data.html#cb155-1"></a>zion_extract &lt;-<span class="st"> </span>terra<span class="op">::</span><span class="kw">extract</span>(srtm, <span class="kw">vect</span>(zion_points))</span>
+<span id="cb155-2"><a href="manipulating-raster-data.html#cb155-2"></a>zion_points &lt;-<span class="st"> </span><span class="kw">cbind</span>(zion_points, zion_extract)</span>
 <span id="cb155-3"><a href="manipulating-raster-data.html#cb155-3"></a>zion_points</span></code></pre></div>
 <pre><code>## Simple feature collection with 30 features and 2 fields
 ## Geometry type: POINT
@@ -502,9 +502,9 @@ Also known as zonal statistics. Result - a summary table</p>
 ## 8   8 2032 POINT (-113.0953 37.34965)
 ## 9   9 1830 POINT (-113.0362 37.31429)
 ## 10 10 1860 POINT (-113.2077 37.43165)</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="manipulating-raster-data.html#cb157-1"></a>zion =<span class="st"> </span><span class="kw">read_sf</span>(<span class="kw">system.file</span>(<span class="st">&quot;vector/zion.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span>
-<span id="cb157-2"><a href="manipulating-raster-data.html#cb157-2"></a>zion =<span class="st"> </span><span class="kw">st_transform</span>(zion, <span class="kw">crs</span>(srtm))</span>
-<span id="cb157-3"><a href="manipulating-raster-data.html#cb157-3"></a>zion_srtm_values =<span class="st"> </span>terra<span class="op">::</span><span class="kw">extract</span>(srtm, <span class="kw">vect</span>(zion))</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="manipulating-raster-data.html#cb157-1"></a>zion &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="kw">system.file</span>(<span class="st">&quot;vector/zion.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>))</span>
+<span id="cb157-2"><a href="manipulating-raster-data.html#cb157-2"></a>zion &lt;-<span class="st"> </span><span class="kw">st_transform</span>(zion, <span class="kw">crs</span>(srtm))</span>
+<span id="cb157-3"><a href="manipulating-raster-data.html#cb157-3"></a>zion_srtm_values &lt;-<span class="st"> </span>terra<span class="op">::</span><span class="kw">extract</span>(srtm, <span class="kw">vect</span>(zion))</span></code></pre></div>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="manipulating-raster-data.html#cb158-1"></a><span class="kw">head</span>(zion_srtm_values)</span></code></pre></div>
 <pre><code>##   ID srtm
 ## 1  1 1666
@@ -514,10 +514,10 @@ Also known as zonal statistics. Result - a summary table</p>
 ## 5  1 1751
 ## 6  1 1770</code></pre>
 <p><img src="_main_files/figure-html/53-raster-extraction-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="manipulating-raster-data.html#cb160-1"></a>zion_srtm_values =<span class="st"> </span>terra<span class="op">::</span><span class="kw">extract</span>(srtm, <span class="kw">vect</span>(zion))</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="manipulating-raster-data.html#cb160-1"></a>zion_srtm_values &lt;-<span class="st"> </span>terra<span class="op">::</span><span class="kw">extract</span>(srtm, <span class="kw">vect</span>(zion))</span></code></pre></div>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="manipulating-raster-data.html#cb161-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb161-2"><a href="manipulating-raster-data.html#cb161-2"></a>zion_srtm_values <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb161-3"><a href="manipulating-raster-data.html#cb161-3"></a><span class="st">  </span><span class="kw">group_by</span>(ID) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb161-2"><a href="manipulating-raster-data.html#cb161-2"></a>zion_srtm_values <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb161-3"><a href="manipulating-raster-data.html#cb161-3"></a><span class="st">  </span><span class="kw">group_by</span>(ID) <span class="op">|</span><span class="er">&gt;</span></span>
 <span id="cb161-4"><a href="manipulating-raster-data.html#cb161-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">across</span>(srtm, <span class="kw">list</span>(<span class="dt">min =</span> min, <span class="dt">mean =</span> mean, <span class="dt">max =</span> max)))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##      ID srtm_min srtm_mean srtm_max
@@ -540,16 +540,16 @@ Also known as zonal statistics. Result - a summary table</p>
 <h2><span class="header-section-number">5.6</span> Raster analysis<a href="manipulating-raster-data.html#raster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="predictions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.1</span> Predictions<a href="manipulating-raster-data.html#predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="manipulating-raster-data.html#cb164-1"></a>landsat_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/landsat.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
-<span id="cb164-2"><a href="manipulating-raster-data.html#cb164-2"></a>landsat =<span class="st"> </span><span class="kw">rast</span>(landsat_path)</span>
-<span id="cb164-3"><a href="manipulating-raster-data.html#cb164-3"></a>zion_points_utm =<span class="st"> </span>zion_points_utm =<span class="st"> </span><span class="kw">st_transform</span>(zion_points, <span class="dt">crs =</span> <span class="kw">crs</span>(landsat))</span>
-<span id="cb164-4"><a href="manipulating-raster-data.html#cb164-4"></a>landsat_s =<span class="st"> </span><span class="kw">stretch</span>(landsat, <span class="dt">maxq =</span> <span class="fl">0.98</span>)</span>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="manipulating-raster-data.html#cb164-1"></a>landsat_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/landsat.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
+<span id="cb164-2"><a href="manipulating-raster-data.html#cb164-2"></a>landsat &lt;-<span class="st"> </span><span class="kw">rast</span>(landsat_path)</span>
+<span id="cb164-3"><a href="manipulating-raster-data.html#cb164-3"></a>zion_points_utm &lt;-<span class="st"> </span><span class="kw">st_transform</span>(zion_points, <span class="dt">crs =</span> <span class="kw">crs</span>(landsat))</span>
+<span id="cb164-4"><a href="manipulating-raster-data.html#cb164-4"></a>landsat_s &lt;-<span class="st"> </span><span class="kw">stretch</span>(landsat, <span class="dt">maxq =</span> <span class="fl">0.98</span>)</span>
 <span id="cb164-5"><a href="manipulating-raster-data.html#cb164-5"></a><span class="kw">plotRGB</span>(landsat_s, <span class="dt">r =</span> <span class="dv">3</span>, <span class="dt">g =</span> <span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">1</span>)</span>
 <span id="cb164-6"><a href="manipulating-raster-data.html#cb164-6"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(zion_points_utm), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-43-1.png" width="672" /></p>
 <p><code>?predict</code> - <code>glm</code>, <code>randomForest</code>, <code>prcomp</code></p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="manipulating-raster-data.html#cb165-1"></a>zion_points_utm_v =<span class="st"> </span><span class="kw">extract</span>(landsat_s, <span class="kw">vect</span>(zion_points_utm))</span>
-<span id="cb165-2"><a href="manipulating-raster-data.html#cb165-2"></a>pca =<span class="st"> </span><span class="kw">prcomp</span>(zion_points_utm_v[<span class="op">-</span><span class="dv">1</span>])</span>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="manipulating-raster-data.html#cb165-1"></a>zion_points_utm_v &lt;-<span class="st"> </span><span class="kw">extract</span>(landsat_s, <span class="kw">vect</span>(zion_points_utm))</span>
+<span id="cb165-2"><a href="manipulating-raster-data.html#cb165-2"></a>pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(zion_points_utm_v[<span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb165-3"><a href="manipulating-raster-data.html#cb165-3"></a>pca</span></code></pre></div>
 <pre><code>## Standard deviations (1, .., p=4):
 ## [1] 83.689718 24.939305  9.388554  3.530974
@@ -561,35 +561,34 @@ Also known as zonal statistics. Result - a summary table</p>
 ## landsat_3 -0.5783656  0.31318090  0.70849728 -0.2558175
 ## landsat_4 -0.3523479 -0.92433101  0.07565763 -0.1254554</code></pre>
 <p><code>?predict</code> - <code>glm</code>, <code>randomForest</code>, <code>prcomp</code></p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="manipulating-raster-data.html#cb167-1"></a>pca_pred =<span class="st"> </span><span class="kw">predict</span>(landsat_s, pca)</span>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="manipulating-raster-data.html#cb167-1"></a>pca_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(landsat_s, pca)</span>
 <span id="cb167-2"><a href="manipulating-raster-data.html#cb167-2"></a><span class="kw">plot</span>(pca_pred)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-45-1.png" width="672" /></p>
 </div>
 <div id="interpolations" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.6.2</span> Interpolations<a href="manipulating-raster-data.html#interpolations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>?interpolate</code></p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="manipulating-raster-data.html#cb168-1"></a>zion_points_srtm =<span class="st"> </span><span class="kw">extract</span>(srtm_utm, </span>
-<span id="cb168-2"><a href="manipulating-raster-data.html#cb168-2"></a>                      <span class="kw">vect</span>(zion_points_utm))</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="manipulating-raster-data.html#cb168-1"></a>zion_points_srtm &lt;-<span class="st"> </span><span class="kw">extract</span>(srtm_utm, <span class="kw">vect</span>(zion_points_utm))</span></code></pre></div>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="manipulating-raster-data.html#cb169-1"></a><span class="kw">library</span>(fields)</span>
-<span id="cb169-2"><a href="manipulating-raster-data.html#cb169-2"></a>tps =<span class="st"> </span><span class="kw">Tps</span>(<span class="kw">st_coordinates</span>(zion_points_utm),</span>
+<span id="cb169-2"><a href="manipulating-raster-data.html#cb169-2"></a>tps &lt;-<span class="st"> </span><span class="kw">Tps</span>(<span class="kw">st_coordinates</span>(zion_points_utm),</span>
 <span id="cb169-3"><a href="manipulating-raster-data.html#cb169-3"></a>          zion_points_utm<span class="op">$</span>srtm)</span>
-<span id="cb169-4"><a href="manipulating-raster-data.html#cb169-4"></a>rt =<span class="st"> </span><span class="kw">rast</span>(srtm_utm)</span>
-<span id="cb169-5"><a href="manipulating-raster-data.html#cb169-5"></a>interp1 =<span class="st"> </span><span class="kw">interpolate</span>(rt, tps)</span></code></pre></div>
+<span id="cb169-4"><a href="manipulating-raster-data.html#cb169-4"></a>rt &lt;-<span class="st"> </span><span class="kw">rast</span>(srtm_utm)</span>
+<span id="cb169-5"><a href="manipulating-raster-data.html#cb169-5"></a>interp1 &lt;-<span class="st"> </span><span class="kw">interpolate</span>(rt, tps)</span></code></pre></div>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="manipulating-raster-data.html#cb170-1"></a><span class="kw">plot</span>(interp1)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-48-1.png" width="672" /></p>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="manipulating-raster-data.html#cb171-1"></a><span class="kw">library</span>(gstat)</span>
-<span id="cb171-2"><a href="manipulating-raster-data.html#cb171-2"></a>interpolate_gstat =<span class="st"> </span><span class="cf">function</span>(model, x, crs, ...) {</span>
+<span id="cb171-2"><a href="manipulating-raster-data.html#cb171-2"></a>interpolate_gstat &lt;-<span class="st"> </span><span class="cf">function</span>(model, x, crs, ...) {</span>
 <span id="cb171-3"><a href="manipulating-raster-data.html#cb171-3"></a>    v =<span class="st"> </span><span class="kw">st_as_sf</span>(x, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">crs =</span> crs)</span>
 <span id="cb171-4"><a href="manipulating-raster-data.html#cb171-4"></a>    p =<span class="st"> </span><span class="kw">predict</span>(model, v, ...)</span>
 <span id="cb171-5"><a href="manipulating-raster-data.html#cb171-5"></a>    <span class="kw">as.data.frame</span>(p)[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
 <span id="cb171-6"><a href="manipulating-raster-data.html#cb171-6"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="manipulating-raster-data.html#cb172-1"></a>v =<span class="st"> </span><span class="kw">variogram</span>(srtm <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> zion_points_utm)</span>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="manipulating-raster-data.html#cb172-1"></a>v &lt;-<span class="st"> </span><span class="kw">variogram</span>(srtm <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> zion_points_utm)</span>
 <span id="cb172-2"><a href="manipulating-raster-data.html#cb172-2"></a><span class="co"># plot(v)</span></span>
-<span id="cb172-3"><a href="manipulating-raster-data.html#cb172-3"></a>mv =<span class="st"> </span><span class="kw">fit.variogram</span>(v, <span class="kw">vgm</span>(<span class="dv">120000</span>, <span class="st">&quot;Exp&quot;</span>, <span class="dv">12000</span>, <span class="dt">nugget =</span> <span class="dv">10000</span>))</span></code></pre></div>
+<span id="cb172-3"><a href="manipulating-raster-data.html#cb172-3"></a>mv &lt;-<span class="st"> </span><span class="kw">fit.variogram</span>(v, <span class="kw">vgm</span>(<span class="dv">120000</span>, <span class="st">&quot;Exp&quot;</span>, <span class="dv">12000</span>, <span class="dt">nugget =</span> <span class="dv">10000</span>))</span></code></pre></div>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="manipulating-raster-data.html#cb173-1"></a><span class="kw">plot</span>(v, <span class="dt">model =</span> mv)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-51-1.png" width="672" /></p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="manipulating-raster-data.html#cb174-1"></a>g_OK =<span class="st"> </span><span class="kw">gstat</span>(<span class="ot">NULL</span>, <span class="st">&quot;srtm&quot;</span>, srtm <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, zion_points_utm, <span class="dt">model =</span> mv)</span>
-<span id="cb174-2"><a href="manipulating-raster-data.html#cb174-2"></a>OK =<span class="st"> </span><span class="kw">interpolate</span>(rt, g_OK, <span class="dt">debug.level =</span> <span class="dv">0</span>, <span class="dt">fun =</span> interpolate_gstat,</span>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="manipulating-raster-data.html#cb174-1"></a>g_OK &lt;-<span class="st"> </span><span class="kw">gstat</span>(<span class="ot">NULL</span>, <span class="st">&quot;srtm&quot;</span>, srtm <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, zion_points_utm, <span class="dt">model =</span> mv)</span>
+<span id="cb174-2"><a href="manipulating-raster-data.html#cb174-2"></a>OK &lt;-<span class="st"> </span><span class="kw">interpolate</span>(rt, g_OK, <span class="dt">debug.level =</span> <span class="dv">0</span>, <span class="dt">fun =</span> interpolate_gstat,</span>
 <span id="cb174-3"><a href="manipulating-raster-data.html#cb174-3"></a>                 <span class="dt">crs =</span> <span class="kw">crs</span>(rt), <span class="dt">index =</span> <span class="dv">1</span>)</span>
 <span id="cb174-4"><a href="manipulating-raster-data.html#cb174-4"></a><span class="kw">plot</span>(OK)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-52-1.png" width="672" /></p>
@@ -598,17 +597,17 @@ Also known as zonal statistics. Result - a summary table</p>
 <h3><span class="header-section-number">5.6.3</span> Segmentations<a href="manipulating-raster-data.html#segmentations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://github.com/Nowosad/supercells" class="uri">https://github.com/Nowosad/supercells</a></p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="manipulating-raster-data.html#cb175-1"></a><span class="kw">library</span>(supercells)</span>
-<span id="cb175-2"><a href="manipulating-raster-data.html#cb175-2"></a>ortho =<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/ortho.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;supercells&quot;</span>))</span>
+<span id="cb175-2"><a href="manipulating-raster-data.html#cb175-2"></a>ortho &lt;-<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/ortho.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;supercells&quot;</span>))</span>
 <span id="cb175-3"><a href="manipulating-raster-data.html#cb175-3"></a><span class="kw">plot</span>(ortho)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-53-1.png" width="672" /></p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="manipulating-raster-data.html#cb176-1"></a>ortho_slic1 =<span class="st"> </span><span class="kw">supercells</span>(ortho, <span class="dt">k =</span> <span class="dv">200</span>, <span class="dt">compactness =</span> <span class="dv">10</span>)</span>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="manipulating-raster-data.html#cb176-1"></a>ortho_slic1 &lt;-<span class="st"> </span><span class="kw">supercells</span>(ortho, <span class="dt">k =</span> <span class="dv">200</span>, <span class="dt">compactness =</span> <span class="dv">10</span>)</span>
 <span id="cb176-2"><a href="manipulating-raster-data.html#cb176-2"></a><span class="kw">plot</span>(ortho)</span>
 <span id="cb176-3"><a href="manipulating-raster-data.html#cb176-3"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(ortho_slic1), <span class="dt">add =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-54-1.png" width="672" /></p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="manipulating-raster-data.html#cb177-1"></a>rgb_to_hex =<span class="st"> </span><span class="cf">function</span>(x){</span>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="manipulating-raster-data.html#cb177-1"></a>rgb_to_hex &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
 <span id="cb177-2"><a href="manipulating-raster-data.html#cb177-2"></a>  <span class="kw">apply</span>(<span class="kw">t</span>(x), <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">rgb</span>(x[<span class="dv">1</span>], x[<span class="dv">2</span>], x[<span class="dv">3</span>], <span class="dt">maxColorValue =</span> <span class="dv">255</span>))</span>
 <span id="cb177-3"><a href="manipulating-raster-data.html#cb177-3"></a>}</span>
-<span id="cb177-4"><a href="manipulating-raster-data.html#cb177-4"></a>avg_colors =<span class="st"> </span><span class="kw">rgb_to_hex</span>(<span class="kw">st_drop_geometry</span>(ortho_slic1[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>]))</span>
+<span id="cb177-4"><a href="manipulating-raster-data.html#cb177-4"></a>avg_colors &lt;-<span class="st"> </span><span class="kw">rgb_to_hex</span>(<span class="kw">st_drop_geometry</span>(ortho_slic1[<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>]))</span>
 <span id="cb177-5"><a href="manipulating-raster-data.html#cb177-5"></a></span>
 <span id="cb177-6"><a href="manipulating-raster-data.html#cb177-6"></a><span class="kw">plot</span>(ortho)</span>
 <span id="cb177-7"><a href="manipulating-raster-data.html#cb177-7"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(ortho_slic1), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> avg_colors)</span></code></pre></div>
