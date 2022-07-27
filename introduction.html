@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-07-26" />
+<meta name="date" content="2022-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,12 +252,11 @@ introduction to spatial data handling in R using the <a href="https://r-spatial.
 We will present to the audience mapping with the {tmap} package, vector data
 handling with {sf} and raster data handling with {terra}.</p>
 <p>No previous knowledge of R is required.</p>
-<p>The workshop leaders are <a href="https://jakubnowosad.com/">Jakub Nowosad</a> from Adam Mickiewicz University (Poznań, Poland)
-and <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiffel university (Lyon, France).</p>
+<p>The workshop leaders are <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiffel university (Lyon, France) and <a href="https://jakubnowosad.com/">Jakub Nowosad</a> from Adam Mickiewicz University (Poznań, Poland).</p>
 <div id="schedule" class="section level2 unnumbered hasAnchor">
 <h2>Schedule<a href="introduction.html#schedule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Introduction to the workshop (5 min)</li>
+<li>Opening the workshop (5 min)</li>
 <li>Introduction to R (15 min)</li>
 <li>Non-spatial data handling (30 min)</li>
 <li>Introduction to R-spatial ecosystem (20 min)</li>
@@ -265,7 +264,7 @@ and <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiff
 <li>Pause (to be confirmed)</li>
 <li>Vector data processing (45 min)</li>
 <li>Raster data processing (45 min)</li>
-<li>Closing of the workshop (5 min)</li>
+<li>Closing the workshop (5 min)</li>
 </ul>
 </div>
 <div id="pre-requisites" class="section level2 unnumbered hasAnchor">
@@ -274,8 +273,9 @@ and <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiff
 <li>A working installation of R (following <a href="https://cran.r-project.org/">CRAN recommandations</a> for your computer)</li>
 </ol>
 <div class="infobox note">
-<p>R comes with the RGui interface. It is usable but for a better user experience we recommend using <a href="https://www.rstudio.com/products/rstudio/download/#download">Rstudio</a>.</p>
-<p><a href="https://jupyter.org/">Jupyter Notebook</a> with the <a href="https://irkernel.github.io/installation/">IRKernel</a> can be a good option.</p>
+<p>R comes with the RGui interface.
+It is usable but for a better user experience we recommend using <a href="https://www.rstudio.com/products/rstudio/download/#download">Rstudio</a>.</p>
+<p><a href="https://jupyter.org/">Jupyter Notebook</a> with the <a href="https://irkernel.github.io/installation/">IRKernel</a> can also be a good option.</p>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li>R packages</li>
@@ -308,9 +308,9 @@ Free and Open Source Software in 1995.</p>
 <div id="why-an-r-workshop-in-a-foss4g-conference" class="section level2 hasAnchor">
 <h2><span class="header-section-number">0.1</span> Why an R workshop in a FOSS4G conference ?<a href="introduction.html#why-an-r-workshop-in-a-foss4g-conference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While R is not dedicated to spatial analysis, there is several packages that provides
-geospatial capabilities to the langage.</p>
+geospatial capabilities to the language.</p>
 <ul>
-<li>use R a standalone GIS:
+<li>Use R a standalone GIS:
 <ul>
 <li>read and write geospatial data</li>
 <li>connect to geospatial data base</li>
@@ -328,10 +328,10 @@ geospatial capabilities to the langage.</p>
 <div id="coding-paradigms" class="section level2 unnumbered hasAnchor">
 <h2>Coding paradigms<a href="introduction.html#coding-paradigms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When R has been released as an Open Source language, there was no strong syntax
-philosophy so there is some inconstancies in packages, functions and parameters naming
+philosophy so there is some inconsistencies in packages, functions and parameters naming
 for example.
-R base readibility and performances where not good enough for some users so they
-developped packages to improve thoses.</p>
+R base readability and performance where not good enough for some users so they
+developed packages to improve those.</p>
 <p>When using R for data analysis, you will encounter 3 majors coding paradigms:</p>
 <ul>
 <li>R base</li>
@@ -339,7 +339,7 @@ developped packages to improve thoses.</p>
 <li><a href="https://rdatatable.gitlab.io/data.table/">data.table</a></li>
 </ul>
 <p>R base is vanilla R code. The Tidyverse aims to provide a more consistent grammar
-and readibility.
+and readability.
 Data.table provides a fast and powerful alternative to R base with a consistent
 grammar.</p>
 <p>You can mix those paradigms for your projects but for teaching purposes, the workshop
