@@ -12,8 +12,8 @@ library(terra)
 ```{r}
 library(spData)
 data("nz")
-nz_ports = read_sf("data/nz_ports.gpkg")
-nz_elev = rast(system.file("raster/nz_elev.tif", package = "spDataLarge"))
+nz_ports <- read_sf("data/nz_ports.gpkg")
+nz_elev <- rast(system.file("raster/nz_elev.tif", package = "spDataLarge"))
 ```
 
 ## Mapping tools in R
@@ -63,7 +63,7 @@ tm_shape(nz) +
 
 ```{r}
 #| echo = FALSE
-map_layers = data.frame(Function = c("`tm_polygons()`", "`tm_symbols()`", 
+map_layers <- data.frame(Function = c("`tm_polygons()`", "`tm_symbols()`", 
                                      "`tm_lines()`", "`tm_raster()`",
                                      "`tm_text()`"),
                         Geometry = c("polygons", "points, lines, and polygons",
@@ -132,7 +132,7 @@ tm_shape(nz_elev) +
 ```
 
 ```{r}
-tm = tm_shape(nz_elev) +
+tm <- tm_shape(nz_elev) +
   tm_raster(palette = "-Spectral", style = "cont",
             title = "Elevation (m asl)") +
   tm_shape(nz_ports) +
@@ -143,7 +143,7 @@ tm = tm_shape(nz_elev) +
 
 ```{r}
 #| echo = FALSE
-attr_layers = data.frame(Function = c("`tm_graticules()`", "`tm_scale_bar()`",
+attr_layers <- data.frame(Function = c("`tm_graticules()`", "`tm_scale_bar()`",
                                       "`tm_compass()`", "`tm_logo()`", "`tm_credits()`"),
                          Description = c("draws latitude and longitude graticules", 
                                          "adds a scale bar", "adds a compass rose",
@@ -161,7 +161,7 @@ tm +
 ```
 
 ```{r}
-tm2 = tm +
+tm2 <- tm +
   tm_graticules() +
   tm_scale_bar(breaks = c(0, 100, 200)) +
   tm_compass(position = c("right", "top")) +
@@ -178,7 +178,7 @@ tm2 +
 ```
 
 ```{r}
-tm3 = tm2 +
+tm3 <- tm2 +
   tm_add_legend(type = "symbol", col = "grey", title = "Main ports") +
   tm_layout(main.title = "New Zealand", bg.color = "lightblue")
 ```

@@ -8,6 +8,6 @@ library(sf)
 
 
 ```{r}
- sf::st_read(system.file("shapes/sids.shp", package = "spData"))
+sf::st_read(system.file("shapes/sids.shp", package = "spData"))
 ```
 
