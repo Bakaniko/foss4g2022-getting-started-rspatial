@@ -19,7 +19,7 @@
   - `c('FOSS4G 2022', 'Firenze')`
 - list: `list(1, 45, 12.0, "toto")`
 - matrices: `matrix(0:9, 3,3)`
-- dataframe (df): `data.frame(x = 1:3, y = c('a', 'b', 'c'))`
+- data frames (df): `data.frame(x = 1:3, y = c('a', 'b', 'c'))`
 - constants:
   - `letters[3:4]`
   - `LETTERS[12:26]`
