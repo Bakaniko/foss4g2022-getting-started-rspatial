@@ -179,8 +179,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html"><i class="fa fa-check"></i><b>2</b> Introduction to the R-spatial ecosystem</a><ul>
 <li class="chapter" data-level="2.1" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html#r-packages---specialized-packages"><i class="fa fa-check"></i><b>2.1</b> R packages - specialized packages</a></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html#rs-spatial-ecosystems"><i class="fa fa-check"></i><b>2.2</b> R’s spatial ecosystem(s)</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html#conversions"><i class="fa fa-check"></i><b>2.2.1</b> Conversions</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html#rs-spatial-ecosystems"><i class="fa fa-check"></i><b>2.2</b> R’s spatial ecosystem(s)</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html#vector-data"><i class="fa fa-check"></i><b>2.3</b> Vector data</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html#raster-data"><i class="fa fa-check"></i><b>2.4</b> Raster data</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-the-r-spatial-ecosystem.html"><a href="introduction-to-the-r-spatial-ecosystem.html#conversions"><i class="fa fa-check"></i><b>2.4.1</b> Conversions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="making-maps-in-r.html"><a href="making-maps-in-r.html"><i class="fa fa-check"></i><b>3</b> Making maps in R</a><ul>
@@ -299,21 +301,354 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Other R ecosystems</li>
 <li>…</li>
 </ul>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<div class="figure"><span style="display:block;" id="fig:03-intro-to-rspatial-1"></span>
 <img src="https://geocompr.robinlovelace.net/figures/01-cranlogs.png" alt="Source: https://geocompr.robinlovelace.net"  />
 <p class="caption">
 Figure 2.1: Source: <a href="https://geocompr.robinlovelace.net" class="uri">https://geocompr.robinlovelace.net</a>
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+</div>
+<div id="vector-data" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.3</span> Vector data<a href="introduction-to-the-r-spatial-ecosystem.html#vector-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="https://github.com/r-spatial/sf"><strong>sf</strong></a></li>
+<li><a href="https://github.com/edzer/sp"><strong>sp</strong></a></li>
+<li><a href="https://github.com/rspatial/terra"><strong>terra</strong></a></li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:03-intro-to-rspatial-2"></span>
 <img src="https://keen-swartz-3146c4.netlify.com/images/sf_deps.png" alt="Source: https://www.r-spatial.org/r/2020/03/17/wkt.html"  />
 <p class="caption">
 Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" class="uri">https://www.r-spatial.org/r/2020/03/17/wkt.html</a>
 </p>
 </div>
+<ul>
+<li>The <strong>sf</strong> package is the successor of the <strong>sp</strong> package based on the OGC standard Simple Features</li>
+<li><a href="https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf" class="uri">https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf</a></li>
+<li>Combines the functionality of three previous packages: <strong>sp</strong>, <strong>rgeos</strong> and <strong>rgdal</strong></li>
+<li><a href="https://www.mail-archive.com/r-sig-geo@r-project.org/msg18468.html" class="uri">https://www.mail-archive.com/r-sig-geo@r-project.org/msg18468.html</a></li>
+<li><a href="https://github.com/r-spatial/sf/wiki/Migrating" class="uri">https://github.com/r-spatial/sf/wiki/Migrating</a></li>
+<li>Most of the functions in this package start with a prefix <code>st_</code></li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb54-1"></a><span class="kw">library</span>(sf)</span></code></pre></div>
+<pre><code>## Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 7.2.0; sf_use_s2() is TRUE</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb56-1"></a><span class="co"># lsf.str(&quot;package:sf&quot;)</span></span>
+<span id="cb56-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb56-2"></a><span class="kw">ls</span>(<span class="st">&quot;package:sf&quot;</span>)</span></code></pre></div>
+<pre><code>##   [1] &quot;%&gt;%&quot;                          &quot;as_Spatial&quot;                  
+##   [3] &quot;dbDataType&quot;                   &quot;dbWriteTable&quot;                
+##   [5] &quot;gdal_addo&quot;                    &quot;gdal_create&quot;                 
+##   [7] &quot;gdal_crs&quot;                     &quot;gdal_extract&quot;                
+##   [9] &quot;gdal_inv_geotransform&quot;        &quot;gdal_metadata&quot;               
+##  [11] &quot;gdal_polygonize&quot;              &quot;gdal_rasterize&quot;              
+##  [13] &quot;gdal_read&quot;                    &quot;gdal_read_mdim&quot;              
+##  [15] &quot;gdal_subdatasets&quot;             &quot;gdal_utils&quot;                  
+##  [17] &quot;gdal_write&quot;                   &quot;gdal_write_mdim&quot;             
+##  [19] &quot;get_key_pos&quot;                  &quot;NA_agr_&quot;                     
+##  [21] &quot;NA_bbox_&quot;                     &quot;NA_crs_&quot;                     
+##  [23] &quot;NA_m_range_&quot;                  &quot;NA_z_range_&quot;                 
+##  [25] &quot;pivot_wider.sf&quot;               &quot;plot_sf&quot;                     
+##  [27] &quot;rawToHex&quot;                     &quot;read_sf&quot;                     
+##  [29] &quot;sf_add_proj_units&quot;            &quot;sf_extSoftVersion&quot;           
+##  [31] &quot;sf_proj_info&quot;                 &quot;sf_proj_network&quot;             
+##  [33] &quot;sf_proj_pipelines&quot;            &quot;sf_proj_search_paths&quot;        
+##  [35] &quot;sf_project&quot;                   &quot;sf_use_s2&quot;                   
+##  [37] &quot;sf.colors&quot;                    &quot;st_agr&quot;                      
+##  [39] &quot;st_agr&lt;-&quot;                     &quot;st_area&quot;                     
+##  [41] &quot;st_as_binary&quot;                 &quot;st_as_grob&quot;                  
+##  [43] &quot;st_as_s2&quot;                     &quot;st_as_sf&quot;                    
+##  [45] &quot;st_as_sfc&quot;                    &quot;st_as_text&quot;                  
+##  [47] &quot;st_axis_order&quot;                &quot;st_bbox&quot;                     
+##  [49] &quot;st_bind_cols&quot;                 &quot;st_boundary&quot;                 
+##  [51] &quot;st_buffer&quot;                    &quot;st_cast&quot;                     
+##  [53] &quot;st_centroid&quot;                  &quot;st_collection_extract&quot;       
+##  [55] &quot;st_combine&quot;                   &quot;st_contains&quot;                 
+##  [57] &quot;st_contains_properly&quot;         &quot;st_convex_hull&quot;              
+##  [59] &quot;st_coordinates&quot;               &quot;st_covered_by&quot;               
+##  [61] &quot;st_covers&quot;                    &quot;st_crop&quot;                     
+##  [63] &quot;st_crosses&quot;                   &quot;st_crs&quot;                      
+##  [65] &quot;st_crs&lt;-&quot;                     &quot;st_delete&quot;                   
+##  [67] &quot;st_difference&quot;                &quot;st_dimension&quot;                
+##  [69] &quot;st_disjoint&quot;                  &quot;st_distance&quot;                 
+##  [71] &quot;st_drivers&quot;                   &quot;st_drop_geometry&quot;            
+##  [73] &quot;st_equals&quot;                    &quot;st_equals_exact&quot;             
+##  [75] &quot;st_filter&quot;                    &quot;st_geometry&quot;                 
+##  [77] &quot;st_geometry_type&quot;             &quot;st_geometry&lt;-&quot;               
+##  [79] &quot;st_geometrycollection&quot;        &quot;st_graticule&quot;                
+##  [81] &quot;st_inscribed_circle&quot;          &quot;st_interpolate_aw&quot;           
+##  [83] &quot;st_intersection&quot;              &quot;st_intersects&quot;               
+##  [85] &quot;st_is&quot;                        &quot;st_is_empty&quot;                 
+##  [87] &quot;st_is_longlat&quot;                &quot;st_is_simple&quot;                
+##  [89] &quot;st_is_valid&quot;                  &quot;st_is_within_distance&quot;       
+##  [91] &quot;st_jitter&quot;                    &quot;st_join&quot;                     
+##  [93] &quot;st_layers&quot;                    &quot;st_length&quot;                   
+##  [95] &quot;st_line_merge&quot;                &quot;st_line_sample&quot;              
+##  [97] &quot;st_linestring&quot;                &quot;st_m_range&quot;                  
+##  [99] &quot;st_make_grid&quot;                 &quot;st_make_valid&quot;               
+## [101] &quot;st_minimum_rotated_rectangle&quot; &quot;st_multilinestring&quot;          
+## [103] &quot;st_multipoint&quot;                &quot;st_multipolygon&quot;             
+## [105] &quot;st_nearest_feature&quot;           &quot;st_nearest_points&quot;           
+## [107] &quot;st_node&quot;                      &quot;st_normalize&quot;                
+## [109] &quot;st_overlaps&quot;                  &quot;st_point&quot;                    
+## [111] &quot;st_point_on_surface&quot;          &quot;st_polygon&quot;                  
+## [113] &quot;st_polygonize&quot;                &quot;st_precision&quot;                
+## [115] &quot;st_precision&lt;-&quot;               &quot;st_read&quot;                     
+## [117] &quot;st_read_db&quot;                   &quot;st_relate&quot;                   
+## [119] &quot;st_reverse&quot;                   &quot;st_sample&quot;                   
+## [121] &quot;st_segmentize&quot;                &quot;st_set_agr&quot;                  
+## [123] &quot;st_set_crs&quot;                   &quot;st_set_geometry&quot;             
+## [125] &quot;st_set_precision&quot;             &quot;st_sf&quot;                       
+## [127] &quot;st_sfc&quot;                       &quot;st_shift_longitude&quot;          
+## [129] &quot;st_simplify&quot;                  &quot;st_snap&quot;                     
+## [131] &quot;st_sym_difference&quot;            &quot;st_touches&quot;                  
+## [133] &quot;st_transform&quot;                 &quot;st_triangulate&quot;              
+## [135] &quot;st_union&quot;                     &quot;st_viewport&quot;                 
+## [137] &quot;st_voronoi&quot;                   &quot;st_within&quot;                   
+## [139] &quot;st_wrap_dateline&quot;             &quot;st_write&quot;                    
+## [141] &quot;st_write_db&quot;                  &quot;st_z_range&quot;                  
+## [143] &quot;st_zm&quot;                        &quot;vec_cast.sfc&quot;                
+## [145] &quot;vec_ptype2.sfc&quot;               &quot;write_sf&quot;</code></pre>
+<ul>
+<li>This package handles additional vector data types (e.g. polygon and multipolygon are two separate classes), allows for easier data processing, and support for spatial databases such as PostGIS</li>
+<li><a href="https://r-spatial.github.io/sf/" class="uri">https://r-spatial.github.io/sf/</a> and <a href="https://github.com/rstudio/cheatsheets/blob/master/sf.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/master/sf.pdf</a></li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb58-1"></a><span class="kw">library</span>(spData)</span>
+<span id="cb58-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb58-2"></a></span>
+<span id="cb58-3"><a href="introduction-to-the-r-spatial-ecosystem.html#cb58-3"></a>world</span></code></pre></div>
+<pre><code>## Simple feature collection with 177 features and 10 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -89.9 xmax: 180 ymax: 83.64513
+## Geodetic CRS:  WGS 84
+## # A tibble: 177 × 11
+##    iso_a2 name_l…¹ conti…² regio…³ subre…⁴ type  area_…⁵     pop lifeExp gdpPe…⁶
+##  * &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 FJ     Fiji     Oceania Oceania Melane… Sove…  1.93e4  8.86e5    70.0   8222.
+##  2 TZ     Tanzania Africa  Africa  Easter… Sove…  9.33e5  5.22e7    64.2   2402.
+##  3 EH     Western… Africa  Africa  Northe… Inde…  9.63e4 NA         NA       NA 
+##  4 CA     Canada   North … Americ… Northe… Sove…  1.00e7  3.55e7    82.0  43079.
+##  5 US     United … North … Americ… Northe… Coun…  9.51e6  3.19e8    78.8  51922.
+##  6 KZ     Kazakhs… Asia    Asia    Centra… Sove…  2.73e6  1.73e7    71.6  23587.
+##  7 UZ     Uzbekis… Asia    Asia    Centra… Sove…  4.61e5  3.08e7    71.0   5371.
+##  8 PG     Papua N… Oceania Oceania Melane… Sove…  4.65e5  7.76e6    65.2   3709.
+##  9 ID     Indones… Asia    Asia    South-… Sove…  1.82e6  2.55e8    68.9  10003.
+## 10 AR     Argenti… South … Americ… South … Sove…  2.78e6  4.30e7    76.3  18798.
+## # … with 167 more rows, 1 more variable: geom &lt;MULTIPOLYGON [°]&gt;, and
+## #   abbreviated variable names ¹​name_long, ²​continent, ³​region_un, ⁴​subregion,
+## #   ⁵​area_km2, ⁶​gdpPercap
+## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb60-1"></a><span class="kw">plot</span>(world)</span></code></pre></div>
+<pre><code>## Warning: plotting the first 9 out of 10 attributes; use max.plot = 10 to plot
+## all</code></pre>
+<p><img src="_main_files/figure-html/03-intro-to-rspatial-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb62-1"></a>file_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;shapes/world.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>)</span>
+<span id="cb62-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb62-2"></a>file_path</span></code></pre></div>
+<pre><code>## [1] &quot;/Users/runner/work/_temp/Library/spData/shapes/world.gpkg&quot;</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb64-1"></a>world =<span class="st"> </span><span class="kw">read_sf</span>(file_path)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb65-1"></a>world</span></code></pre></div>
+<pre><code>## Simple feature collection with 177 features and 10 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -89.9 xmax: 180 ymax: 83.64513
+## Geodetic CRS:  WGS 84
+## # A tibble: 177 × 11
+##    iso_a2 name_l…¹ conti…² regio…³ subre…⁴ type  area_…⁵     pop lifeExp gdpPe…⁶
+##    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 FJ     Fiji     Oceania Oceania Melane… Sove…  1.93e4  8.86e5    70.0   8222.
+##  2 TZ     Tanzania Africa  Africa  Easter… Sove…  9.33e5  5.22e7    64.2   2402.
+##  3 EH     Western… Africa  Africa  Northe… Inde…  9.63e4 NA         NA       NA 
+##  4 CA     Canada   North … Americ… Northe… Sove…  1.00e7  3.55e7    82.0  43079.
+##  5 US     United … North … Americ… Northe… Coun…  9.51e6  3.19e8    78.8  51922.
+##  6 KZ     Kazakhs… Asia    Asia    Centra… Sove…  2.73e6  1.73e7    71.6  23587.
+##  7 UZ     Uzbekis… Asia    Asia    Centra… Sove…  4.61e5  3.08e7    71.0   5371.
+##  8 PG     Papua N… Oceania Oceania Melane… Sove…  4.65e5  7.76e6    65.2   3709.
+##  9 ID     Indones… Asia    Asia    South-… Sove…  1.82e6  2.55e8    68.9  10003.
+## 10 AR     Argenti… South … Americ… South … Sove…  2.78e6  4.30e7    76.3  18798.
+## # … with 167 more rows, 1 more variable: geom &lt;MULTIPOLYGON [°]&gt;, and
+## #   abbreviated variable names ¹​name_long, ²​continent, ³​region_un, ⁴​subregion,
+## #   ⁵​area_km2, ⁶​gdpPercap
+## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb67-1"></a><span class="kw">st_crs</span>(world)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   User input: WGS 84 
+##   wkt:
+## GEOGCRS[&quot;WGS 84&quot;,
+##     DATUM[&quot;World Geodetic System 1984&quot;,
+##         ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,
+##             LENGTHUNIT[&quot;metre&quot;,1]]],
+##     PRIMEM[&quot;Greenwich&quot;,0,
+##         ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     CS[ellipsoidal,2],
+##         AXIS[&quot;geodetic latitude (Lat)&quot;,north,
+##             ORDER[1],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##         AXIS[&quot;geodetic longitude (Lon)&quot;,east,
+##             ORDER[2],
+##             ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+##     USAGE[
+##         SCOPE[&quot;Horizontal component of 3D system.&quot;],
+##         AREA[&quot;World.&quot;],
+##         BBOX[-90,-180,90,180]],
+##     ID[&quot;EPSG&quot;,4326]]</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb69-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>wkt</span></code></pre></div>
+<pre><code>## [1] &quot;GEOGCRS[\&quot;WGS 84\&quot;,\n    DATUM[\&quot;World Geodetic System 1984\&quot;,\n        ELLIPSOID[\&quot;WGS 84\&quot;,6378137,298.257223563,\n            LENGTHUNIT[\&quot;metre\&quot;,1]]],\n    PRIMEM[\&quot;Greenwich\&quot;,0,\n        ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\&quot;geodetic latitude (Lat)\&quot;,north,\n            ORDER[1],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n        AXIS[\&quot;geodetic longitude (Lon)\&quot;,east,\n            ORDER[2],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    USAGE[\n        SCOPE[\&quot;Horizontal component of 3D system.\&quot;],\n        AREA[\&quot;World.\&quot;],\n        BBOX[-90,-180,90,180]],\n    ID[\&quot;EPSG\&quot;,4326]]&quot;</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb71-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>srid</span></code></pre></div>
+<pre><code>## [1] &quot;EPSG:4326&quot;</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb73-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>proj4string</span></code></pre></div>
+<pre><code>## [1] &quot;+proj=longlat +datum=WGS84 +no_defs&quot;</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb75-1"></a>cycle_hire_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;misc/cycle_hire_xy.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>)</span>
+<span id="cb75-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb75-2"></a>cycle_hire_txt =<span class="st"> </span><span class="kw">read.csv</span>(cycle_hire_path)</span>
+<span id="cb75-3"><a href="introduction-to-the-r-spatial-ecosystem.html#cb75-3"></a><span class="kw">head</span>(cycle_hire_txt)</span></code></pre></div>
+<pre><code>##             X        Y id               name             area nbikes nempty
+## 1 -0.10997053 51.52916  1       River Street      Clerkenwell      4     14
+## 2 -0.19757425 51.49961  2 Phillimore Gardens       Kensington      2     34
+## 3 -0.08460569 51.52128  3 Christopher Street Liverpool Street      0     32
+## 4 -0.12097369 51.53006  4  St. Chad&#39;s Street     King&#39;s Cross      4     19
+## 5 -0.15687600 51.49313  5     Sedding Street    Sloane Square     15     12
+## 6 -0.14422888 51.51812  6 Broadcasting House       Marylebone      0     18</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb77-1"></a>cycle_hire_xy =<span class="st"> </span><span class="kw">st_as_sf</span>(cycle_hire_txt, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dt">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>)</span>
+<span id="cb77-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb77-2"></a>cycle_hire_xy</span></code></pre></div>
+<pre><code>## Simple feature collection with 742 features and 5 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -0.2367699 ymin: 51.45475 xmax: -0.002275 ymax: 51.54214
+## Geodetic CRS:  WGS 84
+## First 10 features:
+##    id               name             area nbikes nempty
+## 1   1       River Street      Clerkenwell      4     14
+## 2   2 Phillimore Gardens       Kensington      2     34
+## 3   3 Christopher Street Liverpool Street      0     32
+## 4   4  St. Chad&#39;s Street     King&#39;s Cross      4     19
+## 5   5     Sedding Street    Sloane Square     15     12
+## 6   6 Broadcasting House       Marylebone      0     18
+## 7   7   Charlbert Street  St. John&#39;s Wood     15      0
+## 8   8         Lodge Road  St. John&#39;s Wood      5     13
+## 9   9     New Globe Walk         Bankside      3     16
+## 10 10        Park Street         Bankside      1     17
+##                        geometry
+## 1   POINT (-0.1099705 51.52916)
+## 2   POINT (-0.1975742 51.49961)
+## 3  POINT (-0.08460569 51.52128)
+## 4   POINT (-0.1209737 51.53006)
+## 5    POINT (-0.156876 51.49313)
+## 6   POINT (-0.1442289 51.51812)
+## 7    POINT (-0.1680743 51.5343)
+## 8   POINT (-0.1701345 51.52834)
+## 9  POINT (-0.09644075 51.50739)
+## 10 POINT (-0.09275416 51.50597)</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb79-1"></a><span class="kw">plot</span>(cycle_hire_xy)</span></code></pre></div>
+<p><img src="_main_files/figure-html/03-intro-to-rspatial-16-1.png" width="672" /></p>
+</div>
+<div id="raster-data" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.4</span> Raster data<a href="introduction-to-the-r-spatial-ecosystem.html#raster-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="https://github.com/rspatial/terra"><strong>terra</strong></a></li>
+<li><a href="https://github.com/rspatial/raster"><strong>raster</strong></a></li>
+<li><a href="https://github.com/r-spatial/stars"><strong>stars</strong></a></li>
+</ul>
 <p><img src="figs/terra-libs.png" width="750" /></p>
+<ul>
+<li>The <strong>terra</strong> package contains classes and methods representing raster objects and operations</li>
+<li>It allows raster data to be loaded and saved</li>
+<li>It allows raster algebra and raster processing</li>
+<li>It includes a number of additional functions, e.g., for analysis of terrain characteristics</li>
+<li>It allows you to work on large sets of data</li>
+<li>?<code>terra-package</code>, <a href="https://rspatial.github.io/terra/reference/terra-package.html" class="uri">https://rspatial.github.io/terra/reference/terra-package.html</a></li>
+<li>It is a successor of the <strong>raster</strong> package - <a href="http://www.rpubs.com/etiennebr/visualraster" class="uri">http://www.rpubs.com/etiennebr/visualraster</a></li>
+<li>The <strong>terra</strong> package contains classes and methods representing raster objects and operations</li>
+</ul>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb80-1"></a><span class="kw">library</span>(terra)</span></code></pre></div>
+<pre><code>## terra 1.6.4</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb82-1"></a>elev =<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/elev.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>))</span>
+<span id="cb82-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb82-2"></a>elev</span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 6, 6, 1  (nrow, ncol, nlyr)
+## resolution  : 0.5, 0.5  (x, y)
+## extent      : -1.5, 1.5, -1.5, 1.5  (xmin, xmax, ymin, ymax)
+## coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+## source      : elev.tif 
+## name        : elev 
+## min value   :    1 
+## max value   :   36</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb84-1"></a><span class="kw">plot</span>(elev)</span></code></pre></div>
+<p><img src="_main_files/figure-html/03-intro-to-rspatial-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb85-1"></a>elev[]</span></code></pre></div>
+<pre><code>##       elev
+##  [1,]    1
+##  [2,]    2
+##  [3,]    3
+##  [4,]    4
+##  [5,]    5
+##  [6,]    6
+##  [7,]    7
+##  [8,]    8
+##  [9,]    9
+## [10,]   10
+## [11,]   11
+## [12,]   12
+## [13,]   13
+## [14,]   14
+## [15,]   15
+## [16,]   16
+## [17,]   17
+## [18,]   18
+## [19,]   19
+## [20,]   20
+## [21,]   21
+## [22,]   22
+## [23,]   23
+## [24,]   24
+## [25,]   25
+## [26,]   26
+## [27,]   27
+## [28,]   28
+## [29,]   29
+## [30,]   30
+## [31,]   31
+## [32,]   32
+## [33,]   33
+## [34,]   34
+## [35,]   35
+## [36,]   36</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb87-1"></a>raster_filepath =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/srtm.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
+<span id="cb87-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb87-2"></a>new_raster =<span class="st"> </span><span class="kw">rast</span>(raster_filepath)</span>
+<span id="cb87-3"><a href="introduction-to-the-r-spatial-ecosystem.html#cb87-3"></a>new_raster</span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 457, 465, 1  (nrow, ncol, nlyr)
+## resolution  : 0.0008333333, 0.0008333333  (x, y)
+## extent      : -113.2396, -112.8521, 37.13208, 37.51292  (xmin, xmax, ymin, ymax)
+## coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+## source      : srtm.tif 
+## name        : srtm 
+## min value   : 1024 
+## max value   : 2892</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb89-1"></a><span class="kw">crs</span>(new_raster)</span></code></pre></div>
+<pre><code>## [1] &quot;GEOGCRS[\&quot;WGS 84\&quot;,\n    DATUM[\&quot;World Geodetic System 1984\&quot;,\n        ELLIPSOID[\&quot;WGS 84\&quot;,6378137,298.257223563,\n            LENGTHUNIT[\&quot;metre\&quot;,1]]],\n    PRIMEM[\&quot;Greenwich\&quot;,0,\n        ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\&quot;geodetic latitude (Lat)\&quot;,north,\n            ORDER[1],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n        AXIS[\&quot;geodetic longitude (Lon)\&quot;,east,\n            ORDER[2],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    ID[\&quot;EPSG\&quot;,4326]]&quot;</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb91-1"></a><span class="kw">crs</span>(new_raster, <span class="dt">describe =</span> <span class="ot">TRUE</span>, <span class="dt">proj =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>##     name authority code area         extent                                proj
+## 1 WGS 84      EPSG 4326 &lt;NA&gt; NA, NA, NA, NA +proj=longlat +datum=WGS84 +no_defs</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb93-1"></a>raster_filepath2 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/landsat.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
+<span id="cb93-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb93-2"></a>new_raster2 =<span class="st"> </span><span class="kw">rast</span>(raster_filepath2)</span>
+<span id="cb93-3"><a href="introduction-to-the-r-spatial-ecosystem.html#cb93-3"></a><span class="kw">plot</span>(new_raster2)</span></code></pre></div>
+<p><img src="_main_files/figure-html/03-intro-to-rspatial-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb94-1"></a><span class="kw">plotRGB</span>(new_raster2, <span class="dt">r =</span> <span class="dv">3</span>, <span class="dt">g =</span> <span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">stretch =</span> <span class="st">&quot;lin&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/03-intro-to-rspatial-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb95-1"></a>my_raster =<span class="st"> </span><span class="kw">rast</span>(<span class="dt">nrows =</span> <span class="dv">10</span>, <span class="dt">ncols =</span> <span class="dv">20</span>, </span>
+<span id="cb95-2"><a href="introduction-to-the-r-spatial-ecosystem.html#cb95-2"></a>                 <span class="dt">xmin =</span> <span class="dv">0</span>, <span class="dt">xmax =</span> <span class="dv">20</span>, <span class="dt">ymin =</span> <span class="dv">-10</span>, <span class="dt">ymax =</span> <span class="dv">0</span>,</span>
+<span id="cb95-3"><a href="introduction-to-the-r-spatial-ecosystem.html#cb95-3"></a>                 <span class="dt">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>,</span>
+<span id="cb95-4"><a href="introduction-to-the-r-spatial-ecosystem.html#cb95-4"></a>                 <span class="dt">vals =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>)</span>
+<span id="cb95-5"><a href="introduction-to-the-r-spatial-ecosystem.html#cb95-5"></a>my_raster</span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 10, 20, 1  (nrow, ncol, nlyr)
+## resolution  : 1, 1  (x, y)
+## extent      : 0, 20, -10, 0  (xmin, xmax, ymin, ymax)
+## coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+## source      : memory 
+## name        : lyr.1 
+## min value   :     1 
+## max value   :   200</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="introduction-to-the-r-spatial-ecosystem.html#cb97-1"></a><span class="kw">plot</span>(my_raster)</span></code></pre></div>
+<p><img src="_main_files/figure-html/03-intro-to-rspatial-27-1.png" width="672" /></p>
 <div id="conversions" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.1</span> Conversions<a href="introduction-to-the-r-spatial-ecosystem.html#conversions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">2.4.1</span> Conversions<a href="introduction-to-the-r-spatial-ecosystem.html#conversions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://geocompr.github.io/post/2021/spatial-classes-conversion/" class="uri">https://geocompr.github.io/post/2021/spatial-classes-conversion/</a></p>
 
 </div>

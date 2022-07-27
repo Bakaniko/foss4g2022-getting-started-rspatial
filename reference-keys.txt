@@ -1,7 +1,7 @@
-fig:unnamed-chunk-6
-fig:unnamed-chunk-7
-tab:unnamed-chunk-12
-tab:unnamed-chunk-24
+fig:03-intro-to-rspatial-1
+fig:03-intro-to-rspatial-2
+tab:unnamed-chunk-9
+tab:unnamed-chunk-21
 why-an-r-workshop-in-a-foss4g-conference
 data-handling-with-r
 data-types
@@ -19,6 +19,8 @@ piping
 introduction-to-the-r-spatial-ecosystem
 r-packages---specialized-packages
 rs-spatial-ecosystems
+vector-data
+raster-data
 conversions
 making-maps-in-r
 mapping-tools-in-r
