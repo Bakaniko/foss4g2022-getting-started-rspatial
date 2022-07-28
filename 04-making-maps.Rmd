@@ -34,20 +34,36 @@ Interactive maps' packages are, for example, **leaflet**, **mapview**, **mapdeck
 Specific-purpose mapping can be achieved with **cartogram** (to construct area cartograms), **geofacet** ("geofaceting"), **geogrid** (to turn polygons into regular or hexagonal grids), and **rayshader** (raytracing to produce 2D and 3D data visualizations). 
 
 In this workshop, we will focus on the **tmap** package.
-It allows to create static and interactive maps as well as animations.
+It accepts spatial data in various formats, allows to create static and interactive maps, and makes it possible to create small multiples map and map animations.
 
-## tmap intro
+## Basic example
+
+The code below shows a basic example of the tmap use:
 
 ```{r}
 tm_shape(nz) +
   tm_graticules() +
-  tm_polygons(col = "Median_income") +
+  tm_polygons(col = "Median_income", title = "Median income (USD)") +
   tm_shape(nz_ports) +
   tm_symbols(size = 0.75) +
   tm_scale_bar(breaks = c(0, 100, 200)) +
   tm_compass(position = c("right", "top")) +
   tm_layout(bg.color = "lightblue")
 ```
+
+It combines eight function calls using the `+` operator to create the above map.
+Each function can be adjusted using its arguments.
+
+We can divide the above tmap functions into a few groups:
+
+- shapes and layers: `tm_shape()`, `tm_polygons()`, `tm_symbols()`. 
+They are used to read the spatial data and specify how it should be presented.
+- attribute layers: `tm_graticules()`, `tm_scale_bar()`, `tm_compass()`.
+They add additional information.
+- other map elements: `tm_layout()`.
+It specifies the overall map look, including its background color or title.
+
+We expand the explanation of these functions in the next few sections. 
 
 ## Shapes and layers
 
