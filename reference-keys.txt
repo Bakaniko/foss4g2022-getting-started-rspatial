@@ -16,7 +16,7 @@ create-new-variables
 agregate-data
 join-data
 piping
-introduction-to-the-r-spatial-ecosystem
+rspatial
 r-packages---specialized-packages
 rs-spatial-ecosystems
 vector-data
