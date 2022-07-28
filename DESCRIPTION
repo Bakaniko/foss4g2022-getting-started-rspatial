@@ -14,6 +14,7 @@ Imports:
   terra,
   fields,
   gstat,
-  supercells
+  supercells,
+  here
 Remotes:
   Nowosad/spDataLarge@noraster
