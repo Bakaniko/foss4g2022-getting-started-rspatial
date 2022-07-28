@@ -4,7 +4,7 @@
 
 This chapter requires the following packages:
 
-```{r}
+```{r 04-making-maps-1}
 #| message = FALSE
 library(tmap)
 library(sf)
@@ -17,7 +17,7 @@ Additionally, we will use three datasets:
 - `nz_ports`: a point dataset with locations of New Zealand main ports
 - `nz_elev`: an elevation raster data of the New Zealand area
 
-```{r}
+```{r 04-making-maps-2}
 library(spData)
 data("nz")
 nz_ports <- read_sf("data/nz_ports.gpkg")
@@ -40,7 +40,7 @@ It accepts spatial data in various formats, allows to create static and interact
 
 The code below shows a basic example of the tmap use:
 
-```{r}
+```{r 04-making-maps-3}
 tm_shape(nz) +
   tm_graticules() +
   tm_polygons(col = "Median_income", title = "Median income (USD)") +
@@ -67,61 +67,87 @@ We expand the explanation of these functions in the next few sections.
 
 ## Shapes and layers
 
-```{r}
-#| echo = FALSE
-map_layers <- data.frame(Function = c("`tm_polygons()`", "`tm_symbols()`", 
-                                     "`tm_lines()`", "`tm_raster()`",
-                                     "`tm_text()`"),
-                        Geometry = c("polygons", "points, lines, and polygons",
-                                     "lines", "raster", "points, lines, and polygons"))
-knitr::kable(map_layers, caption = "Basic map layers")
-```
+A simple instance of a (t)map consists of specifying spatial object with `tm_shape()` (this can be, for example, an sf vector or a terra raster) and then how this object should be visualized.
+For example, the code below takes the `nz` object (sf object with polygons) and plots it as polygons:
 
-```{r}
+```{r 04-making-maps-4}
 tm_shape(nz) +
   tm_polygons()
 ```
 
+Table \@ref(tab:04-making-maps-5) gives a list of basic map layers allowed by tmap.
+We can use different functions depending on our input spatial data type.
+
+```{r 04-making-maps-5}
+#| echo = FALSE
+map_layers <- data.frame(Geometry = c("polygons", "points, lines, and polygons",
+                                     "lines", "raster", "points, lines, and polygons"),
+                         Function = c("`tm_polygons()`", "`tm_symbols()`", 
+                                     "`tm_lines()`", "`tm_raster()`",
+                                     "`tm_text()`"))
+knitr::kable(map_layers, caption = "Basic map layers")
+```
+
+As we have seen above, polygons can be visualized with `tm_polygons()`; however, we can also show them using `tm_symbols()` or `tm_text()`:
+
 ```{r}
+tm_shape(nz) +
+  tm_symbols()
+```
+
+Each map layer can be adjusted.
+For example, `tm_polygons()` can be represented by either:
+
+- one consistent color (e.g., `col = "darkblue"`)
+- unique colors for adjacent polygons (`col = "MAP_COLORS"`)
+- color representing values of a given variable (`col = Median_income`)
+
+One consistent color may be set with [a color name](https://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) or a hex color code:
+
+```{r 04-making-maps-6}
 tm_shape(nz) +
   tm_polygons(col = "darkblue") #or #00008b
 ```
 
-```{r}
+To use unique colors for adjacent polygons we need to use `col = "MAP_COLORS"`: 
+
+```{r 04-making-maps-7}
 tm_shape(nz) +
   tm_polygons(col = "MAP_COLORS")
 ```
 
-```{r}
-head(nz)
-```
+We also can provide a variable name to color each polygon based on its value (note: you can check your variables names with `head(nz)`).
+Let's create a choropleth map of the `"Median_income"` variable:
 
-```{r}
+```{r 04-making-maps-9}
 tm_shape(nz) +
   tm_polygons(col = "Median_income")
 ```
 
-```{r}
+Next, we customize the map with additional arguments, such as `title` to change the legend title or `palette` to provide a name of the color palette to use:
+
+```{r 04-making-maps-10}
 tm_shape(nz) +
   tm_polygons(col = "Median_income", title = "Median income (USD)",
               palette = "viridis")
 ```
 
-`tmaptools::palette_explorer()`
+The tmap package accepts names of a few dozens of color palettes (note: try `tmaptools::palette_explorer()`), but it is also possible to provide a vector of colors here.
 
-```{r}
-tm_shape(nz) +
-  tm_polygons(col = "Median_income", title = "Median income (USD)",
-              palette = "viridis")
-```
+By default, tmap behaves differently depending on the input variable type, e.g., uses unique colors for categorical variables and pretty breaks for continuous variables.
+We can use [the `style` argument](https://geocompr.github.io/post/2019/tmap-color-scales/) if we want to change the color breaks.
+For example, `style = "cont"` creates a continuous color gradient:
 
-```{r}
+```{r 04-making-maps-12}
 tm_shape(nz) +
   tm_polygons(col = "Median_income", title = "Median income (USD)",
               palette = "viridis", style = "cont")
 ```
 
-```{r}
+Many spatial objects and their related map layers can be connected with the `+` operator.
+Importantly, subsequent map layers are drawn on top of the previous ones:
+
+```{r 04-making-maps-13}
 tm_shape(nz) +
   tm_polygons(col = "Median_income", title = "Median income (USD)",
               palette = "viridis", style = "cont") +
@@ -129,15 +155,20 @@ tm_shape(nz) +
   tm_symbols()
 ```
 
-```{r}
+The previous examples used spatial vector data.
+However, plotting raster data works in the same fashion -- we need to provide a spatial object with `tm_shape()`, and then plot it with `tm_raster()`:
+
+```{r 04-making-maps-14}
 tm_shape(nz_elev) +
-  tm_raster(palette = "-Spectral", style = "cont",
-            title = "Elevation (m asl)") +
+  tm_raster(title = "Elevation (m asl)",
+            palette = "-Spectral", style = "cont") +
   tm_shape(nz_ports) +
   tm_symbols()
 ```
 
-```{r}
+The tmap functions do not only result in a plot, but their output can be also attach to an R object:
+
+```{r 04-making-maps-15}
 tm <- tm_shape(nz_elev) +
   tm_raster(palette = "-Spectral", style = "cont",
             title = "Elevation (m asl)") +
@@ -145,9 +176,13 @@ tm <- tm_shape(nz_elev) +
   tm_symbols()
 ```
 
+This is useful when we want to add new layers to our map or save it to a file.
+
 ## Attributes layers
 
-```{r}
+Attributes layers allow to draw often used map elements, such as [graticules](https://geocompr.github.io/post/2019/tmap-grid/), scale bars, north arrows, logos, or credits (Table \@ref(tab:04-making-maps-16)).
+
+```{r 04-making-maps-16}
 #| echo = FALSE
 attr_layers <- data.frame(Function = c("`tm_graticules()`", "`tm_scale_bar()`",
                                       "`tm_compass()`", "`tm_logo()`", "`tm_credits()`"),
@@ -157,7 +192,9 @@ attr_layers <- data.frame(Function = c("`tm_graticules()`", "`tm_scale_bar()`",
 knitr::kable(attr_layers, caption = "Basic attributes layers")
 ```
 
-```{r}
+We can add these elements to our previous map with the following code:
+
+```{r 04-making-maps-17}
 tm +
   tm_graticules() +
   tm_scale_bar(breaks = c(0, 100, 200)) +
@@ -166,7 +203,11 @@ tm +
   tm_credits("N. Roelandt and J. Nowosad")
 ```
 
-```{r}
+Each map element can be also customized (e.g., by specifying breaks for the scale bar or a text in the credits), and its location can be set with `position`.
+
+Let's save our new map to the `tm2` object:
+
+```{r 04-making-maps-18}
 tm2 <- tm +
   tm_graticules() +
   tm_scale_bar(breaks = c(0, 100, 200)) +
@@ -177,13 +218,19 @@ tm2 <- tm +
 
 ## Other map elements
 
-```{r}
+The {tmap} also has some other map elements.
+It includes `tm_add_legend()` that allows to add a manual legend by specifying its type, color, and title.
+In the example below, we also use `tm_layout()` -- this function specifies the overall map look, including its background color, title, fonts, etc.
+
+```{r 04-making-maps-19}
 tm2 +
   tm_add_legend(type = "symbol", col = "grey", title = "Main ports") +
   tm_layout(main.title = "New Zealand", bg.color = "lightblue")
 ```
 
-```{r}
+Here, we save our new map to the `tm3` object:
+
+```{r 04-making-maps-20}
 tm3 <- tm2 +
   tm_add_legend(type = "symbol", col = "grey", title = "Main ports") +
   tm_layout(main.title = "New Zealand", bg.color = "lightblue")
@@ -191,53 +238,59 @@ tm3 <- tm2 +
 
 ## Interactive mode
 
-```{r}
+Each map created with {tmap} can be viewed in either `"plot"` and `"view"` mode: the default `"plot"` mode returns a static map, while the `"view"` mode results in an interactive map.
+We can change the mode with `tmap_mode()`:
+
+```{r 04-making-maps-21}
 tmap_mode("view")
 tm3
 ```
 
-```{r}
+As you can see above, the interactive mode has the same map layers, colors, and legend.
+However, both modes have their own features.
+For example, `tm_compass()`, `tm_logo()`, and `tm_credits()` only work in the static mode.
+On the other hand, the interactive mode allows for zooming or panning, and also makes it possible to select and change the background tiles.^[Try `tm_basemap()` and `tm_tiles()` if you want to customize the interactive tiles.] We can also add some map elements available for interactive mode only, such as `tm_minimap()` or `tm_mouse_coordinates()`.
+
+```{r 04-making-maps-22}
 tm3 + 
   tm_minimap() +
   tm_mouse_coordinates()
 ```
 
-<!-- , "`tm_basemap()`", "`tm_tiles()`" -->
+To return to the static mode, we need to use `tmap_mode("plot")`:
 
-```{r}
+```{r 04-making-maps-23}
 tmap_mode("plot")
 tm3
 ```
 
 ## Saving maps
 
-```{r}
+Maps created with {tmap} can be saved to various file formats.
+It includes `.png` for raster graphic files, `.svg` for vector graphic files, or even `.html` to save an interactive map.
+All of the saving can be done with `tmap_save()`, which accepts the map object and a file path.
+It also allows customizing the output map resolution.
+
+```{r 04-making-maps-24}
 #| eval = FALSE
 tmap_save(tm3, "my_map.png")
-```
-
-```{r}
-#| eval = FALSE
 tmap_save(tm3, "my_map.svg")
-```
-
-```{r}
-#| eval = FALSE
 tmap_save(tm3, "my_map.html")
 ```
 
 ## What else?
 
-- Facet maps
-- Animations
-- Mapping applications
+The above examples showed basic (and probably the most often used) features of {tmap}.
+However, this package has much more to offer, including:
+
+- Facet maps: using `tm_facets()` to create small multiples map
+- Animations: using `tm_facets()` + `tmap_animation()` to create map animations
+- Mapping applications: using the {shiny} package with `renderTmap()`, `tmapOutput()`, etc.
 - `tmap_tip()`
 
 ## More resources
 
-- https://r-tmap.github.io/tmap-book/index.html
-- https://geocompr.github.io/post/2019/tmap-grid/
-- https://geocompr.github.io/post/2019/tmap-color-scales/
+For more resources check [the {tmap} repo](https://github.com/r-tmap/tmap), read [the tmap book (work in progress)](https://r-tmap.github.io/tmap-book) and [the Making maps with R chapter](https://geocompr.robinlovelace.net/adv-map.html).
 
 ## Exercises
 
