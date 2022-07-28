@@ -16,16 +16,18 @@
 
 - vectors:
   - `c(12, 15, 35698)`
-  - `c('FOSS4G 2022', 'Firenze')`
+  - `c("FOSS4G 2022", "Firenze")`
 - list: `list(1, 45, 12.0, "toto")`
 - matrices: `matrix(0:9, 3,3)`
-- data frames (df): `data.frame(x = 1:3, y = c('a', 'b', 'c'))`
+- data frames (df): `data.frame(x = 1:3, y = c("a", "b", "c"))`
 - constants:
   - `letters[3:4]`
   - `LETTERS[12:26]`
   - `pi`
 
 ## Affectation
+
+<!--jn: what do you mean by "affectation"?-->
 
 Use of variables to store data in memory.
 
@@ -35,7 +37,7 @@ Examples:
 
 ```{r eval=FALSE}
 a <- c(0, 1, 2) # new integer vector
-b <- c('FOSS4G', '2022', 'Firenze') # new character vector
+b <- c("FOSS4G", "2022", "Firenze") # new character vector
 c <- data.frame(
   number = a, 
   strings = b)
@@ -65,29 +67,27 @@ Exercices :
 - Use `head()` to see its first lines
 - Plot `LakeHuron`
 
-
 ## Packages
 
-While R base contains a lot of functions, it can be extended with packages.
+While base R contains a lot of functions, it can be extended with packages.
 
 > In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. @wickham2022Packages
 
 You already saw how to install packages with the `install.packages()` function, 
 let's see how to load the [dplyr](https://dplyr.tidyverse.org/) 
-library we will use to handle the data.
+package we will use to handle the data.
 
 ```{r data-handling-libraries}
 library(dplyr)
 ```
 
-
 ## Load data
 
-If the packages provides datasets to work with, you will want to work on your own data.
+If the packages do not provide datasets to work with, you will want to work on your own data.
 There is several ways to load data.
 
-R base provides a set of functions for delimited text files.
-For example, if we want ot work with the Gapminder dataset from [Software Carpentry's R course](https://github.com/swcarpentry/r-novice-gapminder).
+Base R provides a set of functions for delimited text files.
+For example, if we want to work with the Gapminder dataset from [Software Carpentry's R course](https://github.com/swcarpentry/r-novice-gapminder).
 
 ```{r data-handling-download-gapminder}
 data_url <- "https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/main/data/gapminder_data.csv"
@@ -122,10 +122,10 @@ gapminder <- read.delim(data_url, sep = "\t")
 
 :::: {.infobox .tip data-latex="tip"}
 
-`read.csv()` and similars functions can read delimited text files only.
+`read.csv()` and similar functions can read delimited text files only.
 For other formats, you can use functions from other packages like 
 [Haven](https://haven.tidyverse.org) or [readxl](https://readxl.tidyverse.org/).
-We will show in [Section](#manipulating-vector-data) how to load geospatial data.
+We will show in [Chapter](#rspatial) how to load geospatial data.
 
 ::::
 
@@ -159,19 +159,15 @@ names(gapminder)
 ## In the beginning was the Verb
 
 `dplyr` provides a lot of functions to handle data: `filter()` to filter the data matching
-certains conditions (subset data), `select()` to select columns, `mutate()` to create new variables.
+certain conditions (subset data), `select()` to select columns, `mutate()` to create new variables.
 All those functions are verbs and means an action onto the dataset.
-
-
 
 ## Filter data
 
 If we only want the records from Italy, we can filter using 
 
 ```{r data-handling-filter}
-
 filter(gapminder, country == "Italy" )
-
 ```
 
 You can use comparison operators like `==`, `>`, `<`, `>=` , etc.
@@ -205,9 +201,7 @@ filter(gapminder, continent == "Oceania" | year < 2000)
 Maybe we only want the `country`, `year` and `lifeExp` variables:
 
 ```{r data-handling-select}
-
 select(italy_2000, country, year, lifeExp)
-
 ```
 
 Or, for example, in the `italy_2000` subset, the `continent` variable does not 
@@ -215,9 +209,7 @@ provide useful information anymore, so we want to discard it.
 Please not the use of the `-` symbol before the name of the variable.
 
 ```{r data-handling-select2}
-
 select(italy_2000, -continent)
-
 ```
 
 So you can select the column you want to keep or the ones you want to remove.
@@ -247,8 +239,8 @@ So in this example, we compute the GPD but we also keep the information about th
 
 ## Agregate data
 
-Sometimes, we have a too detailled dataset and we want a more broader view of the data
-so we want to agregate it.
+Sometimes, we have a too detailed dataset and we want a more broader view of the data
+so we want to aggregate it.
 
 To do so, `dplyr` provides a couple of functions:  `group_by()` and `summarise()`.
 Like their names says, `group_by` groups records who share the same value in a variable 
@@ -260,27 +252,20 @@ Into this second function, we create a new variable called `population` that is 
 the variable `pop` of each group.
 
 ```{r data-handling-group-by}
-
 summarise(group_by(gapminder, continent, year), population = sum(pop))
-
 ```
-
 
 You can use any function to summarise your data, for example, if you want to know the number of entries
 by continent, you can use `n()`.
 
 ```{r data-handling-summarise}
-
 summarise(group_by(gapminder, continent), count = n())
-
 ```
 
 Or if you only want the first country of each continent:
 
 ```{r data-handling-summarise2}
-
 summarise(group_by(gapminder, continent), country = first(.data[["country"]]))
-
 ```
 
 :::: {.infobox .note data-latex="note"}
@@ -303,7 +288,6 @@ gapminder_left <- transmute(gapminder,
                             country, 
                             continent, 
                             year)
-
 head(gapminder_left)
 ```
 
@@ -314,10 +298,8 @@ gapminder_right <- transmute(gapminder,
                              lifeExp, 
                              pop, 
                              gdpPercap)
-
 head(gapminder_right)
 ```
-
 
 Now we can join them.
 
@@ -338,10 +320,10 @@ If you want more information on joins operations with `dplyr`, we recommend to r
 Piping allows to create a sequence of actions on a dataset without storing intermediate results.
 
 As it can be difficult to debug piped commands for the beginners, we won't use it in this workshop.
-However, its usagei very frequent so it is most likely that a beginner will encounter it soon.
+However, its usage very frequent so it is most likely that a beginner will encounter it soon.
 
 The most common form `%>%` is provided by the package [magrittr](https://magrittr.tidyverse.org/) 
-which is part of the Tidyverse and is a dependency of `dplyr`, so you don't have to load it.
+which is part of the tidyverse and is a dependency of dplyr, so you don't have to load it.
 
 In the following example, we show how to compute the mean GDP by decade of the Europeans countries.
 
@@ -356,7 +338,7 @@ gapminder %>% # pass the datset as the first argument
   summarise(mean_GDP = mean(GDP)) # compute mean GDP of the decade
 ```
 
-With R 4.1.0, a piping operator has been introduced:
+With R 4.1.0, a built-in piping operator has been introduced:
 
 ```{r piping-example-Rbase}
 gapminder |> # pass the datset as the first argument
@@ -368,6 +350,5 @@ gapminder |> # pass the datset as the first argument
   group_by(country, decade) |> # grouping variables
   summarise(mean_GDP = mean(GDP)) # compute mean GDP of the decade
 ```
-
 
 Those two pipes operators are not equivalent so we recommend to read this [R-bloggers' blogpost](https://www.r-bloggers.com/2021/05/the-new-r-pipe/) on pipe's operators.
