@@ -195,16 +195,7 @@ italy_2000
 ### Exercice {-}
 
 - Try to subset non-European records
-
-```{r class.source = 'fold-hide', eval=FALSE}
-filter(gapminder, continent != "Europe")
-```
-
 - Try to subset records that are in Oceania or before 2000
-
-```{r class.source = 'fold-hide', eval=FALSE}
-filter(gapminder, continent == "Oceania" | year < 2000)
-```
 
 ## Select columns
 
