@@ -2,6 +2,8 @@
 
 <!-- (Jakub) Raster data processing (45 min) -->
 
+This chapter requires the following packages:
+
 ```{r 06-manipulating-raster-data-1}
 #| message = FALSE
 library(tmap)
