@@ -3,7 +3,7 @@
 <!-- (Nicolas) Introduction to the workshop (5 min) -->
 
 This workshops aims to provide the very basics of R to newcomers and a first 
-introduction to spatial data handling in R using the [R-spatial ecosystem](https://r-spatial.org/). 
+introduction to spatial data handling in R using the [R-spatial ecosystem](https://cran.r-project.org/view=Spatial). 
 We will present to the audience mapping with the {tmap} package, vector data
 handling with {sf} and raster data handling with {terra}.
 
@@ -16,9 +16,9 @@ The workshop leaders are [Nicolas Roelandt](https://roelandtn.frama.io/) from Gu
 - Opening the workshop (5 min)
 - Introduction to R (15 min)
 - Non-spatial data handling (30 min)
-- Introduction to R-spatial ecosystem (20 min)
+- Introduction to the R-spatial ecosystem (20 min)
 - Mapping in R with {tmap} (30 min)
-- Pause (to be confirmed)
+- Coffee break (to be confirmed)
 - Vector data processing (45 min)
 - Raster data processing (45 min)
 - Closing the workshop (5 min)
@@ -33,6 +33,7 @@ The workshop leaders are [Nicolas Roelandt](https://roelandtn.frama.io/) from Gu
 R comes with the RGui interface.
 It is usable but for a better user experience we recommend using [Rstudio](https://www.rstudio.com/products/rstudio/download/#download).
 
+<!--vscode??-->
 [Jupyter Notebook](https://jupyter.org/) with the [IRKernel](https://irkernel.github.io/installation/) can also be a good option.
 
 ::::
@@ -40,7 +41,6 @@ It is usable but for a better user experience we recommend using [Rstudio](https
 2. R packages
 
 Please run those commands into the R console:
-
 
 ```{r pre-requisites-packages, eval = FALSE}
 packages <- c(
@@ -60,7 +60,6 @@ install.packages(packages)
 install.packages("spDataLarge", repos = "https://geocompr.r-universe.dev")
 ```
 
-
 ## What is ~~love~~ R ? {-}
 <!-- (Nicolas) Introduction to R (15 min) -->
 
@@ -72,7 +71,7 @@ Free and Open Source Software in 1995.
 
 ## Why an R workshop in a FOSS4G conference ?
 
-While R is not dedicated to spatial analysis, there is several packages that provides
+While R is not dedicated to spatial analysis, there a several dozen of packages that provides
 geospatial capabilities to the language.
 
 - Use R a standalone GIS:
@@ -80,29 +79,29 @@ geospatial capabilities to the language.
   - connect to geospatial data base
   - perform spatial analysis
   - make geostatistical modelling, prediction and simulation
-  - access to algorithms from other tools ([QGIS](https://github.com/r-spatial/RQGIS3), [GRASS](https://github.com/rsbivand/rgrass), [SAGA](https://github.com/r-spatial/RSAGA))
+  - access to algorithms from other tools ([QGIS](https://github.com/paleolimbot/qgisprocess), [GRASS](https://github.com/rsbivand/rgrass), [SAGA](https://github.com/stevenpawley/Rsagacmd))
 - Use R in other FOSS4G tools:
   - [QGIS](https://docs.qgis.org/3.22/en/docs/training_manual/processing/r_intro.html?highlight=r%20processing)
   - [GRASS](https://grasswiki.osgeo.org/wiki/R_statistics)
 
 ## Coding paradigms {-}
 
-When R has been released as an Open Source language, there was no strong syntax 
-philosophy so there is some inconsistencies in packages, functions and parameters naming
+When R was released, there was no strong syntax 
+philosophy so there are some inconsistencies in packages, functions and arguments naming,
 for example.
 R base readability and performance where not good enough for some users so they
 developed packages to improve those.
 
 When using R for data analysis, you will encounter 3 majors coding paradigms:
 
-- R base
+- base R
 - [Tidyverse](https://www.tidyverse.org/)
 - [data.table](https://rdatatable.gitlab.io/data.table/)
 
-R base is vanilla R code. The Tidyverse aims to provide a more consistent grammar
+Base R is a vanilla R code. The Tidyverse aims to provide a more consistent grammar
  and readability.
  Data.table provides a fast and powerful alternative to R base with a consistent
  grammar.
  
-You can mix those paradigms for your projects but for teaching purposes, the workshop 
-materials will use the Tidyverse with some R base.
+You can mix those paradigms for your projects, but for teaching purposes the workshop 
+materials will use Tidyverse with some base R.
