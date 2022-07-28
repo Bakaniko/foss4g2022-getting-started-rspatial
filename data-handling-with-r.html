@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-07-27" />
+<meta name="date" content="2022-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -268,11 +268,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>vectors:
 <ul>
 <li><code>c(12, 15, 35698)</code></li>
-<li><code>c('FOSS4G 2022', 'Firenze')</code></li>
+<li><code>c("FOSS4G 2022", "Firenze")</code></li>
 </ul></li>
 <li>list: <code>list(1, 45, 12.0, "toto")</code></li>
 <li>matrices: <code>matrix(0:9, 3,3)</code></li>
-<li>data frames (df): <code>data.frame(x = 1:3, y = c('a', 'b', 'c'))</code></li>
+<li>data frames (df): <code>data.frame(x = 1:3, y = c("a", "b", "c"))</code></li>
 <li>constants:
 <ul>
 <li><code>letters[3:4]</code></li>
@@ -283,11 +283,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="affectation" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.2</span> Affectation<a href="data-handling-with-r.html#affectation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!--jn: what do you mean by "affectation"?-->
 <p>Use of variables to store data in memory.</p>
 <p>Use <code>&lt;-</code> (or <code>=</code>)</p>
 <p>Examples:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-handling-with-r.html#cb2-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># new integer vector</span></span>
-<span id="cb2-2"><a href="data-handling-with-r.html#cb2-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;FOSS4G&#39;</span>, <span class="st">&#39;2022&#39;</span>, <span class="st">&#39;Firenze&#39;</span>) <span class="co"># new character vector</span></span>
+<span id="cb2-2"><a href="data-handling-with-r.html#cb2-2"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FOSS4G&quot;</span>, <span class="st">&quot;2022&quot;</span>, <span class="st">&quot;Firenze&quot;</span>) <span class="co"># new character vector</span></span>
 <span id="cb2-3"><a href="data-handling-with-r.html#cb2-3"></a>c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
 <span id="cb2-4"><a href="data-handling-with-r.html#cb2-4"></a>  <span class="dt">number =</span> a, </span>
 <span id="cb2-5"><a href="data-handling-with-r.html#cb2-5"></a>  <span class="dt">strings =</span> b)</span>
@@ -315,13 +316,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="packages" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.4</span> Packages<a href="data-handling-with-r.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While R base contains a lot of functions, it can be extended with packages.</p>
+<p>While base R contains a lot of functions, it can be extended with packages.</p>
 <blockquote>
 <p>In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. <span class="citation">Wickham and Bryan (<a href="#ref-wickham2022Packages" role="doc-biblioref">2022</a>)</span></p>
 </blockquote>
 <p>You already saw how to install packages with the <code>install.packages()</code> function,
 let’s see how to load the <a href="https://dplyr.tidyverse.org/">dplyr</a>
-library we will use to handle the data.</p>
+package we will use to handle the data.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-handling-with-r.html#cb4-1"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
@@ -334,10 +335,10 @@ library we will use to handle the data.</p>
 </div>
 <div id="load-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.5</span> Load data<a href="data-handling-with-r.html#load-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>If the packages provides datasets to work with, you will want to work on your own data.
+<p>If the packages do not provide datasets to work with, you will want to work on your own data.
 There is several ways to load data.</p>
-<p>R base provides a set of functions for delimited text files.
-For example, if we want ot work with the Gapminder dataset from <a href="https://github.com/swcarpentry/r-novice-gapminder">Software Carpentry’s R course</a>.</p>
+<p>Base R provides a set of functions for delimited text files.
+For example, if we want to work with the Gapminder dataset from <a href="https://github.com/swcarpentry/r-novice-gapminder">Software Carpentry’s R course</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-handling-with-r.html#cb8-1"></a>data_url &lt;-<span class="st"> &quot;https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/main/data/gapminder_data.csv&quot;</span></span>
 <span id="cb8-2"><a href="data-handling-with-r.html#cb8-2"></a></span>
 <span id="cb8-3"><a href="data-handling-with-r.html#cb8-3"></a><span class="co"># download the data and store it in a variable</span></span>
@@ -354,10 +355,10 @@ of the operating system.</p>
 </div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-handling-with-r.html#cb11-1"></a>gapminder &lt;-<span class="st"> </span><span class="kw">read.delim</span>(data_url, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
 <div class="infobox tip">
-<p><code>read.csv()</code> and similars functions can read delimited text files only.
+<p><code>read.csv()</code> and similar functions can read delimited text files only.
 For other formats, you can use functions from other packages like
 <a href="https://haven.tidyverse.org">Haven</a> or <a href="https://readxl.tidyverse.org/">readxl</a>.
-We will show in <a href="manipulating-vector-data.html#manipulating-vector-data">Section</a> how to load geospatial data.</p>
+We will show in <a href="#rspatial">Chapter</a> how to load geospatial data.</p>
 </div>
 <p>Let’s take a look to our data :</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-handling-with-r.html#cb12-1"></a><span class="kw">glimpse</span>(gapminder)</span></code></pre></div>
@@ -390,7 +391,7 @@ countries between 1952 and 2007.</p>
 <div id="in-the-beginning-was-the-verb" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.6</span> In the beginning was the Verb<a href="data-handling-with-r.html#in-the-beginning-was-the-verb" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>dplyr</code> provides a lot of functions to handle data: <code>filter()</code> to filter the data matching
-certains conditions (subset data), <code>select()</code> to select columns, <code>mutate()</code> to create new variables.
+certain conditions (subset data), <code>select()</code> to select columns, <code>mutate()</code> to create new variables.
 All those functions are verbs and means an action onto the dataset.</p>
 </div>
 <div id="filter-data" class="section level2 hasAnchor">
@@ -10050,8 +10051,8 @@ For that, you can use the <code>mutate()</code> function:</p>
 </div>
 <div id="agregate-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.10</span> Agregate data<a href="data-handling-with-r.html#agregate-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Sometimes, we have a too detailled dataset and we want a more broader view of the data
-so we want to agregate it.</p>
+<p>Sometimes, we have a too detailed dataset and we want a more broader view of the data
+so we want to aggregate it.</p>
 <p>To do so, <code>dplyr</code> provides a couple of functions: <code>group_by()</code> and <code>summarise()</code>.
 Like their names says, <code>group_by</code> groups records who share the same value in a variable
 and <code>summarise()</code> compute the summary of non-grouping variables.</p>
@@ -10112,8 +10113,7 @@ by continent, you can use <code>n()</code>.</p>
 <span id="cb43-3"><a href="data-handling-with-r.html#cb43-3"></a>                            country, </span>
 <span id="cb43-4"><a href="data-handling-with-r.html#cb43-4"></a>                            continent, </span>
 <span id="cb43-5"><a href="data-handling-with-r.html#cb43-5"></a>                            year)</span>
-<span id="cb43-6"><a href="data-handling-with-r.html#cb43-6"></a></span>
-<span id="cb43-7"><a href="data-handling-with-r.html#cb43-7"></a><span class="kw">head</span>(gapminder_left)</span></code></pre></div>
+<span id="cb43-6"><a href="data-handling-with-r.html#cb43-6"></a><span class="kw">head</span>(gapminder_left)</span></code></pre></div>
 <pre><code>##                key     country continent year
 ## 1 Afghanistan_1952 Afghanistan      Asia 1952
 ## 2 Afghanistan_1957 Afghanistan      Asia 1957
@@ -10126,8 +10126,7 @@ by continent, you can use <code>n()</code>.</p>
 <span id="cb45-3"><a href="data-handling-with-r.html#cb45-3"></a>                             lifeExp, </span>
 <span id="cb45-4"><a href="data-handling-with-r.html#cb45-4"></a>                             pop, </span>
 <span id="cb45-5"><a href="data-handling-with-r.html#cb45-5"></a>                             gdpPercap)</span>
-<span id="cb45-6"><a href="data-handling-with-r.html#cb45-6"></a></span>
-<span id="cb45-7"><a href="data-handling-with-r.html#cb45-7"></a><span class="kw">head</span>(gapminder_right)</span></code></pre></div>
+<span id="cb45-6"><a href="data-handling-with-r.html#cb45-6"></a><span class="kw">head</span>(gapminder_right)</span></code></pre></div>
 <pre><code>##                key lifeExp      pop gdpPercap
 ## 1 Afghanistan_1952  28.801  8425333  779.4453
 ## 2 Afghanistan_1957  30.332  9240934  820.8530
@@ -10151,9 +10150,9 @@ by continent, you can use <code>n()</code>.</p>
 <h2><span class="header-section-number">1.12</span> Piping<a href="data-handling-with-r.html#piping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Piping allows to create a sequence of actions on a dataset without storing intermediate results.</p>
 <p>As it can be difficult to debug piped commands for the beginners, we won’t use it in this workshop.
-However, its usagei very frequent so it is most likely that a beginner will encounter it soon.</p>
+However, its usage very frequent so it is most likely that a beginner will encounter it soon.</p>
 <p>The most common form <code>%&gt;%</code> is provided by the package <a href="https://magrittr.tidyverse.org/">magrittr</a>
-which is part of the Tidyverse and is a dependency of <code>dplyr</code>, so you don’t have to load it.</p>
+which is part of the tidyverse and is a dependency of dplyr, so you don’t have to load it.</p>
 <p>In the following example, we show how to compute the mean GDP by decade of the Europeans countries.</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="data-handling-with-r.html#cb48-1"></a>gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># pass the datset as the first argument</span></span>
 <span id="cb48-2"><a href="data-handling-with-r.html#cb48-2"></a><span class="st">  </span><span class="kw">filter</span>(continent <span class="op">==</span><span class="st"> &quot;Europe&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># subset on European records</span></span>
@@ -10181,7 +10180,7 @@ which is part of the Tidyverse and is a dependency of <code>dplyr</code>, so you
 ## 10 Austria   1980  171559.
 ## # … with 170 more rows
 ## # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<p>With R 4.1.0, a piping operator has been introduced:</p>
+<p>With R 4.1.0, a built-in piping operator has been introduced:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="data-handling-with-r.html#cb51-1"></a>gapminder <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="co"># pass the datset as the first argument</span></span>
 <span id="cb51-2"><a href="data-handling-with-r.html#cb51-2"></a><span class="st">  </span><span class="kw">filter</span>(continent <span class="op">==</span><span class="st"> &quot;Europe&quot;</span>) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="co"># subset on European records</span></span>
 <span id="cb51-3"><a href="data-handling-with-r.html#cb51-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>continent) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="co"># remove the continent column</span></span>
@@ -10272,7 +10271,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 }
 });
 });
