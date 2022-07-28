@@ -3,7 +3,7 @@ title: "Getting started with R and R-spatial"
 author: "Nicolas Roelandt and Jakub Nowosad"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook:
+output: bookdown::gitbook
 
 documentclass: book
 bibliography: [book.bib, packages.bib]
