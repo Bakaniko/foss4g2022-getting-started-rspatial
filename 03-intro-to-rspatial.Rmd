@@ -1,4 +1,4 @@
-# Introduction to the R-spatial ecosystem
+# Introduction to the R-spatial ecosystem {#rspatial}
 
 <!-- (Jakub) Introduction to R-spatial ecosystem (20 min) -->
 
