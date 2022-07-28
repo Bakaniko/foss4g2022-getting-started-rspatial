@@ -24,7 +24,7 @@ raster-data
 conversions
 making-maps-in-r
 mapping-tools-in-r
-tmap-intro
+basic-example
 shapes-and-layers
 attributes-layers
 other-map-elements
