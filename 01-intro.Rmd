@@ -51,7 +51,8 @@ packages <- c(
   sf,
   terra,
   fields,
-  supercells)
+  supercells,
+  here)
 
 # Install packages from CRAN Repo
 install.packages(packages)
