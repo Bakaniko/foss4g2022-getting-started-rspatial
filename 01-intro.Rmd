@@ -98,10 +98,10 @@ When using R for data analysis, you will encounter 3 majors coding paradigms:
 - [Tidyverse](https://www.tidyverse.org/)
 - [data.table](https://rdatatable.gitlab.io/data.table/)
 
-Base R is a vanilla R code. The Tidyverse aims to provide a more consistent grammar
+Base R is a vanilla R code. The tidyverse aims to provide a more consistent grammar
  and readability.
  Data.table provides a fast and powerful alternative to R base with a consistent
  grammar.
  
 You can mix those paradigms for your projects, but for teaching purposes the workshop 
-materials will use Tidyverse with some base R.
+materials will use tidyverse with some base R.
