@@ -2,12 +2,20 @@
 
 <!-- (Jakub) Mapping in R with {tmap} (30 min) -->
 
+This chapter requires the following packages:
+
 ```{r}
 #| message = FALSE
 library(tmap)
 library(sf)
 library(terra)
 ```
+
+Additionally, we will use three datasets:
+
+- `nz`: a set of polygons representing 16 regions of New Zealand
+- `nz_ports`: a point dataset with locations of New Zealand main ports
+- `nz_elev`: an elevation raster data of the New Zealand area
 
 ```{r}
 library(spData)
@@ -18,33 +26,15 @@ nz_elev <- rast(system.file("raster/nz_elev.tif", package = "spDataLarge"))
 
 ## Mapping tools in R
 
-Static maps:
+R has many packages dedicated to spatial data visualizations. 
+They include tools for making both static maps, interactive maps, specific-purpose maps, animations, etc.
 
-- **graphics**
-- **rasterVis**
-- **ggplot2**
-- **ggspatial**
-- **mapsf**
-- ...
+Packages for creating static maps include **graphics**, **rasterVis**, **ggplot2**, **ggspatial**, **mapsf**, **tidyterra**, etc.
+Interactive maps' packages are, for example, **leaflet**, **mapview**, **mapdeck**.
+Specific-purpose mapping can be achieved with **cartogram** (to construct area cartograms), **geofacet** ("geofaceting"), **geogrid** (to turn polygons into regular or hexagonal grids), and **rayshader** (raytracing to produce 2D and 3D data visualizations). 
 
-Interactive maps:
-
-- **leaflet**
-- **mapview**
-- **mapdeck**
-- ...
-
-Both:
-
-- **tmap**
-
-Specific-purpose mapping:
-
-- **cartogram**
-- **geofacet**
-- **geogrid**
-- **rayshader**
-- ...
+In this workshop, we will focus on the **tmap** package.
+It allows to create static and interactive maps as well as animations.
 
 ## tmap intro
 
