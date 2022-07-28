@@ -149,7 +149,7 @@ We can transform a dataframe into a tibble to access their better `print()` meth
 that combines `head()` and `glimpse()`. 
 Tibbles are at the core of the Tidyverse packages. 
 
-```{r data-handling-head}
+```{r data-handling-head2}
 gapminder <- as_tibble(gapminder)
 gapminder
 ```
