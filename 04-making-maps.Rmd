@@ -29,16 +29,16 @@ nz_elev <- rast(system.file("raster/nz_elev.tif", package = "spDataLarge"))
 R has many packages dedicated to spatial data visualizations. 
 They include tools for making both static maps, interactive maps, specific-purpose maps, animations, etc.
 
-Packages for creating static maps include **graphics**, **rasterVis**, **ggplot2**, **ggspatial**, **mapsf**, **tidyterra**, etc.
-Interactive maps' packages are, for example, **leaflet**, **mapview**, **mapdeck**.
-Specific-purpose mapping can be achieved with **cartogram** (to construct area cartograms), **geofacet** ("geofaceting"), **geogrid** (to turn polygons into regular or hexagonal grids), and **rayshader** (raytracing to produce 2D and 3D data visualizations). 
+Packages for creating static maps include {graphics}, {rasterVis}, {ggplot2}, {ggspatial}, {mapsf}, {**}tidyterra}, etc.
+Interactive maps' packages are, for example, {leaflet}, {mapview}, {mapdeck}.
+Specific-purpose mapping can be achieved with {cartogram} (to construct area cartograms), {geofacet} ("geofaceting"), {geogrid} (to turn polygons into regular or hexagonal grids), and {rayshader} (raytracing to produce 2D and 3D data visualizations). 
 
-In this workshop, we will focus on the **tmap** package.
+In this workshop, we will focus on the {tmap} package.
 It accepts spatial data in various formats, allows to create static and interactive maps, and makes it possible to create small multiples map and map animations.
 
 ## Basic example
 
-The code below shows a basic example of the tmap use:
+The code below shows a basic example of the {tmap} use:
 
 ```{r 04-making-maps-3}
 tm_shape(nz) +
@@ -67,7 +67,7 @@ We expand the explanation of these functions in the next few sections.
 
 ## Shapes and layers
 
-A simple instance of a (t)map consists of specifying spatial object with `tm_shape()` (this can be, for example, an sf vector or a terra raster) and then how this object should be visualized.
+A simple instance of a (t)map consists of specifying spatial object with `tm_shape()` (this can be, for example, an {sf} vector or a {terra} raster) and then how this object should be visualized.
 For example, the code below takes the `nz` object (sf object with polygons) and plots it as polygons:
 
 ```{r 04-making-maps-4}
@@ -75,7 +75,7 @@ tm_shape(nz) +
   tm_polygons()
 ```
 
-Table \@ref(tab:04-making-maps-5) gives a list of basic map layers allowed by tmap.
+Table \@ref(tab:04-making-maps-5) gives a list of basic map layers allowed by {tmap}.
 We can use different functions depending on our input spatial data type.
 
 ```{r 04-making-maps-5}
@@ -132,9 +132,9 @@ tm_shape(nz) +
               palette = "viridis")
 ```
 
-The tmap package accepts names of a few dozens of color palettes (note: try `tmaptools::palette_explorer()`), but it is also possible to provide a vector of colors here.
+The {tmap} package accepts names of a few dozens of color palettes (note: try `tmaptools::palette_explorer()`), but it is also possible to provide a vector of colors here.
 
-By default, tmap behaves differently depending on the input variable type, e.g., uses unique colors for categorical variables and pretty breaks for continuous variables.
+By default, {tmap} behaves differently depending on the input variable type, e.g., uses unique colors for categorical variables and pretty breaks for continuous variables.
 We can use [the `style` argument](https://geocompr.github.io/post/2019/tmap-color-scales/) if we want to change the color breaks.
 For example, `style = "cont"` creates a continuous color gradient:
 
@@ -159,6 +159,7 @@ The previous examples used spatial vector data.
 However, plotting raster data works in the same fashion -- we need to provide a spatial object with `tm_shape()`, and then plot it with `tm_raster()`:
 
 ```{r 04-making-maps-14}
+#| message = FALSE
 tm_shape(nz_elev) +
   tm_raster(title = "Elevation (m asl)",
             palette = "-Spectral", style = "cont") +
@@ -277,6 +278,13 @@ tmap_save(tm3, "my_map.png")
 tmap_save(tm3, "my_map.svg")
 tmap_save(tm3, "my_map.html")
 ```
+
+:::: {.infobox .tip data-latex="note"}
+
+Note that some {tmap} functions have a `tm_` prefix, while other a `tmap_` prefix. 
+This syntax allows to distinct between making maps functions (e.g., `tm_shape()` or `tm_polygons()`) and other functions (e.g., `tmap_save()`).
+
+::::
 
 ## What else?
 
