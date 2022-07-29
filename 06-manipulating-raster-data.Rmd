@@ -457,7 +457,9 @@ You can also read about an extended example of spatial prediction in the [Statis
 
 ### Segmentations
 
-https://github.com/Nowosad/supercells
+Segmentation is a partition of space to identify homogeneous objects.
+One possible approach to create segments using the SLIC Superpixel algorithm through the {supercells} package.
+The example data here is an RGB raster with 87,400 cells.
 
 ```{r 06-manipulating-raster-data-59 }
 library(supercells)
@@ -470,6 +472,7 @@ tm_shape(ortho) +
   tm_layout(frame = FALSE)
 ```
 
+Superpixels can be created with the `supercells()` function that expects our input raster and several parameters:
 
 ```{r 06-manipulating-raster-data-60, message=FALSE, results='hide'}
 ortho_slic1 <- supercells(ortho, k = 2000, compactness = 10, transform = "to_LAB")
@@ -482,6 +485,11 @@ tm_shape(ortho) +
   tm_borders(col = "black") +
   tm_layout(frame = FALSE)
 ```
+
+Each superpixel represents a desired level of homogeneity while at the same time maintains boundaries and structures.
+Superpixels also carry more information than each cell alone, and thus they can speed up the subsequent processing efforts.
+
+Next, to vizualize our results we can convert average colors of each superpixel from RGB to a hexadecimal representation:
 
 ```{r 06-manipulating-raster-data-61 }
 rgb_to_hex <- function(x){
@@ -503,6 +511,9 @@ tms2 = tm_shape(ortho_slic1) +
   tm_layout(frame = FALSE, main.title = "New image (2000 supercells)")
 tmap_arrange(tms1, tms2, ncol = 1)
 ```
+
+You can watch the [Spatial segmentation in R using the supercells package](https://av.tib.eu/media/54880) presentation ([slides](https://jakubnowosad.com/ogh2021/)) to learn more about the {supercells} package. 
+We also encourage you to visit https://cran.r-project.org/view=Spatial and https://cran.r-project.org/package=terra to find other packages allowing for spatial raster data analysis.
 
 ## Raster writing
 
