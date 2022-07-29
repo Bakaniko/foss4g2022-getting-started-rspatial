@@ -561,12 +561,18 @@ You can also read about an extended example of spatial prediction in the <a href
 </div>
 <div id="segmentations" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.5.2</span> Segmentations<a href="manipulating-raster-data.html#segmentations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><a href="https://github.com/Nowosad/supercells" class="uri">https://github.com/Nowosad/supercells</a></p>
+<p>Segmentation is a partition of space to identify homogeneous objects.
+One possible approach to create segments using the SLIC Superpixel algorithm through the {supercells} package.
+The example data here is an RGB raster with 87,400 cells.</p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="manipulating-raster-data.html#cb207-1"></a><span class="kw">library</span>(supercells)</span>
 <span id="cb207-2"><a href="manipulating-raster-data.html#cb207-2"></a>ortho &lt;-<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/ortho.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;supercells&quot;</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Superpixels can be created with the <code>supercells()</code> function that expects our input raster and several parameters:</p>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="manipulating-raster-data.html#cb208-1"></a>ortho_slic1 &lt;-<span class="st"> </span><span class="kw">supercells</span>(ortho, <span class="dt">k =</span> <span class="dv">2000</span>, <span class="dt">compactness =</span> <span class="dv">10</span>, <span class="dt">transform =</span> <span class="st">&quot;to_LAB&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Each superpixel represents a desired level of homogeneity while at the same time maintains boundaries and structures.
+Superpixels also carry more information than each cell alone, and thus they can speed up the subsequent processing efforts.</p>
+<p>Next, to vizualize our results we can convert average colors of each superpixel from RGB to a hexadecimal representation:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="manipulating-raster-data.html#cb209-1"></a>rgb_to_hex &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
 <span id="cb209-2"><a href="manipulating-raster-data.html#cb209-2"></a>  <span class="kw">apply</span>(<span class="kw">t</span>(x), <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">rgb</span>(x[<span class="dv">1</span>], x[<span class="dv">2</span>], x[<span class="dv">3</span>], <span class="dt">maxColorValue =</span> <span class="dv">255</span>))</span>
 <span id="cb209-3"><a href="manipulating-raster-data.html#cb209-3"></a>}</span>
@@ -574,6 +580,8 @@ You can also read about an extended example of spatial prediction in the <a href
 <span id="cb209-5"><a href="manipulating-raster-data.html#cb209-5"></a><span class="co"># plot(ortho)</span></span>
 <span id="cb209-6"><a href="manipulating-raster-data.html#cb209-6"></a><span class="co"># plot(st_geometry(ortho_slic1), add = TRUE, col = avg_colors)</span></span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>You can watch the <a href="https://av.tib.eu/media/54880">Spatial segmentation in R using the supercells package</a> presentation (<a href="https://jakubnowosad.com/ogh2021/">slides</a>) to learn more about the {supercells} package.
+We also encourage you to visit <a href="https://cran.r-project.org/view=Spatial" class="uri">https://cran.r-project.org/view=Spatial</a> and <a href="https://cran.r-project.org/package=terra" class="uri">https://cran.r-project.org/package=terra</a> to find other packages allowing for spatial raster data analysis.</p>
 </div>
 </div>
 <div id="raster-writing" class="section level2 hasAnchor">
