@@ -263,13 +263,15 @@ global(srtm, fun = "mean")
 
 ## Transformations
 
+Raster transformations can be, in general, divided into two groups:
 
+- resampling: recalculating raster values for a different grid (e.g., with a different resolution)
+- reprojecting: recalculating raster values for a grid with a different coordinate reference system
 
 ### Resampling
 
-```{r 06-manipulating-raster-data-26 }
-srtm
-```
+For the resampling example, we need a new grid that we will recalculated values into.
+Our new grid, `new_srtm`, will have a lower resolution than the original `srtm` raster:
 
 ```{r 06-manipulating-raster-data-27 }
 new_srtm <- srtm
@@ -277,12 +279,16 @@ res(new_srtm) <- 0.001
 new_srtm
 ```
 
+Resampling is applied using the `resample()` function, which accepts the original raster, new (often empty) grid, and a resampling method's name (e.g., `"bilinear"`):
+
 ```{r 06-manipulating-raster-data-28 }
 srtm2 <- resample(srtm, new_srtm, method = "bilinear") # method!
 srtm2
 ```
 
-### Reprojecting rasters
+To learn more about resampling methods, read the [Resampling](https://geocompr.robinlovelace.net/geometric-operations.html#resampling) section of Geocomputation with R.
+
+### Reprojecting
 
 ```{r 06-manipulating-raster-data-29 }
 crs(srtm, describe = TRUE)
