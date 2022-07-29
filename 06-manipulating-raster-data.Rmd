@@ -31,6 +31,8 @@ srtm
 We can also extract each information separately using the following functions:
 
 ```{r 06-manipulating-raster-data-4 }
+#| collapse = TRUE,
+#| results = "hold"
 ncol(srtm)
 nrow(srtm)
 nlyr(srtm)
@@ -202,12 +204,12 @@ tm_shape(ndvi) +
 
 ### Focal operations
 
-`?focal`
+Focal operations, also known as moving window operations, apply a function for a given window around each cell.
+A numeric vector or a matrix can represent a window.
+In the example below, we calculate an average of 3 by 3 cells window for each (focal) cell.
 
 ```{r 06-manipulating-raster-data-19 }
-srtm_focal_mean <- focal(srtm, 
-                   w = matrix(1, nrow = 3, ncol = 3), 
-                   fun = mean)
+srtm_focal_mean <- focal(srtm, w = c(3, 3), fun = "mean")
 ```
 
 ```{r 06-manipulating-raster-data-20, purl=FALSE,echo=FALSE}
@@ -224,16 +226,15 @@ tmap_arrange(tmf1, tmf2)
 
 ### Zonal operations
 
-`?zonal`
-Also known as zonal statistics. Result - a summary table
+Zonal operations are also known as zonal statistics.
+They calculate summary statistics independently for each provided "zone" (a category in a second raster), and their result is a summary table.
+
+In this example, we want to calculate an average elevation (from `srtm`) for each land cover category (from `nlcd`).
+However, firstly we need to have both datasets in the same coordinate reference system.
+We can do that with the `project()` function:
 
 ```{r 06-manipulating-raster-data-21 }
 srtm_utm <- project(srtm, nlcd, method = "bilinear")
-```
-
-```{r 06-manipulating-raster-data-22, purl=FALSE, warning=FALSE, echo=FALSE, message=FALSE}
-tm_shape(nlcd) +
-  tm_raster(drop.levels = TRUE, legend.show = FALSE)
 ```
 
 ```{r 06-manipulating-raster-data-23 }
@@ -241,18 +242,24 @@ srtm_zonal <- zonal(srtm_utm, nlcd, na.rm = TRUE, fun = "mean")
 srtm_zonal
 ```
 
-### Global operations 
+```{r 06-manipulating-raster-data-22, purl=FALSE, warning=FALSE, echo=FALSE, message=FALSE}
+tmz1 <- tm_shape(srtm_utm) +
+  # tm_graticules() +
+  tm_raster(style = "cont") +
+  tm_layout(legend.frame = TRUE)
+tmz2 <- tm_shape(nlcd) +
+  tm_raster(drop.levels = TRUE) +
+  tm_layout(legend.frame = TRUE)
+tmap_arrange(tmz1, tmz2)
+```
+
+### Global operations
+
+Global operations provide statistics for the entire raster.
 
 ```{r 06-manipulating-raster-data-24 }
 global(srtm, fun = "mean")
-global(srtm, fun = "sd")
 ```
-
-```{r 06-manipulating-raster-data-25 }
-freq(nlcd)
-```
-
-<!-- - global + freq + areas (cellSize()) -->
 
 ## Transformations
 
@@ -539,3 +546,4 @@ plot(st_geometry(ortho_slic1), add = TRUE, col = avg_colors)
 <!-- try hillshade -->
 <!-- create a map of nlcd -->
 <!-- https://bleutner.github.io/RStoolbox/rstbx-docu/spectralIndices.html -->
+<!-- - global + freq + areas (cellSize()) -->
