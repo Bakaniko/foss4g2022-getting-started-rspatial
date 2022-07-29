@@ -290,42 +290,40 @@ To learn more about resampling methods, read the [Resampling](https://geocompr.r
 
 ### Reprojecting
 
+Reprojecting moves our raster grid into a new coordinate reference system, and then resample its values.
+CRS of the `srtm` raster is represented by the code `"EPSG:4326"`:
+
 ```{r 06-manipulating-raster-data-29 }
 crs(srtm, describe = TRUE)
 ```
 
 ```{r 06-manipulating-raster-data-30 }
-hist(srtm)
+#\ echo = FALSE
+# hist(srtm)
 ```
 
-```{r 06-manipulating-raster-data-31, purl=FALSE,echo=FALSE}
-tm_shape(srtm) + 
-  tm_grid() +
-  tm_raster(style = "cont",
-            legend.show = FALSE)
-```
-
-https://projectionwizard.org/
+We can use the `project()` function to change its CRS.
+It expects a raster object (that we want to reproject), a new CRS definition^[This can also be a raster with a different CRS.], and a resampling method.
+In the example below, we are reprojecting the `srtm` raster into UTM zone 12N:
 
 ```{r 06-manipulating-raster-data-32 }
 srtm_utm <- project(srtm, "EPSG:32612", method = "bilinear")
 crs(srtm_utm, describe = TRUE)
 ```
 
-```{r 06-manipulating-raster-data-33, purl=FALSE,echo=FALSE, fig.height=7}
-tm_shape(srtm) + 
+```{r 06-manipulating-raster-data-33, purl=FALSE,echo=FALSE}
+tmp1 = tm_shape(srtm) + 
   tm_grid() + 
   tm_raster(style = "cont") + 
   tm_layout(legend.show = FALSE)
-```
-
-```{r 06-manipulating-raster-data-34, purl=FALSE,echo=FALSE, fig.height=7, eval=FALSE}
-tm_shape(srtm_utm) + 
+tmp2 = tm_shape(srtm_utm) + 
   tm_grid() + 
   tm_raster(style = "cont") + 
   tm_layout(legend.show = FALSE)
+tmap_arrange(tmp1, tmp2)
 ```
 
+<!-- https://projectionwizard.org/ -->
 
 ## Raster-vector interactions
 
