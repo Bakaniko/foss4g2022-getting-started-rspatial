@@ -503,14 +503,17 @@ plot(st_geometry(ortho_slic1), add = TRUE, col = avg_colors)
 
 ## Raster writing
 
-- https://geocompr.robinlovelace.net/read-write.html#data-output
-- https://gdal.org/drivers/raster/gtiff.html
+Writing raster objects back to the files is possible with `writeRaster()`.
+It allows, for example, to provide GDAL driver-specific creation options (`gdal`), output data type (`datatype`), or file type (`filetype`):
 
 ```{r 06-manipulating-raster-data-48, eval=FALSE}
+writeRaster(nlcd, filename = "nlcd0.tif")
 writeRaster(nlcd, filename = "nlcd1.tif", gdal = c("COMPRESS=NONE"))
 writeRaster(nlcd, filename = "nlcd2.tif", datatype = "INT1U")
 writeRaster(nlcd, filename = "nlcd3.tif", filetype = "COG")
 ```
+
+To learn more about raster writing visit the [Geocomputation with R ](https://geocompr.robinlovelace.net/read-write.html#data-output) book and the [official GDAL](https://gdal.org/drivers/raster/gtiff.html) documentation. 
 
 
 ## Exercises
