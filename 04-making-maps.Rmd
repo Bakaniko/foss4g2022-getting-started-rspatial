@@ -185,11 +185,11 @@ Attributes layers allow to draw often used map elements, such as [graticules](ht
 
 ```{r 04-making-maps-16}
 #| echo = FALSE
-attr_layers <- data.frame(Function = c("`tm_graticules()`", "`tm_scale_bar()`",
-                                      "`tm_compass()`", "`tm_logo()`", "`tm_credits()`"),
-                         Description = c("draws latitude and longitude graticules", 
+attr_layers <- data.frame(Description = c("draws latitude and longitude graticules", 
                                          "adds a scale bar", "adds a compass rose",
-                                         "adds a logo", "adds a text annotation"))
+                                         "adds a logo", "adds a text annotation"),
+                            Function = c("`tm_graticules()`", "`tm_scale_bar()`",
+                                      "`tm_compass()`", "`tm_logo()`", "`tm_credits()`"))
 knitr::kable(attr_layers, caption = "Basic attributes layers")
 ```
 
@@ -209,6 +209,8 @@ Each map element can be also customized (e.g., by specifying breaks for the scal
 Let's save our new map to the `tm2` object:
 
 ```{r 04-making-maps-18}
+#| message = FALSE
+#| fig.height = 6
 tm2 <- tm +
   tm_graticules() +
   tm_scale_bar(breaks = c(0, 100, 200)) +
@@ -224,6 +226,8 @@ It includes `tm_add_legend()` that allows to add a manual legend by specifying i
 In the example below, we also use `tm_layout()` -- this function specifies the overall map look, including its background color, title, fonts, etc.
 
 ```{r 04-making-maps-19}
+#| message = FALSE
+#| fig.height = 6
 tm2 +
   tm_add_legend(type = "symbol", col = "grey", title = "Main ports") +
   tm_layout(main.title = "New Zealand", bg.color = "lightblue")
@@ -243,6 +247,8 @@ Each map created with {tmap} can be viewed in either `"plot"` and `"view"` mode:
 We can change the mode with `tmap_mode()`:
 
 ```{r 04-making-maps-21}
+#| collapse = TRUE
+#| results = "hold"
 tmap_mode("view")
 tm3
 ```
