@@ -58,13 +58,12 @@ zonal-operations
 global-operations
 transformations
 resampling
-reprojecting-rasters
+reprojecting
 raster-vector-interactions
 raster-cropping-and-masking
 raster-extraction
 raster-analysis
 predictions
-interpolations
 segmentations
 raster-writing
 exercises-1
