@@ -50,7 +50,7 @@ saving-results
 writing-data
 check-data
 manipulating-raster-data
-raster-reading
+example-data
 map-algebra
 local-operations
 focal-operations
