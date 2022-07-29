@@ -263,6 +263,8 @@ global(srtm, fun = "mean")
 
 ## Transformations
 
+
+
 ### Resampling
 
 ```{r 06-manipulating-raster-data-26 }
@@ -426,52 +428,6 @@ pca
 ```{r 06-manipulating-raster-data-51 }
 pca_pred <- predict(landsat_s, pca)
 plot(pca_pred)
-```
-
-### Interpolations
-
-`?interpolate`
-
-```{r 06-manipulating-raster-data-52 }
-zion_points_srtm <- extract(srtm_utm, zion_points_utm)
-```
-
-```{r 06-manipulating-raster-data-53, message=FALSE}
-library(fields)
-tps <- Tps(st_coordinates(zion_points_utm),
-          zion_points_utm$srtm)
-rt <- rast(srtm_utm)
-interp1 <- interpolate(rt, tps)
-```
-
-```{r 06-manipulating-raster-data-54 }
-plot(interp1)
-```
-
-```{r 06-manipulating-raster-data-55 }
-library(gstat)
-interpolate_gstat <- function(model, x, crs, ...) {
-	v = st_as_sf(x, coords = c("x", "y"), crs = crs)
-	p = predict(model, v, ...)
-	as.data.frame(p)[, 1:2]
-}
-```
-
-```{r 06-manipulating-raster-data-56, warning=FALSE}
-v <- variogram(srtm ~ 1, data = zion_points_utm)
-# plot(v)
-mv <- fit.variogram(v, vgm(120000, "Exp", 12000, nugget = 10000))
-```
-
-```{r 06-manipulating-raster-data-57 }
-plot(v, model = mv)
-```
-
-```{r 06-manipulating-raster-data-58, cache = TRUE, warning=FALSE}
-g_OK <- gstat(NULL, "srtm", srtm ~ 1, zion_points_utm, model = mv)
-OK <- interpolate(rt, g_OK, debug.level = 0, fun = interpolate_gstat,
-                 crs = crs(rt), index = 1)
-plot(OK)
 ```
 
 ### Segmentations
