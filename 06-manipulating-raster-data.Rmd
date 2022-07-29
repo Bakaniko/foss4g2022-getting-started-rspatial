@@ -321,63 +321,55 @@ tm_shape(srtm_utm) +
 
 ## Raster-vector interactions
 
-- Raster cropping and masking
-- Raster extraction - by points, lines, and polygons
-- Rasterization - points, lines, polygons to rasters
-- Vectorization - rasters to polygons or contours
+Raster and vector datasets can interact in many ways.
+It includes:
+
+- raster cropping and masking by vector polygons
+- extraction of raster values by vector points, lines, and polygons
+- rasterization: converting vector points, lines, polygons to rasters
+- vectorization: converting rasters to polygons or contours
+
+Here, we will focus only on raster cropping and masking, and raster extraction by points.
+Read the [raster-vector interactions](https://geocompr.robinlovelace.net/raster-vector.html) chapter of the Geocomputation with R book to learn more.
 
 ### Raster cropping and masking
 
+In this example, our goal is to limit the raster data to the area of a polygon.
+Therefore, we need to read our polygon dataset, `zion.gpkg`, representing the borders of Zion National Park:
+
 ```{r 06-manipulating-raster-data-35 }
-library(sf)
 zion <- read_sf(system.file("vector/zion.gpkg", package = "spDataLarge"))
 ```
 
-```{r 06-manipulating-raster-data-36 }
-srtm_utm_c <- crop(srtm_utm, vect(zion))
-```
+Raster cropping limits the raster data (first argument) extent to the bounding box of the vector data (second argument).
 
-```{r 06-manipulating-raster-data-37, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
-tc1 <- tm_shape(srtm_utm) +
-  tm_grid() + 
-  tm_raster(style = "cont") +
-  tm_shape(zion) +
-  tm_borders() +
-  tm_layout(inner.margins = 0)
-tc2 <- tm_shape(srtm_utm_c) +
-  tm_grid() + 
-  tm_raster(style = "cont") +
-  tm_shape(zion) +
-  tm_borders() +
-  tm_layout(inner.margins = 0)
-tmap_arrange(tc1, tc2)
+```{r 06-manipulating-raster-data-36 }
+srtm_utm_c <- crop(srtm_utm, zion)
 ```
 
 Raster masking is usually done together with cropping.
+This operation replaces values of all the cells outside the polygon to `NA`:
 
 ```{r 06-manipulating-raster-data-38 }
-srtm_utm_m <- mask(srtm_utm_c, vect(zion))
+srtm_utm_m <- mask(srtm_utm_c, zion)
 ```
 
-```{r 06-manipulating-raster-data-39, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
+```{r 06-manipulating-raster-data-39, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE}
 tc1 <- tm_shape(srtm_utm) +
-  tm_grid() + 
   tm_raster(style = "cont") +
   tm_shape(zion) +
   tm_borders() +
-  tm_layout(inner.margins = 0)
+  tm_layout(inner.margins = 0, main.title = "Original")
 tc2 <- tm_shape(srtm_utm_c) +
-  tm_grid() + 
   tm_raster(style = "cont") +
   tm_shape(zion) +
   tm_borders() +
-  tm_layout(inner.margins = 0)
+  tm_layout(inner.margins = 0, main.title = "Cropped")
 tc3 <- tm_shape(srtm_utm_m) +
-  tm_grid() + 
   tm_raster(style = "cont") +
   tm_shape(zion) +
   tm_borders() +
-  tm_layout(inner.margins = 0)
+  tm_layout(inner.margins = 0, main.title = "Cropped and masked")
 tmap_arrange(tc1, tc2, tc3)
 ```
 
@@ -395,7 +387,7 @@ tm_shape(srtm) +
 ```
 
 ```{r 06-manipulating-raster-data-42 }
-zion_extract <- terra::extract(srtm, vect(zion_points))
+zion_extract <- terra::extract(srtm, zion_points)
 zion_points <- cbind(zion_points, zion_extract)
 zion_points
 ```
@@ -403,7 +395,7 @@ zion_points
 ```{r 06-manipulating-raster-data-43 }
 zion <- read_sf(system.file("vector/zion.gpkg", package = "spDataLarge"))
 zion <- st_transform(zion, crs(srtm))
-zion_srtm_values <- terra::extract(srtm, vect(zion))
+zion_srtm_values <- terra::extract(srtm, zion)
 ```
 
 ```{r 06-manipulating-raster-data-44 }
