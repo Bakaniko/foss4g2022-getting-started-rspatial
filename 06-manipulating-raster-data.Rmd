@@ -341,13 +341,13 @@ Therefore, we need to read our polygon dataset, `zion.gpkg`, representing the bo
 zion <- read_sf(system.file("vector/zion.gpkg", package = "spDataLarge"))
 ```
 
-Raster cropping limits the raster data (first argument) extent to the bounding box of the vector data (second argument).
+Raster cropping (`crop()`) limits the raster data (first argument) extent to the bounding box of the vector data (second argument).
 
 ```{r 06-manipulating-raster-data-36 }
 srtm_utm_c <- crop(srtm_utm, zion)
 ```
 
-Raster masking is usually done together with cropping.
+Raster masking (`mask()`) is usually done together with cropping.
 This operation replaces values of all the cells outside the polygon to `NA`:
 
 ```{r 06-manipulating-raster-data-38 }
@@ -375,6 +375,9 @@ tmap_arrange(tc1, tc2, tc3)
 
 ### Raster extraction
 
+Raster extraction allows to get value(s) of raster cells based on vector data locations.
+For this example, we will use 30 points located in Zion National Park stored in the `zion_points.gpkg` file:
+
 ```{r 06-manipulating-raster-data-40 }
 zion_points <- read_sf(system.file("vector/zion_points.gpkg", package = "spDataLarge"))
 ```
@@ -383,8 +386,11 @@ zion_points <- read_sf(system.file("vector/zion_points.gpkg", package = "spDataL
 tm_shape(srtm) +
   tm_raster(style = "cont") +
   tm_shape(zion_points) +
-  tm_dots(size = 2)
+  tm_symbols()
 ```
+
+The `extract()` function returns a data frame where the `ID` column represents each vector feature (a point in this case), and the rest of the columns store extracted values.
+Next, we can connect the extracted values with the vector object using the `cbind()` function:
 
 ```{r 06-manipulating-raster-data-42 }
 zion_extract <- terra::extract(srtm, zion_points)
@@ -392,46 +398,7 @@ zion_points <- cbind(zion_points, zion_extract)
 zion_points
 ```
 
-```{r 06-manipulating-raster-data-43 }
-zion <- read_sf(system.file("vector/zion.gpkg", package = "spDataLarge"))
-zion <- st_transform(zion, crs(srtm))
-zion_srtm_values <- terra::extract(srtm, zion)
-```
-
-```{r 06-manipulating-raster-data-44 }
-head(zion_srtm_values)
-```
-
-```{r 06-manipulating-raster-data-45, purl=FALSE,echo=FALSE}
-tm_shape(srtm) +
-  tm_raster(style = "cont") +
-  tm_shape(zion) +
-  tm_polygons()
-```
-
-```{r 06-manipulating-raster-data-46 }
-zion_srtm_values <- terra::extract(srtm, vect(zion))
-```
-
-```{r 06-manipulating-raster-data-47, message=FALSE}
-library(dplyr)
-zion_srtm_values |>
-  group_by(ID) |>
-  summarize(across(srtm, list(min = min, mean = mean, max = max)))
-```
-
 <!-- exact = TRUE -->
-
-## Raster writing
-
-- https://geocompr.robinlovelace.net/read-write.html#data-output
-- https://gdal.org/drivers/raster/gtiff.html
-
-```{r 06-manipulating-raster-data-48, eval=FALSE}
-writeRaster(nlcd, filename = "nlcd1.tif", gdal = c("COMPRESS=NONE"))
-writeRaster(nlcd, filename = "nlcd2.tif", datatype = "INT1U")
-writeRaster(nlcd, filename = "nlcd3.tif", filetype = "COG")
-```
 
 ## Raster analysis
 
@@ -449,7 +416,7 @@ plot(st_geometry(zion_points_utm), add = TRUE, col = "red", cex = 3)
 `?predict` - `glm`, `randomForest`, `prcomp`
 
 ```{r 06-manipulating-raster-data-50 }
-zion_points_utm_v <- extract(landsat_s, vect(zion_points_utm))
+zion_points_utm_v <- extract(landsat_s, zion_points_utm)
 pca <- prcomp(zion_points_utm_v[-1])
 pca
 ```
@@ -466,7 +433,7 @@ plot(pca_pred)
 `?interpolate`
 
 ```{r 06-manipulating-raster-data-52 }
-zion_points_srtm <- extract(srtm_utm, vect(zion_points_utm))
+zion_points_srtm <- extract(srtm_utm, zion_points_utm)
 ```
 
 ```{r 06-manipulating-raster-data-53, message=FALSE}
@@ -532,6 +499,19 @@ avg_colors <- rgb_to_hex(st_drop_geometry(ortho_slic1[4:6]))
 plot(ortho)
 plot(st_geometry(ortho_slic1), add = TRUE, col = avg_colors)
 ```
+
+
+## Raster writing
+
+- https://geocompr.robinlovelace.net/read-write.html#data-output
+- https://gdal.org/drivers/raster/gtiff.html
+
+```{r 06-manipulating-raster-data-48, eval=FALSE}
+writeRaster(nlcd, filename = "nlcd1.tif", gdal = c("COMPRESS=NONE"))
+writeRaster(nlcd, filename = "nlcd2.tif", datatype = "INT1U")
+writeRaster(nlcd, filename = "nlcd3.tif", filetype = "COG")
+```
+
 
 ## Exercises
 
