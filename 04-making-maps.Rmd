@@ -170,9 +170,9 @@ tm_shape(nz_elev) +
 The tmap functions do not only result in a plot, but their output can be also attach to an R object:
 
 ```{r 04-making-maps-15}
-tm <- tm_shape(nz_elev) +
-  tm_raster(palette = "-Spectral", style = "cont",
-            title = "Elevation (m asl)") +
+tm <- tm_shape(nz) +
+  tm_polygons(col = "Median_income", title = "Median income (USD)",
+              palette = "viridis", style = "cont") +
   tm_shape(nz_ports) +
   tm_symbols()
 ```
@@ -196,6 +196,7 @@ knitr::kable(attr_layers, caption = "Basic attributes layers")
 We can add these elements to our previous map with the following code:
 
 ```{r 04-making-maps-17}
+#| message = FALSE
 tm +
   tm_graticules() +
   tm_scale_bar(breaks = c(0, 100, 200)) +
@@ -209,8 +210,7 @@ Each map element can be also customized (e.g., by specifying breaks for the scal
 Let's save our new map to the `tm2` object:
 
 ```{r 04-making-maps-18}
-#| message = FALSE,
-#| fig.height = 6
+#| message = FALSE
 tm2 <- tm +
   tm_graticules() +
   tm_scale_bar(breaks = c(0, 100, 200)) +
@@ -226,8 +226,7 @@ It includes `tm_add_legend()` that allows to add a manual legend by specifying i
 In the example below, we also use `tm_layout()` -- this function specifies the overall map look, including its background color, title, fonts, etc.
 
 ```{r 04-making-maps-19}
-#| message = FALSE,
-#| fig.height = 6
+#| message = FALSE
 tm2 +
   tm_add_legend(type = "symbol", col = "grey", title = "Main ports") +
   tm_layout(main.title = "New Zealand", bg.color = "lightblue")
@@ -247,9 +246,14 @@ Each map created with {tmap} can be viewed in either `"plot"` and `"view"` mode:
 We can change the mode with `tmap_mode()`:
 
 ```{r 04-making-maps-21}
+tmap_mode("view")
+```
+
+Then we just need to open the map object (or write a (t)map code):
+
+```{r}
 #| collapse = TRUE,
 #| results = "hold"
-tmap_mode("view")
 tm3
 ```
 
@@ -259,6 +263,8 @@ For example, `tm_compass()`, `tm_logo()`, and `tm_credits()` only work in the st
 On the other hand, the interactive mode allows for zooming or panning, and also makes it possible to select and change the background tiles.^[Try `tm_basemap()` and `tm_tiles()` if you want to customize the interactive tiles.] We can also add some map elements available for interactive mode only, such as `tm_minimap()` or `tm_mouse_coordinates()`.
 
 ```{r 04-making-maps-22}
+#| collapse = TRUE,
+#| results = "hold"
 tm3 + 
   tm_minimap() +
   tm_mouse_coordinates()
@@ -267,6 +273,7 @@ tm3 +
 To return to the static mode, we need to use `tmap_mode("plot")`:
 
 ```{r 04-making-maps-23}
+#| message = FALSE
 tmap_mode("plot")
 tm3
 ```

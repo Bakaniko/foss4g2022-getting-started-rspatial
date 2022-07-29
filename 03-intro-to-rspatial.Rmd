@@ -165,6 +165,7 @@ knitr::include_graphics("figs/terra-libs.png")
 - It is a successor of the **raster** package - http://www.rpubs.com/etiennebr/visualraster
 - The **terra** package contains classes and methods representing raster objects and operations
 
+
 ```{r 03-intro-to-rspatial-18 }
 library(terra)
 elev = rast(system.file("raster/elev.tif", package = "spData"))
