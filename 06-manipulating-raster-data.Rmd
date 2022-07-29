@@ -4,55 +4,33 @@
 
 This chapter requires the following packages:
 
-```{r 06-manipulating-raster-data-1}
+```{r 06-manipulating-raster-data-1 }
 #| message = FALSE
 library(tmap)
 library(sf)
 library(terra)
 ```
 
-- The terra package contains classes and methods representing raster objects
-- It allows raster data to be loaded and saved
-- It allows raster algebra and raster processing
-- It includes a number of additional functions, e.g., for analysis of terrain characteristics
-- It allows you to work on large sets of data
-- ?terra-package, https://rspatial.github.io/terra/reference/terra-package.html
-- It is a successor of the raster package - http://www.rpubs.com/etiennebr/visualraster
+## Example data
 
+We will read a few datasets for this chapter.
+It includes `srtm.tif` -- an elevation raster data the Zion National Park area:
+<!-- [](https://geocompr.robinlovelace.net/read-write.html#raster-data-read) -->
 
-## Raster reading
-
-```{r 06-manipulating-raster-data-2}
+```{r 06-manipulating-raster-data-2 }
 srtm_path <- system.file("raster/srtm.tif", package = "spDataLarge")
-srtm_path
+srtm <- rast(srtm_path)
 ```
 
-**terra** - https://rspatial.github.io/terra/reference/terra-package.html
+We can quickly look at this dataset's summary by just typing its name:
 
 ```{r 06-manipulating-raster-data-3}
-srtm <- rast(srtm_path)
 srtm
 ```
 
-```{r 06-manipulating-raster-data-4}
-plot(srtm)
-```
+We can also extract each information separately using the following functions:
 
-```{r 06-manipulating-raster-data-5}
-tm_shape(srtm) +
-  tm_graticules() +
-  tm_raster(style = "cont", 
-            title = "elevation (m a.s.l)",
-            palette = "-Spectral") +
-  tm_scale_bar(breaks = c(0, 2, 4),
-               text.size = 1) +
-  tm_credits("Jakub Nowosad, 2021") +
-  tm_layout(inner.margins = 0,
-    main.title = "Zion National Park")
-```
-
-
-```{r 06-manipulating-raster-data-6}
+```{r 06-manipulating-raster-data-4 }
 ncol(srtm)
 nrow(srtm)
 nlyr(srtm)
@@ -60,63 +38,84 @@ res(srtm)
 ext(srtm)
 ```
 
-```{r 06-manipulating-raster-data-7}
+Next, we can quickly look at the data with the `plot()` function...
+
+```{r 06-manipulating-raster-data-5 }
+plot(srtm)
+```
+
+... or create more customized map with the {tmap} package:
+
+```{r 06-manipulating-raster-data-6 }
+tm_shape(srtm) +
+  tm_graticules() +
+  tm_raster(style = "cont", 
+            title = "elevation (m a.s.l)",
+            palette = "-Spectral") +
+  tm_scale_bar(breaks = c(0, 2, 4),
+               text.size = 1) +
+  tm_credits("Jakub Nowosad, 2022") +
+  tm_layout(inner.margins = 0,
+            main.title = "Zion National Park")
+```
+
+Additional raster dataset we use in this chapter is `nlcd.tif` -- a simplified version of the National Land Cover Database 2011 product for the Zion National Park area.
+
+```{r 06-manipulating-raster-data-7 }
 nlcd <- rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
 ```
 
 ## Map algebra
 
-Used for a various task related to spatial raster data.
+Map algebra is used for a various task related to spatial raster data processing and analysis.
 
-It can be divided into four groups:
+It can be divided into four groups of operations:
 
 1. **Local** - per-cell operations
-2. **Focal (neighborhood operations)** - most often the output cell value is the result of a 3 x 3 input cell block
-3. **Zonal operations** - to summarize raster values for some zones (usually irregular areas)
+2. **Focal** - most often the output cell value is the result of a 3 x 3 input cell block
+3. **Zonal** - to summarize raster values for some zones (usually irregular areas)
 4. **Global** - to summarize raster values for one or several rasters
 
 ### Local operations
 
-- Raster calculator
-- Replacing values
-- Reclassification
-- Operations on many layers (e.g., calculating spectral indices, such as NDVI)
+Numerical computations are basic examples of local operations -- we can create new raster objects by, for example, adding or subtracting existing values:
 
-```{r 06-manipulating-raster-data-8}
+```{r 06-manipulating-raster-data-8 }
 srtm2 <- srtm + 1000
-```
-
-```{r 06-manipulating-raster-data-9}
 srtm3 <- srtm - 1024
-```
-
-```{r 06-manipulating-raster-data-10}
 srtm4 <- srtm - 1837
 ```
 
-```{r 06-manipulating-raster-data-11, purl=FALSE,echo=FALSE, message=FALSE, out.width="100%", fig.height=3.8, fig.width=12}
-library(tmap)
+```{r 06-manipulating-raster-data-9, purl=FALSE,echo=FALSE, message=FALSE, out.width="100%", fig.height=3.8, fig.width=12}
 tm1 <- tm_shape(srtm) +
   # tm_graticules() +
-  tm_raster(style = "cont")
+  tm_raster(style = "cont", palette = "-Spectral", breaks = seq(-1000, 4000, by = 1000)) +
+  tm_layout(legend.bg.color = "white")
 tm2 <- tm_shape(srtm2) +
   # tm_graticules() +
-  tm_raster(style = "cont")
+  tm_raster(style = "cont", palette = "-Spectral", breaks = seq(-1000, 4000, by = 1000)) +
+  tm_layout(legend.bg.color = "white")
 tm3 <- tm_shape(srtm3) +
   # tm_graticules() +
-  tm_raster(style = "cont")
+  tm_raster(style = "cont", palette = "-Spectral", breaks = seq(-1000, 4000, by = 1000)) +
+  tm_layout(legend.bg.color = "white")
 tm4 <- tm_shape(srtm4) +
   # tm_graticules() +
-  tm_raster(style = "cont")
+  tm_raster(style = "cont", palette = "-Spectral", breaks = seq(-1000, 4000, by = 1000),
+            midpoint = NA) +
+  tm_layout(legend.bg.color = "white")
 tmap_arrange(tm1, tm2, tm3, tm4, nrow = 1)
 ```
 
-```{r 06-manipulating-raster-data-12}
-srtm_new <- srtm
-srtm_new[srtm_new < 1500] <- NA
+Another example of local operation is when we want to replace some values.
+This can be done by either `subst()` or `classify()`.
+The `subst()` function is useful when we want to quickly replace some value(s).
+
+```{r 06-manipulating-raster-data-10 }
+srtm_new <- subst(srtm, 1500:2000, NA)
 ```
 
-```{r 06-manipulating-raster-data-13, purl=FALSE,echo=FALSE, message=FALSE, out.width="100%", fig.height=3.8, fig.width=12}
+```{r 06-manipulating-raster-data-11, purl=FALSE,echo=FALSE, message=FALSE, out.width="100%", fig.height=3.8, fig.width=12}
 library(tmap)
 tm1 <- tm_shape(srtm) +
   # tm_graticules() +
@@ -127,17 +126,21 @@ tm2 <- tm_shape(srtm_new) +
 tmap_arrange(tm1, tm2, nrow = 1)
 ```
 
-```{r 06-manipulating-raster-data-14}
+On the other hand, the `classify()` function is more useful when we want to replace many values.
+It requires at least two arguments -- our input raster and a reclassification table.
+Reclassification table is a matrix usually with two columns (old/new) or three columns (from/to/new):
+
+```{r 06-manipulating-raster-data-12 }
 rcl <- matrix(c(0, 1500, 1, 1500, 2000, 2, 2000, 9999, 3),
              ncol = 3, byrow = TRUE)
 rcl
 ```
 
-```{r 06-manipulating-raster-data-15}
+```{r 06-manipulating-raster-data-13 }
 srtm_recl <- classify(srtm, rcl = rcl)
 ```
 
-```{r 06-manipulating-raster-data-16, purl=FALSE,echo=FALSE}
+```{r 06-manipulating-raster-data-14, purl=FALSE,echo=FALSE}
 tmr1 <- tm_shape(srtm) +
   # tm_graticules() +
   tm_raster(style = "cont") +
@@ -149,15 +152,26 @@ tmr2 <- tm_shape(srtm_recl) +
 tmap_arrange(tmr1, tmr2)
 ```
 
-`?lapp`
+The last example of local operation is useful when we have many raster layers and want to calculate, for example, spectral indices, such as NDVI.
+In this case, each cell's values are treated independently.
 
-```{r 06-manipulating-raster-data-17}
+To showcase local operations on many layers, we will use the `landsat.tif` dataset.
+It contains four bands (2, 3, 4, 5) of the Landsat 8 image for the area of Zion National Park.
+
+```{r 06-manipulating-raster-data-15 }
 landsat_path <- system.file("raster/landsat.tif", package = "spDataLarge")
 landsat <- rast(landsat_path)
 landsat
 ```
 
-https://bleutner.github.io/RStoolbox/rstbx-docu/spectralIndices.html
+```{r 06-manipulating-raster-data-16, message=FALSE, echo=FALSE}
+tm_shape(landsat) +
+  tm_raster(style = "cont") +
+  tm_facets(ncol = 4)
+```
+
+[Normalized Difference Vegetation Index (NDVI)](https://en.wikipedia.org/wiki/Normalized_difference_vegetation_index) is one of the most commonly used spectral index.
+It uses values of two bands: red (3) and near-infrared (4):
 
 $$
 \begin{split}
@@ -165,15 +179,23 @@ NDVI&= \frac{\text{NIR} - \text{Red}}{\text{NIR} + \text{Red}}\\
 \end{split}
 $$
 
-```{r 06-manipulating-raster-data-18}
+The above equation can be rewritten as an R function that accepts two arguments, and returns a result of the calculations.
+
+```{r 06-manipulating-raster-data-17 }
 ndvi_fun <- function(nir, red){
   (nir - red) / (nir + red)
 }
-ndvi <- lapp(landsat[[c(4, 3)]],
-            fun = ndvi_fun)
 ```
 
-```{r 06-manipulating-raster-data-19, purl=FALSE,echo=FALSE, message=FALSE, out.width="100%", fig.height=7}
+Now, we can apply our `ndvi_fun()` to the `lapp()` function.
+The only important thing we need to remember is to subset our raster to contain only the needed layers:
+
+```{r}
+ndvi <- lapp(landsat[[c(4, 3)]], fun = ndvi_fun)
+```
+
+```{r 06-manipulating-raster-data-18, purl=FALSE,echo=FALSE, message=FALSE}
+tml1 = tm_shape()
 tm_shape(ndvi) +
   tm_raster(style = "cont", title = "NDVI")
 ```
@@ -182,13 +204,13 @@ tm_shape(ndvi) +
 
 `?focal`
 
-```{r 06-manipulating-raster-data-20}
+```{r 06-manipulating-raster-data-19 }
 srtm_focal_mean <- focal(srtm, 
                    w = matrix(1, nrow = 3, ncol = 3), 
                    fun = mean)
 ```
 
-```{r 06-manipulating-raster-data-21, purl=FALSE,echo=FALSE}
+```{r 06-manipulating-raster-data-20, purl=FALSE,echo=FALSE}
 tmf1 <- tm_shape(srtm) +
   # tm_graticules() +
   tm_raster(style = "cont") +
@@ -205,28 +227,28 @@ tmap_arrange(tmf1, tmf2)
 `?zonal`
 Also known as zonal statistics. Result - a summary table
 
-```{r 06-manipulating-raster-data-22}
+```{r 06-manipulating-raster-data-21 }
 srtm_utm <- project(srtm, nlcd, method = "bilinear")
 ```
 
-```{r 06-manipulating-raster-data-23, purl=FALSE, warning=FALSE, echo=FALSE, message=FALSE}
+```{r 06-manipulating-raster-data-22, purl=FALSE, warning=FALSE, echo=FALSE, message=FALSE}
 tm_shape(nlcd) +
   tm_raster(drop.levels = TRUE, legend.show = FALSE)
 ```
 
-```{r 06-manipulating-raster-data-24}
+```{r 06-manipulating-raster-data-23 }
 srtm_zonal <- zonal(srtm_utm, nlcd, na.rm = TRUE, fun = "mean")
 srtm_zonal
 ```
 
 ### Global operations 
 
-```{r 06-manipulating-raster-data-25}
+```{r 06-manipulating-raster-data-24 }
 global(srtm, fun = "mean")
 global(srtm, fun = "sd")
 ```
 
-```{r 06-manipulating-raster-data-26}
+```{r 06-manipulating-raster-data-25 }
 freq(nlcd)
 ```
 
@@ -236,32 +258,32 @@ freq(nlcd)
 
 ### Resampling
 
-```{r 06-manipulating-raster-data-27}
+```{r 06-manipulating-raster-data-26 }
 srtm
 ```
 
-```{r 06-manipulating-raster-data-28}
+```{r 06-manipulating-raster-data-27 }
 new_srtm <- srtm
 res(new_srtm) <- 0.001
 new_srtm
 ```
 
-```{r 06-manipulating-raster-data-29}
+```{r 06-manipulating-raster-data-28 }
 srtm2 <- resample(srtm, new_srtm, method = "bilinear") # method!
 srtm2
 ```
 
 ### Reprojecting rasters
 
-```{r 06-manipulating-raster-data-30}
+```{r 06-manipulating-raster-data-29 }
 crs(srtm, describe = TRUE)
 ```
 
-```{r 06-manipulating-raster-data-31}
+```{r 06-manipulating-raster-data-30 }
 hist(srtm)
 ```
 
-```{r 06-manipulating-raster-data-32, purl=FALSE,echo=FALSE}
+```{r 06-manipulating-raster-data-31, purl=FALSE,echo=FALSE}
 tm_shape(srtm) + 
   tm_grid() +
   tm_raster(style = "cont",
@@ -270,19 +292,19 @@ tm_shape(srtm) +
 
 https://projectionwizard.org/
 
-```{r 06-manipulating-raster-data-33}
+```{r 06-manipulating-raster-data-32 }
 srtm_utm <- project(srtm, "EPSG:32612", method = "bilinear")
 crs(srtm_utm, describe = TRUE)
 ```
 
-```{r 06-manipulating-raster-data-34, purl=FALSE,echo=FALSE, fig.height=7}
+```{r 06-manipulating-raster-data-33, purl=FALSE,echo=FALSE, fig.height=7}
 tm_shape(srtm) + 
   tm_grid() + 
   tm_raster(style = "cont") + 
   tm_layout(legend.show = FALSE)
 ```
 
-```{r 06-manipulating-raster-data-35, purl=FALSE,echo=FALSE, fig.height=7, eval=FALSE}
+```{r 06-manipulating-raster-data-34, purl=FALSE,echo=FALSE, fig.height=7, eval=FALSE}
 tm_shape(srtm_utm) + 
   tm_grid() + 
   tm_raster(style = "cont") + 
@@ -299,16 +321,16 @@ tm_shape(srtm_utm) +
 
 ### Raster cropping and masking
 
-```{r 06-manipulating-raster-data-36}
+```{r 06-manipulating-raster-data-35 }
 library(sf)
 zion <- read_sf(system.file("vector/zion.gpkg", package = "spDataLarge"))
 ```
 
-```{r 06-manipulating-raster-data-37}
+```{r 06-manipulating-raster-data-36 }
 srtm_utm_c <- crop(srtm_utm, vect(zion))
 ```
 
-```{r 06-manipulating-raster-data-38, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
+```{r 06-manipulating-raster-data-37, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
 tc1 <- tm_shape(srtm_utm) +
   tm_grid() + 
   tm_raster(style = "cont") +
@@ -326,11 +348,11 @@ tmap_arrange(tc1, tc2)
 
 Raster masking is usually done together with cropping.
 
-```{r 06-manipulating-raster-data-39}
+```{r 06-manipulating-raster-data-38 }
 srtm_utm_m <- mask(srtm_utm_c, vect(zion))
 ```
 
-```{r 06-manipulating-raster-data-40, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
+```{r 06-manipulating-raster-data-39, echo=FALSE, purl=FALSE, message=FALSE, warning=FALSE, fig.width=12, eval=FALSE}
 tc1 <- tm_shape(srtm_utm) +
   tm_grid() + 
   tm_raster(style = "cont") +
@@ -354,45 +376,45 @@ tmap_arrange(tc1, tc2, tc3)
 
 ### Raster extraction
 
-```{r 53-raster-extraction-5}
+```{r 06-manipulating-raster-data-40 }
 zion_points <- read_sf(system.file("vector/zion_points.gpkg", package = "spDataLarge"))
 ```
 
-```{r 53-raster-extraction-6, purl=FALSE,echo=FALSE}
+```{r 06-manipulating-raster-data-41, purl=FALSE,echo=FALSE}
 tm_shape(srtm) +
   tm_raster(style = "cont") +
   tm_shape(zion_points) +
   tm_dots(size = 2)
 ```
 
-```{r 53-raster-extraction-7}
+```{r 06-manipulating-raster-data-42 }
 zion_extract <- terra::extract(srtm, vect(zion_points))
 zion_points <- cbind(zion_points, zion_extract)
 zion_points
 ```
 
-```{r 53-raster-extraction-12}
+```{r 06-manipulating-raster-data-43 }
 zion <- read_sf(system.file("vector/zion.gpkg", package = "spDataLarge"))
 zion <- st_transform(zion, crs(srtm))
 zion_srtm_values <- terra::extract(srtm, vect(zion))
 ```
 
-```{r 06-manipulating-raster-data-41}
+```{r 06-manipulating-raster-data-44 }
 head(zion_srtm_values)
 ```
 
-```{r 53-raster-extraction-13, purl=FALSE,echo=FALSE}
+```{r 06-manipulating-raster-data-45, purl=FALSE,echo=FALSE}
 tm_shape(srtm) +
   tm_raster(style = "cont") +
   tm_shape(zion) +
   tm_polygons()
 ```
 
-```{r 53-raster-extraction-14}
+```{r 06-manipulating-raster-data-46 }
 zion_srtm_values <- terra::extract(srtm, vect(zion))
 ```
 
-```{r 53-raster-extraction-15, message=FALSE}
+```{r 06-manipulating-raster-data-47, message=FALSE}
 library(dplyr)
 zion_srtm_values |>
   group_by(ID) |>
@@ -406,7 +428,7 @@ zion_srtm_values |>
 - https://geocompr.robinlovelace.net/read-write.html#data-output
 - https://gdal.org/drivers/raster/gtiff.html
 
-```{r 06-manipulating-raster-data-42, eval=FALSE}
+```{r 06-manipulating-raster-data-48, eval=FALSE}
 writeRaster(nlcd, filename = "nlcd1.tif", gdal = c("COMPRESS=NONE"))
 writeRaster(nlcd, filename = "nlcd2.tif", datatype = "INT1U")
 writeRaster(nlcd, filename = "nlcd3.tif", filetype = "COG")
@@ -416,7 +438,7 @@ writeRaster(nlcd, filename = "nlcd3.tif", filetype = "COG")
 
 ### Predictions
 
-```{r 06-manipulating-raster-data-43}
+```{r 06-manipulating-raster-data-49 }
 landsat_path <- system.file("raster/landsat.tif", package = "spDataLarge")
 landsat <- rast(landsat_path)
 zion_points_utm <- st_transform(zion_points, crs = crs(landsat))
@@ -427,7 +449,7 @@ plot(st_geometry(zion_points_utm), add = TRUE, col = "red", cex = 3)
 
 `?predict` - `glm`, `randomForest`, `prcomp`
 
-```{r 06-manipulating-raster-data-44}
+```{r 06-manipulating-raster-data-50 }
 zion_points_utm_v <- extract(landsat_s, vect(zion_points_utm))
 pca <- prcomp(zion_points_utm_v[-1])
 pca
@@ -435,7 +457,7 @@ pca
 
 `?predict` - `glm`, `randomForest`, `prcomp`
 
-```{r 06-manipulating-raster-data-45}
+```{r 06-manipulating-raster-data-51 }
 pca_pred <- predict(landsat_s, pca)
 plot(pca_pred)
 ```
@@ -444,11 +466,11 @@ plot(pca_pred)
 
 `?interpolate`
 
-```{r 06-manipulating-raster-data-46}
+```{r 06-manipulating-raster-data-52 }
 zion_points_srtm <- extract(srtm_utm, vect(zion_points_utm))
 ```
 
-```{r 06-manipulating-raster-data-47, message=FALSE}
+```{r 06-manipulating-raster-data-53, message=FALSE}
 library(fields)
 tps <- Tps(st_coordinates(zion_points_utm),
           zion_points_utm$srtm)
@@ -456,11 +478,11 @@ rt <- rast(srtm_utm)
 interp1 <- interpolate(rt, tps)
 ```
 
-```{r 06-manipulating-raster-data-48}
+```{r 06-manipulating-raster-data-54 }
 plot(interp1)
 ```
 
-```{r 06-manipulating-raster-data-49}
+```{r 06-manipulating-raster-data-55 }
 library(gstat)
 interpolate_gstat <- function(model, x, crs, ...) {
 	v = st_as_sf(x, coords = c("x", "y"), crs = crs)
@@ -469,17 +491,17 @@ interpolate_gstat <- function(model, x, crs, ...) {
 }
 ```
 
-```{r 06-manipulating-raster-data-50, warning=FALSE}
+```{r 06-manipulating-raster-data-56, warning=FALSE}
 v <- variogram(srtm ~ 1, data = zion_points_utm)
 # plot(v)
 mv <- fit.variogram(v, vgm(120000, "Exp", 12000, nugget = 10000))
 ```
 
-```{r 06-manipulating-raster-data-51}
+```{r 06-manipulating-raster-data-57 }
 plot(v, model = mv)
 ```
 
-```{r 06-manipulating-raster-data-52, cache = TRUE, warning=FALSE}
+```{r 06-manipulating-raster-data-58, cache = TRUE, warning=FALSE}
 g_OK <- gstat(NULL, "srtm", srtm ~ 1, zion_points_utm, model = mv)
 OK <- interpolate(rt, g_OK, debug.level = 0, fun = interpolate_gstat,
                  crs = crs(rt), index = 1)
@@ -490,19 +512,19 @@ plot(OK)
 
 https://github.com/Nowosad/supercells
 
-```{r 06-manipulating-raster-data-53}
+```{r 06-manipulating-raster-data-59 }
 library(supercells)
 ortho <- rast(system.file("raster/ortho.tif", package = "supercells"))
 plot(ortho)
 ```
 
-```{r 06-manipulating-raster-data-54, message=FALSE, results='hide'}
+```{r 06-manipulating-raster-data-60, message=FALSE, results='hide'}
 ortho_slic1 <- supercells(ortho, k = 200, compactness = 10)
 plot(ortho)
 plot(st_geometry(ortho_slic1), add = TRUE)
 ```
 
-```{r 06-manipulating-raster-data-55}
+```{r 06-manipulating-raster-data-61 }
 rgb_to_hex <- function(x){
   apply(t(x), 2, function(x) rgb(x[1], x[2], x[3], maxColorValue = 255))
 }
@@ -513,3 +535,7 @@ plot(st_geometry(ortho_slic1), add = TRUE, col = avg_colors)
 ```
 
 ## Exercises
+
+<!-- try hillshade -->
+<!-- create a map of nlcd -->
+<!-- https://bleutner.github.io/RStoolbox/rstbx-docu/spectralIndices.html -->
