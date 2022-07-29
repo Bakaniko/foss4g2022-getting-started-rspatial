@@ -408,31 +408,52 @@ zion_points
 
 ## Raster analysis
 
+There are many ways to analyze raster data, with some directly implemented in {terra}, while other available in external R packages.
+Here, we will show to basic examples of -- spatial model predictions and spatial segmentation.
+
 ### Predictions
 
+For this example, we will use `lsl_sf` and `ta` datasets:
+- `lsl_sf`: spatial vector object with several variables, such as `lslpts` (where TRUE corresponds to an observed landslide ‘initiation point’), `slope`, `cplan` (plan curvature), `cprof` (profile curvature), `elev` (elevation), `log10_carea` (catchment area)
+- `ta`: spatial raster object with the same variables, except `lslpts`
+
+```{r}
+data("lsl", "study_mask", package = "spDataLarge")
+lsl_sf <- st_as_sf(lsl, coords = c("x", "y"), crs = "EPSG:32717")
+ta <- terra::rast(system.file("raster/ta.tif", package = "spDataLarge"))
+ta <- mask(ta, study_mask)
+```
+
+```{r, echo=FALSE, message=FALSE}
+tm_shape(ta) +
+  tm_raster(style = "cont", title = "", midpoint = NA) +
+  tm_facets(free.scales	= TRUE) +
+  tm_shape(lsl_sf) +
+  tm_symbols(size = 0.1)
+```
+
+Our main goal here is to predict landslide susceptibility based on the available data.
+One possible approach here would be to use Generalized Linear Models (GLM):
+
+```{r}
+fit <- glm(lslpts ~ slope + cplan + cprof + elev + log10_carea,
+          family = binomial(), data = lsl_sf)
+```
+
+Next, we can use our model, `fit`, to predict landslide susceptibility for the whole study area with the `predict()` function:
+
 ```{r 06-manipulating-raster-data-49 }
-landsat_path <- system.file("raster/landsat.tif", package = "spDataLarge")
-landsat <- rast(landsat_path)
-zion_points_utm <- st_transform(zion_points, crs = crs(landsat))
-landsat_s <- stretch(landsat, maxq = 0.98)
-plotRGB(landsat_s, r = 3, g = 2, b = 1)
-plot(st_geometry(zion_points_utm), add = TRUE, col = "red", cex = 3)
+pred <- predict(ta, model = fit, type = "response")
 ```
 
-`?predict` - `glm`, `randomForest`, `prcomp`
-
-```{r 06-manipulating-raster-data-50 }
-zion_points_utm_v <- extract(landsat_s, zion_points_utm)
-pca <- prcomp(zion_points_utm_v[-1])
-pca
+```{r, echo=FALSE, message=FALSE}
+tm_shape(pred) +
+  tm_raster(style = "cont", title = "") +
+  tm_layout(main.title = "Landslide susceptibility")
 ```
 
-`?predict` - `glm`, `randomForest`, `prcomp`
-
-```{r 06-manipulating-raster-data-51 }
-pca_pred <- predict(landsat_s, pca)
-plot(pca_pred)
-```
+Visit the `predict()` function help file, `?predict`, for more examples of spatial model predictions using {terra}.
+You can also read about an extended example of spatial prediction in the [Statistical learning](https://geocompr.robinlovelace.net/spatial-cv.html) chapter of Geocomputation with R.
 
 ### Segmentations
 
@@ -441,13 +462,25 @@ https://github.com/Nowosad/supercells
 ```{r 06-manipulating-raster-data-59 }
 library(supercells)
 ortho <- rast(system.file("raster/ortho.tif", package = "supercells"))
-plot(ortho)
 ```
 
+```{r, echo=FALSE}
+tm_shape(ortho) +
+  tm_rgb() +
+  tm_layout(frame = FALSE)
+```
+
+
 ```{r 06-manipulating-raster-data-60, message=FALSE, results='hide'}
-ortho_slic1 <- supercells(ortho, k = 200, compactness = 10)
-plot(ortho)
-plot(st_geometry(ortho_slic1), add = TRUE)
+ortho_slic1 <- supercells(ortho, k = 2000, compactness = 10, transform = "to_LAB")
+```
+
+```{r, echo=FALSE}
+tm_shape(ortho) +
+  tm_rgb() +
+  tm_shape(ortho_slic1) +
+  tm_borders(col = "black") +
+  tm_layout(frame = FALSE)
 ```
 
 ```{r 06-manipulating-raster-data-61 }
@@ -455,11 +488,21 @@ rgb_to_hex <- function(x){
   apply(t(x), 2, function(x) rgb(x[1], x[2], x[3], maxColorValue = 255))
 }
 avg_colors <- rgb_to_hex(st_drop_geometry(ortho_slic1[4:6]))
-
-plot(ortho)
-plot(st_geometry(ortho_slic1), add = TRUE, col = avg_colors)
+# plot(ortho)
+# plot(st_geometry(ortho_slic1), add = TRUE, col = avg_colors)
 ```
 
+```{r, echo=FALSE, warning=FALSE}
+tmap_options(max.categories = Inf)
+tms1 = tm_shape(ortho) +
+  tm_rgb() +
+  tm_layout(frame = FALSE, main.title = "Original image (87400 cells)")
+tms2 = tm_shape(ortho_slic1) +
+  tm_fill(border.col = "black", col = "supercells", palette = avg_colors,
+              style = "cat", legend.show = FALSE) +
+  tm_layout(frame = FALSE, main.title = "New image (2000 supercells)")
+tmap_arrange(tms1, tms2, ncol = 1)
+```
 
 ## Raster writing
 
