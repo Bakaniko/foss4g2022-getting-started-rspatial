@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-07-28" />
+<meta name="date" content="2022-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html"><i class="fa fa-check"></i><b>1</b> Data handling with R</a><ul>
 <li class="chapter" data-level="1.1" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#data-types"><i class="fa fa-check"></i><b>1.1</b> Data types</a></li>
-<li class="chapter" data-level="1.2" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#affectation"><i class="fa fa-check"></i><b>1.2</b> Affectation</a></li>
+<li class="chapter" data-level="1.2" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#assignment"><i class="fa fa-check"></i><b>1.2</b> Assignment</a></li>
 <li class="chapter" data-level="1.3" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#not-only-a-calculator"><i class="fa fa-check"></i><b>1.3</b> Not only a calculator</a></li>
 <li class="chapter" data-level="1.4" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#packages"><i class="fa fa-check"></i><b>1.4</b> Packages</a></li>
 <li class="chapter" data-level="1.5" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#load-data"><i class="fa fa-check"></i><b>1.5</b> Load data</a></li>
@@ -273,10 +273,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Most spatial functions (if not all) start with the <code>st_</code> (<em>for spatial type</em>)
 prefix like in <a href="https://postgis.net/docs/manual-2.5/reference.html">PostGIS</a>.</p>
 <p>We will focus on vector data from the <code>spData</code> package.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="manipulating-vector-data.html#cb143-1"></a><span class="kw">library</span>(sf)</span>
-<span id="cb143-2"><a href="manipulating-vector-data.html#cb143-2"></a><span class="kw">library</span>(spData)</span>
-<span id="cb143-3"><a href="manipulating-vector-data.html#cb143-3"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb143-4"><a href="manipulating-vector-data.html#cb143-4"></a><span class="kw">library</span>(here)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="manipulating-vector-data.html#cb137-1"></a><span class="kw">library</span>(sf)</span>
+<span id="cb137-2"><a href="manipulating-vector-data.html#cb137-2"></a><span class="kw">library</span>(spData)</span>
+<span id="cb137-3"><a href="manipulating-vector-data.html#cb137-3"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb137-4"><a href="manipulating-vector-data.html#cb137-4"></a><span class="kw">library</span>(here)</span></code></pre></div>
 <pre><code>## here() starts at /Users/runner/work/foss4g2022-getting-started-rspatial/foss4g2022-getting-started-rspatial</code></pre>
 <p>We will also use functions from the <code>dplyr</code> package, <code>sf</code> objects are dataframes
 compatibles with the Tidyverse philosophy.</p>
@@ -284,9 +284,9 @@ compatibles with the Tidyverse philosophy.</p>
 <h2><span class="header-section-number">4.1</span> Read spatial data<a href="manipulating-vector-data.html#read-spatial-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>sf</code> provides the <code>st_read</code> and <code>st_write</code> functions to access geospatial files.
 They can operate with any <a href="https://gdal.org/drivers/vector/index.html">vector driver provided by GDAL</a>.</p>
-<p>We will use the data from the <code>spData</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+<p>We will use the data from the <code>spData</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 package. Let’s see what it contains :</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="manipulating-vector-data.html#cb145-1"></a><span class="kw">list.files</span>(<span class="kw">system.file</span>(<span class="st">&quot;shapes&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="manipulating-vector-data.html#cb139-1"></a><span class="kw">list.files</span>(<span class="kw">system.file</span>(<span class="st">&quot;shapes&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>))</span></code></pre></div>
 <pre><code>##  [1] &quot;auckland.dbf&quot;           &quot;auckland.shp&quot;           &quot;auckland.shx&quot;          
 ##  [4] &quot;baltim.dbf&quot;             &quot;baltim.shp&quot;             &quot;baltim.shx&quot;            
 ##  [7] &quot;boston_tracts.dbf&quot;      &quot;boston_tracts.prj&quot;      &quot;boston_tracts.shp&quot;     
@@ -302,7 +302,7 @@ package. Let’s see what it contains :</p>
 <p>We will work on cycle hires in London so let’s load that data.</p>
 <div id="cycle-hire-dataset" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.1</span> Cycle hire dataset<a href="manipulating-vector-data.html#cycle-hire-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="manipulating-vector-data.html#cb147-1"></a>cycle_hire &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;shapes/cycle_hire.geojson&quot;</span>, <span class="dt">package=</span><span class="st">&quot;spData&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="manipulating-vector-data.html#cb141-1"></a>cycle_hire &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;shapes/cycle_hire.geojson&quot;</span>, <span class="dt">package=</span><span class="st">&quot;spData&quot;</span>))</span></code></pre></div>
 <pre><code>## Reading layer `cycle_hire&#39; from data source 
 ##   `/Users/runner/work/_temp/Library/spData/shapes/cycle_hire.geojson&#39; 
 ##   using driver `GeoJSON&#39;
@@ -342,14 +342,14 @@ its CRS: <code>Geodetic CRS:  WGS 84</code>).
 <p>We can see how many bike are parked, the count of empty slots but not the total
 amount of bike slots. Let’s create a new <code>slots</code> column for this with <code>mutate()</code>
 from <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="manipulating-vector-data.html#cb149-1"></a>cycle_hire &lt;-<span class="st"> </span><span class="kw">mutate</span>(cycle_hire, <span class="dt">slots =</span> nbikes <span class="op">+</span><span class="st">  </span>nempty)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="manipulating-vector-data.html#cb143-1"></a>cycle_hire &lt;-<span class="st"> </span><span class="kw">mutate</span>(cycle_hire, <span class="dt">slots =</span> nbikes <span class="op">+</span><span class="st">  </span>nempty)</span></code></pre></div>
 <p>Let’s load polygon data, in this case London’s boroughs stored in the <em>lnd</em> dataset.</p>
 </div>
 <div id="boroughs-of-london" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.2</span> Boroughs of London<a href="manipulating-vector-data.html#boroughs-of-london" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This dataset is contained in a R data format so the loading is different.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="manipulating-vector-data.html#cb150-1"></a><span class="kw">data</span>(lnd) <span class="co"># load the dataset in memory</span></span>
-<span id="cb150-2"><a href="manipulating-vector-data.html#cb150-2"></a>lnd       <span class="co"># call the dataset to visualise the 10 first features</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="manipulating-vector-data.html#cb144-1"></a><span class="kw">data</span>(lnd) <span class="co"># load the dataset in memory</span></span>
+<span id="cb144-2"><a href="manipulating-vector-data.html#cb144-2"></a>lnd       <span class="co"># call the dataset to visualise the 10 first features</span></span></code></pre></div>
 <pre><code>## Simple feature collection with 33 features and 7 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -405,20 +405,20 @@ Source : <a href="https://github.com/Robinlovelace/Creating-maps-in-R">https://g
 <div id="reprojection" class="section level2 hasAnchor">
 <h2><span class="header-section-number">4.2</span> Reprojection<a href="manipulating-vector-data.html#reprojection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <a href="https://en.wikipedia.org/wiki/Ordnance_Survey_National_Grid">Ordnance Survey National Grid</a> is the official one for Great Britain. Its SRID is <strong>EPSG:27700</strong>.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="manipulating-vector-data.html#cb152-1"></a>cycle_hire_<span class="dv">27700</span> &lt;-<span class="st"> </span><span class="kw">st_transform</span>(cycle_hire, <span class="dt">crs =</span> <span class="kw">st_crs</span>(<span class="dv">27700</span>))</span>
-<span id="cb152-2"><a href="manipulating-vector-data.html#cb152-2"></a></span>
-<span id="cb152-3"><a href="manipulating-vector-data.html#cb152-3"></a>london_<span class="dv">27700</span> &lt;-<span class="st"> </span><span class="kw">st_transform</span>(lnd, <span class="dt">crs =</span> <span class="kw">st_crs</span>(<span class="dv">27700</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="manipulating-vector-data.html#cb146-1"></a>cycle_hire_<span class="dv">27700</span> &lt;-<span class="st"> </span><span class="kw">st_transform</span>(cycle_hire, <span class="dt">crs =</span> <span class="kw">st_crs</span>(<span class="dv">27700</span>))</span>
+<span id="cb146-2"><a href="manipulating-vector-data.html#cb146-2"></a></span>
+<span id="cb146-3"><a href="manipulating-vector-data.html#cb146-3"></a>london_<span class="dv">27700</span> &lt;-<span class="st"> </span><span class="kw">st_transform</span>(lnd, <span class="dt">crs =</span> <span class="kw">st_crs</span>(<span class="dv">27700</span>))</span></code></pre></div>
 <p>To reproject, we used 2 functions:
 - <code>st_transform()</code> for the reprojection operation
 - <code>st_crs()</code> to get CRS definition from an EPSG code</p>
 <p>Now, we can create a quick map to visualize our data.
 We can use the <code>plot()</code> function to do this.
 This function is part of base R.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="manipulating-vector-data.html#cb153-1"></a><span class="kw">plot</span>(london_<span class="dv">27700</span><span class="op">$</span>geometry) <span class="co"># we just want to plot the geometry column</span></span>
-<span id="cb153-2"><a href="manipulating-vector-data.html#cb153-2"></a><span class="kw">plot</span>(cycle_hire_<span class="dv">27700</span><span class="op">$</span>geometry, </span>
-<span id="cb153-3"><a href="manipulating-vector-data.html#cb153-3"></a> <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,  <span class="co"># color</span></span>
-<span id="cb153-4"><a href="manipulating-vector-data.html#cb153-4"></a> <span class="dt">cex =</span> <span class="fl">0.5</span>,    <span class="co"># size of symbol</span></span>
-<span id="cb153-5"><a href="manipulating-vector-data.html#cb153-5"></a> <span class="dt">add =</span> <span class="ot">TRUE</span>)   <span class="co"># important parameter to create multilayer plots</span></span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="manipulating-vector-data.html#cb147-1"></a><span class="kw">plot</span>(london_<span class="dv">27700</span><span class="op">$</span>geometry) <span class="co"># we just want to plot the geometry column</span></span>
+<span id="cb147-2"><a href="manipulating-vector-data.html#cb147-2"></a><span class="kw">plot</span>(cycle_hire_<span class="dv">27700</span><span class="op">$</span>geometry, </span>
+<span id="cb147-3"><a href="manipulating-vector-data.html#cb147-3"></a> <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,  <span class="co"># color</span></span>
+<span id="cb147-4"><a href="manipulating-vector-data.html#cb147-4"></a> <span class="dt">cex =</span> <span class="fl">0.5</span>,    <span class="co"># size of symbol</span></span>
+<span id="cb147-5"><a href="manipulating-vector-data.html#cb147-5"></a> <span class="dt">add =</span> <span class="ot">TRUE</span>)   <span class="co"># important parameter to create multilayer plots</span></span></code></pre></div>
 <p><img src="_main_files/figure-html/quick_plot-1.png" width="672" /></p>
 </div>
 <div id="joins" class="section level2 hasAnchor">
@@ -429,10 +429,10 @@ For the sake of the exercice, let’s do both.</p>
 <div id="join-by-attributes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.3.1</span> Join by attributes<a href="manipulating-vector-data.html#join-by-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s join them with a inner join to see how many corresponds.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="manipulating-vector-data.html#cb154-1"></a><span class="kw">inner_join</span>(cycle_hire_<span class="dv">27700</span>,</span>
-<span id="cb154-2"><a href="manipulating-vector-data.html#cb154-2"></a>  <span class="kw">st_drop_geometry</span>(london_<span class="dv">27700</span>), <span class="co"># we don&#39;t need the geometry here</span></span>
-<span id="cb154-3"><a href="manipulating-vector-data.html#cb154-3"></a>  <span class="dt">by =</span> <span class="kw">c</span>( <span class="st">&quot;area&quot;</span> =<span class="st"> &quot;NAME&quot;</span>)</span>
-<span id="cb154-4"><a href="manipulating-vector-data.html#cb154-4"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="manipulating-vector-data.html#cb148-1"></a><span class="kw">inner_join</span>(cycle_hire_<span class="dv">27700</span>,</span>
+<span id="cb148-2"><a href="manipulating-vector-data.html#cb148-2"></a>  <span class="kw">st_drop_geometry</span>(london_<span class="dv">27700</span>), <span class="co"># we don&#39;t need the geometry here</span></span>
+<span id="cb148-3"><a href="manipulating-vector-data.html#cb148-3"></a>  <span class="dt">by =</span> <span class="kw">c</span>( <span class="st">&quot;area&quot;</span> =<span class="st"> &quot;NAME&quot;</span>)</span>
+<span id="cb148-4"><a href="manipulating-vector-data.html#cb148-4"></a>)</span></code></pre></div>
 <pre><code>## Simple feature collection with 33 features and 12 fields
 ## Geometry type: POINT
 ## Dimension:     XY
@@ -470,13 +470,13 @@ That’s poor, let’s try this spatially.</p>
 We will regroup the data afterwards.</p>
 <p>For this, we will select only the <code>GSS_CODE</code> column from <code>london_27700</code> with the
 <code>select</code> function from <code>dplyr</code>, the geometry will follow.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="manipulating-vector-data.html#cb156-1"></a>cycle_hire_<span class="dv">27700</span> &lt;-<span class="st"> </span><span class="kw">st_join</span>(cycle_hire_<span class="dv">27700</span>, <span class="kw">select</span>(london_<span class="dv">27700</span>, GSS_CODE))</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="manipulating-vector-data.html#cb150-1"></a>cycle_hire_<span class="dv">27700</span> &lt;-<span class="st"> </span><span class="kw">st_join</span>(cycle_hire_<span class="dv">27700</span>, <span class="kw">select</span>(london_<span class="dv">27700</span>, GSS_CODE))</span></code></pre></div>
 <p>Now if we look at our dataset, there is a <code>GSS_CODE</code> column.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="manipulating-vector-data.html#cb157-1"></a><span class="kw">names</span>(cycle_hire_<span class="dv">27700</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="manipulating-vector-data.html#cb151-1"></a><span class="kw">names</span>(cycle_hire_<span class="dv">27700</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;id&quot;       &quot;name&quot;     &quot;area&quot;     &quot;nbikes&quot;   &quot;nempty&quot;   &quot;slots&quot;    &quot;GSS_CODE&quot;
 ## [8] &quot;geometry&quot;</code></pre>
 <p>How many points doesn’t have a GSS_code ?</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="manipulating-vector-data.html#cb159-1"></a><span class="kw">filter</span>(cycle_hire_<span class="dv">27700</span>, <span class="kw">is.na</span>(GSS_CODE))</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="manipulating-vector-data.html#cb153-1"></a><span class="kw">filter</span>(cycle_hire_<span class="dv">27700</span>, <span class="kw">is.na</span>(GSS_CODE))</span></code></pre></div>
 <pre><code>## Simple feature collection with 1 feature and 7 fields
 ## Geometry type: POINT
 ## Dimension:     XY
@@ -496,18 +496,18 @@ But that is not blocking.</p>
 <h2><span class="header-section-number">4.4</span> Aggregation<a href="manipulating-vector-data.html#aggregation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="count" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.4.1</span> Count<a href="manipulating-vector-data.html#count" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="manipulating-vector-data.html#cb161-1"></a><span class="co"># remove NAs</span></span>
-<span id="cb161-2"><a href="manipulating-vector-data.html#cb161-2"></a>cycle_hire_clean &lt;-<span class="st"> </span><span class="kw">filter</span>(cycle_hire_<span class="dv">27700</span>, <span class="op">!</span><span class="kw">is.na</span>(GSS_CODE))</span>
-<span id="cb161-3"><a href="manipulating-vector-data.html#cb161-3"></a></span>
-<span id="cb161-4"><a href="manipulating-vector-data.html#cb161-4"></a><span class="co"># let&#39;s put geometry aside</span></span>
-<span id="cb161-5"><a href="manipulating-vector-data.html#cb161-5"></a>cycle_hire_clean &lt;-<span class="st"> </span><span class="kw">st_drop_geometry</span>(cycle_hire_clean)</span>
-<span id="cb161-6"><a href="manipulating-vector-data.html#cb161-6"></a></span>
-<span id="cb161-7"><a href="manipulating-vector-data.html#cb161-7"></a><span class="co"># group data by GSS_CODE</span></span>
-<span id="cb161-8"><a href="manipulating-vector-data.html#cb161-8"></a>cycle_hire_grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(cycle_hire_clean, GSS_CODE)</span>
-<span id="cb161-9"><a href="manipulating-vector-data.html#cb161-9"></a></span>
-<span id="cb161-10"><a href="manipulating-vector-data.html#cb161-10"></a><span class="co"># count</span></span>
-<span id="cb161-11"><a href="manipulating-vector-data.html#cb161-11"></a>cycle_hire_by_area &lt;-<span class="st"> </span><span class="kw">tally</span>(cycle_hire_grouped, <span class="dt">name =</span> <span class="st">&quot;count&quot;</span>, <span class="dt">sort=</span> <span class="ot">TRUE</span>) <span class="co"># Aggregate</span></span>
-<span id="cb161-12"><a href="manipulating-vector-data.html#cb161-12"></a>cycle_hire_by_area</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="manipulating-vector-data.html#cb155-1"></a><span class="co"># remove NAs</span></span>
+<span id="cb155-2"><a href="manipulating-vector-data.html#cb155-2"></a>cycle_hire_clean &lt;-<span class="st"> </span><span class="kw">filter</span>(cycle_hire_<span class="dv">27700</span>, <span class="op">!</span><span class="kw">is.na</span>(GSS_CODE))</span>
+<span id="cb155-3"><a href="manipulating-vector-data.html#cb155-3"></a></span>
+<span id="cb155-4"><a href="manipulating-vector-data.html#cb155-4"></a><span class="co"># let&#39;s put geometry aside</span></span>
+<span id="cb155-5"><a href="manipulating-vector-data.html#cb155-5"></a>cycle_hire_clean &lt;-<span class="st"> </span><span class="kw">st_drop_geometry</span>(cycle_hire_clean)</span>
+<span id="cb155-6"><a href="manipulating-vector-data.html#cb155-6"></a></span>
+<span id="cb155-7"><a href="manipulating-vector-data.html#cb155-7"></a><span class="co"># group data by GSS_CODE</span></span>
+<span id="cb155-8"><a href="manipulating-vector-data.html#cb155-8"></a>cycle_hire_grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(cycle_hire_clean, GSS_CODE)</span>
+<span id="cb155-9"><a href="manipulating-vector-data.html#cb155-9"></a></span>
+<span id="cb155-10"><a href="manipulating-vector-data.html#cb155-10"></a><span class="co"># count</span></span>
+<span id="cb155-11"><a href="manipulating-vector-data.html#cb155-11"></a>cycle_hire_by_area &lt;-<span class="st"> </span><span class="kw">tally</span>(cycle_hire_grouped, <span class="dt">name =</span> <span class="st">&quot;count&quot;</span>, <span class="dt">sort=</span> <span class="ot">TRUE</span>) <span class="co"># Aggregate</span></span>
+<span id="cb155-12"><a href="manipulating-vector-data.html#cb155-12"></a>cycle_hire_by_area</span></code></pre></div>
 <pre><code>## # A tibble: 11 × 2
 ##    GSS_CODE  count
 ##    &lt;fct&gt;     &lt;int&gt;
@@ -528,13 +528,13 @@ But that is not blocking.</p>
 </div>
 <div id="sum" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.4.2</span> Sum<a href="manipulating-vector-data.html#sum" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="manipulating-vector-data.html#cb163-1"></a><span class="co"># count</span></span>
-<span id="cb163-2"><a href="manipulating-vector-data.html#cb163-2"></a>cycle_hire_by_area_sum &lt;-<span class="st"> </span><span class="kw">summarise</span>(</span>
-<span id="cb163-3"><a href="manipulating-vector-data.html#cb163-3"></a>  cycle_hire_grouped, <span class="co"># we reused grouped data</span></span>
-<span id="cb163-4"><a href="manipulating-vector-data.html#cb163-4"></a>  <span class="dt">sum =</span> <span class="kw">sum</span>(nbikes), <span class="co"># sums the number of bikes</span></span>
-<span id="cb163-5"><a href="manipulating-vector-data.html#cb163-5"></a>  <span class="dt">count =</span> <span class="kw">n</span>() <span class="co"># count cycle stations</span></span>
-<span id="cb163-6"><a href="manipulating-vector-data.html#cb163-6"></a>  ) </span>
-<span id="cb163-7"><a href="manipulating-vector-data.html#cb163-7"></a>cycle_hire_by_area_sum</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="manipulating-vector-data.html#cb157-1"></a><span class="co"># count</span></span>
+<span id="cb157-2"><a href="manipulating-vector-data.html#cb157-2"></a>cycle_hire_by_area_sum &lt;-<span class="st"> </span><span class="kw">summarise</span>(</span>
+<span id="cb157-3"><a href="manipulating-vector-data.html#cb157-3"></a>  cycle_hire_grouped, <span class="co"># we reused grouped data</span></span>
+<span id="cb157-4"><a href="manipulating-vector-data.html#cb157-4"></a>  <span class="dt">sum =</span> <span class="kw">sum</span>(nbikes), <span class="co"># sums the number of bikes</span></span>
+<span id="cb157-5"><a href="manipulating-vector-data.html#cb157-5"></a>  <span class="dt">count =</span> <span class="kw">n</span>() <span class="co"># count cycle stations</span></span>
+<span id="cb157-6"><a href="manipulating-vector-data.html#cb157-6"></a>  ) </span>
+<span id="cb157-7"><a href="manipulating-vector-data.html#cb157-7"></a>cycle_hire_by_area_sum</span></code></pre></div>
 <pre><code>## # A tibble: 11 × 3
 ##    GSS_CODE    sum count
 ##    &lt;fct&gt;     &lt;int&gt; &lt;int&gt;
@@ -550,10 +550,10 @@ But that is not blocking.</p>
 ## 10 E09000032  1083    59
 ## 11 E09000033  1336   171</code></pre>
 <p>We could have use the base function <code>aggregate()</code> which works with <code>sf</code> objects.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="manipulating-vector-data.html#cb165-1"></a><span class="kw">aggregate</span>(cycle_hire_<span class="dv">27700</span>[<span class="st">&quot;nbikes&quot;</span>], </span>
-<span id="cb165-2"><a href="manipulating-vector-data.html#cb165-2"></a>          <span class="dt">by =</span> <span class="kw">list</span>(cycle_hire_<span class="dv">27700</span><span class="op">$</span><span class="st">&quot;GSS_CODE&quot;</span>),</span>
-<span id="cb165-3"><a href="manipulating-vector-data.html#cb165-3"></a>          <span class="dt">FUN =</span> sum, </span>
-<span id="cb165-4"><a href="manipulating-vector-data.html#cb165-4"></a>          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="manipulating-vector-data.html#cb159-1"></a><span class="kw">aggregate</span>(cycle_hire_<span class="dv">27700</span>[<span class="st">&quot;nbikes&quot;</span>], </span>
+<span id="cb159-2"><a href="manipulating-vector-data.html#cb159-2"></a>          <span class="dt">by =</span> <span class="kw">list</span>(cycle_hire_<span class="dv">27700</span><span class="op">$</span><span class="st">&quot;GSS_CODE&quot;</span>),</span>
+<span id="cb159-3"><a href="manipulating-vector-data.html#cb159-3"></a>          <span class="dt">FUN =</span> sum, </span>
+<span id="cb159-4"><a href="manipulating-vector-data.html#cb159-4"></a>          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Simple feature collection with 11 features and 2 fields
 ## Attribute-geometry relationship: 0 constant, 1 aggregate, 1 identity
 ## Geometry type: MULTIPOINT
@@ -584,11 +584,11 @@ That can be useful for irregular shapes where the centroid might be outside the 
 </div>
 <div id="centroids" class="section level2 hasAnchor">
 <h2><span class="header-section-number">4.5</span> Centroids<a href="manipulating-vector-data.html#centroids" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="manipulating-vector-data.html#cb167-1"></a> <span class="co"># only keep useful columns</span></span>
-<span id="cb167-2"><a href="manipulating-vector-data.html#cb167-2"></a>boroughs &lt;-<span class="st"> </span><span class="kw">select</span>(london_<span class="dv">27700</span>, NAME, GSS_CODE)</span>
-<span id="cb167-3"><a href="manipulating-vector-data.html#cb167-3"></a></span>
-<span id="cb167-4"><a href="manipulating-vector-data.html#cb167-4"></a><span class="co"># compute centroids</span></span>
-<span id="cb167-5"><a href="manipulating-vector-data.html#cb167-5"></a>boroughs_centroids &lt;-<span class="st"> </span><span class="kw">st_centroid</span>(boroughs)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="manipulating-vector-data.html#cb161-1"></a> <span class="co"># only keep useful columns</span></span>
+<span id="cb161-2"><a href="manipulating-vector-data.html#cb161-2"></a>boroughs &lt;-<span class="st"> </span><span class="kw">select</span>(london_<span class="dv">27700</span>, NAME, GSS_CODE)</span>
+<span id="cb161-3"><a href="manipulating-vector-data.html#cb161-3"></a></span>
+<span id="cb161-4"><a href="manipulating-vector-data.html#cb161-4"></a><span class="co"># compute centroids</span></span>
+<span id="cb161-5"><a href="manipulating-vector-data.html#cb161-5"></a>boroughs_centroids &lt;-<span class="st"> </span><span class="kw">st_centroid</span>(boroughs)</span></code></pre></div>
 <pre><code>## Warning in st_centroid.sf(boroughs): st_centroid assumes attributes are constant
 ## over geometries of x</code></pre>
 <p>You can also do buffers and other geometrical operations like <a href="https://r-spatial.github.io/sf/reference/geos_combine.html"><code>st_union()</code></a> to merge geometries</p>
@@ -618,22 +618,22 @@ That can be useful for irregular shapes where the centroid might be outside the 
 <p>You can use it alone or with ̀st_join()`.</p>
 <p>For example, if we want to the cycle hires contained in the borough of Wandsworth,
 we will do like this:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="manipulating-vector-data.html#cb169-1"></a>Wandsworth &lt;-<span class="st"> </span><span class="kw">filter</span>(london_<span class="dv">27700</span>, NAME <span class="op">==</span><span class="st"> &quot;Wandsworth&quot;</span>)</span>
-<span id="cb169-2"><a href="manipulating-vector-data.html#cb169-2"></a>(Wandsworth_bike_stations &lt;-<span class="st"> </span><span class="kw">st_contains</span>(Wandsworth, cycle_hire_<span class="dv">27700</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="manipulating-vector-data.html#cb163-1"></a>Wandsworth &lt;-<span class="st"> </span><span class="kw">filter</span>(london_<span class="dv">27700</span>, NAME <span class="op">==</span><span class="st"> &quot;Wandsworth&quot;</span>)</span>
+<span id="cb163-2"><a href="manipulating-vector-data.html#cb163-2"></a>(Wandsworth_bike_stations &lt;-<span class="st"> </span><span class="kw">st_contains</span>(Wandsworth, cycle_hire_<span class="dv">27700</span>) )</span></code></pre></div>
 <pre><code>## Sparse geometry binary predicate list of length 1, where the predicate
 ## was `contains&#39;
 ##  1: 293, 576, 581, 587, 588, 590, 592, 594, 596, 598, ...</code></pre>
 <p>That will return a list of cycle hire points id.</p>
 <p>In contrary, if we want to find in which borough the hire point with id 614 is
 we can use the opposite function : <code>st_within()</code>.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="manipulating-vector-data.html#cb171-1"></a>cycle_hire_<span class="dv">614</span> &lt;-<span class="st"> </span><span class="kw">filter</span>(cycle_hire_<span class="dv">27700</span>, id <span class="op">==</span><span class="st"> &quot;614&quot;</span>) </span>
-<span id="cb171-2"><a href="manipulating-vector-data.html#cb171-2"></a>cycle_hire_<span class="dv">614</span>_borough &lt;-<span class="st"> </span><span class="kw">st_within</span>(cycle_hire_<span class="dv">614</span>, london_<span class="dv">27700</span>) <span class="co"># borough at index 22</span></span>
-<span id="cb171-3"><a href="manipulating-vector-data.html#cb171-3"></a>cycle_hire_<span class="dv">614</span>_borough</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="manipulating-vector-data.html#cb165-1"></a>cycle_hire_<span class="dv">614</span> &lt;-<span class="st"> </span><span class="kw">filter</span>(cycle_hire_<span class="dv">27700</span>, id <span class="op">==</span><span class="st"> &quot;614&quot;</span>) </span>
+<span id="cb165-2"><a href="manipulating-vector-data.html#cb165-2"></a>cycle_hire_<span class="dv">614</span>_borough &lt;-<span class="st"> </span><span class="kw">st_within</span>(cycle_hire_<span class="dv">614</span>, london_<span class="dv">27700</span>) <span class="co"># borough at index 22</span></span>
+<span id="cb165-3"><a href="manipulating-vector-data.html#cb165-3"></a>cycle_hire_<span class="dv">614</span>_borough</span></code></pre></div>
 <pre><code>## Sparse geometry binary predicate list of length 1, where the predicate
 ## was `within&#39;
 ##  1: 22</code></pre>
 <p>To get the borough data, there is some more work to do.</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="manipulating-vector-data.html#cb173-1"></a>london_<span class="dv">27700</span>[<span class="kw">unlist</span>(cycle_hire_<span class="dv">614</span>_borough),]</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="manipulating-vector-data.html#cb167-1"></a>london_<span class="dv">27700</span>[<span class="kw">unlist</span>(cycle_hire_<span class="dv">614</span>_borough),]</span></code></pre></div>
 <pre><code>## Simple feature collection with 1 feature and 7 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -659,31 +659,31 @@ It takes the data source name (<em>dsn</em>) as mandatory argument,
 the boroughs first.
 </div>
 
-<p>As we want to save it to GeoPackage<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, we also need to provide a layer name : <em>london_boroughs_27700</em>. Repeat for all data you want to save.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="manipulating-vector-data.html#cb175-1"></a><span class="kw">st_write</span>(</span>
-<span id="cb175-2"><a href="manipulating-vector-data.html#cb175-2"></a>  <span class="dt">obj =</span> <span class="kw">left_join</span>(london_<span class="dv">27700</span>, cycle_hire_by_area_sum), <span class="co"># object to write</span></span>
-<span id="cb175-3"><a href="manipulating-vector-data.html#cb175-3"></a>  <span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>), <span class="co"># destination file</span></span>
-<span id="cb175-4"><a href="manipulating-vector-data.html#cb175-4"></a>  <span class="dt">layer =</span> <span class="st">&quot;london_boroughs_27700&quot;</span>,   <span class="co"># layer name</span></span>
-<span id="cb175-5"><a href="manipulating-vector-data.html#cb175-5"></a>  <span class="dt">append =</span> <span class="ot">FALSE</span>)  <span class="co"># options</span></span></code></pre></div>
+<p>As we want to save it to GeoPackage<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, we also need to provide a layer name : <em>london_boroughs_27700</em>. Repeat for all data you want to save.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="manipulating-vector-data.html#cb169-1"></a><span class="kw">st_write</span>(</span>
+<span id="cb169-2"><a href="manipulating-vector-data.html#cb169-2"></a>  <span class="dt">obj =</span> <span class="kw">left_join</span>(london_<span class="dv">27700</span>, cycle_hire_by_area_sum), <span class="co"># object to write</span></span>
+<span id="cb169-3"><a href="manipulating-vector-data.html#cb169-3"></a>  <span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>), <span class="co"># destination file</span></span>
+<span id="cb169-4"><a href="manipulating-vector-data.html#cb169-4"></a>  <span class="dt">layer =</span> <span class="st">&quot;london_boroughs_27700&quot;</span>,   <span class="co"># layer name</span></span>
+<span id="cb169-5"><a href="manipulating-vector-data.html#cb169-5"></a>  <span class="dt">append =</span> <span class="ot">FALSE</span>)  <span class="co"># options</span></span></code></pre></div>
 <pre><code>## Joining, by = &quot;GSS_CODE&quot;</code></pre>
 <pre><code>## Writing layer `london_boroughs_27700&#39; to data source 
 ##   `/Users/runner/work/foss4g2022-getting-started-rspatial/foss4g2022-getting-started-rspatial/foss4g_R_workshop.gpkg&#39; using driver `GPKG&#39;
 ## Writing 33 features with 9 fields and geometry type Multi Polygon.</code></pre>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="manipulating-vector-data.html#cb178-1"></a><span class="kw">st_write</span>(</span>
-<span id="cb178-2"><a href="manipulating-vector-data.html#cb178-2"></a>  <span class="kw">left_join</span>(boroughs_centroids , cycle_hire_by_area_sum),</span>
-<span id="cb178-3"><a href="manipulating-vector-data.html#cb178-3"></a>  <span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>),</span>
-<span id="cb178-4"><a href="manipulating-vector-data.html#cb178-4"></a>  <span class="dt">layer =</span> <span class="st">&quot;boroughs_centroids_27700&quot;</span>, </span>
-<span id="cb178-5"><a href="manipulating-vector-data.html#cb178-5"></a>  <span class="dt">append =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="manipulating-vector-data.html#cb172-1"></a><span class="kw">st_write</span>(</span>
+<span id="cb172-2"><a href="manipulating-vector-data.html#cb172-2"></a>  <span class="kw">left_join</span>(boroughs_centroids , cycle_hire_by_area_sum),</span>
+<span id="cb172-3"><a href="manipulating-vector-data.html#cb172-3"></a>  <span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>),</span>
+<span id="cb172-4"><a href="manipulating-vector-data.html#cb172-4"></a>  <span class="dt">layer =</span> <span class="st">&quot;boroughs_centroids_27700&quot;</span>, </span>
+<span id="cb172-5"><a href="manipulating-vector-data.html#cb172-5"></a>  <span class="dt">append =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;GSS_CODE&quot;</code></pre>
 <pre><code>## Deleting layer `boroughs_centroids_27700&#39; failed
 ## Writing layer `boroughs_centroids_27700&#39; to data source 
 ##   `/Users/runner/work/foss4g2022-getting-started-rspatial/foss4g2022-getting-started-rspatial/foss4g_R_workshop.gpkg&#39; using driver `GPKG&#39;
 ## Writing 33 features with 4 fields and geometry type Point.</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="manipulating-vector-data.html#cb181-1"></a><span class="kw">st_write</span>(</span>
-<span id="cb181-2"><a href="manipulating-vector-data.html#cb181-2"></a>  <span class="dt">obj =</span> <span class="kw">left_join</span>(cycle_hire_<span class="dv">27700</span>, cycle_hire_by_area_sum),</span>
-<span id="cb181-3"><a href="manipulating-vector-data.html#cb181-3"></a>  <span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>),</span>
-<span id="cb181-4"><a href="manipulating-vector-data.html#cb181-4"></a>  <span class="dt">layer =</span> <span class="st">&quot;cycle_hire_27700&quot;</span>,</span>
-<span id="cb181-5"><a href="manipulating-vector-data.html#cb181-5"></a>  <span class="dt">append =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="manipulating-vector-data.html#cb175-1"></a><span class="kw">st_write</span>(</span>
+<span id="cb175-2"><a href="manipulating-vector-data.html#cb175-2"></a>  <span class="dt">obj =</span> <span class="kw">left_join</span>(cycle_hire_<span class="dv">27700</span>, cycle_hire_by_area_sum),</span>
+<span id="cb175-3"><a href="manipulating-vector-data.html#cb175-3"></a>  <span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>),</span>
+<span id="cb175-4"><a href="manipulating-vector-data.html#cb175-4"></a>  <span class="dt">layer =</span> <span class="st">&quot;cycle_hire_27700&quot;</span>,</span>
+<span id="cb175-5"><a href="manipulating-vector-data.html#cb175-5"></a>  <span class="dt">append =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;GSS_CODE&quot;</code></pre>
 <pre><code>## Deleting layer `cycle_hire_27700&#39; failed
 ## Writing layer `cycle_hire_27700&#39; to data source 
@@ -697,9 +697,9 @@ It works better in Rstudio but it is still useful with Jupyter notebooks.</p>
 The <code>append = FALSE</code> ensure you can write on existing layer, it is optionnal.
 </div>
 
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="manipulating-vector-data.html#cb184-1"></a><span class="kw">print</span>(<span class="kw">here</span>())  <span class="co"># print the project directory</span></span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="manipulating-vector-data.html#cb178-1"></a><span class="kw">print</span>(<span class="kw">here</span>())  <span class="co"># print the project directory</span></span></code></pre></div>
 <pre><code>## [1] &quot;/Users/runner/work/foss4g2022-getting-started-rspatial/foss4g2022-getting-started-rspatial&quot;</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="manipulating-vector-data.html#cb186-1"></a><span class="kw">list.files</span>(<span class="kw">here</span>()) <span class="co"># list the files in the project directory</span></span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="manipulating-vector-data.html#cb180-1"></a><span class="kw">list.files</span>(<span class="kw">here</span>()) <span class="co"># list the files in the project directory</span></span></code></pre></div>
 <pre><code>##  [1] &quot;_book&quot;                                      
 ##  [2] &quot;_bookdown.yml&quot;                              
 ##  [3] &quot;_main_files&quot;                                
@@ -729,7 +729,7 @@ The <code>append = FALSE</code> ensure you can write on existing layer, it is op
 <div id="check-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.7.2</span> Check data<a href="manipulating-vector-data.html#check-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>sf</code> provides a <code>st_layers()</code> function that is useful to see the content of a dataset.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="manipulating-vector-data.html#cb188-1"></a><span class="kw">st_layers</span>(<span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="manipulating-vector-data.html#cb182-1"></a><span class="kw">st_layers</span>(<span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>))</span></code></pre></div>
 <pre><code>## Driver: GPKG 
 ## Available layers:
 ##                 layer_name geometry_type features fields
@@ -746,10 +746,10 @@ The <code>append = FALSE</code> ensure you can write on existing layer, it is op
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>More details on the datasets here :
-<a href="https://cran.r-project.org/web/packages/spData/spData.pdf">https://cran.r-project.org/web/packages/spData/spData.pdf</a><a href="manipulating-vector-data.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Because <a href="http://switchfromshapefile.org/#geopackage">GeoPackage are cool !</a><a href="manipulating-vector-data.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<ol start="2">
+<li id="fn2"><p>More details on the datasets here :
+<a href="https://cran.r-project.org/web/packages/spData/spData.pdf">https://cran.r-project.org/web/packages/spData/spData.pdf</a><a href="manipulating-vector-data.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Because <a href="http://switchfromshapefile.org/#geopackage">GeoPackage are cool !</a><a href="manipulating-vector-data.html#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

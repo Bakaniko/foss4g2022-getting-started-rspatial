@@ -1,11 +1,11 @@
 fig:03-intro-to-rspatial-1
 fig:03-intro-to-rspatial-2
-tab:unnamed-chunk-9
-tab:unnamed-chunk-21
+tab:04-making-maps-5
+tab:04-making-maps-16
 why-an-r-workshop-in-a-foss4g-conference
 data-handling-with-r
 data-types
-affectation
+assignment
 not-only-a-calculator
 packages
 load-data
