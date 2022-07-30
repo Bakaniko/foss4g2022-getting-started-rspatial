@@ -74,8 +74,7 @@ While base R contains a lot of functions, it can be extended with packages.
 
 > In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. @wickham2022Packages
 
-You already saw how to install packages with the `install.packages()` function, 
-let's see how to load the [dplyr](https://dplyr.tidyverse.org/) 
+You already saw how to install packages with the `install.packages()` function, let's see how to load the [{dplyr}](https://dplyr.tidyverse.org/) 
 package we will use to handle the data.
 
 ```{r data-handling-libraries}
@@ -99,11 +98,10 @@ gapminder <- read.csv(data_url)
 
 We call this dataset from an URL but it can be a path in your system file.
 
-For example, if you have installed the gapminder package as recommended, 
-you will find the data set as a TSV file in your R installation.
+For example, if you have installed the gapminder package as recommended, you will find the data set as a TSV file in your R installation.
 
 ```{r where-is-gapminder}
-data_url <- system.file("extdata/gapminder.tsv",package = "gapminder")
+data_url <- system.file("extdata/gapminder.tsv", package = "gapminder")
 data_url
 ```
 
@@ -115,7 +113,6 @@ of the operating system.
 ::::
 
 
-
 ```{r load-gapminder-from-package, eval=FALSE}
 gapminder <- read.delim(data_url, sep = "\t")
 ```
@@ -124,9 +121,8 @@ gapminder <- read.delim(data_url, sep = "\t")
 :::: {.infobox .tip data-latex="tip"}
 
 `read.csv()` and similar functions can read delimited text files only.
-For other formats, you can use functions from other packages like 
-[Haven](https://haven.tidyverse.org) or [readxl](https://readxl.tidyverse.org/).
-We will show in [Chapter](#rspatial) how to load geospatial data.
+For other formats, you can use functions from other packages like [Haven](https://haven.tidyverse.org) or [readxl](https://readxl.tidyverse.org/).
+We will show in Chapter \@ref(rspatial) how to load geospatial data.
 
 ::::
 
@@ -136,8 +132,7 @@ Let's take a look to our data :
 glimpse(gapminder)
 ```
 
-This dataset is about life expectancy, population and GDP per capita in world 
-countries between `r min(gapminder$year)` and `r max(gapminder$year)`.
+This dataset is about life expectancy, population and GDP per capita in world countries between `r min(gapminder$year)` and `r max(gapminder$year)`.
 
 You can also use `head()` for the same purpose but a different output format.
 
@@ -145,8 +140,7 @@ You can also use `head()` for the same purpose but a different output format.
 head(gapminder)
 ```
 
-We can transform a dataframe into a tibble to access their better `print()` method
-that combines `head()` and `glimpse()`. 
+We can transform a dataframe into a tibble to access their better `print()` method that combines `head()` and `glimpse()`. 
 Tibbles are at the core of the Tidyverse packages. 
 
 ```{r data-handling-head2}
@@ -156,9 +150,7 @@ gapminder
 
 :::: {.infobox .note data-latex="note"}
 
-If you want more information about the `gapminder` dataset, Hans Rosling made a 
-[TED talk](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) 
-presenting the gapminder data.
+If you want more information about the `gapminder` dataset, Hans Rosling made a [TED talk](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen) presenting the gapminder data.
 
 ::::
 
@@ -170,13 +162,12 @@ names(gapminder)
 
 ## In the beginning was the Verb
 
-`dplyr` provides a lot of functions to handle data: `filter()` to filter the data matching
-certain conditions (subset data), `select()` to select columns, `mutate()` to create new variables.
+{dplyr} provides a lot of functions to handle data: `filter()` to filter the data matching certain conditions (subset data), `select()` to select columns, `mutate()` to create new variables.
 All those functions are verbs and means an action onto the dataset.
 
 ## Filter data
 
-If we only want the records from Italy, we can filter using 
+If we only want the records from Italy, we can filter using:
 
 ```{r data-handling-filter}
 filter(gapminder, country == "Italy" )
@@ -199,7 +190,7 @@ italy_2000
 
 ## Select columns
 
-`select`allows you to keep only the columns you need for your analysis.
+`select()` allows you to keep only the columns you need for your analysis.
 
 Maybe we only want the `country`, `year` and `lifeExp` variables:
 
@@ -207,8 +198,7 @@ Maybe we only want the `country`, `year` and `lifeExp` variables:
 select(italy_2000, country, year, lifeExp)
 ```
 
-Or, for example, in the `italy_2000` subset, the `continent` variable does not 
-provide useful information anymore, so we want to discard it. 
+Or, for example, in the `italy_2000` subset, the `continent` variable does not provide useful information anymore, so we want to discard it. 
 Please not the use of the `-` symbol before the name of the variable.
 
 ```{r data-handling-select2}
@@ -242,24 +232,20 @@ So in this example, we compute the GPD but we also keep the information about th
 
 ## Agregate data
 
-Sometimes, we have a too detailed dataset and we want a more broader view of the data
-so we want to aggregate it.
+Sometimes, we have a too detailed dataset and we want a more broader view of the data so we want to aggregate it.
 
 To do so, `dplyr` provides a couple of functions:  `group_by()` and `summarise()`.
-Like their names says, `group_by` groups records who share the same value in a variable 
-and `summarise()` compute the summary of non-grouping variables.
+Like their names says, `group_by()` groups records who share the same value in a variable and `summarise()` compute the summary of non-grouping variables.
 
 For example, let's compute the yearly population of each continent.
-To do this, we first group the data by continent and year and pass the result to `summarise().
-Into this second function, we create a new variable called `population` that is the sum of
-the variable `pop` of each group.
+To do this, we first group the data by continent and year and pass the result to `summarise()`.
+Into this second function, we create a new variable called `population` that is the sum of the variable `pop` of each group.
 
 ```{r data-handling-group-by}
 summarise(group_by(gapminder, continent, year), population = sum(pop))
 ```
 
-You can use any function to summarise your data, for example, if you want to know the number of entries
-by continent, you can use `n()`.
+You can use any function to summarise your data, for example, if you want to know the number of entries by continent, you can use `n()`.
 
 ```{r data-handling-summarise}
 summarise(group_by(gapminder, continent), count = n())
@@ -323,14 +309,11 @@ If you want more information on joins operations with `dplyr`, we recommend to r
 Piping allows to create a sequence of actions on a dataset without storing intermediate results.
 
 As it can be difficult to debug piped commands for beginners, we won't use it in this workshop.
-However, its usage is very frequent so it is most likely that a beginner will encounter it 
-in documentation or in code source publicly available.
+However, its usage is very frequent so it is most likely that a beginner will encounter it in documentation or in code source publicly available.
 
-The most common form `%>%` is provided by the package [magrittr](https://magrittr.tidyverse.org/) 
-which is part of the tidyverse and is a dependency of dplyr, so you don't have to load it.
+The most common form `%>%` is provided by the package [{magrittr}](https://magrittr.tidyverse.org/), which is part of the tidyverse and is a dependency of {dplyr}, so you don't have to load it.
 
-In the following example, we show how to compute the mean GDP by decade of  
-Europeans countries using pipes to chain functions.
+In the following example, we show how to compute the mean GDP by decade of Europeans countries using pipes to chain functions.
 
 ```{r piping-example-magrittr}
 gapminder %>% # pass the datset as the first argument
