@@ -2,55 +2,38 @@
 
 <!-- (Jakub) Introduction to R-spatial ecosystem (20 min) -->
 
-- https://www.r-spatial.org/
-- https://www.rspatial.org/
-- https://geocompr.github.io/
-- #rspatial and #geocompr on Twitter
-
-What can you do with geographic data + R?
-
-- Exploratory data analysis (EDA)
-- Output data in different formats (e.g. creating a .GeoTIFF or .shp file to share with others)
-- Data processing (e.g. adding new variables, 'adding value')
-- Data transformation (e.g. changing CRS, reducing size via simplification/aggregation)
-- Data visualization
-- Web application development
-- Software development e.g. to share new methods
-
-- [**sf**](https://github.com/r-spatial/sf),
-[**sp**](https://github.com/edzer/sp),
-[**terra**](https://github.com/rspatial/terra),
-[**raster**](https://github.com/rspatial/raster), [**stars**](https://github.com/r-spatial/stars) - spatial classes
-- [**dplyr**](https://github.com/tidyverse/dplyr), [**rmapshaper**](https://github.com/ateucher/rmapshaper) - processing of attribute tables/geometries 
-- [**rnaturalearth**](https://github.com/ropensci/rnaturalearth), [**osmdata**](https://github.com/ropensci/osmdata), [**getSpatialData**](https://github.com/16EAGLE/getSpatialData) - spatial data download
-- [**rgrass7**](https://github.com/rsbivand/rgrass7), [**qgisprocess**](https://github.com/paleolimbot/qgisprocess), [**RSAGA**](https://github.com/r-spatial/RSAGA), [**link2GI**](https://github.com/r-spatial/link2GI) - connecting with GIS software
-- [**gstat**](https://github.com/r-spatial/gstat), [**mlr3**](https://github.com/mlr-org/mlr3), [**CAST**](https://github.com/HannaMeyer/CAST) - spatial data modeling
-- [**rasterVis**](https://github.com/oscarperpinan/rastervis), [**tmap**](https://github.com/mtennekes/tmap), [**ggplot2**](https://github.com/tidyverse/ggplot2) - static visualizations
-- [**leaflet**](https://github.com/rstudio/leaflet), [**mapview**](https://github.com/r-spatial/mapview), [**mapdeck**](https://github.com/SymbolixAU/mapdeck) - interactive visualizations
-- many more...
-
-## R packages - specialized packages
-
-- [**spatstat**](http://spatstat.org/)
-- [**spdep**](https://github.com/r-spatial/spdep)
-- [**spatialreg**](https://github.com/r-spatial/spatialreg)
-- [**dismo**](https://github.com/rspatial/dismo)
-- [**landscapemetrics**](https://github.com/r-spatialecology/landscapemetrics) - part of https://github.com/r-spatialecology
-- [**RStoolbox**](http://bleutner.github.io/RStoolbox/rstbx-docu/RStoolbox.html)
-- [**rayshader**](https://github.com/tylermorganwall/rayshader)
-- [**gdalcubes**](https://github.com/appelmar/gdalcubes_R)
-- [**sfnetworks**](https://github.com/luukvdmeer/sfnetworks)
-- many more...
-
-Learn more at https://cran.r-project.org/web/views/Spatial.html.
-
 ## R's spatial ecosystem(s)
 
-- [rspatial](https://rspatial.org) vs [r-spatial](https://www.rspatial.org/)
-- Old vs New
-- [Legacy](https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial)
-- Other R ecosystems
-- ...
+R is a powerful language for geocomputation, allowing for: 
+
+- Exploratory data analysis (EDA)
+- Data processing (e.g., adding new variables)
+- Data transformation (e.g., changing CRS, reducing size via simplification/aggregation)
+- Data visualization
+- Web application development
+- Software development (e.g., to share new methods)
+
+There are many ways to handle geographic data in R, with several dozens of packages in the area.
+It includes:
+
+- [{sf}](https://github.com/r-spatial/sf),
+[{sp}](https://github.com/edzer/sp),
+[{terra}](https://github.com/rspatial/terra),
+[{raster}](https://github.com/rspatial/raster), [{stars}](https://github.com/r-spatial/stars) - spatial classes
+- [{dplyr}](https://github.com/tidyverse/dplyr), [{rmapshaper}](https://github.com/ateucher/rmapshaper) - processing of attribute tables/geometries 
+- [{rnaturalearth}](https://github.com/ropensci/rnaturalearth), [{osmdata}](https://github.com/ropensci/osmdata) - spatial data download
+- [{rgrass}](https://github.com/rsbivand/rgrass), [{qgisprocess}](https://github.com/paleolimbot/qgisprocess), [{link2GI}](https://github.com/r-spatial/link2GI) - connecting with GIS software
+- [{gstat}](https://github.com/r-spatial/gstat), [{mlr3}](https://github.com/mlr-org/mlr3), [{CAST}](https://github.com/HannaMeyer/CAST) - spatial data modeling
+- [{rasterVis}](https://github.com/oscarperpinan/rastervis), [{tmap}](https://github.com/mtennekes/tmap), [{ggplot2}](https://github.com/tidyverse/ggplot2) - static visualizations
+- [{leaflet}](https://github.com/rstudio/leaflet), [{mapview}](https://github.com/r-spatial/mapview), [{mapdeck}](https://github.com/SymbolixAU/mapdeck) - interactive visualizations
+- [{spatstat}](http://spatstat.org/), [{spdep}](https://github.com/r-spatial/spdep), [{spatialreg}](https://github.com/r-spatial/spatialreg), [{dismo}](https://github.com/rspatial/dismo), [{landscapemetrics}](https://github.com/r-spatialecology/landscapemetrics), [{RStoolbox}](http://bleutner.github.io/RStoolbox/rstbx-docu/RStoolbox.html), [{rayshader}](https://github.com/tylermorganwall/rayshader), [{gdalcubes}](https://github.com/appelmar/gdalcubes_R), [{sfnetworks}](https://github.com/luukvdmeer/sfnetworks) - different types of spatial data analysis
+- many more...
+
+Visit https://cran.r-project.org/view=Spatial to get an overview of different spatial tasks that can be solved using R.
+
+We think it is helpful to start learning the R-spatial ecosystem by using its packages for spatial classes handling.
+They offer capabilities to read/write spatial data, but also have many tools to process and transform the data.
+The below figure shows the change in popularity of the main R packages for spatial data handling -- in this workshop, we will focus on {sf} for working with spatial vector data and {terra} for working with spatial raster data.
 
 ```{r 03-intro-to-rspatial-1}
 #| echo = FALSE,
