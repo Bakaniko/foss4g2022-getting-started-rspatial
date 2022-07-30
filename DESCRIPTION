@@ -6,6 +6,7 @@ Imports:
   bookdown,
   webshot,
   dplyr,
+  gapminder,
   tmaptools,
   tmap,
   spDataLarge,
