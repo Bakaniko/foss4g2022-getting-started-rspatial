@@ -380,7 +380,7 @@ tm_shape(srtm) +
             legend.position = c("left", "center"))
 ```
 
-E5. Add two manual legend: one for the `zion` and one for `zion_points`.
+E5. Bonus: add two manual legend: one for the `zion` and one for `zion_points`.
 
 ```{r}
 #| include = FALSE
