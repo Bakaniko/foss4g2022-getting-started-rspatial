@@ -17,7 +17,6 @@ agregate-data
 join-data
 piping
 rspatial
-r-packages---specialized-packages
 rs-spatial-ecosystems
 vector-data
 raster-data

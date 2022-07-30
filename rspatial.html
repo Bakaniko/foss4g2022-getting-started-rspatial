@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-07-29" />
+<meta name="date" content="2022-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,11 +178,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.12" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#piping"><i class="fa fa-check"></i><b>1.12</b> Piping</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="rspatial.html"><a href="rspatial.html"><i class="fa fa-check"></i><b>2</b> Introduction to the R-spatial ecosystem</a><ul>
-<li class="chapter" data-level="2.1" data-path="rspatial.html"><a href="rspatial.html#r-packages---specialized-packages"><i class="fa fa-check"></i><b>2.1</b> R packages - specialized packages</a></li>
-<li class="chapter" data-level="2.2" data-path="rspatial.html"><a href="rspatial.html#rs-spatial-ecosystems"><i class="fa fa-check"></i><b>2.2</b> R’s spatial ecosystem(s)</a></li>
-<li class="chapter" data-level="2.3" data-path="rspatial.html"><a href="rspatial.html#vector-data"><i class="fa fa-check"></i><b>2.3</b> Vector data</a></li>
-<li class="chapter" data-level="2.4" data-path="rspatial.html"><a href="rspatial.html#raster-data"><i class="fa fa-check"></i><b>2.4</b> Raster data</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="rspatial.html"><a href="rspatial.html#conversions"><i class="fa fa-check"></i><b>2.4.1</b> Conversions</a></li>
+<li class="chapter" data-level="2.1" data-path="rspatial.html"><a href="rspatial.html#rs-spatial-ecosystems"><i class="fa fa-check"></i><b>2.1</b> R’s spatial ecosystem(s)</a></li>
+<li class="chapter" data-level="2.2" data-path="rspatial.html"><a href="rspatial.html#vector-data"><i class="fa fa-check"></i><b>2.2</b> Vector data</a></li>
+<li class="chapter" data-level="2.3" data-path="rspatial.html"><a href="rspatial.html#raster-data"><i class="fa fa-check"></i><b>2.3</b> Raster data</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="rspatial.html"><a href="rspatial.html#conversions"><i class="fa fa-check"></i><b>2.3.1</b> Conversions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="making-maps-in-r.html"><a href="making-maps-in-r.html"><i class="fa fa-check"></i><b>3</b> Making maps in R</a><ul>
@@ -268,58 +267,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rspatial" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 2</span> Introduction to the R-spatial ecosystem<a href="rspatial.html#rspatial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <!-- (Jakub) Introduction to R-spatial ecosystem (20 min) -->
+<div id="rs-spatial-ecosystems" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.1</span> R’s spatial ecosystem(s)<a href="rspatial.html#rs-spatial-ecosystems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R is a powerful language for geocomputation, allowing for:</p>
 <ul>
-<li><a href="https://www.r-spatial.org/" class="uri">https://www.r-spatial.org/</a></li>
-<li><a href="https://www.rspatial.org/" class="uri">https://www.rspatial.org/</a></li>
-<li><a href="https://geocompr.github.io/" class="uri">https://geocompr.github.io/</a></li>
-<li>#rspatial and #geocompr on Twitter</li>
+<li>Exploratory data analysis (EDA)</li>
+<li>Data processing (e.g., adding new variables)</li>
+<li>Data transformation (e.g., changing CRS, reducing size via simplification/aggregation)</li>
+<li>Data visualization</li>
+<li>Web application development</li>
+<li>Software development (e.g., to share new methods)</li>
 </ul>
-<p>What can you do with geographic data + R?</p>
+<p>There are many ways to handle geographic data in R, with several dozens of packages in the area.
+It includes:</p>
 <ul>
-<li><p>Exploratory data analysis (EDA)</p></li>
-<li><p>Output data in different formats (e.g. creating a .GeoTIFF or .shp file to share with others)</p></li>
-<li><p>Data processing (e.g. adding new variables, ‘adding value’)</p></li>
-<li><p>Data transformation (e.g. changing CRS, reducing size via simplification/aggregation)</p></li>
-<li><p>Data visualization</p></li>
-<li><p>Web application development</p></li>
-<li><p>Software development e.g. to share new methods</p></li>
-<li><p><a href="https://github.com/r-spatial/sf"><strong>sf</strong></a>,
-<a href="https://github.com/edzer/sp"><strong>sp</strong></a>,
-<a href="https://github.com/rspatial/terra"><strong>terra</strong></a>,
-<a href="https://github.com/rspatial/raster"><strong>raster</strong></a>, <a href="https://github.com/r-spatial/stars"><strong>stars</strong></a> - spatial classes</p></li>
-<li><p><a href="https://github.com/tidyverse/dplyr"><strong>dplyr</strong></a>, <a href="https://github.com/ateucher/rmapshaper"><strong>rmapshaper</strong></a> - processing of attribute tables/geometries</p></li>
-<li><p><a href="https://github.com/ropensci/rnaturalearth"><strong>rnaturalearth</strong></a>, <a href="https://github.com/ropensci/osmdata"><strong>osmdata</strong></a>, <a href="https://github.com/16EAGLE/getSpatialData"><strong>getSpatialData</strong></a> - spatial data download</p></li>
-<li><p><a href="https://github.com/rsbivand/rgrass7"><strong>rgrass7</strong></a>, <a href="https://github.com/paleolimbot/qgisprocess"><strong>qgisprocess</strong></a>, <a href="https://github.com/r-spatial/RSAGA"><strong>RSAGA</strong></a>, <a href="https://github.com/r-spatial/link2GI"><strong>link2GI</strong></a> - connecting with GIS software</p></li>
-<li><p><a href="https://github.com/r-spatial/gstat"><strong>gstat</strong></a>, <a href="https://github.com/mlr-org/mlr3"><strong>mlr3</strong></a>, <a href="https://github.com/HannaMeyer/CAST"><strong>CAST</strong></a> - spatial data modeling</p></li>
-<li><p><a href="https://github.com/oscarperpinan/rastervis"><strong>rasterVis</strong></a>, <a href="https://github.com/mtennekes/tmap"><strong>tmap</strong></a>, <a href="https://github.com/tidyverse/ggplot2"><strong>ggplot2</strong></a> - static visualizations</p></li>
-<li><p><a href="https://github.com/rstudio/leaflet"><strong>leaflet</strong></a>, <a href="https://github.com/r-spatial/mapview"><strong>mapview</strong></a>, <a href="https://github.com/SymbolixAU/mapdeck"><strong>mapdeck</strong></a> - interactive visualizations</p></li>
-<li><p>many more…</p></li>
-</ul>
-<div id="r-packages---specialized-packages" class="section level2 hasAnchor">
-<h2><span class="header-section-number">2.1</span> R packages - specialized packages<a href="rspatial.html#r-packages---specialized-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><a href="http://spatstat.org/"><strong>spatstat</strong></a></li>
-<li><a href="https://github.com/r-spatial/spdep"><strong>spdep</strong></a></li>
-<li><a href="https://github.com/r-spatial/spatialreg"><strong>spatialreg</strong></a></li>
-<li><a href="https://github.com/rspatial/dismo"><strong>dismo</strong></a></li>
-<li><a href="https://github.com/r-spatialecology/landscapemetrics"><strong>landscapemetrics</strong></a> - part of <a href="https://github.com/r-spatialecology" class="uri">https://github.com/r-spatialecology</a></li>
-<li><a href="http://bleutner.github.io/RStoolbox/rstbx-docu/RStoolbox.html"><strong>RStoolbox</strong></a></li>
-<li><a href="https://github.com/tylermorganwall/rayshader"><strong>rayshader</strong></a></li>
-<li><a href="https://github.com/appelmar/gdalcubes_R"><strong>gdalcubes</strong></a></li>
-<li><a href="https://github.com/luukvdmeer/sfnetworks"><strong>sfnetworks</strong></a></li>
+<li><a href="https://github.com/r-spatial/sf">{sf}</a>,
+<a href="https://github.com/edzer/sp">{sp}</a>,
+<a href="https://github.com/rspatial/terra">{terra}</a>,
+<a href="https://github.com/rspatial/raster">{raster}</a>, <a href="https://github.com/r-spatial/stars">{stars}</a> - spatial classes</li>
+<li><a href="https://github.com/tidyverse/dplyr">{dplyr}</a>, <a href="https://github.com/ateucher/rmapshaper">{rmapshaper}</a> - processing of attribute tables/geometries</li>
+<li><a href="https://github.com/ropensci/rnaturalearth">{rnaturalearth}</a>, <a href="https://github.com/ropensci/osmdata">{osmdata}</a> - spatial data download</li>
+<li><a href="https://github.com/rsbivand/rgrass">{rgrass}</a>, <a href="https://github.com/paleolimbot/qgisprocess">{qgisprocess}</a>, <a href="https://github.com/r-spatial/link2GI">{link2GI}</a> - connecting with GIS software</li>
+<li><a href="https://github.com/r-spatial/gstat">{gstat}</a>, <a href="https://github.com/mlr-org/mlr3">{mlr3}</a>, <a href="https://github.com/HannaMeyer/CAST">{CAST}</a> - spatial data modeling</li>
+<li><a href="https://github.com/oscarperpinan/rastervis">{rasterVis}</a>, <a href="https://github.com/mtennekes/tmap">{tmap}</a>, <a href="https://github.com/tidyverse/ggplot2">{ggplot2}</a> - static visualizations</li>
+<li><a href="https://github.com/rstudio/leaflet">{leaflet}</a>, <a href="https://github.com/r-spatial/mapview">{mapview}</a>, <a href="https://github.com/SymbolixAU/mapdeck">{mapdeck}</a> - interactive visualizations</li>
+<li><a href="http://spatstat.org/">{spatstat}</a>, <a href="https://github.com/r-spatial/spdep">{spdep}</a>, <a href="https://github.com/r-spatial/spatialreg">{spatialreg}</a>, <a href="https://github.com/rspatial/dismo">{dismo}</a>, <a href="https://github.com/r-spatialecology/landscapemetrics">{landscapemetrics}</a>, <a href="http://bleutner.github.io/RStoolbox/rstbx-docu/RStoolbox.html">{RStoolbox}</a>, <a href="https://github.com/tylermorganwall/rayshader">{rayshader}</a>, <a href="https://github.com/appelmar/gdalcubes_R">{gdalcubes}</a>, <a href="https://github.com/luukvdmeer/sfnetworks">{sfnetworks}</a> - different types of spatial data analysis</li>
 <li>many more…</li>
 </ul>
-<p>Learn more at <a href="https://cran.r-project.org/web/views/Spatial.html" class="uri">https://cran.r-project.org/web/views/Spatial.html</a>.</p>
-</div>
-<div id="rs-spatial-ecosystems" class="section level2 hasAnchor">
-<h2><span class="header-section-number">2.2</span> R’s spatial ecosystem(s)<a href="rspatial.html#rs-spatial-ecosystems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><a href="https://rspatial.org">rspatial</a> vs <a href="https://www.rspatial.org/">r-spatial</a></li>
-<li>Old vs New</li>
-<li><a href="https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial">Legacy</a></li>
-<li>Other R ecosystems</li>
-<li>…</li>
-</ul>
+<p>Visit <a href="https://cran.r-project.org/view=Spatial" class="uri">https://cran.r-project.org/view=Spatial</a> to get an overview of different spatial tasks that can be solved using R.</p>
+<p>We think it is helpful to start learning the R-spatial ecosystem by using its packages for spatial classes handling.
+They offer capabilities to read/write spatial data, but also have many tools to process and transform the data.
+The below figure shows the change in popularity of the main R packages for spatial data handling – in this workshop, we will focus on {sf} for working with spatial vector data and {terra} for working with spatial raster data.</p>
 <div class="figure"><span style="display:block;" id="fig:03-intro-to-rspatial-1"></span>
 <img src="https://geocompr.robinlovelace.net/figures/01-cranlogs.png" alt="Source: https://geocompr.robinlovelace.net"  />
 <p class="caption">
@@ -328,7 +306,7 @@ Figure 2.1: Source: <a href="https://geocompr.robinlovelace.net" class="uri">htt
 </div>
 </div>
 <div id="vector-data" class="section level2 hasAnchor">
-<h2><span class="header-section-number">2.3</span> Vector data<a href="rspatial.html#vector-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.2</span> Vector data<a href="rspatial.html#vector-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><a href="https://github.com/r-spatial/sf"><strong>sf</strong></a></li>
 <li><a href="https://github.com/edzer/sp"><strong>sp</strong></a></li>
@@ -557,7 +535,7 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 <p><img src="_main_files/figure-html/03-intro-to-rspatial-16-1.png" width="672" /></p>
 </div>
 <div id="raster-data" class="section level2 hasAnchor">
-<h2><span class="header-section-number">2.4</span> Raster data<a href="rspatial.html#raster-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.3</span> Raster data<a href="rspatial.html#raster-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><a href="https://github.com/rspatial/terra"><strong>terra</strong></a></li>
 <li><a href="https://github.com/rspatial/raster"><strong>raster</strong></a></li>
@@ -575,7 +553,7 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 <li>The <strong>terra</strong> package contains classes and methods representing raster objects and operations</li>
 </ul>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="rspatial.html#cb78-1"></a><span class="kw">library</span>(terra)</span></code></pre></div>
-<pre><code>## terra 1.6.4</code></pre>
+<pre><code>## terra 1.6.5</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="rspatial.html#cb80-1"></a>elev =<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/elev.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>))</span>
 <span id="cb80-2"><a href="rspatial.html#cb80-2"></a>elev</span></code></pre></div>
 <pre><code>## class       : SpatRaster 
@@ -667,7 +645,7 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="rspatial.html#cb95-1"></a><span class="kw">plot</span>(my_raster)</span></code></pre></div>
 <p><img src="_main_files/figure-html/03-intro-to-rspatial-27-1.png" width="672" /></p>
 <div id="conversions" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.4.1</span> Conversions<a href="rspatial.html#conversions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">2.3.1</span> Conversions<a href="rspatial.html#conversions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><a href="https://geocompr.github.io/post/2021/spatial-classes-conversion/" class="uri">https://geocompr.github.io/post/2021/spatial-classes-conversion/</a></p>
 
 </div>
