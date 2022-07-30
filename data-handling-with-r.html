@@ -339,8 +339,7 @@ It is French for assignment ;)-->
 <blockquote>
 <p>In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. <span class="citation">Wickham and Bryan (<a href="#ref-wickham2022Packages" role="doc-biblioref">2022</a>)</span></p>
 </blockquote>
-<p>You already saw how to install packages with the <code>install.packages()</code> function,
-let’s see how to load the <a href="https://dplyr.tidyverse.org/">dplyr</a>
+<p>You already saw how to install packages with the <code>install.packages()</code> function, let’s see how to load the <a href="https://dplyr.tidyverse.org/">{dplyr}</a>
 package we will use to handle the data.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-handling-with-r.html#cb4-1"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <pre><code>## 
@@ -363,9 +362,8 @@ For example, if we want to work with the Gapminder dataset from <a href="https:/
 <span id="cb8-3"><a href="data-handling-with-r.html#cb8-3"></a><span class="co"># download the data and store it in a variable</span></span>
 <span id="cb8-4"><a href="data-handling-with-r.html#cb8-4"></a>gapminder &lt;-<span class="st"> </span><span class="kw">read.csv</span>(data_url)</span></code></pre></div>
 <p>We call this dataset from an URL but it can be a path in your system file.</p>
-<p>For example, if you have installed the gapminder package as recommended,
-you will find the data set as a TSV file in your R installation.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-handling-with-r.html#cb9-1"></a>data_url &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/gapminder.tsv&quot;</span>,<span class="dt">package =</span> <span class="st">&quot;gapminder&quot;</span>)</span>
+<p>For example, if you have installed the gapminder package as recommended, you will find the data set as a TSV file in your R installation.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-handling-with-r.html#cb9-1"></a>data_url &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/gapminder.tsv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;gapminder&quot;</span>)</span>
 <span id="cb9-2"><a href="data-handling-with-r.html#cb9-2"></a>data_url</span></code></pre></div>
 <pre><code>## [1] &quot;/Users/runner/work/_temp/Library/gapminder/extdata/gapminder.tsv&quot;</code></pre>
 <div class="infobox tip">
@@ -375,9 +373,8 @@ of the operating system.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-handling-with-r.html#cb11-1"></a>gapminder &lt;-<span class="st"> </span><span class="kw">read.delim</span>(data_url, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
 <div class="infobox tip">
 <p><code>read.csv()</code> and similar functions can read delimited text files only.
-For other formats, you can use functions from other packages like
-<a href="https://haven.tidyverse.org">Haven</a> or <a href="https://readxl.tidyverse.org/">readxl</a>.
-We will show in <a href="rspatial.html#rspatial">Chapter</a> how to load geospatial data.</p>
+For other formats, you can use functions from other packages like <a href="https://haven.tidyverse.org">Haven</a> or <a href="https://readxl.tidyverse.org/">readxl</a>.
+We will show in Chapter <a href="rspatial.html#rspatial">2</a> how to load geospatial data.</p>
 </div>
 <p>Let’s take a look to our data :</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-handling-with-r.html#cb12-1"></a><span class="kw">glimpse</span>(gapminder)</span></code></pre></div>
@@ -389,8 +386,7 @@ We will show in <a href="rspatial.html#rspatial">Chapter</a> how to load geospat
 ## $ continent &lt;chr&gt; &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asia&quot;, &quot;Asi…
 ## $ lifeExp   &lt;dbl&gt; 28.801, 30.332, 31.997, 34.020, 36.088, 38.438, 39.854, 40.8…
 ## $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.1134, …</code></pre>
-<p>This dataset is about life expectancy, population and GDP per capita in world
-countries between 1952 and 2007.</p>
+<p>This dataset is about life expectancy, population and GDP per capita in world countries between 1952 and 2007.</p>
 <p>You can also use <code>head()</code> for the same purpose but a different output format.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-handling-with-r.html#cb14-1"></a><span class="kw">head</span>(gapminder)</span></code></pre></div>
 <pre><code>##       country year      pop continent lifeExp gdpPercap
@@ -400,8 +396,7 @@ countries between 1952 and 2007.</p>
 ## 4 Afghanistan 1967 11537966      Asia  34.020  836.1971
 ## 5 Afghanistan 1972 13079460      Asia  36.088  739.9811
 ## 6 Afghanistan 1977 14880372      Asia  38.438  786.1134</code></pre>
-<p>We can transform a dataframe into a tibble to access their better <code>print()</code> method
-that combines <code>head()</code> and <code>glimpse()</code>.
+<p>We can transform a dataframe into a tibble to access their better <code>print()</code> method that combines <code>head()</code> and <code>glimpse()</code>.
 Tibbles are at the core of the Tidyverse packages.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-handling-with-r.html#cb16-1"></a>gapminder &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(gapminder)</span>
 <span id="cb16-2"><a href="data-handling-with-r.html#cb16-2"></a>gapminder</span></code></pre></div>
@@ -421,9 +416,7 @@ Tibbles are at the core of the Tidyverse packages.</p>
 ## # … with 1,694 more rows
 ## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <div class="infobox note">
-<p>If you want more information about the <code>gapminder</code> dataset, Hans Rosling made a
-<a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen">TED talk</a>
-presenting the gapminder data.</p>
+<p>If you want more information about the <code>gapminder</code> dataset, Hans Rosling made a <a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen">TED talk</a> presenting the gapminder data.</p>
 </div>
 <p>We can see that it contains several columns (also called <em>variables</em>):</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-handling-with-r.html#cb18-1"></a><span class="kw">names</span>(gapminder)</span></code></pre></div>
@@ -431,13 +424,12 @@ presenting the gapminder data.</p>
 </div>
 <div id="in-the-beginning-was-the-verb" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.6</span> In the beginning was the Verb<a href="data-handling-with-r.html#in-the-beginning-was-the-verb" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><code>dplyr</code> provides a lot of functions to handle data: <code>filter()</code> to filter the data matching
-certain conditions (subset data), <code>select()</code> to select columns, <code>mutate()</code> to create new variables.
+<p>{dplyr} provides a lot of functions to handle data: <code>filter()</code> to filter the data matching certain conditions (subset data), <code>select()</code> to select columns, <code>mutate()</code> to create new variables.
 All those functions are verbs and means an action onto the dataset.</p>
 </div>
 <div id="filter-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.7</span> Filter data<a href="data-handling-with-r.html#filter-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>If we only want the records from Italy, we can filter using</p>
+<p>If we only want the records from Italy, we can filter using:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-handling-with-r.html#cb20-1"></a><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;Italy&quot;</span> )</span></code></pre></div>
 <pre><code>## # A tibble: 12 × 6
 ##    country  year      pop continent lifeExp gdpPercap
@@ -474,7 +466,7 @@ There is also logical operators : <code>&amp;</code> (<em>AND</em>), <code>|</co
 </div>
 <div id="select-columns" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.8</span> Select columns<a href="data-handling-with-r.html#select-columns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><code>select</code>allows you to keep only the columns you need for your analysis.</p>
+<p><code>select()</code> allows you to keep only the columns you need for your analysis.</p>
 <p>Maybe we only want the <code>country</code>, <code>year</code> and <code>lifeExp</code> variables:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-handling-with-r.html#cb24-1"></a><span class="kw">select</span>(italy_<span class="dv">2000</span>, country, year, lifeExp)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
@@ -482,8 +474,7 @@ There is also logical operators : <code>&amp;</code> (<em>AND</em>), <code>|</co
 ##   &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;
 ## 1 Italy    2002    80.2
 ## 2 Italy    2007    80.5</code></pre>
-<p>Or, for example, in the <code>italy_2000</code> subset, the <code>continent</code> variable does not
-provide useful information anymore, so we want to discard it.
+<p>Or, for example, in the <code>italy_2000</code> subset, the <code>continent</code> variable does not provide useful information anymore, so we want to discard it.
 Please not the use of the <code>-</code> symbol before the name of the variable.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-handling-with-r.html#cb26-1"></a><span class="kw">select</span>(italy_<span class="dv">2000</span>, <span class="op">-</span>continent)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
@@ -551,13 +542,12 @@ For that, you can use the <code>mutate()</code> function:</p>
 </div>
 <div id="agregate-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.10</span> Agregate data<a href="data-handling-with-r.html#agregate-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Sometimes, we have a too detailed dataset and we want a more broader view of the data
-so we want to aggregate it.</p>
+<p>Sometimes, we have a too detailed dataset and we want a more broader view of the data so we want to aggregate it.</p>
 <p>To do so, <code>dplyr</code> provides a couple of functions: <code>group_by()</code> and <code>summarise()</code>.
-Like their names says, <code>group_by</code> groups records who share the same value in a variable
-and <code>summarise()</code> compute the summary of non-grouping variables.</p>
+Like their names says, <code>group_by()</code> groups records who share the same value in a variable and <code>summarise()</code> compute the summary of non-grouping variables.</p>
 <p>For example, let’s compute the yearly population of each continent.
-To do this, we first group the data by continent and year and pass the result to <code>summarise(). Into this second function, we create a new variable called</code>population<code>that is the sum of the variable</code>pop` of each group.</p>
+To do this, we first group the data by continent and year and pass the result to <code>summarise()</code>.
+Into this second function, we create a new variable called <code>population</code> that is the sum of the variable <code>pop</code> of each group.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-handling-with-r.html#cb34-1"></a><span class="kw">summarise</span>(<span class="kw">group_by</span>(gapminder, continent, year), <span class="dt">population =</span> <span class="kw">sum</span>(pop))</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;continent&#39;. You can override using the
 ## `.groups` argument.</code></pre>
@@ -577,8 +567,7 @@ To do this, we first group the data by continent and year and pass the result to
 ## 10 Africa     1997  743832984
 ## # … with 50 more rows
 ## # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<p>You can use any function to summarise your data, for example, if you want to know the number of entries
-by continent, you can use <code>n()</code>.</p>
+<p>You can use any function to summarise your data, for example, if you want to know the number of entries by continent, you can use <code>n()</code>.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-handling-with-r.html#cb37-1"></a><span class="kw">summarise</span>(<span class="kw">group_by</span>(gapminder, continent), <span class="dt">count =</span> <span class="kw">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 2
 ##   continent count
@@ -666,17 +655,14 @@ by continent, you can use <code>n()</code>.</p>
 <h2><span class="header-section-number">1.12</span> Piping<a href="data-handling-with-r.html#piping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Piping allows to create a sequence of actions on a dataset without storing intermediate results.</p>
 <p>As it can be difficult to debug piped commands for beginners, we won’t use it in this workshop.
-However, its usage is very frequent so it is most likely that a beginner will encounter it
-in documentation or in code source publicly available.</p>
-<p>The most common form <code>%&gt;%</code> is provided by the package <a href="https://magrittr.tidyverse.org/">magrittr</a>
-which is part of the tidyverse and is a dependency of dplyr, so you don’t have to load it.</p>
-<p>In the following example, we show how to compute the mean GDP by decade of<br />
-Europeans countries using pipes to chain functions.</p>
+However, its usage is very frequent so it is most likely that a beginner will encounter it in documentation or in code source publicly available.</p>
+<p>The most common form <code>%&gt;%</code> is provided by the package <a href="https://magrittr.tidyverse.org/">{magrittr}</a>, which is part of the tidyverse and is a dependency of {dplyr}, so you don’t have to load it.</p>
+<p>In the following example, we show how to compute the mean GDP by decade of Europeans countries using pipes to chain functions.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-handling-with-r.html#cb46-1"></a>gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># pass the datset as the first argument</span></span>
 <span id="cb46-2"><a href="data-handling-with-r.html#cb46-2"></a><span class="st">  </span><span class="kw">filter</span>(continent <span class="op">==</span><span class="st"> &quot;Europe&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># subset on European records</span></span>
 <span id="cb46-3"><a href="data-handling-with-r.html#cb46-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>continent) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># remove the continent column</span></span>
 <span id="cb46-4"><a href="data-handling-with-r.html#cb46-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decade =</span> year <span class="op">-</span><span class="st"> </span>year <span class="op">%%</span><span class="st"> </span><span class="dv">10</span>, <span class="co"># compute decade</span></span>
-<span id="cb46-5"><a href="data-handling-with-r.html#cb46-5"></a>         <span class="dt">GDP =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span> <span class="co"># compute GDP</span></span>
+<span id="cb46-5"><a href="data-handling-with-r.html#cb46-5"></a>         <span class="dt">GDP =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop) <span class="op">/</span><span class="st"> </span><span class="dv">1000000</span> <span class="co"># compute GDP</span></span>
 <span id="cb46-6"><a href="data-handling-with-r.html#cb46-6"></a>         ) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb46-7"><a href="data-handling-with-r.html#cb46-7"></a><span class="st">  </span><span class="kw">group_by</span>(country, decade) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># grouping variables</span></span>
 <span id="cb46-8"><a href="data-handling-with-r.html#cb46-8"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_GDP =</span> <span class="kw">mean</span>(GDP)) <span class="co"># compute mean GDP of the decade</span></span></code></pre></div>
@@ -703,7 +689,7 @@ Europeans countries using pipes to chain functions.</p>
 <span id="cb49-2"><a href="data-handling-with-r.html#cb49-2"></a><span class="st">  </span><span class="kw">filter</span>(continent <span class="op">==</span><span class="st"> &quot;Europe&quot;</span>) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="co"># subset on European records</span></span>
 <span id="cb49-3"><a href="data-handling-with-r.html#cb49-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>continent) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="co"># remove the continent column</span></span>
 <span id="cb49-4"><a href="data-handling-with-r.html#cb49-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decade =</span> year <span class="op">-</span><span class="st"> </span>year <span class="op">%%</span><span class="st"> </span><span class="dv">10</span>, <span class="co"># compute decade</span></span>
-<span id="cb49-5"><a href="data-handling-with-r.html#cb49-5"></a>         <span class="dt">GDP =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span> <span class="co"># compute GDP</span></span>
+<span id="cb49-5"><a href="data-handling-with-r.html#cb49-5"></a>         <span class="dt">GDP =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop) <span class="op">/</span><span class="st"> </span><span class="dv">1000000</span> <span class="co"># compute GDP</span></span>
 <span id="cb49-6"><a href="data-handling-with-r.html#cb49-6"></a>         ) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
 <span id="cb49-7"><a href="data-handling-with-r.html#cb49-7"></a><span class="st">  </span><span class="kw">group_by</span>(country, decade) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="co"># grouping variables</span></span>
 <span id="cb49-8"><a href="data-handling-with-r.html#cb49-8"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_GDP =</span> <span class="kw">mean</span>(GDP)) <span class="co"># compute mean GDP of the decade</span></span></code></pre></div>
