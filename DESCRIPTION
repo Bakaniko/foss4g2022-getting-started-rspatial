@@ -12,8 +12,6 @@ Imports:
   spData,
   sf,
   terra,
-  fields,
-  gstat,
   supercells,
   here
 Remotes:
