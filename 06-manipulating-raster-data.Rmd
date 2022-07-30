@@ -56,7 +56,7 @@ tm_shape(srtm) +
             palette = "-Spectral") +
   tm_scale_bar(breaks = c(0, 2, 4),
                text.size = 1) +
-  tm_credits("Jakub Nowosad, 2022") +
+  tm_credits("N. Roelandt and J. Nowosad") +
   tm_layout(inner.margins = 0,
             main.title = "Zion National Park")
 ```
@@ -529,10 +529,78 @@ writeRaster(nlcd, filename = "nlcd3.tif", filetype = "COG")
 
 To learn more about raster writing visit the [Geocomputation with R ](https://geocompr.robinlovelace.net/read-write.html#data-output) book and the [official GDAL](https://gdal.org/drivers/raster/gtiff.html) documentation. 
 
-
 ## Exercises
 
-<!-- try hillshade -->
-<!-- create a map of nlcd -->
-<!-- https://bleutner.github.io/RStoolbox/rstbx-docu/spectralIndices.html -->
-<!-- - global + freq + areas (cellSize()) -->
+Read the following datasets:
+
+```{r}
+nz_elev <- rast(system.file("raster/nz_elev.tif", package = "spDataLarge"))
+data("nz", package = "spData")
+data("nz_height", package = "spData")
+```
+
+E1. Create a map of `nz_elev` (raster), `nz` (polygon), and `nz_height` (point) datasets.
+
+```{r}
+#| include = FALSE
+tm_shape(nz_elev) +
+  tm_raster() +
+  tm_shape(nz) +
+  tm_polygons(alpha = 0.3) +
+  tm_shape(nz_height) +
+  tm_symbols(size = 0.1)
+```
+
+E2. Reclassify the `nz_elev` into three groups of values: below 300 (as `1`), between 300 and 600 (as `2`), and above 600 m asl (as `3`).
+
+```{r}
+#| include = FALSE
+rct <- matrix(c(-Inf, 300, 1, 300, 600, 2, 600, Inf, 3), ncol = 3, byrow = TRUE)
+nz_elev_cat <- classify(nz_elev, rct)
+```
+
+E3. Extract average elevation for each of the New Zealand region (Hints: read about the `fun` argument of `?terra::extract`; you will also need to add `na.rm = TRUE` to your function call).
+Which region has the highest average elevation?
+Plot the results.
+
+```{r}
+#| include = FALSE
+avg_elev <- extract(nz_elev, nz, fun = "mean", na.rm = TRUE)
+nz_elevp <- cbind(nz, avg_elev)
+tm_shape(nz_elevp) +
+  tm_polygons(col = "elevation")
+```
+
+E4. Calculate the GNDVI index (see its equation at https://bleutner.github.io/RStoolbox/rstbx-docu/spectralIndices.html) based on the `landsat` dataset.
+Compare the obtained values of GNDVI with the previously calculated values of NDVI.
+
+```{r}
+#| include = FALSE
+gndvi_fun <- function(nir, green){
+  (nir - green) / (nir + green)
+}
+gndvi <- lapp(landsat[[c(4, 2)]], fun = gndvi_fun)
+cor(gndvi[], ndvi[])
+plot(gndvi, ndvi)
+plot(ndvi - gndvi)
+plot(abs(ndvi - gndvi))
+```
+
+E5. Bonus: see the documentation of the `shade()` function, `?shade`, and try to create a hillshade map of New Zealand.
+
+```{r}
+#| include = FALSE
+slope <- terrain(nz_elev, "slope", unit = "radians")
+aspect <- terrain(nz_elev, "aspect", unit = "radians")
+hill <- shade(slope, aspect, 40, 270)
+
+# base R plot
+plot(hill, col = grey(0:100/100), legend = FALSE, mar = c(2, 2, 1, 4))
+plot(nz_elev, col = terrain.colors(25, alpha = 0.35), add = TRUE)
+
+# tmap
+tm_shape(hill) +
+  tm_raster(palette = grey(0:100/100), style = "cont", legend.show = FALSE) +
+  tm_shape(nz_elev) +
+  tm_raster(palette = terrain.colors(25), alpha = 0.35, style = "cont")
+```
