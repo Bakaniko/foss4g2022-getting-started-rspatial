@@ -320,7 +320,7 @@ gapminder %>% # pass the datset as the first argument
   filter(continent == "Europe") %>% # subset on European records
   select(-continent) %>% # remove the continent column
   mutate(decade = year - year %% 10, # compute decade
-         GDP = (gdpPercap * pop)/ 1000000 # compute GDP
+         GDP = (gdpPercap * pop) / 1000000 # compute GDP
          ) %>% 
   group_by(country, decade) %>% # grouping variables
   summarise(mean_GDP = mean(GDP)) # compute mean GDP of the decade
@@ -333,7 +333,7 @@ gapminder |> # pass the datset as the first argument
   filter(continent == "Europe") |> # subset on European records
   select(-continent) |> # remove the continent column
   mutate(decade = year - year %% 10, # compute decade
-         GDP = (gdpPercap * pop)/ 1000000 # compute GDP
+         GDP = (gdpPercap * pop) / 1000000 # compute GDP
          ) |> 
   group_by(country, decade) |> # grouping variables
   summarise(mean_GDP = mean(GDP)) # compute mean GDP of the decade
