@@ -1,37 +1,45 @@
 # Summary {-}
 
 <!-- (Jakub) Closing of the workshop (5 min) -->
+<!-- [Legacy](https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial) - -->
 
+Several entry points for users looking for help and information our R-spatial exist.
+Two informal organizations curate the following websites:
 
----
-class: inverse, left, bottom
-# Summary
+- `r-spatial` with a hyphen - https://www.r-spatial.org/: it is a home of {sf} package
+- `rspatial` without a hyphen - https://www.rspatial.org/:  it is a home of {terra} package
 
-Many resources are available:
+Additionally, the https://geocompr.github.io/ website is the main home of the Geocomputation with R book.
 
-- **terra** - https://rspatial.github.io/terra/reference/terra-package.html and https://rspatial.org/terra/index.html
-- **raster** - https://rspatial.org/raster/ and https://rpubs.com/etiennebr/visualraster
-- **stars** - https://r-spatial.github.io/stars/index.html and https://r-spatial.org/book/
-- https://geocompr.github.io/
-- https://spacetimewithr.org/Spatio-Temporal%20Statistics%20with%20R.pdf
-- https://jean-romain.github.io/lidRbook/index.html
-- More...
+Currently, there are many R-spatial resources available online.
+It includes many books and extended documentation, for example:
 
-**Sometimes conversion between classes is crucial!**
+- [The lidR package](https://r-lidar.github.io/lidRbook/)
+- [The tmap book](https://r-tmap.github.io/)
+- [Spatial Data Science with applications in R](https://r-spatial.org/book/)
+- [Geospatial Data Science With R: Applications in Environmental Geography](https://www.bookdown.org/mcwimberly/gdswr-book/)
+- [Spatial Modelling for Data Scientists](https://gdsl-ul.github.io/san/)
 
+New updates on R and R-spatial may be found at https://www.r-bloggers.com/ and https://rweekly.org/.
+Twitter can also be a nice place to share and discuss your work with hashtags `#rspatial` and `#geocompr`.
 
-Ask for help, if needed:
+If you need help, you can ask questions on various websites, including:
 
 - https://stackoverflow.com/questions/tagged/r
 - https://gis.stackexchange.com/questions/tagged/r
 - https://community.rstudio.com/
 - https://stat.ethz.ch/mailman/listinfo/r-sig-geo
 
-Contribute something:
+It is just important to remember that [conversion between spatial classes](https://geocompr.github.io/post/2021/spatial-classes-conversion/) is sometimes crucial!
 
-- https://github.com/
+Finally, we encourage you to contribute something:
+
 - Provide suggestions 
 - Write bugs reports
 - Make improvements to the documentation, e.g., clarifying unclear sentences, fixing typos
 - Make changes to the code, e.g., to do things in a more efficient way
 - Share your work with #rspatial on Twitter
+
+All of the activities improve not only your work, but also the work of many others.
+
+Good luck!
