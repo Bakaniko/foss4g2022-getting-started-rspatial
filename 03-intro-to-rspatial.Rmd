@@ -92,12 +92,6 @@ When we print the object, it also provides a header with some basic spatial info
 world
 ```
 
-We can quickly plot the object with the `plot()` function:
-
-```{r}
-plot(world)
-```
-
 It is also possible to extract all of the spatial information with several specific functions.
 For example, `st_crs()` is used to get information about the coordinate reference system of the given object:
 
@@ -111,6 +105,12 @@ We can even extract different CRS definition with:
 st_crs(world)$wkt
 st_crs(world)$srid
 st_crs(world)$proj4string
+```
+
+We can quickly plot the object with the `plot()` function:
+
+```{r}
+plot(world)
 ```
 
 Let's move to a different data example.
@@ -141,52 +141,47 @@ To learn more read https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-201
 
 ## Raster data
 
-- [**terra**](https://github.com/rspatial/terra)
-- [**raster**](https://github.com/rspatial/raster)
-- [**stars**](https://github.com/r-spatial/stars)
+The [{terra}](https://github.com/rspatial/terra) package contains classes and methods representing raster objects and operations.
+It allows raster data to be loaded and saved, provides raster algebra and raster processing, and includes a number of additional functions, e.g., for analysis of terrain characteristics.
+It also works well on large sets of data.
+
+Similarly to {sf}, {terra} also uses many external libraries, but also enables many R packages (Figure \@ref(fig:03-intro-to-rspatial-17)).
 
 ```{r 03-intro-to-rspatial-17}
 #| echo = FALSE
 knitr::include_graphics("figs/terra-libs.png")
 ```
 
-- The **terra** package contains classes and methods representing raster objects and operations
-- It allows raster data to be loaded and saved
-- It allows raster algebra and raster processing
-- It includes a number of additional functions, e.g., for analysis of terrain characteristics
-- It allows you to work on large sets of data
-- ?`terra-package`, https://rspatial.github.io/terra/reference/terra-package.html
-- It is a successor of the **raster** package - http://www.rpubs.com/etiennebr/visualraster
-- The **terra** package contains classes and methods representing raster objects and operations
-
+To read a spatial raster file, we just need to provide its file path to the `rast()` function:
 
 ```{r 03-intro-to-rspatial-18 }
 library(terra)
-elev = rast(system.file("raster/elev.tif", package = "spData"))
-elev
+raster_filepath = system.file("raster/srtm.tif", package = "spDataLarge")
+new_raster = rast(raster_filepath)
 ```
+
+Now, we can look at the summary of our data by typing the object's name:
+
+```{r}
+new_raster
+```
+
+It provides us information about the raster dimensions, resolution, CRS, etc.
+`crs()` is used to get information about the coordinate reference system of the given {terra} object:
+
+```{r 03-intro-to-rspatial-22}
+crs(new_raster)
+crs(new_raster, describe = TRUE, proj = TRUE)
+```
+
+We are also able to create quick visualization with `plot()`:
 
 ```{r 03-intro-to-rspatial-19 }
 plot(elev)
 ```
 
-```{r 03-intro-to-rspatial-20}
-elev[]
-```
-
-```{r 03-intro-to-rspatial-21 }
-raster_filepath = system.file("raster/srtm.tif", package = "spDataLarge")
-new_raster = rast(raster_filepath)
-new_raster
-```
-
-```{r 03-intro-to-rspatial-22}
-crs(new_raster)
-```
-
-```{r 03-intro-to-rspatial-23}
-crs(new_raster, describe = TRUE, proj = TRUE)
-```
+The {terra} package also supports multi-layered raster files.
+For example, the `landsat.tif` file has four bands:
 
 ```{r 03-intro-to-rspatial-24 }
 raster_filepath2 = system.file("raster/landsat.tif", package = "spDataLarge")
@@ -194,22 +189,28 @@ new_raster2 = rast(raster_filepath2)
 plot(new_raster2)
 ```
 
+In this case, we are also able to plot three layers with `plotRGB()`:
+
 ```{r 03-intro-to-rspatial-25}
 plotRGB(new_raster2, r = 3, g = 2, b = 1, stretch = "lin")
 ```
 
-```{r 03-intro-to-rspatial-26 }
-my_raster = rast(nrows = 10, ncols = 20, 
-                 xmin = 0, xmax = 20, ymin = -10, ymax = 0,
-                 crs = "EPSG:4326",
-                 vals = 1:200)
-my_raster
+Sometimes, we want to create a raster from scratch. 
+This is also possible with the `rast()` function:
 
+```{r 03-intro-to-rspatial-26 }
+my_raster = rast(nrows = 10, ncols = 20, xmin = 0, xmax = 20, ymin = -10, ymax = 0,
+                 crs = "EPSG:4326", vals = 1:200)
+my_raster
 ```
+
+Let's plot our new object:
 
 ```{r 03-intro-to-rspatial-27}
 plot(my_raster)
 ```
+
+To learn more about the package type ``?`terra-package``` or visit https://rspatial.github.io/terra/reference/terra-package.html.
 
 ### Conversions
 
