@@ -43,9 +43,9 @@ knitr::include_graphics("https://geocompr.robinlovelace.net/figures/01-cranlogs.
 
 ## Vector data
 
-- [**sf**](https://github.com/r-spatial/sf)
-- [**sp**](https://github.com/edzer/sp)
-- [**terra**](https://github.com/rspatial/terra)
+The [{sf}](https://github.com/r-spatial/sf) package based on the OGC standard Simple Features.
+It allows to read, process, visualize, and write various spatial data files.
+As you can see in Figure \@ref(fig:03-intro-to-rspatial-2), the {sf} package does not exist in void.
 
 ```{r 03-intro-to-rspatial-2}
 #| echo = FALSE,
@@ -53,65 +53,69 @@ knitr::include_graphics("https://geocompr.robinlovelace.net/figures/01-cranlogs.
 knitr::include_graphics("https://keen-swartz-3146c4.netlify.com/images/sf_deps.png")
 ```
 
-- The **sf** package is the successor of the **sp** package based on the OGC standard Simple Features
-- https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf
-- Combines the functionality of three previous packages: **sp**, **rgeos** and **rgdal**
-- https://www.mail-archive.com/r-sig-geo@r-project.org/msg18468.html
-- https://github.com/r-spatial/sf/wiki/Migrating
-- Most of the functions in this package start with a prefix `st_`
+First, it is built upon several external libraries, including GDAL, PROJ, GEOS, and s2geometry.
+Second, it uses several R packages, such as {s2}, {units}, {DBI}.
+Third, it is a basis of a few hundred of other R packages.
+
+{sf} represent all common vector geometry types (Figure \@ref(fig:03-intro-to-rspatial-4)): points, lines, polygons and their respective ‘multi’ versions.
+It also also supports geometry collections.
+
+```{r 03-intro-to-rspatial-4, purl=FALSE,echo=FALSE, out.width="90%"}
+knitr::include_graphics("figs/sf-classes.png", dpi = NA)
+```
+
+Most of the functions in this package start with a prefix `st_`:
 
 ```{r 03-intro-to-rspatial-3, echo=TRUE}
 library(sf)
-# lsf.str("package:sf")
 ls("package:sf")
 ```
 
-
-```{r 03-intro-to-rspatial-4, purl=FALSE,echo=FALSE, out.width="90%"}
-# knitr::include_graphics("figs/sf-classes.png", dpi = NA)
-```
-
-- This package handles additional vector data types (e.g. polygon and multipolygon are two separate classes), allows for easier data processing, and support for spatial databases such as PostGIS
-- https://r-spatial.github.io/sf/ and https://github.com/rstudio/cheatsheets/blob/master/sf.pdf
-
-```{r 03-intro-to-rspatial-5 }
-library(spData)
-
-world
-```
-
-```{r 03-intro-to-rspatial-6 }
-plot(world)
-```
+Most often, the first step in spatial data analysis in R is to read the data.
+Here, we will read example file stored in the {spData} package:
 
 ```{r 03-intro-to-rspatial-7 }
 file_path = system.file("shapes/world.gpkg", package = "spData")
 file_path
 ```
 
+To read a spatial vector file, we just need to provide a file path to the `read_sf()` function:^[There is also a second similar function allowing to read spatial vector files called `st_read()`.]
+
 ```{r 03-intro-to-rspatial-8 }
 world = read_sf(file_path)
 ```
+
+Our new object is an extended data frame with several non-spatial attributes and one special column `geom`.
+When we print the object, it also provides a header with some basic spatial information:
 
 ```{r 03-intro-to-rspatial-9}
 world
 ```
 
+We can quickly plot the object with the `plot()` function:
+
+```{r}
+plot(world)
+```
+
+It is also possible to extract all of the spatial information with several specific functions.
+For example, `st_crs()` is used to get information about the coordinate reference system of the given object:
+
 ```{r 03-intro-to-rspatial-10}
 st_crs(world)
 ```
 
+We can even extract different CRS definition with:
+
 ```{r 03-intro-to-rspatial-11}
 st_crs(world)$wkt
-```
-
-```{r 03-intro-to-rspatial-12}
 st_crs(world)$srid
-```
-
-```{r 03-intro-to-rspatial-13}
 st_crs(world)$proj4string
 ```
+
+Let's move to a different data example.
+What to do when our data is stored in a text file (instead of a spatial file format)?
+Then, we can read it as a regular data frame with `read.csv`:
 
 ```{r 03-intro-to-rspatial-14 }
 cycle_hire_path = system.file("misc/cycle_hire_xy.csv", package = "spData")
@@ -119,14 +123,21 @@ cycle_hire_txt = read.csv(cycle_hire_path)
 head(cycle_hire_txt)
 ```
 
+Next, we need to convert it into a spatial {sf} object with `st_as_sf()` by providing which columns contain coordinates, and what is the CRS of the data:
+
 ```{r 03-intro-to-rspatial-15}
 cycle_hire_xy = st_as_sf(cycle_hire_txt, coords = c("X", "Y"), crs = "EPSG:4326")
 cycle_hire_xy
 ```
 
+Now, we are able to plot and analyse the data:
+
 ```{r 03-intro-to-rspatial-16}
 plot(cycle_hire_xy)
 ```
+
+We will give more example of the {sf} use in Chapter \@ref(manipulating-vector-data).
+To learn more read https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf and visit https://r-spatial.github.io/sf/.
 
 ## Raster data
 
