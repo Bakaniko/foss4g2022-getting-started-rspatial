@@ -210,8 +210,13 @@ Let's plot our new object:
 plot(my_raster)
 ```
 
+<<<<<<< HEAD
 To learn more about the package type ``?`terra-package``` or visit https://rspatial.github.io/terra/reference/terra-package.html.
 
 ### Conversions
 
 https://geocompr.github.io/post/2021/spatial-classes-conversion/
+=======
+We will give more example of the {terra} use in Chapter \@ref(manipulating-raster-data).
+To learn more about the package type ``?`terra-package``` or visit https://rspatial.github.io/terra/reference/terra-package.html.
+>>>>>>> 38f48b6 (adds raster text)
