@@ -177,7 +177,7 @@ crs(new_raster, describe = TRUE, proj = TRUE)
 We are also able to create quick visualization with `plot()`:
 
 ```{r 03-intro-to-rspatial-19 }
-plot(elev)
+plot(new_raster)
 ```
 
 The {terra} package also supports multi-layered raster files.
