@@ -180,9 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="rspatial.html"><a href="rspatial.html"><i class="fa fa-check"></i><b>2</b> Introduction to the R-spatial ecosystem</a><ul>
 <li class="chapter" data-level="2.1" data-path="rspatial.html"><a href="rspatial.html#rs-spatial-ecosystems"><i class="fa fa-check"></i><b>2.1</b> R’s spatial ecosystem(s)</a></li>
 <li class="chapter" data-level="2.2" data-path="rspatial.html"><a href="rspatial.html#vector-data"><i class="fa fa-check"></i><b>2.2</b> Vector data</a></li>
-<li class="chapter" data-level="2.3" data-path="rspatial.html"><a href="rspatial.html#raster-data"><i class="fa fa-check"></i><b>2.3</b> Raster data</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="rspatial.html"><a href="rspatial.html#conversions"><i class="fa fa-check"></i><b>2.3.1</b> Conversions</a></li>
-</ul></li>
+<li class="chapter" data-level="2.3" data-path="rspatial.html"><a href="rspatial.html#raster-data"><i class="fa fa-check"></i><b>2.3</b> Raster data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="making-maps-in-r.html"><a href="making-maps-in-r.html"><i class="fa fa-check"></i><b>3</b> Making maps in R</a><ul>
 <li class="chapter" data-level="3.1" data-path="making-maps-in-r.html"><a href="making-maps-in-r.html#mapping-tools-in-r"><i class="fa fa-check"></i><b>3.1</b> Mapping tools in R</a></li>
@@ -307,29 +305,25 @@ Figure 2.1: Source: <a href="https://geocompr.robinlovelace.net" class="uri">htt
 </div>
 <div id="vector-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.2</span> Vector data<a href="rspatial.html#vector-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><a href="https://github.com/r-spatial/sf"><strong>sf</strong></a></li>
-<li><a href="https://github.com/edzer/sp"><strong>sp</strong></a></li>
-<li><a href="https://github.com/rspatial/terra"><strong>terra</strong></a></li>
-</ul>
+<p>The <a href="https://github.com/r-spatial/sf">{sf}</a> package based on the OGC standard Simple Features.
+It allows to read, process, visualize, and write various spatial data files.
+As you can see in Figure <a href="rspatial.html#fig:03-intro-to-rspatial-2">2.2</a>, the {sf} package does not exist in void.</p>
 <div class="figure"><span style="display:block;" id="fig:03-intro-to-rspatial-2"></span>
 <img src="https://keen-swartz-3146c4.netlify.com/images/sf_deps.png" alt="Source: https://www.r-spatial.org/r/2020/03/17/wkt.html"  />
 <p class="caption">
 Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" class="uri">https://www.r-spatial.org/r/2020/03/17/wkt.html</a>
 </p>
 </div>
-<ul>
-<li>The <strong>sf</strong> package is the successor of the <strong>sp</strong> package based on the OGC standard Simple Features</li>
-<li><a href="https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf" class="uri">https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf</a></li>
-<li>Combines the functionality of three previous packages: <strong>sp</strong>, <strong>rgeos</strong> and <strong>rgdal</strong></li>
-<li><a href="https://www.mail-archive.com/r-sig-geo@r-project.org/msg18468.html" class="uri">https://www.mail-archive.com/r-sig-geo@r-project.org/msg18468.html</a></li>
-<li><a href="https://github.com/r-spatial/sf/wiki/Migrating" class="uri">https://github.com/r-spatial/sf/wiki/Migrating</a></li>
-<li>Most of the functions in this package start with a prefix <code>st_</code></li>
-</ul>
+<p>First, it is built upon several external libraries, including GDAL, PROJ, GEOS, and s2geometry.
+Second, it uses several R packages, such as {s2}, {units}, {DBI}.
+Third, it is a basis of a few hundred of other R packages.</p>
+<p>{sf} represent all common vector geometry types (Figure <a href="#fig:03-intro-to-rspatial-4"><strong>??</strong></a>): points, lines, polygons and their respective ‘multi’ versions.
+It also also supports geometry collections.</p>
+<p><img src="figs/sf-classes.png" width="90%" /></p>
+<p>Most of the functions in this package start with a prefix <code>st_</code>:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="rspatial.html#cb52-1"></a><span class="kw">library</span>(sf)</span></code></pre></div>
 <pre><code>## Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 7.2.0; sf_use_s2() is TRUE</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="rspatial.html#cb54-1"></a><span class="co"># lsf.str(&quot;package:sf&quot;)</span></span>
-<span id="cb54-2"><a href="rspatial.html#cb54-2"></a><span class="kw">ls</span>(<span class="st">&quot;package:sf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="rspatial.html#cb54-1"></a><span class="kw">ls</span>(<span class="st">&quot;package:sf&quot;</span>)</span></code></pre></div>
 <pre><code>##   [1] &quot;%&gt;%&quot;                          &quot;as_Spatial&quot;                  
 ##   [3] &quot;dbDataType&quot;                   &quot;dbWriteTable&quot;                
 ##   [5] &quot;gdal_addo&quot;                    &quot;gdal_create&quot;                 
@@ -403,44 +397,16 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 ## [141] &quot;st_write_db&quot;                  &quot;st_z_range&quot;                  
 ## [143] &quot;st_zm&quot;                        &quot;vec_cast.sfc&quot;                
 ## [145] &quot;vec_ptype2.sfc&quot;               &quot;write_sf&quot;</code></pre>
-<ul>
-<li>This package handles additional vector data types (e.g. polygon and multipolygon are two separate classes), allows for easier data processing, and support for spatial databases such as PostGIS</li>
-<li><a href="https://r-spatial.github.io/sf/" class="uri">https://r-spatial.github.io/sf/</a> and <a href="https://github.com/rstudio/cheatsheets/blob/master/sf.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/master/sf.pdf</a></li>
-</ul>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="rspatial.html#cb56-1"></a><span class="kw">library</span>(spData)</span>
-<span id="cb56-2"><a href="rspatial.html#cb56-2"></a></span>
-<span id="cb56-3"><a href="rspatial.html#cb56-3"></a>world</span></code></pre></div>
-<pre><code>## Simple feature collection with 177 features and 10 fields
-## Geometry type: MULTIPOLYGON
-## Dimension:     XY
-## Bounding box:  xmin: -180 ymin: -89.9 xmax: 180 ymax: 83.64513
-## Geodetic CRS:  WGS 84
-## # A tibble: 177 × 11
-##    iso_a2 name_l…¹ conti…² regio…³ subre…⁴ type  area_…⁵     pop lifeExp gdpPe…⁶
-##  * &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1 FJ     Fiji     Oceania Oceania Melane… Sove…  1.93e4  8.86e5    70.0   8222.
-##  2 TZ     Tanzania Africa  Africa  Easter… Sove…  9.33e5  5.22e7    64.2   2402.
-##  3 EH     Western… Africa  Africa  Northe… Inde…  9.63e4 NA         NA       NA 
-##  4 CA     Canada   North … Americ… Northe… Sove…  1.00e7  3.55e7    82.0  43079.
-##  5 US     United … North … Americ… Northe… Coun…  9.51e6  3.19e8    78.8  51922.
-##  6 KZ     Kazakhs… Asia    Asia    Centra… Sove…  2.73e6  1.73e7    71.6  23587.
-##  7 UZ     Uzbekis… Asia    Asia    Centra… Sove…  4.61e5  3.08e7    71.0   5371.
-##  8 PG     Papua N… Oceania Oceania Melane… Sove…  4.65e5  7.76e6    65.2   3709.
-##  9 ID     Indones… Asia    Asia    South-… Sove…  1.82e6  2.55e8    68.9  10003.
-## 10 AR     Argenti… South … Americ… South … Sove…  2.78e6  4.30e7    76.3  18798.
-## # … with 167 more rows, 1 more variable: geom &lt;MULTIPOLYGON [°]&gt;, and
-## #   abbreviated variable names ¹​name_long, ²​continent, ³​region_un, ⁴​subregion,
-## #   ⁵​area_km2, ⁶​gdpPercap
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="rspatial.html#cb58-1"></a><span class="kw">plot</span>(world)</span></code></pre></div>
-<pre><code>## Warning: plotting the first 9 out of 10 attributes; use max.plot = 10 to plot
-## all</code></pre>
-<p><img src="_main_files/figure-html/03-intro-to-rspatial-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="rspatial.html#cb60-1"></a>file_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;shapes/world.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>)</span>
-<span id="cb60-2"><a href="rspatial.html#cb60-2"></a>file_path</span></code></pre></div>
+<p>Most often, the first step in spatial data analysis in R is to read the data.
+Here, we will read example file stored in the {spData} package:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="rspatial.html#cb56-1"></a>file_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;shapes/world.gpkg&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>)</span>
+<span id="cb56-2"><a href="rspatial.html#cb56-2"></a>file_path</span></code></pre></div>
 <pre><code>## [1] &quot;/Users/runner/work/_temp/Library/spData/shapes/world.gpkg&quot;</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="rspatial.html#cb62-1"></a>world =<span class="st"> </span><span class="kw">read_sf</span>(file_path)</span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="rspatial.html#cb63-1"></a>world</span></code></pre></div>
+<p>To read a spatial vector file, we just need to provide a file path to the <code>read_sf()</code> function:<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="rspatial.html#cb58-1"></a>world =<span class="st"> </span><span class="kw">read_sf</span>(file_path)</span></code></pre></div>
+<p>Our new object is an extended data frame with several non-spatial attributes and one special column <code>geom</code>.
+When we print the object, it also provides a header with some basic spatial information:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="rspatial.html#cb59-1"></a>world</span></code></pre></div>
 <pre><code>## Simple feature collection with 177 features and 10 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -463,7 +429,9 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 ## #   abbreviated variable names ¹​name_long, ²​continent, ³​region_un, ⁴​subregion,
 ## #   ⁵​area_km2, ⁶​gdpPercap
 ## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="rspatial.html#cb65-1"></a><span class="kw">st_crs</span>(world)</span></code></pre></div>
+<p>It is also possible to extract all of the spatial information with several specific functions.
+For example, <code>st_crs()</code> is used to get information about the coordinate reference system of the given object:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="rspatial.html#cb61-1"></a><span class="kw">st_crs</span>(world)</span></code></pre></div>
 <pre><code>## Coordinate Reference System:
 ##   User input: WGS 84 
 ##   wkt:
@@ -485,15 +453,24 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 ##         AREA[&quot;World.&quot;],
 ##         BBOX[-90,-180,90,180]],
 ##     ID[&quot;EPSG&quot;,4326]]</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="rspatial.html#cb67-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>wkt</span></code></pre></div>
+<p>We can even extract different CRS definition with:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="rspatial.html#cb63-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>wkt</span></code></pre></div>
 <pre><code>## [1] &quot;GEOGCRS[\&quot;WGS 84\&quot;,\n    DATUM[\&quot;World Geodetic System 1984\&quot;,\n        ELLIPSOID[\&quot;WGS 84\&quot;,6378137,298.257223563,\n            LENGTHUNIT[\&quot;metre\&quot;,1]]],\n    PRIMEM[\&quot;Greenwich\&quot;,0,\n        ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\&quot;geodetic latitude (Lat)\&quot;,north,\n            ORDER[1],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n        AXIS[\&quot;geodetic longitude (Lon)\&quot;,east,\n            ORDER[2],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    USAGE[\n        SCOPE[\&quot;Horizontal component of 3D system.\&quot;],\n        AREA[\&quot;World.\&quot;],\n        BBOX[-90,-180,90,180]],\n    ID[\&quot;EPSG\&quot;,4326]]&quot;</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="rspatial.html#cb69-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>srid</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="rspatial.html#cb65-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>srid</span></code></pre></div>
 <pre><code>## [1] &quot;EPSG:4326&quot;</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="rspatial.html#cb71-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>proj4string</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="rspatial.html#cb67-1"></a><span class="kw">st_crs</span>(world)<span class="op">$</span>proj4string</span></code></pre></div>
 <pre><code>## [1] &quot;+proj=longlat +datum=WGS84 +no_defs&quot;</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="rspatial.html#cb73-1"></a>cycle_hire_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;misc/cycle_hire_xy.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>)</span>
-<span id="cb73-2"><a href="rspatial.html#cb73-2"></a>cycle_hire_txt =<span class="st"> </span><span class="kw">read.csv</span>(cycle_hire_path)</span>
-<span id="cb73-3"><a href="rspatial.html#cb73-3"></a><span class="kw">head</span>(cycle_hire_txt)</span></code></pre></div>
+<p>We can quickly plot the object with the <code>plot()</code> function:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="rspatial.html#cb69-1"></a><span class="kw">plot</span>(world)</span></code></pre></div>
+<pre><code>## Warning: plotting the first 9 out of 10 attributes; use max.plot = 10 to plot
+## all</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Let’s move to a different data example.
+What to do when our data is stored in a text file (instead of a spatial file format)?
+Then, we can read it as a regular data frame with <code>read.csv</code>:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="rspatial.html#cb71-1"></a>cycle_hire_path =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;misc/cycle_hire_xy.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>)</span>
+<span id="cb71-2"><a href="rspatial.html#cb71-2"></a>cycle_hire_txt =<span class="st"> </span><span class="kw">read.csv</span>(cycle_hire_path)</span>
+<span id="cb71-3"><a href="rspatial.html#cb71-3"></a><span class="kw">head</span>(cycle_hire_txt)</span></code></pre></div>
 <pre><code>##             X        Y id               name             area nbikes nempty
 ## 1 -0.10997053 51.52916  1       River Street      Clerkenwell      4     14
 ## 2 -0.19757425 51.49961  2 Phillimore Gardens       Kensington      2     34
@@ -501,8 +478,9 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 ## 4 -0.12097369 51.53006  4  St. Chad&#39;s Street     King&#39;s Cross      4     19
 ## 5 -0.15687600 51.49313  5     Sedding Street    Sloane Square     15     12
 ## 6 -0.14422888 51.51812  6 Broadcasting House       Marylebone      0     18</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="rspatial.html#cb75-1"></a>cycle_hire_xy =<span class="st"> </span><span class="kw">st_as_sf</span>(cycle_hire_txt, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dt">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>)</span>
-<span id="cb75-2"><a href="rspatial.html#cb75-2"></a>cycle_hire_xy</span></code></pre></div>
+<p>Next, we need to convert it into a spatial {sf} object with <code>st_as_sf()</code> by providing which columns contain coordinates, and what is the CRS of the data:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="rspatial.html#cb73-1"></a>cycle_hire_xy =<span class="st"> </span><span class="kw">st_as_sf</span>(cycle_hire_txt, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="dt">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>)</span>
+<span id="cb73-2"><a href="rspatial.html#cb73-2"></a>cycle_hire_xy</span></code></pre></div>
 <pre><code>## Simple feature collection with 742 features and 5 fields
 ## Geometry type: POINT
 ## Dimension:     XY
@@ -531,83 +509,26 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 ## 8   POINT (-0.1701345 51.52834)
 ## 9  POINT (-0.09644075 51.50739)
 ## 10 POINT (-0.09275416 51.50597)</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="rspatial.html#cb77-1"></a><span class="kw">plot</span>(cycle_hire_xy)</span></code></pre></div>
+<p>Now, we are able to plot and analyse the data:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="rspatial.html#cb75-1"></a><span class="kw">plot</span>(cycle_hire_xy)</span></code></pre></div>
 <p><img src="_main_files/figure-html/03-intro-to-rspatial-16-1.png" width="672" /></p>
+<p>We will give more example of the {sf} use in Chapter <a href="manipulating-vector-data.html#manipulating-vector-data">4</a>.
+To learn more read <a href="https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf" class="uri">https://journal.r-project.org/archive/2018/RJ-2018-009/RJ-2018-009.pdf</a> and visit <a href="https://r-spatial.github.io/sf/" class="uri">https://r-spatial.github.io/sf/</a>.</p>
 </div>
 <div id="raster-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.3</span> Raster data<a href="rspatial.html#raster-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><a href="https://github.com/rspatial/terra"><strong>terra</strong></a></li>
-<li><a href="https://github.com/rspatial/raster"><strong>raster</strong></a></li>
-<li><a href="https://github.com/r-spatial/stars"><strong>stars</strong></a></li>
-</ul>
+<p>The <a href="https://github.com/rspatial/terra">{terra}</a> package contains classes and methods representing raster objects and operations.
+It allows raster data to be loaded and saved, provides raster algebra and raster processing, and includes a number of additional functions, e.g., for analysis of terrain characteristics.
+It also works well on large sets of data.</p>
+<p>Similarly to {sf}, {terra} also uses many external libraries, but also enables many R packages (Figure <a href="#fig:03-intro-to-rspatial-17"><strong>??</strong></a>).</p>
 <p><img src="figs/terra-libs.png" width="750" /></p>
-<ul>
-<li>The <strong>terra</strong> package contains classes and methods representing raster objects and operations</li>
-<li>It allows raster data to be loaded and saved</li>
-<li>It allows raster algebra and raster processing</li>
-<li>It includes a number of additional functions, e.g., for analysis of terrain characteristics</li>
-<li>It allows you to work on large sets of data</li>
-<li>?<code>terra-package</code>, <a href="https://rspatial.github.io/terra/reference/terra-package.html" class="uri">https://rspatial.github.io/terra/reference/terra-package.html</a></li>
-<li>It is a successor of the <strong>raster</strong> package - <a href="http://www.rpubs.com/etiennebr/visualraster" class="uri">http://www.rpubs.com/etiennebr/visualraster</a></li>
-<li>The <strong>terra</strong> package contains classes and methods representing raster objects and operations</li>
-</ul>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="rspatial.html#cb78-1"></a><span class="kw">library</span>(terra)</span></code></pre></div>
+<p>To read a spatial raster file, we just need to provide its file path to the <code>rast()</code> function:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="rspatial.html#cb76-1"></a><span class="kw">library</span>(terra)</span></code></pre></div>
 <pre><code>## terra 1.6.5</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="rspatial.html#cb80-1"></a>elev =<span class="st"> </span><span class="kw">rast</span>(<span class="kw">system.file</span>(<span class="st">&quot;raster/elev.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spData&quot;</span>))</span>
-<span id="cb80-2"><a href="rspatial.html#cb80-2"></a>elev</span></code></pre></div>
-<pre><code>## class       : SpatRaster 
-## dimensions  : 6, 6, 1  (nrow, ncol, nlyr)
-## resolution  : 0.5, 0.5  (x, y)
-## extent      : -1.5, 1.5, -1.5, 1.5  (xmin, xmax, ymin, ymax)
-## coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-## source      : elev.tif 
-## name        : elev 
-## min value   :    1 
-## max value   :   36</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="rspatial.html#cb82-1"></a><span class="kw">plot</span>(elev)</span></code></pre></div>
-<p><img src="_main_files/figure-html/03-intro-to-rspatial-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="rspatial.html#cb83-1"></a>elev[]</span></code></pre></div>
-<pre><code>##       elev
-##  [1,]    1
-##  [2,]    2
-##  [3,]    3
-##  [4,]    4
-##  [5,]    5
-##  [6,]    6
-##  [7,]    7
-##  [8,]    8
-##  [9,]    9
-## [10,]   10
-## [11,]   11
-## [12,]   12
-## [13,]   13
-## [14,]   14
-## [15,]   15
-## [16,]   16
-## [17,]   17
-## [18,]   18
-## [19,]   19
-## [20,]   20
-## [21,]   21
-## [22,]   22
-## [23,]   23
-## [24,]   24
-## [25,]   25
-## [26,]   26
-## [27,]   27
-## [28,]   28
-## [29,]   29
-## [30,]   30
-## [31,]   31
-## [32,]   32
-## [33,]   33
-## [34,]   34
-## [35,]   35
-## [36,]   36</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="rspatial.html#cb85-1"></a>raster_filepath =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/srtm.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
-<span id="cb85-2"><a href="rspatial.html#cb85-2"></a>new_raster =<span class="st"> </span><span class="kw">rast</span>(raster_filepath)</span>
-<span id="cb85-3"><a href="rspatial.html#cb85-3"></a>new_raster</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="rspatial.html#cb78-1"></a>raster_filepath =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/srtm.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
+<span id="cb78-2"><a href="rspatial.html#cb78-2"></a>new_raster =<span class="st"> </span><span class="kw">rast</span>(raster_filepath)</span></code></pre></div>
+<p>Now, we can look at the summary of our data by typing the object’s name:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="rspatial.html#cb79-1"></a>new_raster</span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 457, 465, 1  (nrow, ncol, nlyr)
 ## resolution  : 0.0008333333, 0.0008333333  (x, y)
@@ -617,22 +538,30 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 ## name        : srtm 
 ## min value   : 1024 
 ## max value   : 2892</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="rspatial.html#cb87-1"></a><span class="kw">crs</span>(new_raster)</span></code></pre></div>
+<p>It provides us information about the raster dimensions, resolution, CRS, etc.
+<code>crs()</code> is used to get information about the coordinate reference system of the given {terra} object:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="rspatial.html#cb81-1"></a><span class="kw">crs</span>(new_raster)</span></code></pre></div>
 <pre><code>## [1] &quot;GEOGCRS[\&quot;WGS 84\&quot;,\n    DATUM[\&quot;World Geodetic System 1984\&quot;,\n        ELLIPSOID[\&quot;WGS 84\&quot;,6378137,298.257223563,\n            LENGTHUNIT[\&quot;metre\&quot;,1]]],\n    PRIMEM[\&quot;Greenwich\&quot;,0,\n        ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\&quot;geodetic latitude (Lat)\&quot;,north,\n            ORDER[1],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n        AXIS[\&quot;geodetic longitude (Lon)\&quot;,east,\n            ORDER[2],\n            ANGLEUNIT[\&quot;degree\&quot;,0.0174532925199433]],\n    ID[\&quot;EPSG\&quot;,4326]]&quot;</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="rspatial.html#cb89-1"></a><span class="kw">crs</span>(new_raster, <span class="dt">describe =</span> <span class="ot">TRUE</span>, <span class="dt">proj =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="rspatial.html#cb83-1"></a><span class="kw">crs</span>(new_raster, <span class="dt">describe =</span> <span class="ot">TRUE</span>, <span class="dt">proj =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>##     name authority code area         extent                                proj
 ## 1 WGS 84      EPSG 4326 &lt;NA&gt; NA, NA, NA, NA +proj=longlat +datum=WGS84 +no_defs</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="rspatial.html#cb91-1"></a>raster_filepath2 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/landsat.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
-<span id="cb91-2"><a href="rspatial.html#cb91-2"></a>new_raster2 =<span class="st"> </span><span class="kw">rast</span>(raster_filepath2)</span>
-<span id="cb91-3"><a href="rspatial.html#cb91-3"></a><span class="kw">plot</span>(new_raster2)</span></code></pre></div>
+<p>We are also able to create quick visualization with <code>plot()</code>:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="rspatial.html#cb85-1"></a><span class="kw">plot</span>(new_raster)</span></code></pre></div>
+<p><img src="_main_files/figure-html/03-intro-to-rspatial-19-1.png" width="672" /></p>
+<p>The {terra} package also supports multi-layered raster files.
+For example, the <code>landsat.tif</code> file has four bands:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="rspatial.html#cb86-1"></a>raster_filepath2 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/landsat.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
+<span id="cb86-2"><a href="rspatial.html#cb86-2"></a>new_raster2 =<span class="st"> </span><span class="kw">rast</span>(raster_filepath2)</span>
+<span id="cb86-3"><a href="rspatial.html#cb86-3"></a><span class="kw">plot</span>(new_raster2)</span></code></pre></div>
 <p><img src="_main_files/figure-html/03-intro-to-rspatial-24-1.png" width="672" /></p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="rspatial.html#cb92-1"></a><span class="kw">plotRGB</span>(new_raster2, <span class="dt">r =</span> <span class="dv">3</span>, <span class="dt">g =</span> <span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">stretch =</span> <span class="st">&quot;lin&quot;</span>)</span></code></pre></div>
+<p>In this case, we are also able to plot three layers with <code>plotRGB()</code>:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="rspatial.html#cb87-1"></a><span class="kw">plotRGB</span>(new_raster2, <span class="dt">r =</span> <span class="dv">3</span>, <span class="dt">g =</span> <span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">stretch =</span> <span class="st">&quot;lin&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/03-intro-to-rspatial-25-1.png" width="672" /></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="rspatial.html#cb93-1"></a>my_raster =<span class="st"> </span><span class="kw">rast</span>(<span class="dt">nrows =</span> <span class="dv">10</span>, <span class="dt">ncols =</span> <span class="dv">20</span>, </span>
-<span id="cb93-2"><a href="rspatial.html#cb93-2"></a>                 <span class="dt">xmin =</span> <span class="dv">0</span>, <span class="dt">xmax =</span> <span class="dv">20</span>, <span class="dt">ymin =</span> <span class="dv">-10</span>, <span class="dt">ymax =</span> <span class="dv">0</span>,</span>
-<span id="cb93-3"><a href="rspatial.html#cb93-3"></a>                 <span class="dt">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>,</span>
-<span id="cb93-4"><a href="rspatial.html#cb93-4"></a>                 <span class="dt">vals =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>)</span>
-<span id="cb93-5"><a href="rspatial.html#cb93-5"></a>my_raster</span></code></pre></div>
+<p>Sometimes, we want to create a raster from scratch.
+This is also possible with the <code>rast()</code> function:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="rspatial.html#cb88-1"></a>my_raster =<span class="st"> </span><span class="kw">rast</span>(<span class="dt">nrows =</span> <span class="dv">10</span>, <span class="dt">ncols =</span> <span class="dv">20</span>, <span class="dt">xmin =</span> <span class="dv">0</span>, <span class="dt">xmax =</span> <span class="dv">20</span>, <span class="dt">ymin =</span> <span class="dv">-10</span>, <span class="dt">ymax =</span> <span class="dv">0</span>,</span>
+<span id="cb88-2"><a href="rspatial.html#cb88-2"></a>                 <span class="dt">crs =</span> <span class="st">&quot;EPSG:4326&quot;</span>, <span class="dt">vals =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>)</span>
+<span id="cb88-3"><a href="rspatial.html#cb88-3"></a>my_raster</span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 10, 20, 1  (nrow, ncol, nlyr)
 ## resolution  : 1, 1  (x, y)
@@ -642,14 +571,19 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 ## name        : lyr.1 
 ## min value   :     1 
 ## max value   :   200</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="rspatial.html#cb95-1"></a><span class="kw">plot</span>(my_raster)</span></code></pre></div>
+<p>Let’s plot our new object:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="rspatial.html#cb90-1"></a><span class="kw">plot</span>(my_raster)</span></code></pre></div>
 <p><img src="_main_files/figure-html/03-intro-to-rspatial-27-1.png" width="672" /></p>
-<div id="conversions" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.3.1</span> Conversions<a href="rspatial.html#conversions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><a href="https://geocompr.github.io/post/2021/spatial-classes-conversion/" class="uri">https://geocompr.github.io/post/2021/spatial-classes-conversion/</a></p>
+<p>We will give more example of the {terra} use in Chapter <a href="manipulating-raster-data.html#manipulating-raster-data">5</a>.
+To learn more about the package type `<code>?</code>terra-package``` or visit <a href="https://rspatial.github.io/terra/reference/terra-package.html" class="uri">https://rspatial.github.io/terra/reference/terra-package.html</a>.</p>
 
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>There is also a second similar function allowing to read spatial vector files called <code>st_read()</code>.<a href="rspatial.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

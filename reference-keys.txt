@@ -20,7 +20,6 @@ rspatial
 rs-spatial-ecosystems
 vector-data
 raster-data
-conversions
 making-maps-in-r
 mapping-tools-in-r
 basic-example
