@@ -315,7 +315,110 @@ For more resources check [the {tmap} repo](https://github.com/r-tmap/tmap), read
 
 ## Exercises
 
-<!-- try saving to different formats -->
-<!-- try other palettes -->
-<!-- try other styles -->
-<!-- try tm_add_legend -->
+Read the following datasets:
+
+```{r}
+srtm <- rast(system.file("raster/srtm.tif", package = "spDataLarge"))
+zion <- read_sf((system.file("vector/zion.gpkg", package = "spDataLarge")))
+zion_points <- read_sf(system.file("vector/zion_points.gpkg", package = "spDataLarge"))
+```
+
+E1. Create a simple map using {tmap} with three map layers: (1) `srtm` (colored based on its values), (2) `zion` (as a grey polygon), (3) `zion_points` (as grey symbols).
+
+```{r}
+#| include = FALSE
+tm_shape(srtm) +
+  tm_raster() +
+  tm_shape(zion) +
+  tm_polygons(alpha = 0.3) +
+  tm_shape(zion_points) +
+  tm_symbols()
+```
+
+E2. Customize the map from E1, for example by: improving the legend title, changing the color palette, etc.
+
+```{r}
+#| include = FALSE
+tm_shape(srtm) +
+  tm_raster(style = "cont", palette = "-Spectral", title = "Elevation (m als)") +
+  tm_shape(zion) +
+  tm_polygons(alpha = 0.3) +
+  tm_shape(zion_points) +
+  tm_symbols(shape = 6, col = "black")
+```
+
+E3. Add some attribute layers to your map, including the scale bar and north arrow. 
+Also, add your name in the bottom left corner of the map.
+
+```{r}
+#| include = FALSE
+tm_shape(srtm) +
+  tm_raster(style = "cont", palette = "-Spectral", title = "Elevation (m als)") +
+  tm_shape(zion) +
+  tm_polygons(alpha = 0.3) +
+  tm_shape(zion_points) +
+  tm_symbols(shape = 6, col = "black") +
+  tm_scale_bar(position = c("left", "bottom"), breaks = c(0, 2, 4)) +
+  tm_compass(position = c("right", "top")) +
+  tm_credits("My Name", position = c("left", "bottom"))
+```
+
+E4. Try to adjust the overall map look by, for example, removing the map frame and adding a map title.
+
+```{r}
+#| include = FALSE
+tm_shape(srtm) +
+  tm_raster(style = "cont", palette = "-Spectral", title = "Elevation (m als)") +
+  tm_shape(zion) +
+  tm_polygons(alpha = 0.3) +
+  tm_shape(zion_points) +
+  tm_symbols(shape = 6, col = "black") +
+  tm_scale_bar(position = c("left", "bottom"), breaks = c(0, 2, 4)) +
+  tm_compass(position = c("right", "top")) +
+  tm_credits("My Name", position = c("left", "bottom")) +
+  tm_layout(frame = FALSE, main.title = "Zion National Park",
+            legend.position = c("left", "center"))
+```
+
+E5. Add two manual legend: one for the `zion` and one for `zion_points`.
+
+```{r}
+#| include = FALSE
+tm_shape(srtm) +
+  tm_raster(style = "cont", palette = "-Spectral", title = "Elevation (m als)") +
+  tm_shape(zion) +
+  tm_polygons(alpha = 0.3) +
+  tm_shape(zion_points) +
+  tm_symbols(shape = 6, col = "black") +
+  tm_add_legend(type = "symbol", shape = 6, col = "black", labels = "My points") +
+  tm_add_legend(type = "fill", alpha = 0.3, labels = "Park's area") +
+  tm_scale_bar(position = c("left", "bottom"), breaks = c(0, 2, 4)) +
+  tm_compass(position = c("right", "top")) +
+  tm_credits("My Name", position = c("left", "bottom")) +
+  tm_layout(frame = FALSE, main.title = "Zion National Park",
+            legend.position = c("left", "center"))
+```
+
+E6. Try saving your map to different file formats: `.png`, `.pdf`, and `.html`. 
+Can you notice any difference between the files?
+
+```{r}
+#| include = FALSE
+my_map <- tm_shape(srtm) +
+  tm_raster(style = "cont", palette = "-Spectral", title = "Elevation (m als)") +
+  tm_shape(zion) +
+  tm_polygons(alpha = 0.3) +
+  tm_shape(zion_points) +
+  tm_symbols(shape = 6, col = "black") +
+  tm_add_legend(type = "symbol", shape = 6, col = "black", labels = "My points") +
+  tm_add_legend(type = "fill", alpha = 0.3, labels = "Park's area") +
+  tm_scale_bar(position = c("left", "bottom"), breaks = c(0, 2, 4)) +
+  tm_compass(position = c("right", "top")) +
+  tm_credits("My Name", position = c("left", "bottom")) +
+  tm_layout(frame = FALSE, main.title = "Zion National Park",
+            legend.position = c("left", "center"))
+tmap_save(my_map, "my_map2.png")
+tmap_save(my_map, "my_map2.pdf")
+tmap_save(my_map, "my_map2.html")
+```
+
