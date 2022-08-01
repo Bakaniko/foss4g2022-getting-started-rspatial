@@ -18,3 +18,6 @@ Imports:
   here
 Remotes:
   Nowosad/spDataLarge@noraster
+Authors@R: c(
+    person("Nicolas", "Roelandt", email = "nicolas.roelandt@univ-eiffel.fr", role = c("aut", "cre")),
+    person("Jakub", "Nowosad", email = "nowosad.jakub@gmail.com", role = "aut"))
