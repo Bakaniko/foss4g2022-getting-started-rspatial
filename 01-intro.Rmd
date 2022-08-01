@@ -43,22 +43,11 @@ It is usable but for a better user experience we recommend using [Rstudio](https
 Please run those commands into the R console:
 
 ```{r pre-requisites-packages, eval = FALSE}
-packages <- c(
-  gapminder,
-  tmaptools,
-  tmap,
-  spData,
-  sf,
-  terra,
-  fields,
-  supercells,
-  here)
+# Install remote package from CRAN Repo
+install.packages(remotes)
 
-# Install packages from CRAN Repo
-install.packages(packages)
-
-# Install spDataLarge that is not on CRAN repo
-install.packages("spDataLarge", repos = "https://geocompr.r-universe.dev")
+# Install workshop and its dependencies
+remotes::install_github("Bakaniko/foss4g2022-getting-started-rspatial")
 ```
 
 ## What is ~~love~~ R ? {-}
@@ -70,7 +59,7 @@ It can compute statistics and produce graphics and reports (and much more).
 It was created by Ross Ihaka and Robert Gentleman in 1993 and was released as a 
 Free and Open Source Software in 1995.
 
-## Why an R workshop in a FOSS4G conference ?
+## Why an R workshop in a FOSS4G conference ? {-}
 
 While R is not dedicated to spatial analysis, there a several dozen of packages that provides
 geospatial capabilities to the language.
