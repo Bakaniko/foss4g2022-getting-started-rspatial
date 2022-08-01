@@ -1,7 +1,7 @@
 Package: foss4g2022
 Type: Book
 Title: Getting started with R and R-spatial
-Version: 0.0.1
+Version: 1.0.0
 Imports:
   bookdown,
   webshot,
