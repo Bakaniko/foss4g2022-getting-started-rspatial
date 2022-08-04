@@ -60,7 +60,10 @@ Third, it is a basis of a few hundred of other R packages.
 {sf} represent all common vector geometry types (Figure \@ref(fig:03-intro-to-rspatial-4)): points, lines, polygons and their respective ‘multi’ versions.
 It also also supports geometry collections.
 
-```{r 03-intro-to-rspatial-4, purl=FALSE,echo=FALSE, out.width="90%"}
+```{r 03-intro-to-rspatial-4}
+#| purl=FALSE
+#| echo=FALSE
+#| out.width="90%"
 #| fig.cap = "Source: https://geocompr.robinlovelace.net/spatial-class.html?q=sf%20classes#intro-sf"
 knitr::include_graphics("figs/sf-classes.png", dpi = NA)
 ```
@@ -150,7 +153,7 @@ Similarly to {sf}, {terra} also uses many external libraries, but also enables m
 
 ```{r 03-intro-to-rspatial-17}
 #| echo = FALSE
-#| #| fig.cap = "{terra} libraries"
+#| fig.cap = "{terra} libraries"
 knitr::include_graphics("figs/terra-libs.png")
 ```
 
