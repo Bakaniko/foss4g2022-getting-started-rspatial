@@ -11,6 +11,8 @@ No previous knowledge of R is required.
 
 The workshop leaders are [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel university (Lyon, France) and [Jakub Nowosad](https://jakubnowosad.com/) from Adam Mickiewicz University (Poznań, Poland).
 
+![Gustave Eiffel university and Adam Mickiewicz University in Poznań logos](images/logos.png)
+
 ## Schedule {-}
 
 - Opening the workshop (5 min)
