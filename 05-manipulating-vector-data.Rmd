@@ -10,7 +10,7 @@ We will use vector data from the {spData} package.
 We will also use functions from the {dplyr} package as {sf} objects are data frames
 compatible with the Tidyverse philosophy.
 
-```{r libraries}
+```{r 05-manipulating-vector-data-01}
 library(sf)
 library(spData)
 library(dplyr)
@@ -27,7 +27,7 @@ We will use the data from the {spData} package.^[More details on the datasets he
 [https://cran.r-project.org/web/packages/spData/spData.pdf](https://cran.r-project.org/web/packages/spData/spData.pdf)]
 Let's see what it contains:
 
-```{r spData_files}
+```{r 05-manipulating-vector-data-02}
 list.files(system.file("shapes", package = "spData"))
 ```
 
@@ -35,7 +35,7 @@ We will work on cycle hires points in London, so let's start by loading that dat
 
 ### Cycle hire dataset
 
-```{r load_hire_data}
+```{r 05-manipulating-vector-data-03}
 cycle_hire <- read_sf(system.file("shapes/cycle_hire.geojson", package = "spData"))
 cycle_hire
 ```
@@ -50,7 +50,7 @@ We can see it contains 742 features and 5 fields.
 It has points with lat/lon coordinates (we can see it through information about its CRS: `Geodetic CRS:  WGS 84`). 
 {sf} also shows the bounding box of our object.
 
-Here is the description of the dataset from the documentation: 
+Here is the description of this dataset from its documentation: 
 
 :::: {.infobox .tip data-latex="note"}
 
@@ -74,17 +74,17 @@ Here is the description of the dataset from the documentation:
 We can see how many bike are parked, the count of empty slots but not the total amount of bike slots. 
 Let's create a new `slots` column for this with `mutate()` from {dplyr}.
 
-```{r create_bike_slots}
+```{r 05-manipulating-vector-data-04}
 cycle_hire <- mutate(cycle_hire, slots = nbikes + nempty)
 ```
 
-Now, let's load a polygon data, in this case London's boroughs stored in the `lnd` dataset.
+Now, let's load a polygon dataset, in this case London's boroughs stored in the `lnd` dataset.
 
 ### Boroughs of London
 
 This dataset is stored in an R data format so the loading is different.
 
-```{r loading_lnd}
+```{r 05-manipulating-vector-data-05}
 data(lnd) # load the dataset in memory
 lnd       # call the dataset to visualize the 10 first features
 ```
@@ -122,7 +122,7 @@ In order to ease spatial calculations, let's reproject them.
 The [Ordnance Survey National Grid](https://en.wikipedia.org/wiki/Ordnance_Survey_National_Grid) is the official one for Great Britain. 
 Its SRID is **EPSG:27700**.
 
-```{r data_reprojection}
+```{r 05-manipulating-vector-data-06}
 cycle_hire_27700 <- st_transform(cycle_hire, crs = "EPSG:27700")
 london_27700 <- st_transform(lnd, crs = "EPSG:27700")
 ```
@@ -133,7 +133,7 @@ We can also use `st_crs()` to check the CRS definition of our objects.
 Now, we can create a quick map using the the `plot()` function.
 This function is part of base R.
 
-```{r quick_plot}
+```{r 05-manipulating-vector-data-07}
 plot(london_27700$geometry) # we just want to plot the geometry column
 plot(cycle_hire_27700$geometry, 
  col = "red",  # color
@@ -143,7 +143,7 @@ plot(cycle_hire_27700$geometry,
 
 We could also use {tmap} here:
 
-```{r}
+```{r 05-manipulating-vector-data-08}
 tm_shape(london_27700) +
   tm_borders() +
   tm_shape(cycle_hire_27700) +
@@ -159,7 +159,7 @@ For the sake of the exercise, let's do both.
 
 Let's join them with a inner join to see how many corresponds.
 
-```{r inner_attribute_join}
+```{r 05-manipulating-vector-data-09}
 inner_join(cycle_hire_27700,
   st_drop_geometry(london_27700), # we don't need the geometry here
   by = c( "area" = "NAME")
@@ -177,33 +177,33 @@ We will regroup the data afterwards.
 For this, we will select only the `GSS_CODE` column from `london_27700` with the
 `select()` function from {dplyr}, the geometry will follow.
 
-```{r spatial_join}
+```{r 05-manipulating-vector-data-10}
 cycle_hire_27700 <- st_join(cycle_hire_27700, select(london_27700, GSS_CODE))
 ```
 
 Now if we look at our dataset, there is a `GSS_CODE` column.
 
-```{r names_cycle_hire}
+```{r 05-manipulating-vector-data-11}
 names(cycle_hire_27700)
 ```
 
 How many points doesn't have a GSS_code?
 
-```{r controle_nas}
+```{r 05-manipulating-vector-data-12}
 filter(cycle_hire_27700, is.na(GSS_CODE))
 ```
 
 Only one, that's more better than before! 
-I don't know well enough London to fix this. 
+Our knowledge of London is not enought to fix this. 
 But that is not prevening us from the next steps.
 
-Now to paraphrase Anita Graser: [*"Aggregate all the things!"*](https://anitagraser.com/2017/06/08/aggregate-all-the-things-qgis-expression-edition/)
+Now, to paraphrase Anita Graser: [*"Aggregate all the things!"*](https://anitagraser.com/2017/06/08/aggregate-all-the-things-qgis-expression-edition/)
 
 ## Aggregation
 
 ### Count
 
-```{r aggregation_count}
+```{r 05-manipulating-vector-data-13}
 # remove NAs
 cycle_hire_clean <- filter(cycle_hire_27700, !is.na(GSS_CODE))
 # let's put geometry aside
@@ -217,25 +217,25 @@ cycle_hire_by_area
 
 :::: {.infobox .tip data-latex="tip"}
 
-`tally()` is equivalent to `df %>% summarise(n = n())`
+[`tally()`](https://dplyr.tidyverse.org/reference/count.html) is equivalent to `df %>% summarise(n = n())`
 
 ::::
 
 ### Sum
 
-```{r aggregation_sum}
-# count
+```{r 05-manipulating-vector-data-14}
+# count cycle stations
 cycle_hire_by_area_sum <- summarise(
   cycle_hire_grouped, # we reused grouped data
-  sum = sum(nbikes), # sums the number of bikes
-  count = n() # count cycle stations
+  sum = sum(nbikes), # sums the number of bikes of each group
+  count = n() # count records in each group 
   ) 
 cycle_hire_by_area_sum
 ```
 
 We could have use the base function `aggregate()` which works with `sf` objects.
 
-```{r aggregate_alternative}
+```{r 05-manipulating-vector-data-15}
 aggregate(cycle_hire_27700["nbikes"], 
           by = list(cycle_hire_27700$"GSS_CODE"),
           FUN = sum, 
@@ -248,21 +248,34 @@ If we want to represents our data with proportional symbols, we might want to cr
 * `st_centroid()`
 * `st_point_on_surface()`
 
-`st_point_on_surface()` assures that every point is **in** its polygon. 
+
+:::: {.infobox .note data-latex="note"}
+
+`st_point_on_surface()` creates a random point inside a polygon. 
+Using this assures that every point is **in** its polygon 
 That can be useful for irregular shapes where the centroid might be outside the shape.
+But those are not centroids.
+
+::::
+
 
 ## Centroids
 
-```{r centroids}
+```{r 05-manipulating-vector-data-16}
  # only keep useful columns
 boroughs <- select(london_27700, NAME, GSS_CODE)
 # compute centroids
 boroughs_centroids <- st_centroid(boroughs)
 ```
 
-You can also do buffers and other geometrical operations like [`st_union()`](https://r-spatial.github.io/sf/reference/geos_combine.html) to merge geometries.
+You can also do buffers and other geometrical operations like [`st_union()`](https://r-spatial.github.io/sf/reference/geos_combine.html) (Figure \@ref(fig:05-manipulating-vector-data-17)) to merge geometries.
 
-![Spatial equivalents of logical operators [@lovelace_geocomputation_2019]](images/venn-clip-1.png)
+
+```{r 05-manipulating-vector-data-17}
+#| echo = FALSE
+#| fig.cap = "Spatial equivalents of logical operators (source: Geocomputation with R)"
+knitr::include_graphics("figs/venn-clip-1.png")
+```
 
 ## Geometric binary predicates
 
@@ -287,7 +300,7 @@ You can use it alone or together with `st_join()`.
 For example, if we want to get the cycle hires contained in the borough of Wandsworth, 
 we will do it like this:
 
-```{r find_E09000032}
+```{r 05-manipulating-vector-data-18}
 Wandsworth <- filter(london_27700, NAME == "Wandsworth")
 (Wandsworth_bike_stations <- st_contains(Wandsworth, cycle_hire_27700) )
 ```
@@ -296,7 +309,7 @@ That will return a list of cycle hire points id.
 
 In contrary, if we want to find in which borough the hire point with id 614 is, we can use the opposite function `st_within()`:
 
-```{r borough_of_614}
+```{r 05-manipulating-vector-data-19}
 cycle_hire_614 <- filter(cycle_hire_27700, id == "614") 
 cycle_hire_614_borough <- st_within(cycle_hire_614, london_27700) # borough at index 22
 cycle_hire_614_borough
@@ -304,7 +317,7 @@ cycle_hire_614_borough
 
 To get the borough data, there is some more work to do.
 
-```{r get_borough22}
+```{r 05-manipulating-vector-data-20}
 london_27700[unlist(cycle_hire_614_borough), ]
 ```
 
@@ -324,7 +337,7 @@ So we need to join the data from cycle_hire_by_area_sum to the boroughs first.
 
 As we want to save it to GeoPackage^[Because [GeoPackage are cool !](http://switchfromshapefile.org/#geopackage)], we also need to provide a layer name: *london_boroughs_27700*. Repeat for all data you want to save.
 
-```{r write_geodata}
+```{r 05-manipulating-vector-data-21}
 write_sf(
   obj = left_join(london_27700, cycle_hire_by_area_sum), # object to write
   dsn = here("foss4g_R_workshop.gpkg"), # destination file
@@ -357,7 +370,7 @@ The `append = FALSE` ensure you can write on existing layer, it is optional.
 ::::
 
 
-```{r here, eval=FALSE}
+```{r 05-manipulating-vector-data-22}
 print(here())  # print the project directory
 list.files(here()) # list the files in the project directory
 ```
@@ -366,6 +379,6 @@ list.files(here()) # list the files in the project directory
 
 {sf} provides an `st_layers()` function that is useful to see the content of a dataset.
  
-```{r check_gpkg}
+```{r 05-manipulating-vector-data-23}
 st_layers(dsn = here("foss4g_R_workshop.gpkg"))
 ```
