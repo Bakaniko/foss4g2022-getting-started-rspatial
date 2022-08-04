@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-01" />
+<meta name="date" content="2022-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,7 +173,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.8" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#select-columns"><i class="fa fa-check"></i><b>1.8</b> Select columns</a></li>
 <li class="chapter" data-level="1.9" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#create-new-variables"><i class="fa fa-check"></i><b>1.9</b> Create new variables</a></li>
-<li class="chapter" data-level="1.10" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#agregate-data"><i class="fa fa-check"></i><b>1.10</b> Agregate data</a></li>
+<li class="chapter" data-level="1.10" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#agregate-data"><i class="fa fa-check"></i><b>1.10</b> Agregate data</a><ul>
+<li class="chapter" data-level="" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#exercice-1"><i class="fa fa-check"></i>Exercice</a></li>
+</ul></li>
 <li class="chapter" data-level="1.11" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#join-data"><i class="fa fa-check"></i><b>1.11</b> Join data</a></li>
 <li class="chapter" data-level="1.12" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#piping"><i class="fa fa-check"></i><b>1.12</b> Piping</a></li>
 </ul></li>
@@ -317,9 +319,14 @@ Figure 2.2: Source: <a href="https://www.r-spatial.org/r/2020/03/17/wkt.html" cl
 <p>First, it is built upon several external libraries, including GDAL, PROJ, GEOS, and s2geometry.
 Second, it uses several R packages, such as {s2}, {units}, {DBI}.
 Third, it is a basis of a few hundred of other R packages.</p>
-<p>{sf} represent all common vector geometry types (Figure <a href="#fig:03-intro-to-rspatial-4"><strong>??</strong></a>): points, lines, polygons and their respective ‘multi’ versions.
+<p>{sf} represent all common vector geometry types (Figure <a href="rspatial.html#fig:03-intro-to-rspatial-4">2.3</a>): points, lines, polygons and their respective ‘multi’ versions.
 It also also supports geometry collections.</p>
-<p><img src="figs/sf-classes.png" width="90%" /></p>
+<div class="figure"><span style="display:block;" id="fig:03-intro-to-rspatial-4"></span>
+<img src="figs/sf-classes.png" alt="Source: https://geocompr.robinlovelace.net/spatial-class.html?q=sf%20classes#intro-sf" width="90%" />
+<p class="caption">
+Figure 2.3: Source: <a href="https://geocompr.robinlovelace.net/spatial-class.html?q=sf%20classes#intro-sf" class="uri">https://geocompr.robinlovelace.net/spatial-class.html?q=sf%20classes#intro-sf</a>
+</p>
+</div>
 <p>Most of the functions in this package start with a prefix <code>st_</code>:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="rspatial.html#cb52-1"></a><span class="kw">library</span>(sf)</span></code></pre></div>
 <pre><code>## Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 7.2.0; sf_use_s2() is TRUE</code></pre>
@@ -520,8 +527,14 @@ To learn more read <a href="https://journal.r-project.org/archive/2018/RJ-2018-0
 <p>The <a href="https://github.com/rspatial/terra">{terra}</a> package contains classes and methods representing raster objects and operations.
 It allows raster data to be loaded and saved, provides raster algebra and raster processing, and includes a number of additional functions, e.g., for analysis of terrain characteristics.
 It also works well on large sets of data.</p>
-<p>Similarly to {sf}, {terra} also uses many external libraries, but also enables many R packages (Figure <a href="#fig:03-intro-to-rspatial-17"><strong>??</strong></a>).</p>
-<p><img src="figs/terra-libs.png" width="750" /></p>
+<p>Similarly to {sf}, {terra} also uses many external libraries, but also enables many R packages (Figure <a href="rspatial.html#fig:03-intro-to-rspatial-17">2.4</a>).</p>
+<div class="figure"><span style="display:block;" id="fig:03-intro-to-rspatial-17"></span>
+<img src="figs/terra-libs.png" alt="{terra} libraries" width="750" />
+<p class="caption">
+Figure 2.4: {terra} libraries
+</p>
+</div>
+<!-- The reference does not work. maybe because it lacks a caption ?-->
 <p>To read a spatial raster file, we just need to provide its file path to the <code>rast()</code> function:</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="rspatial.html#cb76-1"></a><span class="kw">library</span>(terra)</span></code></pre></div>
 <pre><code>## terra 1.6.5</code></pre>
@@ -575,7 +588,9 @@ This is also possible with the <code>rast()</code> function:</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="rspatial.html#cb90-1"></a><span class="kw">plot</span>(my_raster)</span></code></pre></div>
 <p><img src="_main_files/figure-html/03-intro-to-rspatial-27-1.png" width="672" /></p>
 <p>We will give more example of the {terra} use in Chapter <a href="manipulating-raster-data.html#manipulating-raster-data">5</a>.
-To learn more about the package type `<code>?</code>terra-package``` or visit <a href="https://rspatial.github.io/terra/reference/terra-package.html" class="uri">https://rspatial.github.io/terra/reference/terra-package.html</a>.</p>
+To learn more about the package type <code>?terra</code> or visit <a href="https://rspatial.github.io/terra/reference/terra-package.html" class="uri">https://rspatial.github.io/terra/reference/terra-package.html</a>.</p>
+<p>&lt;?– Nicolas : are you sure about ? terra-package, it gives me help on Arithmetic from base R.
+? terra gives me info on {terra}–&gt;</p>
 
 </div>
 </div>

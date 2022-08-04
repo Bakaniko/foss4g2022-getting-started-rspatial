@@ -1,7 +1,10 @@
 fig:03-intro-to-rspatial-1
 fig:03-intro-to-rspatial-2
+fig:03-intro-to-rspatial-4
+fig:03-intro-to-rspatial-17
 tab:04-making-maps-5
 tab:04-making-maps-16
+fig:05-manipulating-vector-data-17
 data-handling-with-r
 data-types
 assignment

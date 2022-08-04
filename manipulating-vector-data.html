@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-01" />
+<meta name="date" content="2022-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,7 +173,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.8" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#select-columns"><i class="fa fa-check"></i><b>1.8</b> Select columns</a></li>
 <li class="chapter" data-level="1.9" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#create-new-variables"><i class="fa fa-check"></i><b>1.9</b> Create new variables</a></li>
-<li class="chapter" data-level="1.10" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#agregate-data"><i class="fa fa-check"></i><b>1.10</b> Agregate data</a></li>
+<li class="chapter" data-level="1.10" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#agregate-data"><i class="fa fa-check"></i><b>1.10</b> Agregate data</a><ul>
+<li class="chapter" data-level="" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#exercice-1"><i class="fa fa-check"></i>Exercice</a></li>
+</ul></li>
 <li class="chapter" data-level="1.11" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#join-data"><i class="fa fa-check"></i><b>1.11</b> Join data</a></li>
 <li class="chapter" data-level="1.12" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#piping"><i class="fa fa-check"></i><b>1.12</b> Piping</a></li>
 </ul></li>
@@ -330,7 +332,7 @@ Let’s see what it contains:</p>
 We can see it contains 742 features and 5 fields.
 It has points with lat/lon coordinates (we can see it through information about its CRS: <code>Geodetic CRS:  WGS 84</code>).
 {sf} also shows the bounding box of our object.</p>
-<p>Here is the description of the dataset from the documentation:</p>
+<p>Here is the description of this dataset from its documentation:</p>
 <div class="infobox tip">
 <p><strong>cycle_hire dataset</strong></p>
 <p><sub>Description:</sub> Points representing cycle hire points accross London.</p>
@@ -349,7 +351,7 @@ It has points with lat/lon coordinates (we can see it through information about 
 <p>We can see how many bike are parked, the count of empty slots but not the total amount of bike slots.
 Let’s create a new <code>slots</code> column for this with <code>mutate()</code> from {dplyr}.</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="manipulating-vector-data.html#cb124-1"></a>cycle_hire &lt;-<span class="st"> </span><span class="kw">mutate</span>(cycle_hire, <span class="dt">slots =</span> nbikes <span class="op">+</span><span class="st"> </span>nempty)</span></code></pre></div>
-<p>Now, let’s load a polygon data, in this case London’s boroughs stored in the <code>lnd</code> dataset.</p>
+<p>Now, let’s load a polygon dataset, in this case London’s boroughs stored in the <code>lnd</code> dataset.</p>
 </div>
 <div id="boroughs-of-london" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.2</span> Boroughs of London<a href="manipulating-vector-data.html#boroughs-of-london" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -421,13 +423,13 @@ This function is part of base R.</p>
 <span id="cb128-3"><a href="manipulating-vector-data.html#cb128-3"></a> <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,  <span class="co"># color</span></span>
 <span id="cb128-4"><a href="manipulating-vector-data.html#cb128-4"></a> <span class="dt">cex =</span> <span class="fl">0.5</span>,    <span class="co"># size of symbol</span></span>
 <span id="cb128-5"><a href="manipulating-vector-data.html#cb128-5"></a> <span class="dt">add =</span> <span class="ot">TRUE</span>)   <span class="co"># important parameter to create multilayer plots</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/quick_plot-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/05-manipulating-vector-data-07-1.png" width="672" /></p>
 <p>We could also use {tmap} here:</p>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="manipulating-vector-data.html#cb129-1"></a><span class="kw">tm_shape</span>(london_<span class="dv">27700</span>) <span class="op">+</span></span>
 <span id="cb129-2"><a href="manipulating-vector-data.html#cb129-2"></a><span class="st">  </span><span class="kw">tm_borders</span>() <span class="op">+</span></span>
 <span id="cb129-3"><a href="manipulating-vector-data.html#cb129-3"></a><span class="st">  </span><span class="kw">tm_shape</span>(cycle_hire_<span class="dv">27700</span>) <span class="op">+</span></span>
 <span id="cb129-4"><a href="manipulating-vector-data.html#cb129-4"></a><span class="st">  </span><span class="kw">tm_symbols</span>(<span class="dt">size =</span> <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/05-manipulating-vector-data-08-1.png" width="672" /></p>
 </div>
 <div id="joins" class="section level2 hasAnchor">
 <h2><span class="header-section-number">4.3</span> Joins<a href="manipulating-vector-data.html#joins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -487,9 +489,9 @@ We will regroup the data afterwards.</p>
 ## * &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;int&gt;  &lt;int&gt;       &lt;POINT [m]&gt; &lt;int&gt; &lt;fct&gt;   
 ## 1   134 Wapping Hig… Wapp…     20      0 (534188 180210.4)    20 &lt;NA&gt;</code></pre>
 <p>Only one, that’s more better than before!
-I don’t know well enough London to fix this.
+Our knowledge of London is not enought to fix this.
 But that is not prevening us from the next steps.</p>
-<p>Now to paraphrase Anita Graser: <a href="https://anitagraser.com/2017/06/08/aggregate-all-the-things-qgis-expression-edition/"><em>“Aggregate all the things!”</em></a></p>
+<p>Now, to paraphrase Anita Graser: <a href="https://anitagraser.com/2017/06/08/aggregate-all-the-things-qgis-expression-edition/"><em>“Aggregate all the things!”</em></a></p>
 </div>
 </div>
 <div id="aggregation" class="section level2 hasAnchor">
@@ -520,16 +522,16 @@ But that is not prevening us from the next steps.</p>
 ## 10 E09000001    35
 ## 11 E09000012    31</code></pre>
 <div class="infobox tip">
-<p><code>tally()</code> is equivalent to <code>df %&gt;% summarise(n = n())</code></p>
+<p><a href="https://dplyr.tidyverse.org/reference/count.html"><code>tally()</code></a> is equivalent to <code>df %&gt;% summarise(n = n())</code></p>
 </div>
 </div>
 <div id="sum" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.4.2</span> Sum<a href="manipulating-vector-data.html#sum" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="manipulating-vector-data.html#cb139-1"></a><span class="co"># count</span></span>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="manipulating-vector-data.html#cb139-1"></a><span class="co"># count cycle stations</span></span>
 <span id="cb139-2"><a href="manipulating-vector-data.html#cb139-2"></a>cycle_hire_by_area_sum &lt;-<span class="st"> </span><span class="kw">summarise</span>(</span>
 <span id="cb139-3"><a href="manipulating-vector-data.html#cb139-3"></a>  cycle_hire_grouped, <span class="co"># we reused grouped data</span></span>
-<span id="cb139-4"><a href="manipulating-vector-data.html#cb139-4"></a>  <span class="dt">sum =</span> <span class="kw">sum</span>(nbikes), <span class="co"># sums the number of bikes</span></span>
-<span id="cb139-5"><a href="manipulating-vector-data.html#cb139-5"></a>  <span class="dt">count =</span> <span class="kw">n</span>() <span class="co"># count cycle stations</span></span>
+<span id="cb139-4"><a href="manipulating-vector-data.html#cb139-4"></a>  <span class="dt">sum =</span> <span class="kw">sum</span>(nbikes), <span class="co"># sums the number of bikes of each group</span></span>
+<span id="cb139-5"><a href="manipulating-vector-data.html#cb139-5"></a>  <span class="dt">count =</span> <span class="kw">n</span>() <span class="co"># count records in each group </span></span>
 <span id="cb139-6"><a href="manipulating-vector-data.html#cb139-6"></a>  ) </span>
 <span id="cb139-7"><a href="manipulating-vector-data.html#cb139-7"></a>cycle_hire_by_area_sum</span></code></pre></div>
 <pre><code>## # A tibble: 11 × 3
@@ -575,8 +577,12 @@ But that is not prevening us from the next steps.</p>
 <li><code>st_centroid()</code></li>
 <li><code>st_point_on_surface()</code></li>
 </ul>
-<p><code>st_point_on_surface()</code> assures that every point is <strong>in</strong> its polygon.
-That can be useful for irregular shapes where the centroid might be outside the shape.</p>
+<div class="infobox note">
+<p><code>st_point_on_surface()</code> creates a random point inside a polygon.
+Using this assures that every point is <strong>in</strong> its polygon
+That can be useful for irregular shapes where the centroid might be outside the shape.
+But those are not centroids.</p>
+</div>
 </div>
 </div>
 <div id="centroids" class="section level2 hasAnchor">
@@ -587,10 +593,12 @@ That can be useful for irregular shapes where the centroid might be outside the 
 <span id="cb143-4"><a href="manipulating-vector-data.html#cb143-4"></a>boroughs_centroids &lt;-<span class="st"> </span><span class="kw">st_centroid</span>(boroughs)</span></code></pre></div>
 <pre><code>## Warning in st_centroid.sf(boroughs): st_centroid assumes attributes are constant
 ## over geometries of x</code></pre>
-<p>You can also do buffers and other geometrical operations like <a href="https://r-spatial.github.io/sf/reference/geos_combine.html"><code>st_union()</code></a> to merge geometries.</p>
-<div class="figure">
-<img src="images/venn-clip-1.png" alt="" />
-<p class="caption">Spatial equivalents of logical operators <span class="citation">(<span class="citeproc-not-found" data-reference-id="lovelace_geocomputation_2019"><strong>???</strong></span>)</span></p>
+<p>You can also do buffers and other geometrical operations like <a href="https://r-spatial.github.io/sf/reference/geos_combine.html"><code>st_union()</code></a> (Figure <a href="manipulating-vector-data.html#fig:05-manipulating-vector-data-17">4.1</a>) to merge geometries.</p>
+<div class="figure"><span style="display:block;" id="fig:05-manipulating-vector-data-17"></span>
+<img src="figs/venn-clip-1.png" alt="Spatial equivalents of logical operators (source: Geocomputation with R)" width="576" />
+<p class="caption">
+Figure 4.1: Spatial equivalents of logical operators (source: Geocomputation with R)
+</p>
 </div>
 </div>
 <div id="geometric-binary-predicates" class="section level2 hasAnchor">
@@ -678,13 +686,42 @@ It works better in RStudio but it is still useful with Jupyter notebooks.</p>
 You can specify the “by” statement, but for the sake of readability, it is not show here.</p>
 <p>The <code>append = FALSE</code> ensure you can write on existing layer, it is optional.</p>
 </div>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="manipulating-vector-data.html#cb157-1"></a><span class="kw">print</span>(<span class="kw">here</span>())  <span class="co"># print the project directory</span></span>
-<span id="cb157-2"><a href="manipulating-vector-data.html#cb157-2"></a><span class="kw">list.files</span>(<span class="kw">here</span>()) <span class="co"># list the files in the project directory</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="manipulating-vector-data.html#cb157-1"></a><span class="kw">print</span>(<span class="kw">here</span>())  <span class="co"># print the project directory</span></span></code></pre></div>
+<pre><code>## [1] &quot;/Users/runner/work/foss4g2022-getting-started-rspatial/foss4g2022-getting-started-rspatial&quot;</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="manipulating-vector-data.html#cb159-1"></a><span class="kw">list.files</span>(<span class="kw">here</span>()) <span class="co"># list the files in the project directory</span></span></code></pre></div>
+<pre><code>##  [1] &quot;_book&quot;                                      
+##  [2] &quot;_bookdown.yml&quot;                              
+##  [3] &quot;_main_files&quot;                                
+##  [4] &quot;_main.Rmd&quot;                                  
+##  [5] &quot;_output.yml&quot;                                
+##  [6] &quot;01-intro.Rmd&quot;                               
+##  [7] &quot;02-data-handling.Rmd&quot;                       
+##  [8] &quot;03-intro-to-rspatial.Rmd&quot;                   
+##  [9] &quot;04-making-maps.Rmd&quot;                         
+## [10] &quot;05-manipulating-vector-data.Rmd&quot;            
+## [11] &quot;06-manipulating-raster-data.Rmd&quot;            
+## [12] &quot;07-summary.Rmd&quot;                             
+## [13] &quot;08-references.Rmd&quot;                          
+## [14] &quot;book.bib&quot;                                   
+## [15] &quot;data&quot;                                       
+## [16] &quot;DESCRIPTION&quot;                                
+## [17] &quot;figs&quot;                                       
+## [18] &quot;foss4g_R_workshop.gpkg&quot;                     
+## [19] &quot;FOSS4G2022_Getting_started_R_Rspatial.Rproj&quot;
+## [20] &quot;images&quot;                                     
+## [21] &quot;index.Rmd&quot;                                  
+## [22] &quot;my_map2.html&quot;                               
+## [23] &quot;my_map2.pdf&quot;                                
+## [24] &quot;my_map2.png&quot;                                
+## [25] &quot;packages.bib&quot;                               
+## [26] &quot;preamble.tex&quot;                               
+## [27] &quot;README.md&quot;                                  
+## [28] &quot;style.css&quot;</code></pre>
 </div>
 <div id="check-data" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.7.2</span> Check data<a href="manipulating-vector-data.html#check-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>{sf} provides an <code>st_layers()</code> function that is useful to see the content of a dataset.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="manipulating-vector-data.html#cb158-1"></a><span class="kw">st_layers</span>(<span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="manipulating-vector-data.html#cb161-1"></a><span class="kw">st_layers</span>(<span class="dt">dsn =</span> <span class="kw">here</span>(<span class="st">&quot;foss4g_R_workshop.gpkg&quot;</span>))</span></code></pre></div>
 <pre><code>## Driver: GPKG 
 ## Available layers:
 ##                 layer_name geometry_type features fields

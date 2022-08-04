@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-01" />
+<meta name="date" content="2022-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,7 +173,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.8" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#select-columns"><i class="fa fa-check"></i><b>1.8</b> Select columns</a></li>
 <li class="chapter" data-level="1.9" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#create-new-variables"><i class="fa fa-check"></i><b>1.9</b> Create new variables</a></li>
-<li class="chapter" data-level="1.10" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#agregate-data"><i class="fa fa-check"></i><b>1.10</b> Agregate data</a></li>
+<li class="chapter" data-level="1.10" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#agregate-data"><i class="fa fa-check"></i><b>1.10</b> Agregate data</a><ul>
+<li class="chapter" data-level="" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#exercice-1"><i class="fa fa-check"></i>Exercice</a></li>
+</ul></li>
 <li class="chapter" data-level="1.11" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#join-data"><i class="fa fa-check"></i><b>1.11</b> Join data</a></li>
 <li class="chapter" data-level="1.12" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#piping"><i class="fa fa-check"></i><b>1.12</b> Piping</a></li>
 </ul></li>
@@ -268,9 +270,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-types" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.1</span> Data types<a href="data-handling-with-r.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>numeric:</li>
+<li>numeric:
+<ul>
 <li><code>2</code></li>
 <li><code>12.125</code></li>
+</ul></li>
 <li>character strings: <code>'a'</code>, <code>"word"</code></li>
 <li>logical:
 <ul>
@@ -279,9 +283,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>NULL</code> (sort of)</li>
 </ul></li>
 </ul>
-<blockquote>
+<div class="infobox note">
 <p>Please note that logicals are in capital letters.</p>
-</blockquote>
+</div>
 <ul>
 <li>vectors:
 <ul>
@@ -367,7 +371,7 @@ For example, if we want to work with the Gapminder dataset from <a href="https:/
 <span id="cb9-2"><a href="data-handling-with-r.html#cb9-2"></a>data_url</span></code></pre></div>
 <pre><code>## [1] &quot;/Users/runner/work/_temp/Library/gapminder/extdata/gapminder.tsv&quot;</code></pre>
 <div class="infobox tip">
-<p><code>system.file()</code> is a function that the path of files in R packages, independently
+<p><code>system.file()</code> is a function that returns the path of files in R packages, independently
 of the operating system.</p>
 </div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-handling-with-r.html#cb11-1"></a>gapminder &lt;-<span class="st"> </span><span class="kw">read.delim</span>(data_url, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
@@ -446,6 +450,9 @@ All those functions are verbs and means an action onto the dataset.</p>
 ## 10 Italy    1997 57479469 Europe       78.8    24675.
 ## 11 Italy    2002 57926999 Europe       80.2    27968.
 ## 12 Italy    2007 58147733 Europe       80.5    28570.</code></pre>
+<div class="infobox tip">
+<p>in Tidyverse functions, the data is the first argument and does not need to be named.</p>
+</div>
 <p>You can use comparison operators like <code>==</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code> , etc.
 There is also logical operators : <code>&amp;</code> (<em>AND</em>), <code>|</code> (<em>OR</em>), <code>!</code> (<em>NOT</em>) and <code>xor()</code>.</p>
 <p>So, for example, if we want to subset records for Italy after 2000, we can use filter like this:</p>
@@ -456,6 +463,7 @@ There is also logical operators : <code>&amp;</code> (<em>AND</em>), <code>|</co
 ##   &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 Italy    2002 57926999 Europe       80.2    27968.
 ## 2 Italy    2007 58147733 Europe       80.5    28570.</code></pre>
+<p>This can be translated to : “From the gapminder dataset, filter all rows where the country is equal to Italy and the year is superior to 2000”.</p>
 <div id="exercice" class="section level3 unnumbered hasAnchor">
 <h3>Exercice<a href="data-handling-with-r.html#exercice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
@@ -486,11 +494,11 @@ Please not the use of the <code>-</code> symbol before the name of the variable.
 </div>
 <div id="create-new-variables" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.9</span> Create new variables<a href="data-handling-with-r.html#create-new-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let say you want to compute the GDP, in millions, from the population and the GDP per capita.
+<p>Let say you want to compute the GDP, in millions, from the population and the GDP per capita variables.
 For that, you can use the <code>mutate()</code> function:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-handling-with-r.html#cb28-1"></a><span class="kw">mutate</span>(gapminder, <span class="dt">GPD =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-handling-with-r.html#cb28-1"></a><span class="kw">mutate</span>(gapminder, <span class="dt">GDP =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,704 × 7
-##    country      year      pop continent lifeExp gdpPercap    GPD
+##    country      year      pop continent lifeExp gdpPercap    GDP
 ##    &lt;chr&gt;       &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
 ##  1 Afghanistan  1952  8425333 Asia         28.8      779.  6567.
 ##  2 Afghanistan  1957  9240934 Asia         30.3      821.  7585.
@@ -505,9 +513,9 @@ For that, you can use the <code>mutate()</code> function:</p>
 ## # … with 1,694 more rows
 ## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>It’s companion function, <code>transmute()</code> does the same thing but only keep the new variables.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-handling-with-r.html#cb30-1"></a><span class="kw">transmute</span>(gapminder, <span class="dt">GPD =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-handling-with-r.html#cb30-1"></a><span class="kw">transmute</span>(gapminder, <span class="dt">GDP =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,704 × 1
-##       GPD
+##       GDP
 ##     &lt;dbl&gt;
 ##  1  6567.
 ##  2  7585.
@@ -522,9 +530,9 @@ For that, you can use the <code>mutate()</code> function:</p>
 ## # … with 1,694 more rows
 ## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>If you want to keep variables from the dataset, you can call them in the function call:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-handling-with-r.html#cb32-1"></a><span class="kw">transmute</span>(gapminder, country, year, <span class="dt">GPD =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-handling-with-r.html#cb32-1"></a><span class="kw">transmute</span>(gapminder, country, year, <span class="dt">GDP =</span> (gdpPercap <span class="op">*</span><span class="st"> </span>pop)<span class="op">/</span><span class="st"> </span><span class="dv">1000000</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,704 × 3
-##    country      year    GPD
+##    country      year    GDP
 ##    &lt;chr&gt;       &lt;int&gt;  &lt;dbl&gt;
 ##  1 Afghanistan  1952  6567.
 ##  2 Afghanistan  1957  7585.
@@ -538,12 +546,12 @@ For that, you can use the <code>mutate()</code> function:</p>
 ## 10 Afghanistan  1997 14122.
 ## # … with 1,694 more rows
 ## # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<p>So in this example, we compute the GPD but we also keep the information about the country and the year.</p>
+<p>So in this example, we compute the GDP but we also keep the information about the country and the year.</p>
 </div>
 <div id="agregate-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.10</span> Agregate data<a href="data-handling-with-r.html#agregate-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Sometimes, we have a too detailed dataset and we want a more broader view of the data so we want to aggregate it.</p>
-<p>To do so, <code>dplyr</code> provides a couple of functions: <code>group_by()</code> and <code>summarise()</code>.
+<p>To do so, {dplyr} provides a couple of functions: <code>group_by()</code> and <code>summarise()</code>.
 Like their names says, <code>group_by()</code> groups records who share the same value in a variable and <code>summarise()</code> compute the summary of non-grouping variables.</p>
 <p>For example, let’s compute the yearly population of each continent.
 To do this, we first group the data by continent and year and pass the result to <code>summarise()</code>.
@@ -590,13 +598,23 @@ Into this second function, we create a new variable called <code>population</cod
 <div class="infobox note">
 <p><code>.data</code> is a pronoun that you can use when the column name is a character vector.</p>
 </div>
+<div id="exercice-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercice<a href="data-handling-with-r.html#exercice-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Determine the max GDP by country other the period (tip: there is a <code>max()</code> function base R.)</li>
+</ul>
+<!--
+summarise(group_by(mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000), continent, country), max_GDP = max(GDP))
+-->
+</div>
 </div>
 <div id="join-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.11</span> Join data<a href="data-handling-with-r.html#join-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><code>dplyr</code> provides a large variety of functions to join datasets :
+<p>{dplyr} provides a large variety of functions to join datasets :
 <code>inner_join()</code>,<code>left_join()</code>, <code>right_join()</code>, <code>full_join()</code>, <code>nest_join()</code> ,
 <code>semi_join()</code>,<code>anti_join()</code>.</p>
-<p>Let’s create two datasets that shares a common key.</p>
+<p>Let’s create two datasets that shares a common key.
+This new key will be the country name and the year seperated by an underscore.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="data-handling-with-r.html#cb41-1"></a>gapminder_left &lt;-<span class="st"> </span><span class="kw">transmute</span>(gapminder, </span>
 <span id="cb41-2"><a href="data-handling-with-r.html#cb41-2"></a>                            <span class="dt">key =</span> <span class="kw">paste0</span>(country, <span class="st">&quot;_&quot;</span> , year), </span>
 <span id="cb41-3"><a href="data-handling-with-r.html#cb41-3"></a>                            country, </span>
@@ -649,7 +667,7 @@ Into this second function, we create a new variable called <code>population</cod
 <img src="https://raw.githubusercontent.com/gadenbuie/tidyexplain/main/images/left-join.gif" alt="" />
 <p class="caption">Left Join animation (Copyright Garrick Aden_Buie)</p>
 </div>
-<p>If you want more information on joins operations with <code>dplyr</code>, we recommend to read the <a href="https://www.garrickadenbuie.com/project/tidyexplain/">dedicated blogpost from Garrick Aden-Buie</a></p>
+<p>If you want more information on joins operations with {dplyr}, we recommend to read the <a href="https://www.garrickadenbuie.com/project/tidyexplain/">dedicated blogpost from Garrick Aden-Buie</a></p>
 </div>
 <div id="piping" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.12</span> Piping<a href="data-handling-with-r.html#piping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
