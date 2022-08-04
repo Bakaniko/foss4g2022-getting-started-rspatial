@@ -149,7 +149,7 @@ It also works well on large sets of data.
 Similarly to {sf}, {terra} also uses many external libraries, but also enables many R packages (Figure \@ref(fig:03-intro-to-rspatial-17)).
 
 ```{r 03-intro-to-rspatial-17}
-#| echo = FALSE
+#| echo = FALSE,
 #| fig.cap = "{terra} libraries"
 knitr::include_graphics("figs/terra-libs.png")
 ```
