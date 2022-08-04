@@ -4,6 +4,10 @@ This is the teaching materials for a workshop introducing R and R-spatial at the
 
 ![FOSS4G2022 logo](https://2022.foss4g.org/img/logo/logo-dark.png)
 
+This workshop will be facilitated by Jakub Nowosad and Nicolas Roelandt, from 
+Adam Mickiewicz University in Poznań (Poland) and Gustave Eiffel university (France) respectively.
+
+![Gustave Eiffel university and Adam Mickiewicz University in Poznań logos](images/logos.png)
 
 ## Pre-requisites {-}
 
