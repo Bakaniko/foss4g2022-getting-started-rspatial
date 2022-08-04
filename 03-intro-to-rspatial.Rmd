@@ -61,6 +61,7 @@ Third, it is a basis of a few hundred of other R packages.
 It also also supports geometry collections.
 
 ```{r 03-intro-to-rspatial-4, purl=FALSE,echo=FALSE, out.width="90%"}
+#| fig.cap = "Source: https://geocompr.robinlovelace.net/spatial-class.html?q=sf%20classes#intro-sf"
 knitr::include_graphics("figs/sf-classes.png", dpi = NA)
 ```
 
@@ -149,8 +150,11 @@ Similarly to {sf}, {terra} also uses many external libraries, but also enables m
 
 ```{r 03-intro-to-rspatial-17}
 #| echo = FALSE
+#| #| fig.cap = "{terra} libraries"
 knitr::include_graphics("figs/terra-libs.png")
 ```
+
+<!-- The reference does not work. maybe because it lacks a caption ?-->
 
 To read a spatial raster file, we just need to provide its file path to the `rast()` function:
 
@@ -211,4 +215,8 @@ plot(my_raster)
 ```
 
 We will give more example of the {terra} use in Chapter \@ref(manipulating-raster-data).
-To learn more about the package type ``?`terra-package``` or visit https://rspatial.github.io/terra/reference/terra-package.html.
+To learn more about the package type `?terra` or visit https://rspatial.github.io/terra/reference/terra-package.html.
+
+
+<?-- Nicolas : are you sure about ? terra-package, it gives me help on Arithmetic from base R. 
+? terra gives me info on {terra}-->
