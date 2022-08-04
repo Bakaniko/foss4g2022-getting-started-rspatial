@@ -272,7 +272,7 @@ You can also do buffers and other geometrical operations like [`st_union()`](htt
 
 
 ```{r 05-manipulating-vector-data-17}
-#| echo = FALSE
+#| echo = FALSE,
 #| fig.cap = "Spatial equivalents of logical operators (source: Geocomputation with R)"
 knitr::include_graphics("figs/venn-clip-1.png")
 ```
