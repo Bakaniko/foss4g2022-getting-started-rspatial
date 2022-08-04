@@ -4,15 +4,19 @@
 ## Data types
 
 - numeric:
- - `2`
- - `12.125`
+  - `2`
+  - `12.125`
 - character strings: `'a'`, `"word"`
 - logical:
   - `TRUE`
   - `FALSE`
   - `NULL` (sort of)
 
-> Please note that logicals are in capital letters.
+:::: {.infobox .note data-latex="note"}
+
+Please note that logicals are in capital letters.
+
+::::
 
 - vectors:
   - `c(12, 15, 35698)`
@@ -107,7 +111,7 @@ data_url
 
 :::: {.infobox .tip data-latex="tip"}
 
-`system.file()` is a function that the path of files in R packages, independently
+`system.file()` is a function that returns the path of files in R packages, independently
 of the operating system.
 
 ::::
@@ -173,6 +177,12 @@ If we only want the records from Italy, we can filter using:
 filter(gapminder, country == "Italy" )
 ```
 
+:::: {.infobox .tip data-latex="tip"}
+
+in Tidyverse functions, the data is the first argument and does not need to be named.
+
+::::
+
 You can use comparison operators like `==`, `>`, `<`, `>=` , etc.
 There is also logical operators : `&` (*AND*), `|` (*OR*), `!` (*NOT*) and `xor()`.
 
@@ -182,6 +192,8 @@ So, for example, if we want to subset records for Italy after 2000, we can use f
 italy_2000 <- filter(gapminder, country == "Italy" & year > 2000 )
 italy_2000
 ```
+
+This can be translated to : "From the gapminder dataset, filter all rows where the country is equal to Italy and the year is superior to 2000".
 
 ### Exercice {-}
 
@@ -209,32 +221,32 @@ So you can select the column you want to keep or the ones you want to remove.
 
 ## Create new variables
 
-Let say you want to compute the GDP, in millions, from the population and the GDP per capita.
+Let say you want to compute the GDP, in millions, from the population and the GDP per capita variables.
 For that, you can use the `mutate()` function:
 
 ```{r data-handling-mutate}
-mutate(gapminder, GPD = (gdpPercap * pop)/ 1000000)
+mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000)
 ```
 
 It's companion function, `transmute()` does the same thing but only keep the new variables.
 
 ```{r data-handling-transmute}
-transmute(gapminder, GPD = (gdpPercap * pop)/ 1000000)
+transmute(gapminder, GDP = (gdpPercap * pop)/ 1000000)
 ```
 
 If you want to keep variables from the dataset, you can call them in the function call:
 
 ```{r data-handling-transmute2}
-transmute(gapminder, country, year, GPD = (gdpPercap * pop)/ 1000000)
+transmute(gapminder, country, year, GDP = (gdpPercap * pop)/ 1000000)
 ```
 
-So in this example, we compute the GPD but we also keep the information about the country and the year.
+So in this example, we compute the GDP but we also keep the information about the country and the year.
 
 ## Agregate data
 
 Sometimes, we have a too detailed dataset and we want a more broader view of the data so we want to aggregate it.
 
-To do so, `dplyr` provides a couple of functions:  `group_by()` and `summarise()`.
+To do so, {dplyr} provides a couple of functions:  `group_by()` and `summarise()`.
 Like their names says, `group_by()` groups records who share the same value in a variable and `summarise()` compute the summary of non-grouping variables.
 
 For example, let's compute the yearly population of each continent.
@@ -263,13 +275,22 @@ summarise(group_by(gapminder, continent), country = first(.data[["country"]]))
 
 ::::
 
+### Exercice {-}
+
+- Determine the max GDP by country other the period (tip: there is a `max()` function base R.)
+
+<!--
+summarise(group_by(mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000), continent, country), max_GDP = max(GDP))
+-->
+
 ## Join data
 
-`dplyr` provides a large variety of functions to join datasets : 
+{dplyr} provides a large variety of functions to join datasets : 
 `inner_join()`,`left_join()`, `right_join()`, `full_join()`, `nest_join()` ,
 `semi_join()`,`anti_join()`. 
 
 Let's create two datasets that shares a common key.
+This new key will be the country name and the year seperated by an underscore.
 
 ```{r data-handling-left}
 gapminder_left <- transmute(gapminder, 
@@ -302,7 +323,7 @@ joined_gapminder <- left_join(
 
 ![Left Join animation (Copyright Garrick Aden_Buie)](https://raw.githubusercontent.com/gadenbuie/tidyexplain/main/images/left-join.gif)
 
-If you want more information on joins operations with `dplyr`, we recommend to read the [dedicated blogpost from Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)
+If you want more information on joins operations with {dplyr}, we recommend to read the [dedicated blogpost from Garrick Aden-Buie](https://www.garrickadenbuie.com/project/tidyexplain/)
 
 ## Piping
 
