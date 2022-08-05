@@ -9,7 +9,9 @@ Adam Mickiewicz University in Poznań (Poland) and Gustave Eiffel university (Fr
 
 ![Gustave Eiffel university and Adam Mickiewicz University in Poznań logos](images/logos.png)
 
-## Pre-requisites {-}
+The gitbook is available here : https://bakaniko.github.io/foss4g2022-getting-started-rspatial
+
+## Pre-requisites
 
 1. A working installation of R (following [CRAN recommandations](https://cran.r-project.org/) for your computer)
 
