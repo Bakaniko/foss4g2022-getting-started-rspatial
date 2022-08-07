@@ -18,6 +18,7 @@ Additionally, we will use three datasets:
 - `nz_elev`: an elevation raster data of the New Zealand area
 
 ```{r 04-making-maps-2}
+#| message = FALSE
 library(spData)
 data("nz")
 nz_ports <- read_sf("data/nz_ports.gpkg")
