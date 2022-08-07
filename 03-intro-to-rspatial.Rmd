@@ -216,7 +216,3 @@ plot(my_raster)
 
 We will give more example of the {terra} use in Chapter \@ref(manipulating-raster-data).
 To learn more about the package type `?terra` or visit https://rspatial.github.io/terra/reference/terra-package.html.
-
-
-<?-- Nicolas : are you sure about ? terra-package, it gives me help on Arithmetic from base R. 
-? terra gives me info on {terra}-->
