@@ -30,7 +30,7 @@ nz_elev <- rast(system.file("raster/nz_elev.tif", package = "spDataLarge"))
 R has many packages dedicated to spatial data visualizations. 
 They include tools for making both static maps, interactive maps, specific-purpose maps, animations, etc.
 
-Packages for creating static maps include {graphics}, {rasterVis}, {ggplot2}, {ggspatial}, {mapsf}, {**}tidyterra}, etc.
+Packages for creating static maps include {graphics}, {rasterVis}, {ggplot2}, {ggspatial}, {mapsf}, {tidyterra}, etc.
 Interactive maps' packages are, for example, {leaflet}, {mapview}, {mapdeck}.
 Specific-purpose mapping can be achieved with {cartogram} (to construct area cartograms), {geofacet} ("geofaceting"), {geogrid} (to turn polygons into regular or hexagonal grids), and {rayshader} (raytracing to produce 2D and 3D data visualizations). 
 
