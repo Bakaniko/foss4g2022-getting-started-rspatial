@@ -59,10 +59,10 @@ data(<datasetname>)   # load an embedded dataset
 head(<objectname>)    # first lines of a dataframe
 is.vector(object)     # return TRUE if object is a vector
 is.data.frame(object) # return TRUE if object is a data.frame
-class(<objectname>)  # Returns the class of an object
-unique(<objectname>) # returns unique values
+class(<objectname>)   # returns the class of an object
+unique(<objectname>)  # returns unique values
 help(<functionname>)  # get help on a function
-plot(<objectname>)   # create a graphic from a dataset
+plot(<objectname>)    # create a graphic from a dataset
 ```
 
 Exercises : 
@@ -74,7 +74,7 @@ Exercises :
 
 ## Packages
 
-While base R contains a lot of functions, it can be extended with packages.
+While base R contains a lot of functions, it can be extended with various packages.
 
 > In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. @wickham2022Packages
 
@@ -82,6 +82,7 @@ You already saw how to install packages with the `install.packages()` function, 
 package we will use to handle the data.
 
 ```{r data-handling-libraries}
+#| message: false
 library(dplyr)
 ```
 
@@ -102,7 +103,7 @@ gapminder <- read.csv(data_url)
 
 We call this dataset from an URL but it can be a path in your system file.
 
-For example, if you have installed the gapminder package as recommended, you will find the data set as a TSV file in your R installation.
+For example, if you have installed the {gapminder} package as recommended, you will find the data set as a TSV file in your R installation.
 
 ```{r where-is-gapminder}
 data_url <- system.file("extdata/gapminder.tsv", package = "gapminder")
@@ -125,7 +126,7 @@ gapminder <- read.delim(data_url, sep = "\t")
 :::: {.infobox .tip data-latex="tip"}
 
 `read.csv()` and similar functions can read delimited text files only.
-For other formats, you can use functions from other packages like [Haven](https://haven.tidyverse.org) or [readxl](https://readxl.tidyverse.org/).
+For other formats, you can use functions from other packages like [{haven}](https://haven.tidyverse.org) or [{readxl}](https://readxl.tidyverse.org/).
 We will show in Chapter \@ref(rspatial) how to load geospatial data.
 
 ::::
@@ -144,7 +145,7 @@ You can also use `head()` for the same purpose but a different output format.
 head(gapminder)
 ```
 
-We can transform a dataframe into a tibble to access their better `print()` method that combines `head()` and `glimpse()`. 
+We can transform a data frame into a tibble to access their better `print()` method that combines `head()` and `glimpse()`. 
 Tibbles are at the core of the Tidyverse packages. 
 
 ```{r data-handling-head2}
@@ -225,13 +226,13 @@ Let say you want to compute the GDP, in millions, from the population and the GD
 For that, you can use the `mutate()` function:
 
 ```{r data-handling-mutate}
-mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000)
+mutate(gapminder, GDP = (gdpPercap * pop) / 1000000)
 ```
 
 It's companion function, `transmute()` does the same thing but only keep the new variables.
 
 ```{r data-handling-transmute}
-transmute(gapminder, GDP = (gdpPercap * pop)/ 1000000)
+transmute(gapminder, GDP = (gdpPercap * pop) / 1000000)
 ```
 
 If you want to keep variables from the dataset, you can call them in the function call:
@@ -247,11 +248,11 @@ So in this example, we compute the GDP but we also keep the information about th
 Sometimes, we have a too detailed dataset and we want a more broader view of the data so we want to aggregate it.
 
 To do so, {dplyr} provides a couple of functions:  `group_by()` and `summarise()`.
-Like their names says, `group_by()` groups records who share the same value in a variable and `summarise()` compute the summary of non-grouping variables.
+Like their names say, `group_by()` groups records which share the same value in a variable and `summarise()` compute the summary of non-grouping variables.
 
 For example, let's compute the yearly population of each continent.
 To do this, we first group the data by continent and year and pass the result to `summarise()`.
-Into this second function, we create a new variable called `population` that is the sum of the variable `pop` of each group.
+In this second function, we create a new variable called `population` that is the sum of the variable `pop` of each group.
 
 ```{r data-handling-group-by}
 summarise(group_by(gapminder, continent, year), population = sum(pop))
@@ -334,7 +335,7 @@ However, its usage is very frequent so it is most likely that a beginner will en
 
 The most common form `%>%` is provided by the package [{magrittr}](https://magrittr.tidyverse.org/), which is part of the tidyverse and is a dependency of {dplyr}, so you don't have to load it.
 
-In the following example, we show how to compute the mean GDP by decade of Europeans countries using pipes to chain functions.
+In the following example, we show how to compute the mean GDP by the decade of European countries using pipes to chain functions.
 
 ```{r piping-example-magrittr}
 gapminder %>% # pass the datset as the first argument
