@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction | Getting started with R and R-spatial</title>
   <meta name="description" content="Teaching materials for R and R-spatial introduction workshop at FOSS4G2022." />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction | Getting started with R and R-spatial" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-07" />
+<meta name="date" content="2022-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,15 +267,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduction" class="section level1 unnumbered hasAnchor">
 <h1>Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <!-- (Nicolas) Introduction to the workshop (5 min) -->
-<p>This workshops aims to provide the very basics of R to newcomers and a first
-introduction to spatial data handling in R using the <a href="https://cran.r-project.org/view=Spatial">R-spatial ecosystem</a>.
-We will present to the audience mapping with the {tmap} package, vector data
-handling with {sf} and raster data handling with {terra}.</p>
+<p>This workshop aims to provide the very basics of R to newcomers and a first introduction to spatial data handling in R using the <a href="https://cran.r-project.org/view=Spatial">R-spatial ecosystem</a>.
+We will also present to the audience mapping with the {tmap} package, vector data handling with {sf} and raster data handling with {terra}.</p>
 <p>No previous knowledge of R is required.</p>
 <p>The workshop leaders are <a href="https://roelandtn.frama.io/">Nicolas Roelandt</a> from Gustave Eiffel university (Lyon, France) and <a href="https://jakubnowosad.com/">Jakub Nowosad</a> from Adam Mickiewicz University (Poznań, Poland).</p>
 <div class="figure">
 <img src="images/logos.png" alt="" />
-<p class="caption">Gustave Eiffel university and Adam Mickiewicz University in Poznań logos</p>
+<p class="caption">Gustave Eiffel university and Adam Mickiewicz University, Poznań logos</p>
 </div>
 <div id="schedule" class="section level2 unnumbered hasAnchor">
 <h2>Schedule<a href="introduction.html#schedule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -325,10 +323,10 @@ Free and Open Source Software in 1995.</p>
 <p>While R is not dedicated to spatial analysis, there a several dozen of packages that provides
 geospatial capabilities to the language.</p>
 <ul>
-<li>Use R a standalone GIS:
+<li>Use R as a standalone GIS:
 <ul>
 <li>read and write geospatial data</li>
-<li>connect to geospatial data base</li>
+<li>connect to geospatial databases</li>
 <li>perform spatial analysis</li>
 <li>make geostatistical modelling, prediction and simulation</li>
 <li>access to algorithms from other tools (<a href="https://github.com/paleolimbot/qgisprocess">QGIS</a>, <a href="https://github.com/rsbivand/rgrass">GRASS</a>, <a href="https://github.com/stevenpawley/Rsagacmd">SAGA</a>)</li>
@@ -343,22 +341,20 @@ geospatial capabilities to the language.</p>
 <div id="coding-paradigms" class="section level2 unnumbered hasAnchor">
 <h2>Coding paradigms<a href="introduction.html#coding-paradigms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When R was released, there was no strong syntax
-philosophy so there are some inconsistencies in packages, functions and arguments naming,
+philosophy, so there are some inconsistencies in packages, functions, and arguments naming,
 for example.
-R base readability and performance where not good enough for some users so they
+R base readability and performance were not good enough for some users, so they
 developed packages to improve those.</p>
-<p>When using R for data analysis, you will encounter 3 majors coding paradigms:</p>
+<p>When using R for data analysis, you will encounter three majors coding paradigms:</p>
 <ul>
 <li>base R</li>
-<li><a href="https://www.tidyverse.org/">Tidyverse</a></li>
+<li><a href="https://www.tidyverse.org/">tidyverse</a></li>
 <li><a href="https://rdatatable.gitlab.io/data.table/">data.table</a></li>
 </ul>
-<p>Base R is a vanilla R code. The tidyverse aims to provide a more consistent grammar
-and readability.
-Data.table provides a fast and powerful alternative to R base with a consistent
-grammar.</p>
-<p>You can mix those paradigms for your projects, but for teaching purposes the workshop
-materials will use tidyverse with some base R.</p>
+<p>Base R is a vanilla R code.
+The tidyverse aims to provide a more consistent grammar and readability.
+data.table provides a fast and powerful alternative to R base with consistent grammar.</p>
+<p>You can mix those paradigms for your projects, but for teaching purposes, the workshop materials will use tidyverse with some base R.</p>
 
 </div>
 </div>
@@ -428,7 +424,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
