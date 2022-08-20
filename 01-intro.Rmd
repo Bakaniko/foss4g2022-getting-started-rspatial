@@ -2,16 +2,14 @@
 
 <!-- (Nicolas) Introduction to the workshop (5 min) -->
 
-This workshops aims to provide the very basics of R to newcomers and a first 
-introduction to spatial data handling in R using the [R-spatial ecosystem](https://cran.r-project.org/view=Spatial). 
-We will present to the audience mapping with the {tmap} package, vector data
-handling with {sf} and raster data handling with {terra}.
+This workshop aims to provide the very basics of R to newcomers and a first introduction to spatial data handling in R using the [R-spatial ecosystem](https://cran.r-project.org/view=Spatial). 
+We will also present to the audience mapping with the {tmap} package, vector data handling with {sf} and raster data handling with {terra}.
 
 No previous knowledge of R is required.
 
 The workshop leaders are [Nicolas Roelandt](https://roelandtn.frama.io/) from Gustave Eiffel university (Lyon, France) and [Jakub Nowosad](https://jakubnowosad.com/) from Adam Mickiewicz University (Poznań, Poland).
 
-![Gustave Eiffel university and Adam Mickiewicz University in Poznań logos](images/logos.png)
+![Gustave Eiffel university and Adam Mickiewicz University, Poznań logos](images/logos.png)
 
 ## Schedule {-}
 
@@ -26,7 +24,6 @@ The workshop leaders are [Nicolas Roelandt](https://roelandtn.frama.io/) from Gu
 - Closing the workshop (5 min)
 
 ## Pre-requisites {-}
-
 
 1. A working installation of R (following [CRAN recommandations](https://cran.r-project.org/) for your computer)
 
@@ -52,6 +49,7 @@ install.packages(remotes)
 remotes::install_github("Bakaniko/foss4g2022-getting-started-rspatial")
 ```
 
+
 ## What is ~~love~~ R ? {-}
 <!-- (Nicolas) Introduction to R (15 min) -->
 
@@ -66,9 +64,9 @@ Free and Open Source Software in 1995.
 While R is not dedicated to spatial analysis, there a several dozen of packages that provides
 geospatial capabilities to the language.
 
-- Use R a standalone GIS:
+- Use R as a standalone GIS:
   - read and write geospatial data
-  - connect to geospatial data base
+  - connect to geospatial databases
   - perform spatial analysis
   - make geostatistical modelling, prediction and simulation
   - access to algorithms from other tools ([QGIS](https://github.com/paleolimbot/qgisprocess), [GRASS](https://github.com/rsbivand/rgrass), [SAGA](https://github.com/stevenpawley/Rsagacmd))
@@ -79,21 +77,19 @@ geospatial capabilities to the language.
 ## Coding paradigms {-}
 
 When R was released, there was no strong syntax 
-philosophy so there are some inconsistencies in packages, functions and arguments naming,
+philosophy, so there are some inconsistencies in packages, functions, and arguments naming,
 for example.
-R base readability and performance where not good enough for some users so they
+R base readability and performance were not good enough for some users, so they
 developed packages to improve those.
 
-When using R for data analysis, you will encounter 3 majors coding paradigms:
+When using R for data analysis, you will encounter three majors coding paradigms:
 
 - base R
-- [Tidyverse](https://www.tidyverse.org/)
+- [tidyverse](https://www.tidyverse.org/)
 - [data.table](https://rdatatable.gitlab.io/data.table/)
 
-Base R is a vanilla R code. The tidyverse aims to provide a more consistent grammar
- and readability.
- Data.table provides a fast and powerful alternative to R base with a consistent
- grammar.
+Base R is a vanilla R code.
+The tidyverse aims to provide a more consistent grammar and readability.
+data.table provides a fast and powerful alternative to R base with consistent grammar.
  
-You can mix those paradigms for your projects, but for teaching purposes the workshop 
-materials will use tidyverse with some base R.
+You can mix those paradigms for your projects, but for teaching purposes, the workshop materials will use tidyverse with some base R.
