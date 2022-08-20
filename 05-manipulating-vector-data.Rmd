@@ -2,13 +2,11 @@
 
 <!-- (Nicolas) Vector data processing (45 min) -->
 
-For this part, we will mostly use {sf} capabilities. 
-Its most spatial functions start with the `st_` (*for spatial type*) 
-prefix like in [PostGIS](https://postgis.net/docs/manual-2.5/reference.html).
+For this part, we will mainly use {sf} capabilities. 
+Its most spatial functions start with the `st_` (*for spatial type*) prefix like in [PostGIS](https://postgis.net/docs/manual-2.5/reference.html).
 
 We will use vector data from the {spData} package.
-We will also use functions from the {dplyr} package as {sf} objects are data frames
-compatible with the Tidyverse philosophy.
+We will also use functions from the {dplyr} package as {sf} objects are data frames compatible with the tidyverse philosophy.
 
 ```{r 05-manipulating-vector-data-01}
 library(sf)
@@ -43,9 +41,9 @@ cycle_hire
 Here we can see a couple of functions :
 
 * `read_sf()` is the reading function from {sf}
-* `system.file()` is a function that allow us to look for data in packages, independently of the operating system
+* `system.file()` is a function that allows us to look for data in packages, independently of the operating system
 
-By default, {sf} provides informations when loading the dataset. 
+By default, {sf} provides pieces of information when loading the dataset. 
 We can see it contains 742 features and 5 fields. 
 It has points with lat/lon coordinates (we can see it through information about its CRS: `Geodetic CRS:  WGS 84`). 
 {sf} also shows the bounding box of our object.
@@ -71,14 +69,14 @@ Here is the description of this dataset from its documentation:
 
 ::::
 
-We can see how many bike are parked, the count of empty slots but not the total amount of bike slots. 
+We can see how many bikes are parked, and the count of empty slots but not the total amount of bike slots. 
 Let's create a new `slots` column for this with `mutate()` from {dplyr}.
 
 ```{r 05-manipulating-vector-data-04}
 cycle_hire <- mutate(cycle_hire, slots = nbikes + nempty)
 ```
 
-Now, let's load a polygon dataset, in this case London's boroughs stored in the `lnd` dataset.
+Now, let's load a polygon dataset; in this case, London's boroughs are stored in the `lnd` dataset.
 
 ### Boroughs of London
 
@@ -130,7 +128,7 @@ london_27700 <- st_transform(lnd, crs = "EPSG:27700")
 We used `st_transform()` for the reprojection operation.
 We can also use `st_crs()` to check the CRS definition of our objects.
 
-Now, we can create a quick map using the the `plot()` function.
+Now, we can create a quick map using the `plot()` function.
 This function is part of base R.
 
 ```{r 05-manipulating-vector-data-07}
@@ -157,22 +155,22 @@ For the sake of the exercise, let's do both.
 
 ### Join by attributes
 
-Let's join them with a inner join to see how many corresponds.
+Let's join them with an inner join to see how many correspond.
 
 ```{r 05-manipulating-vector-data-09}
 inner_join(cycle_hire_27700,
   st_drop_geometry(london_27700), # we don't need the geometry here
-  by = c( "area" = "NAME")
+  by = c("area" = "NAME")
 )
 ```
 
 We can see that only 33 features matched. 
-That's poor, let's try this spatially.
+That's poor, let's try to do the join spatially.
 
 ### Spatial join
 
 For this, we will try to provide a `GSS_CODE` for all cycle hire points. 
-We will regroup the data afterwards.
+We will regroup the data afterward.
 
 For this, we will select only the `GSS_CODE` column from `london_27700` with the
 `select()` function from {dplyr}, the geometry will follow.
@@ -193,9 +191,9 @@ How many points doesn't have a GSS_code?
 filter(cycle_hire_27700, is.na(GSS_CODE))
 ```
 
-Only one, that's more better than before! 
-Our knowledge of London is not enought to fix this. 
-But that is not prevening us from the next steps.
+Only one, that's better than before! 
+Our knowledge of London is not enough to fix this. 
+But that is not preventing us from the next steps.
 
 Now, to paraphrase Anita Graser: [*"Aggregate all the things!"*](https://anitagraser.com/2017/06/08/aggregate-all-the-things-qgis-expression-edition/)
 
@@ -211,7 +209,7 @@ cycle_hire_clean <- st_drop_geometry(cycle_hire_clean)
 # group data by GSS_CODE
 cycle_hire_grouped <- group_by(cycle_hire_clean, GSS_CODE)
 # count
-cycle_hire_by_area <- tally(cycle_hire_grouped, name = "count", sort= TRUE) # Aggregate
+cycle_hire_by_area <- tally(cycle_hire_grouped, name = "count", sort = TRUE) # Aggregate
 cycle_hire_by_area
 ```
 
@@ -242,7 +240,7 @@ aggregate(cycle_hire_27700["nbikes"],
           na.rm = TRUE)
 ```
 
-If we want to represents our data with proportional symbols, we might want to create centroids. 
+If we want to represent our data with proportional symbols, we might want to create centroids. 
 {sf} provides two functions in order to do that:
 
 * `st_centroid()`
@@ -257,7 +255,6 @@ That can be useful for irregular shapes where the centroid might be outside the 
 But those are not centroids.
 
 ::::
-
 
 ## Centroids
 
@@ -323,12 +320,12 @@ london_27700[unlist(cycle_hire_614_borough), ]
 
 ## Saving results
 
-In the first part, we saw that we can read spatial vector data but we can also write it!
+In the first part, we saw that we can read spatial vector data, but we can also write it!
 
 ### Writing data
 
 To write data, we will use the `st_write()` function.
-It takes the data source name (*dsn*) as mandatory argument, {sf} will try to find the good driver from the extension (here it is *.gpkg* for GeoPackage).
+It takes the data source name (*dsn*) as a mandatory argument, {sf} will try to find the good driver from the extension (here, it is *.gpkg* for GeoPackage).
 
 ```{block2, type='rmdwarning'}
 *write_sf()* can't save non geospatial data.
@@ -359,13 +356,13 @@ write_sf(
 
 :::: {.infobox .tip data-latex="note"}
 
-We used the `here()` function as it preserve the project file hierarchy. 
-It works better in RStudio but it is still useful with Jupyter notebooks.
+We used the `here()` function as it preserves the project file hierarchy. 
+It works better in RStudio, but it is still useful with Jupyter notebooks.
 
-The dataset where joined by their GSS_CODE. 
-You can specify the "by" statement, but for the sake of readability, it is not show here.
+The datasets were joined by their GSS_CODE. 
+You can specify the "by" statement, but for the sake of readability, it is not shown here.
 
-The `append = FALSE` ensure you can write on existing layer, it is optional.
+The `append = FALSE` ensure you can write on the existing layer; it is optional.
 
 ::::
 
