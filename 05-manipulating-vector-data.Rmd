@@ -299,7 +299,7 @@ we will do it like this:
 
 ```{r 05-manipulating-vector-data-18}
 Wandsworth <- filter(london_27700, NAME == "Wandsworth")
-(Wandsworth_bike_stations <- st_contains(Wandsworth, cycle_hire_27700) )
+(Wandsworth_bike_stations <- st_contains(Wandsworth, cycle_hire_27700))
 ```
 
 That will return a list of cycle hire points id.
@@ -324,7 +324,7 @@ In the first part, we saw that we can read spatial vector data, but we can also 
 
 ### Writing data
 
-To write data, we will use the `st_write()` function.
+To write data, we will use the `write_sf()` function.
 It takes the data source name (*dsn*) as a mandatory argument, {sf} will try to find the good driver from the extension (here, it is *.gpkg* for GeoPackage).
 
 ```{block2, type='rmdwarning'}

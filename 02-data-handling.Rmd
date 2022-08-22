@@ -65,7 +65,7 @@ help(<functionname>)  # get help on a function
 plot(<objectname>)    # create a graphic from a dataset
 ```
 
-Exercises : 
+Exercise: 
 
 - Load the `LakeHuron` dataset using `data()`
 - Get help on the `LakeHuron` dataset
@@ -196,7 +196,7 @@ italy_2000
 
 This can be translated to : "From the gapminder dataset, filter all rows where the country is equal to Italy and the year is superior to 2000".
 
-### Exercice {-}
+### Exercise {-}
 
 - Try to subset non-European records
 - Try to subset records that are in Oceania or before 2000
@@ -276,7 +276,7 @@ summarise(group_by(gapminder, continent), country = first(.data[["country"]]))
 
 ::::
 
-### Exercice {-}
+### Exercise {-}
 
 - Determine the max GDP by country other the period (tip: there is a `max()` function base R.)
 
@@ -291,7 +291,7 @@ summarise(group_by(mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000), continen
 `semi_join()`,`anti_join()`. 
 
 Let's create two datasets that shares a common key.
-This new key will be the country name and the year seperated by an underscore.
+This new key will be the country name and the year separated by an underscore.
 
 ```{r data-handling-left}
 gapminder_left <- transmute(gapminder, 
@@ -338,7 +338,7 @@ The most common form `%>%` is provided by the package [{magrittr}](https://magri
 In the following example, we show how to compute the mean GDP by the decade of European countries using pipes to chain functions.
 
 ```{r piping-example-magrittr}
-gapminder %>% # pass the datset as the first argument
+gapminder %>% # pass the dataset as the first argument
   filter(continent == "Europe") %>% # subset on European records
   select(-continent) %>% # remove the continent column
   mutate(decade = year - year %% 10, # compute decade

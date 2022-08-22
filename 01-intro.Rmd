@@ -18,7 +18,7 @@ The workshop leaders are [Nicolas Roelandt](https://roelandtn.frama.io/) from Gu
 - Non-spatial data handling (30 min)
 - Introduction to the R-spatial ecosystem (20 min)
 - Mapping in R with {tmap} (30 min)
-- Coffee break (to be confirmed)
+- Coffee break (20 min)
 - Vector data processing (45 min)
 - Raster data processing (45 min)
 - Closing the workshop (5 min)
