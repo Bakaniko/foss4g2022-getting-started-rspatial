@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-20" />
+<meta name="date" content="2022-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,12 +169,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#load-data"><i class="fa fa-check"></i><b>1.5</b> Load data</a></li>
 <li class="chapter" data-level="1.6" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#in-the-beginning-was-the-verb"><i class="fa fa-check"></i><b>1.6</b> In the beginning was the Verb</a></li>
 <li class="chapter" data-level="1.7" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#filter-data"><i class="fa fa-check"></i><b>1.7</b> Filter data</a><ul>
-<li class="chapter" data-level="" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#exercice"><i class="fa fa-check"></i>Exercice</a></li>
+<li class="chapter" data-level="" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#exercise"><i class="fa fa-check"></i>Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="1.8" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#select-columns"><i class="fa fa-check"></i><b>1.8</b> Select columns</a></li>
 <li class="chapter" data-level="1.9" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#create-new-variables"><i class="fa fa-check"></i><b>1.9</b> Create new variables</a></li>
 <li class="chapter" data-level="1.10" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#agregate-data"><i class="fa fa-check"></i><b>1.10</b> Agregate data</a><ul>
-<li class="chapter" data-level="" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#exercice-1"><i class="fa fa-check"></i>Exercice</a></li>
+<li class="chapter" data-level="" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#exercise-1"><i class="fa fa-check"></i>Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="1.11" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#join-data"><i class="fa fa-check"></i><b>1.11</b> Join data</a></li>
 <li class="chapter" data-level="1.12" data-path="data-handling-with-r.html"><a href="data-handling-with-r.html#piping"><i class="fa fa-check"></i><b>1.12</b> Piping</a></li>
@@ -329,7 +329,7 @@ It is French for assignment ;)-->
 <span id="cb3-6"><a href="data-handling-with-r.html#cb3-6"></a><span class="kw">unique</span>(<span class="op">&lt;</span>objectname<span class="op">&gt;</span>)  <span class="co"># returns unique values</span></span>
 <span id="cb3-7"><a href="data-handling-with-r.html#cb3-7"></a><span class="kw">help</span>(<span class="op">&lt;</span>functionname<span class="op">&gt;</span>)  <span class="co"># get help on a function</span></span>
 <span id="cb3-8"><a href="data-handling-with-r.html#cb3-8"></a><span class="kw">plot</span>(<span class="op">&lt;</span>objectname<span class="op">&gt;</span>)    <span class="co"># create a graphic from a dataset</span></span></code></pre></div>
-<p>Exercises :</p>
+<p>Exercise:</p>
 <ul>
 <li>Load the <code>LakeHuron</code> dataset using <code>data()</code></li>
 <li>Get help on the <code>LakeHuron</code> dataset</li>
@@ -455,8 +455,8 @@ There is also logical operators : <code>&amp;</code> (<em>AND</em>), <code>|</co
 ## 1 Italy    2002 57926999 Europe       80.2    27968.
 ## 2 Italy    2007 58147733 Europe       80.5    28570.</code></pre>
 <p>This can be translated to : “From the gapminder dataset, filter all rows where the country is equal to Italy and the year is superior to 2000”.</p>
-<div id="exercice" class="section level3 unnumbered hasAnchor">
-<h3>Exercice<a href="data-handling-with-r.html#exercice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="exercise" class="section level3 unnumbered hasAnchor">
+<h3>Exercise<a href="data-handling-with-r.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Try to subset non-European records</li>
 <li>Try to subset records that are in Oceania or before 2000</li>
@@ -585,8 +585,8 @@ In this second function, we create a new variable called <code>population</code>
 <div class="infobox note">
 <p><code>.data</code> is a pronoun that you can use when the column name is a character vector.</p>
 </div>
-<div id="exercice-1" class="section level3 unnumbered hasAnchor">
-<h3>Exercice<a href="data-handling-with-r.html#exercice-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="exercise-1" class="section level3 unnumbered hasAnchor">
+<h3>Exercise<a href="data-handling-with-r.html#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Determine the max GDP by country other the period (tip: there is a <code>max()</code> function base R.)</li>
 </ul>
@@ -601,7 +601,7 @@ summarise(group_by(mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000), continen
 <code>inner_join()</code>,<code>left_join()</code>, <code>right_join()</code>, <code>full_join()</code>, <code>nest_join()</code> ,
 <code>semi_join()</code>,<code>anti_join()</code>.</p>
 <p>Let’s create two datasets that shares a common key.
-This new key will be the country name and the year seperated by an underscore.</p>
+This new key will be the country name and the year separated by an underscore.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-handling-with-r.html#cb38-1"></a>gapminder_left &lt;-<span class="st"> </span><span class="kw">transmute</span>(gapminder, </span>
 <span id="cb38-2"><a href="data-handling-with-r.html#cb38-2"></a>                            <span class="dt">key =</span> <span class="kw">paste0</span>(country, <span class="st">&quot;_&quot;</span> , year), </span>
 <span id="cb38-3"><a href="data-handling-with-r.html#cb38-3"></a>                            country, </span>
@@ -661,7 +661,7 @@ This new key will be the country name and the year seperated by an underscore.</
 However, its usage is very frequent so it is most likely that a beginner will encounter it in documentation or in code source publicly available.</p>
 <p>The most common form <code>%&gt;%</code> is provided by the package <a href="https://magrittr.tidyverse.org/">{magrittr}</a>, which is part of the tidyverse and is a dependency of {dplyr}, so you don’t have to load it.</p>
 <p>In the following example, we show how to compute the mean GDP by the decade of European countries using pipes to chain functions.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data-handling-with-r.html#cb43-1"></a>gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># pass the datset as the first argument</span></span>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data-handling-with-r.html#cb43-1"></a>gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># pass the dataset as the first argument</span></span>
 <span id="cb43-2"><a href="data-handling-with-r.html#cb43-2"></a><span class="st">  </span><span class="kw">filter</span>(continent <span class="op">==</span><span class="st"> &quot;Europe&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># subset on European records</span></span>
 <span id="cb43-3"><a href="data-handling-with-r.html#cb43-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>continent) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># remove the continent column</span></span>
 <span id="cb43-4"><a href="data-handling-with-r.html#cb43-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decade =</span> year <span class="op">-</span><span class="st"> </span>year <span class="op">%%</span><span class="st"> </span><span class="dv">10</span>, <span class="co"># compute decade</span></span>
