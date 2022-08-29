@@ -1,7 +1,5 @@
 # Making maps in R
 
-<!-- (Jakub) Mapping in R with {tmap} (30 min) -->
-
 This chapter requires the following packages:
 
 ```{r 04-making-maps-1}

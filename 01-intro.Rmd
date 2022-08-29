@@ -1,7 +1,5 @@
 # Introduction {-}
 
-<!-- (Nicolas) Introduction to the workshop (5 min) -->
-
 This workshop aims to provide the very basics of R to newcomers and a first introduction to spatial data handling in R using the [R-spatial ecosystem](https://cran.r-project.org/view=Spatial). 
 We will also present to the audience mapping with the {tmap} package, vector data handling with {sf} and raster data handling with {terra}.
 
@@ -51,7 +49,6 @@ remotes::install_github("Bakaniko/foss4g2022-getting-started-rspatial")
 
 
 ## What is ~~love~~ R ? {-}
-<!-- (Nicolas) Introduction to R (15 min) -->
 
 R is a programming language dedicated to data science.
 It can compute statistics and produce graphics and reports (and much more).

@@ -1,6 +1,5 @@
 # Data handling with R
 
-<!-- (Nicolas) Non-spatial data handling (30 min) -->
 ## Data types
 
 - numeric:
@@ -279,10 +278,6 @@ summarise(group_by(gapminder, continent), country = first(.data[["country"]]))
 ### Exercise {-}
 
 - Determine the max GDP by country other the period (tip: there is a `max()` function base R.)
-
-<!--
-summarise(group_by(mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000), continent, country), max_GDP = max(GDP))
--->
 
 ## Join data
 

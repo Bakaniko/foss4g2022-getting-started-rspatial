@@ -1,7 +1,5 @@
 # Introduction to the R-spatial ecosystem {#rspatial}
 
-<!-- (Jakub) Introduction to R-spatial ecosystem (20 min) -->
-
 ## R's spatial ecosystem(s)
 
 R is a powerful language for geocomputation, allowing for: 
@@ -153,8 +151,6 @@ Similarly to {sf}, {terra} also uses many external libraries, but also enables m
 #| fig.cap = "{terra} libraries"
 knitr::include_graphics("figs/terra-libs.png")
 ```
-
-<!-- The reference does not work. maybe because it lacks a caption ?-->
 
 To read a spatial raster file, we just need to provide its file path to the `rast()` function:
 

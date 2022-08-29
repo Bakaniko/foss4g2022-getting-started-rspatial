@@ -1,8 +1,5 @@
 # Summary {-}
 
-<!-- (Jakub) Closing of the workshop (5 min) -->
-<!-- [Legacy](https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial) - -->
-
 Several entry points for users looking for help and information our R-spatial exist.
 Two informal organizations curate the following websites:
 

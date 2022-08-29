@@ -1,7 +1,5 @@
 # Manipulating vector data {#manipulating-vector-data}
 
-<!-- (Nicolas) Vector data processing (45 min) -->
-
 For this part, we will mainly use {sf} capabilities. 
 Its most spatial functions start with the `st_` (*for spatial type*) prefix like in [PostGIS](https://postgis.net/docs/manual-2.5/reference.html).
 
