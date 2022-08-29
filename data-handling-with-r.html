@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-22" />
+<meta name="date" content="2022-08-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,7 +266,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-handling-with-r" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 1</span> Data handling with R<a href="data-handling-with-r.html#data-handling-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- (Nicolas) Non-spatial data handling (30 min) -->
 <div id="data-types" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.1</span> Data types<a href="data-handling-with-r.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
@@ -590,9 +589,6 @@ In this second function, we create a new variable called <code>population</code>
 <ul>
 <li>Determine the max GDP by country other the period (tip: there is a <code>max()</code> function base R.)</li>
 </ul>
-<!--
-summarise(group_by(mutate(gapminder, GDP = (gdpPercap * pop)/ 1000000), continent, country), max_GDP = max(GDP))
--->
 </div>
 </div>
 <div id="join-data" class="section level2 hasAnchor">

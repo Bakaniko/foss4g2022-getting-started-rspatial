@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-22" />
+<meta name="date" content="2022-08-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,7 +266,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="rspatial" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 2</span> Introduction to the R-spatial ecosystem<a href="rspatial.html#rspatial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- (Jakub) Introduction to R-spatial ecosystem (20 min) -->
 <div id="rs-spatial-ecosystems" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.1</span> R’s spatial ecosystem(s)<a href="rspatial.html#rs-spatial-ecosystems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>R is a powerful language for geocomputation, allowing for:</p>
@@ -533,10 +532,9 @@ It also works well on large sets of data.</p>
 Figure 2.4: {terra} libraries
 </p>
 </div>
-<!-- The reference does not work. maybe because it lacks a caption ?-->
 <p>To read a spatial raster file, we just need to provide its file path to the <code>rast()</code> function:</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="rspatial.html#cb73-1"></a><span class="kw">library</span>(terra)</span></code></pre></div>
-<pre><code>## terra 1.6.9</code></pre>
+<pre><code>## terra 1.6.11</code></pre>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="rspatial.html#cb75-1"></a>raster_filepath =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/srtm.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
 <span id="cb75-2"><a href="rspatial.html#cb75-2"></a>new_raster =<span class="st"> </span><span class="kw">rast</span>(raster_filepath)</span></code></pre></div>
 <p>Now, we can look at the summary of our data by typing the object’s name:</p>

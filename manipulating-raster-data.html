@@ -23,7 +23,7 @@
 <meta name="author" content="Nicolas Roelandt and Jakub Nowosad" />
 
 
-<meta name="date" content="2022-08-22" />
+<meta name="date" content="2022-08-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,7 +266,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="manipulating-raster-data" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 5</span> Manipulating raster data<a href="manipulating-raster-data.html#manipulating-raster-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- (Jakub) Raster data processing (45 min) -->
 <p>This chapter requires the following packages:</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="manipulating-raster-data.html#cb157-1"></a><span class="kw">library</span>(tmap)</span>
 <span id="cb157-2"><a href="manipulating-raster-data.html#cb157-2"></a><span class="kw">library</span>(sf)</span>
@@ -274,8 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.1</span> Example data<a href="manipulating-raster-data.html#example-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will read a few datasets for this chapter.
-It includes <code>srtm.tif</code> – an elevation raster data the Zion National Park area:
-<!-- [](https://geocompr.robinlovelace.net/read-write.html#raster-data-read) --></p>
+It includes <code>srtm.tif</code> – an elevation raster data the Zion National Park area:</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="manipulating-raster-data.html#cb158-1"></a>srtm_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;raster/srtm.tif&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;spDataLarge&quot;</span>)</span>
 <span id="cb158-2"><a href="manipulating-raster-data.html#cb158-2"></a>srtm &lt;-<span class="st"> </span><span class="kw">rast</span>(srtm_path)</span></code></pre></div>
 <p>We can quickly look at this dataset’s summary by just typing its name:</p>
@@ -476,7 +474,6 @@ In the example below, we are reprojecting the <code>srtm</code> raster into UTM 
 ##              extent
 ## 1 -114, -108, 84, 0</code></pre>
 <p><img src="_main_files/figure-html/06-manipulating-raster-data-33-1.png" width="672" /></p>
-<!-- https://projectionwizard.org/ -->
 </div>
 </div>
 <div id="raster-vector-interactions" class="section level2 hasAnchor">
@@ -531,7 +528,6 @@ Next, we can connect the extracted values with the vector object using the <code
 ## 8   8 2032 POINT (-113.0953 37.34965)
 ## 9   9 1830 POINT (-113.0362 37.31429)
 ## 10 10 1860 POINT (-113.2077 37.43165)</code></pre>
-<!-- exact = TRUE -->
 </div>
 </div>
 <div id="raster-analysis" class="section level2 hasAnchor">
